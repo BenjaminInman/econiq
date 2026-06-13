@@ -11,9 +11,13 @@ export default function Home() {
 
       <main className="hero">
         <p className="eyebrow">Multifamily market-cycle intelligence</p>
-        <div className="wordmark">
-          econ<span className="iq">iq</span>
-        </div>
+        <img
+          className="logo"
+          src="/econiq-logo.png"
+          width={1866}
+          height={284}
+          alt="econiq"
+        />
         <h1 className="headline">Read the cycle before the market does.</h1>
         <p className="sub">
           A training method for multifamily investors and operators — built to

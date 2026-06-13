@@ -127,16 +127,11 @@ body::after {
   margin-bottom: 28px;
 }
 
-.wordmark {
-  font-size: clamp(58px, 16vw, 132px);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  line-height: 0.92;
-  margin-bottom: 28px;
-}
-
-.wordmark .iq {
-  color: var(--accent);
+.logo {
+  display: block;
+  width: clamp(238px, 64vw, 470px);
+  height: auto;
+  margin-bottom: 30px;
 }
 
 .headline {
