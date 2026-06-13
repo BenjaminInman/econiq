@@ -1,0 +1,234 @@
+:root {
+  --ink: #08090c;
+  --ink-2: #0e1116;
+  --line: rgba(255, 255, 255, 0.07);
+  --text: #eceef2;
+  --muted: #7e848f;
+  --accent: #e0a93b; /* signal amber — the indicator light */
+  --accent-dim: rgba(224, 169, 59, 0.14);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--ink);
+  color: var(--text);
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* faint intelligence-grid + vignette */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(circle at 50% 38%, #000 0%, transparent 78%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(
+    circle at 50% 30%,
+    rgba(224, 169, 59, 0.06),
+    transparent 55%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: clamp(28px, 6vh, 56px) 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* top bar */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 0 var(--accent-dim);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(224, 169, 59, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 9px rgba(224, 169, 59, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(224, 169, 59, 0);
+  }
+}
+
+/* hero */
+.hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 8vh 0;
+}
+
+.eyebrow {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 12px;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 28px;
+}
+
+.wordmark {
+  font-size: clamp(58px, 16vw, 132px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  line-height: 0.92;
+  margin-bottom: 28px;
+}
+
+.wordmark .iq {
+  color: var(--accent);
+}
+
+.headline {
+  font-size: clamp(20px, 4.4vw, 31px);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.18;
+  max-width: 18ch;
+  margin-bottom: 22px;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: clamp(15px, 2.4vw, 17px);
+  line-height: 1.6;
+  max-width: 54ch;
+}
+
+/* signature: the market cycle line */
+.cycle {
+  margin-top: 48px;
+  position: relative;
+}
+
+.cycle svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.phases {
+  display: flex;
+  justify-content: space-between;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 12px;
+}
+
+.phases span {
+  flex: 1;
+  text-align: center;
+}
+
+/* footer */
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11.5px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+
+.foot a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.foot a:hover,
+.foot a:focus-visible {
+  color: var(--accent);
+}
+
+a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+
+@media (max-width: 480px) {
+  .phases span:nth-child(3) {
+    font-size: 9px;
+  }
+  .hero {
+    padding: 4vh 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot {
+    animation: none;
+  }
+  .tracer {
+    display: none;
+  }
+}
