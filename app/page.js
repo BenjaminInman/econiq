@@ -56,7 +56,8 @@ export default function Home() {
       <footer className="foot">
         <span>© 2026 econiq</span>
         <span>
-          Notify: <a href="mailto:hello@econiq.com">hello@econiq.com</a>
+          More info:{" "}
+          <a href="mailto:info@econiqmethod.com">info@econiqmethod.com</a>
         </span>
       </footer>
     </div>
