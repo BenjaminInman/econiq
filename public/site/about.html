@@ -118,15 +118,15 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 
 /* ---- floating social rail ---- */
 .srail{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;
-  display:flex;flex-direction:column;align-items:center;gap:14px;
-  padding:20px 12px;background:rgba(18,30,16,.72);backdrop-filter:blur(8px);
+  display:flex;flex-direction:column;align-items:center;gap:20px;
+  padding:26px 16px;background:rgba(18,30,16,.72);backdrop-filter:blur(8px);
   border:1px solid var(--line);border-left:0;border-radius:0 var(--r) var(--r) 0}
-.srail-lbl{font-family:var(--mono);font-size:8.5px;letter-spacing:.28em;text-transform:uppercase;
+.srail-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
   color:var(--olive-lift);writing-mode:vertical-rl;transform:rotate(180deg);margin-bottom:2px}
-.srail-line{width:1px;height:22px;background:var(--line)}
+.srail-line{width:1px;height:26px;background:var(--line)}
 .srail a{display:block;line-height:0;opacity:.62;transition:opacity .18s,transform .18s}
 .srail a:hover{opacity:1;transform:translateX(2px)}
-.srail svg{width:15px;height:15px;fill:var(--platinum)}
+.srail svg{width:30px;height:30px;fill:var(--platinum)}
 .srail a:hover svg{fill:var(--amber)}
 body.no-rail .srail{display:none}
 @media(max-width:1180px){.srail{display:none}}
