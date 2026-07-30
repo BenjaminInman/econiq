@@ -1,0 +1,48 @@
+/* ============================================================
+   ECONIQ — LIGHT PALETTE
+   For the course reading environment (Recon read-along).
+   Marketing site stays dark (Version B). Cignal terminal stays dark.
+   Derived and contrast-checked 30 Jul 2026.
+   ============================================================ */
+
+:root {
+  /* paper — warm bone, not white */
+  --paper:        #F7F6F3;   /* page background            */
+  --paper-panel:  #F2F0EB;   /* raised cards, callouts     */
+  --paper-well:   #EAE8E1;   /* deeper wells, code blocks  */
+
+  /* ink — forest, not black */
+  --ink:          #162C21;   /* body + headings  13.7:1 on paper */
+  --ink-soft:     #4B6357;   /* secondary text    6.0:1 on paper */
+  --ink-faint:    #6E664F;   /* metadata, labels                */
+
+  /* accents — darkened from the dark-theme values for contrast */
+  --gold:         #8F6F26;   /* eyebrows, rules, numerals */
+  --amber:        #B8791C;   /* CTAs, active states only  */
+  --amber-text:   #FFF9EE;   /* text on amber buttons     */
+
+  /* structure */
+  --olive:        #867C65;   /* tertiary, dividers        */
+  --olive-dim:    #B9B2A0;   /* inactive states           */
+  --line:         rgba(22,44,33,.14);
+
+  /* inverted blocks — used sparingly for weight */
+  --forest-deep:  #12301F;   /* stat bands, capture blocks */
+  --on-forest:    #EDEFEA;
+  --on-forest-dim:#9DAE9F;
+  --gold-on-dark: #D9B25E;
+}
+
+/* Typography is unchanged from the dark theme:
+   display   Space Grotesk
+   editorial Georgia
+   body      Inter
+   data      IBM Plex Mono
+
+   Reading-environment notes:
+   - body copy at ~65ch measure, 1.7 line-height
+   - lesson prose in Georgia, UI chrome in Inter
+   - callout boxes: --paper-panel with a 2px --amber left border
+   - numbered concept tables: --paper-well background
+   - Knowledge Check options: --paper-panel, --amber when selected
+*/

@@ -296,67 +296,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .opt2{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);margin:10px 0 0}
 .step .sgo{margin-top:14px}
 
-/* ================= LIGHT VARIANT ================= */
-body.light{
-  --forest-black:#F7F6F3;
-  --forest-panel:#F2F0EB;
-  --forest-raise:#EAE8E1;
-  --platinum:#162C21;
-  --muted:#4B6357;
-  --olive-dim:#B9B2A0;
-  --olive:#867C65;
-  --olive-lift:#6E664F;
-  --gold:#8F6F26;
-  --amber:#B8791C;
-  --line:rgba(22,44,33,.14);
-  background:#F7F6F3;color:#162C21;
-}
-body.light header.nav{background:rgba(247,246,243,.92);border-bottom:1px solid rgba(22,44,33,.12)}
-body.light .wordmark img{filter:invert(1) brightness(.16) sepia(.5) hue-rotate(85deg) saturate(3)}
-body.light .foot-mark img{filter:invert(1) brightness(.16) sepia(.5) hue-rotate(85deg) saturate(3);opacity:.75}
-body.light .btn-amber{background:#B8791C;color:#FFF9EE;border-color:#B8791C}
-body.light .btn-amber:hover{background:#A16913;border-color:#A16913}
-body.light .btn-ghost{border-color:rgba(22,44,33,.24);color:#162C21}
-body.light .btn-ghost:hover{border-color:#8F6F26;color:#8F6F26}
-body.light .cy-path{stroke:#C3BCA8}
-body.light .cy-path-lit{stroke:#B8791C}
-body.light .cy-node circle.ring{fill:#F7F6F3;stroke:#B9B2A0}
-body.light .cy-node circle.dot{fill:#867C65}
-body.light .cy-node:hover circle.ring,body.light .cy-node[aria-selected="true"] circle.ring{stroke:#B8791C}
-body.light .cy-node:hover circle.dot,body.light .cy-node[aria-selected="true"] circle.dot{fill:#B8791C}
-body.light .cy-lab{fill:#162C21}
-body.light .cy-num{fill:#6E664F}
-body.light .cy-axis{stroke:rgba(22,44,33,.12)}
-body.light .hero-bg{opacity:.35}
-body.light .stats{background:#12301F;border-color:#12301F}
-body.light .stat{background:#12301F}
-body.light .stat b{color:#D9B25E}
-body.light .stat small{color:#9DAE9F}
-body.light .stats-note{color:#7E8F81}
-body.light .trust-cell{background:#12301F}
-body.light .trust-cell b{color:#D9B25E}
-body.light .trust-cell small{color:#9DAE9F}
-body.light .trust{background:#12301F;border-color:#12301F}
-body.light .trust-note{color:#7E8F81}
-body.light .capture{background:#12301F}
-body.light .capture .eyebrow{color:#D9B25E}
-body.light .capture h2{color:#EDEFEA}
-body.light .capture p,body.light .capture .lede{color:#9DAE9F}
-body.light .capture .privfine{color:#7E8F81}
-body.light .form-row input{background:#0D2417;border-color:rgba(255,255,255,.16);color:#EDEFEA}
-body.light .inst{background:#F2F0EB}
-body.light .shotimg{border-color:rgba(22,44,33,.16);box-shadow:0 14px 34px rgba(22,44,33,.16)}
-body.light .bookcover,body.light .tiercard{box-shadow:0 12px 26px rgba(22,44,33,.22)}
-body.light .ph{border-color:rgba(22,44,33,.24);
-  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(22,44,33,.05) 9px,rgba(22,44,33,.05) 18px)}
-body.light .ph span{color:#6E664F}
-body.light .rung{background:#F2F0EB;border-top-color:#B9B2A0}
-body.light .rung.hi{background:#EAE8E1;border-top-color:#B8791C}
-body.light .panel,body.light .play{background:#F2F0EB}
-body.light .play{background:#EAE8E1}
-body.light .opt[aria-pressed="true"]{background:rgba(184,121,28,.14);border-color:#B8791C;color:#8F6F26}
-body.light .collision{background:#F2F0EB;border-color:rgba(184,121,28,.4)}
-body.light .faq summary:after{color:#8F6F26}
+
 </style>
 </head>
 <body>
@@ -1011,39 +951,6 @@ nodes.forEach(n=>{
   n.addEventListener('click',()=>select(i));
   n.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();select(i);}});
 });
-</script>
-
-<div id="themebar">
-  <span>Compare</span>
-  <button id="tdark" class="on">Dark</button>
-  <button id="tlight">Light</button>
-</div>
-<style>
-#themebar{position:fixed;right:16px;bottom:16px;z-index:200;display:flex;gap:6px;align-items:center;
-  background:rgba(11,19,10,.94);border:1px solid rgba(223,225,219,.2);border-radius:6px;padding:8px 10px;
-  backdrop-filter:blur(8px);box-shadow:0 8px 24px rgba(0,0,0,.4)}
-body.light #themebar{background:rgba(247,246,243,.96);border-color:rgba(22,44,33,.2);box-shadow:0 8px 24px rgba(22,44,33,.18)}
-#themebar span{font-family:'IBM Plex Mono',monospace;font-size:9px;letter-spacing:.16em;text-transform:uppercase;
-  color:#928A77;margin-right:4px}
-body.light #themebar span{color:#6E664F}
-#themebar button{font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
-  padding:6px 12px;border-radius:4px;border:1px solid rgba(223,225,219,.2);background:transparent;color:#999E8A;cursor:pointer}
-body.light #themebar button{border-color:rgba(22,44,33,.2);color:#4B6357}
-#themebar button.on{background:#E0A93B;color:#12100A;border-color:#E0A93B}
-body.light #themebar button.on{background:#B8791C;color:#FFF9EE;border-color:#B8791C}
-</style>
-<script>
-(function(){
-  var d=document.getElementById('tdark'), l=document.getElementById('tlight');
-  function set(mode){
-    document.body.classList.toggle('light', mode==='light');
-    d.classList.toggle('on', mode==='dark'); l.classList.toggle('on', mode==='light');
-    try{ localStorage.setItem('econiq-theme', mode); }catch(e){}
-  }
-  d.onclick=function(){set('dark')}; l.onclick=function(){set('light')};
-  var saved=null; try{ saved=localStorage.getItem('econiq-theme'); }catch(e){}
-  if(saved) set(saved);
-})();
 </script>
 
 </body>
