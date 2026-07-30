@@ -297,6 +297,14 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .step .sgo{margin-top:14px}
 
 
+
+/* three steps — align media bands across all cards */
+.steps{align-items:stretch}
+.step{flex-direction:row}
+.sbody{display:flex;flex-direction:column;height:100%}
+.step .sgo{margin-top:auto;padding-top:14px}
+.smedia{margin:14px 0 0}
+.opt2{margin:12px 0 0;order:99}
 </style>
 </head>
 <body>
@@ -429,6 +437,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <span class="stag">Free &middot; 6 minutes</span>
           <h3>Take the Cycle Score</h3>
           <p>Eighteen questions. Scores how well you read the cycle and names the one gap costing you the most.</p>
+          <span class="sgo">Start the assessment &rarr;</span>
           <div class="smedia"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="Cycle Score Assessment">
   <defs><linearGradient id="csbg" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#122A1B"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
@@ -487,7 +496,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
   <text x="212" y="595" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="2.6" fill="#928A77">BENJAMIN INMAN</text>
 </svg></div>
           <p class="opt2">Take it online now &middot; printed at-home version at launch</p>
-          <span class="sgo">Start the assessment &rarr;</span>
+          
         </div>
       </a>
 
@@ -497,7 +506,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <span class="stag">Free PDF &middot; Print available</span>
           <h3>Read the argument</h3>
           <p>Two short books. Free to download; order in print if you'd rather hold it &mdash; print includes the PDF.</p>
-          <span class="sgo" style="margin-top:14px">See both books &rarr;</span>
+          <span class="sgo">See both books &rarr;</span>
           <div class="smedia twobooks">
             <div class="bkitem"><div class="bk"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="The Dark Side of Multifamily Real Estate">
   <defs>
@@ -596,6 +605,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <span class="stag">$997 &middot; Opening shortly</span>
           <h3>Learn the method</h3>
           <p>Recon. Ten lessons, three parts, 63 questions with explanations, and ECF certification.</p>
+          <span class="sgo">See the curriculum &rarr;</span>
           <div class="smedia"><svg viewBox="0 0 480 270" class="tiercard" role="img" aria-label="Recon tier">
   <rect width="480" height="270" fill="#121E10"/>
   <g stroke="rgba(223,225,219,.06)" stroke-width="1">
@@ -615,7 +625,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
   <circle cx="440" cy="118" r="3.5" fill="#716B5B"/>
   <text x="220" y="30" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.6" fill="#E0A93B">YOU ARE HERE</text>
 </svg></div>
-          <span class="sgo">See the curriculum &rarr;</span>
+          
         </div>
       </a>
     </div>
