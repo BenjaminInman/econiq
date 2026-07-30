@@ -282,6 +282,19 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .twobooks span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);display:block}
 .twobooks a:hover span{color:var(--gold)}
 @media(max-width:980px){.steps{grid-template-columns:1fr;max-width:520px;margin:0 auto}}
+
+/* step media band — fixed height keeps all three cards aligned */
+.smedia{height:186px;display:flex;align-items:center;justify-content:center;gap:12px;margin:18px 0 4px}
+.smedia > svg{height:100%;width:auto;max-width:100%;display:block;border-radius:2px;
+  box-shadow:0 10px 22px rgba(0,0,0,.45)}
+.smedia .tiercard{height:auto;width:100%;max-height:100%;box-shadow:0 10px 22px rgba(0,0,0,.45);border-bottom:0;border-radius:2px}
+.smedia.twobooks{display:flex;grid-template-columns:none}
+.smedia.twobooks .bkitem{height:100%;display:flex;flex-direction:column;align-items:center;min-width:0}
+.smedia.twobooks .bk{height:100%;border-radius:2px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.45);margin-bottom:0}
+.smedia.twobooks .bookcover{height:100%;width:auto;display:block;box-shadow:none;border-radius:0}
+.smedia.twobooks span{display:none}
+.opt2{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);margin:10px 0 0}
+.step .sgo{margin-top:14px}
 </style>
 </head>
 <body>
@@ -414,6 +427,64 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <span class="stag">Free &middot; 6 minutes</span>
           <h3>Take the Cycle Score</h3>
           <p>Eighteen questions. Scores how well you read the cycle and names the one gap costing you the most.</p>
+          <div class="smedia"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="Cycle Score Assessment">
+  <defs><linearGradient id="csbg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#122A1B"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
+  </linearGradient></defs>
+  <rect width="400" height="600" fill="url(#csbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="52" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
+  <line x1="168" y1="66" x2="256" y2="66" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+
+  <text x="212" y="158" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">CYCLE</text>
+  <text x="212" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">SCORE</text>
+  <text x="212" y="244" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" letter-spacing="5.5" fill="#C9A24B">ASSESSMENT</text>
+  <line x1="92" y1="266" x2="332" y2="266" stroke="#C9A24B" stroke-width="1.2"/>
+
+  <text x="212" y="292" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">A data-driven framework to</text>
+  <text x="212" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">score the market cycle</text>
+
+  <g>
+    <path d="M126.0,432.0 A86,86 0 0 1 151.2,371.2" fill="none" stroke="#4C4739" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M151.2,371.2 A86,86 0 0 1 212.0,346.0" fill="none" stroke="#716B5B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M212.0,346.0 A86,86 0 0 1 272.8,371.2" fill="none" stroke="#C9A24B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M272.8,371.2 A86,86 0 0 1 298.0,432.0" fill="none" stroke="#E0A93B" stroke-width="17" stroke-linecap="butt"/>
+    <line x1="157.6" y1="377.6" x2="144.8" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212.0" y1="355.0" x2="212.0" y2="337.0" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="266.4" y1="377.6" x2="279.2" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212" y1="432" x2="256.6" y2="378.1" stroke="#E0A93B" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="212" cy="432" r="7" fill="#E0A93B"/>
+    <circle cx="212" cy="432" r="3" fill="#0C1E15"/>
+    <text x="212" y="472" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="30" fill="#E0A93B">72</text>
+    <text x="212" y="492" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#C9A24B">EXPANSION STRENGTHENING</text>
+  </g>
+
+    <line x1="58" y1="522" x2="366" y2="522" stroke="#302C25" stroke-width="2"/>
+    <line x1="58.0" y1="522" x2="135.0" y2="522" stroke="#4C4739" stroke-width="2"/>
+    <circle cx="135.0" cy="522" r="3" fill="#4C4739"/>
+    <text x="96.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">RECESSION</text>
+    <text x="96.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">0–25</text>
+    <line x1="135.0" y1="522" x2="212.0" y2="522" stroke="#716B5B" stroke-width="2"/>
+    <circle cx="212.0" cy="522" r="3" fill="#716B5B"/>
+    <text x="173.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">CORRECTION</text>
+    <text x="173.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">25–50</text>
+    <line x1="212.0" y1="522" x2="289.0" y2="522" stroke="#C9A24B" stroke-width="2"/>
+    <circle cx="289.0" cy="522" r="3" fill="#C9A24B"/>
+    <text x="250.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">PEAK</text>
+    <text x="250.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">50–75</text>
+    <line x1="289.0" y1="522" x2="366.0" y2="522" stroke="#E0A93B" stroke-width="2"/>
+    <circle cx="366.0" cy="522" r="3" fill="#E0A93B"/>
+    <text x="327.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">EXPANSION</text>
+    <text x="327.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">75–100</text>
+
+  <line x1="150" y1="566" x2="274" y2="566" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="583" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.6" fill="#DFE1DB">MEASURE. MONITOR. MOVE.</text>
+  <text x="212" y="595" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="2.6" fill="#928A77">BENJAMIN INMAN</text>
+</svg></div>
+          <p class="opt2">Take it online now &middot; printed at-home version at launch</p>
           <span class="sgo">Start the assessment &rarr;</span>
         </div>
       </a>
@@ -425,7 +496,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <h3>Read the argument</h3>
           <p>Two short books. Free to download; order in print if you'd rather hold it &mdash; print includes the PDF.</p>
           <span class="sgo" style="margin-top:14px">See both books &rarr;</span>
-          <div class="twobooks">
+          <div class="smedia twobooks">
             <div class="bkitem"><div class="bk"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="The Dark Side of Multifamily Real Estate">
   <defs>
     <linearGradient id="dsbg" x1="0" y1="0" x2="1" y2="1">
@@ -523,6 +594,25 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <span class="stag">$997 &middot; Opening shortly</span>
           <h3>Learn the method</h3>
           <p>Recon. Ten lessons, three parts, 63 questions with explanations, and ECF certification.</p>
+          <div class="smedia"><svg viewBox="0 0 480 270" class="tiercard" role="img" aria-label="Recon tier">
+  <rect width="480" height="270" fill="#121E10"/>
+  <g stroke="rgba(223,225,219,.06)" stroke-width="1">
+    <line x1="0" y1="67" x2="480" y2="67"/><line x1="0" y1="135" x2="480" y2="135"/>
+    <line x1="0" y1="203" x2="480" y2="203"/><line x1="120" y1="0" x2="120" y2="270"/>
+    <line x1="240" y1="0" x2="240" y2="270"/><line x1="360" y1="0" x2="360" y2="270"/>
+  </g>
+  <text x="26" y="40" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="2.6" fill="#C9A24B">01 / RECON</text>
+  <text x="26" y="238" font-family="Space Grotesk,sans-serif" font-size="26" font-weight="600" letter-spacing="-.5" fill="#DFE1DB">Recon</text>
+  <text x="26" y="256" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="2" fill="#928A77">ONE READ · THE FRAMEWORK</text>
+  <path d="M18,150 C46,146 60,138 82,128 C132,105 168,58 220,50 C272,42 308,30 348,38 C392,47 434,104 462,132" fill="none" stroke="#555044" stroke-width="1.6"/>
+  <path d="M18,150 C46,146 60,138 82,128 C132,105 168,58 220,50" fill="none" stroke="#E0A93B" stroke-width="1.8"/>
+  <circle cx="220" cy="50" r="13" fill="none" stroke="#E0A93B" stroke-width="1.4"/>
+  <circle cx="220" cy="50" r="4" fill="#E0A93B"/>
+  <circle cx="82" cy="128" r="3.5" fill="#716B5B"/>
+  <circle cx="348" cy="38" r="3.5" fill="#716B5B"/>
+  <circle cx="440" cy="118" r="3.5" fill="#716B5B"/>
+  <text x="220" y="30" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.6" fill="#E0A93B">YOU ARE HERE</text>
+</svg></div>
           <span class="sgo">See the curriculum &rarr;</span>
         </div>
       </a>
