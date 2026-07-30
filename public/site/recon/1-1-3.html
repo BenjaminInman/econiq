@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Brief History of The Big 3 &middot; Recon 1.1.3</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#12301F;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+/* article */
+.lead{width:min(1080px,92vw);margin:0 auto;padding:52px 0 10px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.lnav{width:min(680px,92vw);margin:0 auto;padding:40px 0 70px;display:flex;justify-content:space-between;gap:16px}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 20px;
+ background:var(--panel);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:var(--amber);color:var(--ink)}
+.lnav a span{display:block;font-family:var(--body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:5px}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../recon.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Recon &middot; Part One &middot; Lesson 1.1.3</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="lead">
+  <p class="eyebrow">Lesson 1.1.3</p>
+  <h1>A Brief History of The Big 3</h1>
+  <p class='deck'>Understanding the Business Cycle, the Real Estate Cycle, and the Long-Term Debt Cycle.</p>
+  <div class="leadmeta"><span>803 words</span><span>4 min read</span><span>7 questions</span></div>
+</div>
+
+<article><div class='epi'><p><em>“Those who cannot remember the past are doomed to repeat it.”</em></p><cite>George Santayana</cite></div>
+<p>Most multifamily investors talk about “the cycle” as if there is only one. In reality, the multifamily real estate market is influenced by three distinct but overlapping cycles—each operating on a different timeline, driven by different forces, and sending different signals.</p>
+<p>Knowing that real estate cycles exist, however, is not enough. To take advantage of them, you must know how to anticipate their arrival. Let’s begin by looking at the big 3. These cycles are:</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>The Business Cycle</span><p>Short- to medium-term fluctuations in overall economic activity—production, employment, income, and consumption. Historical average: approximately 8 years.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>The Real Estate Cycle</span><p>Medium-term changes in supply, demand, pricing, and capital flows within property markets. Historical average: approximately 18 years.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>The Long-Term Debt Cycle</span><p>Decades-long expansions and contractions in leverage across households, corporations, and governments. Timeframe: 50–100 years.</p></div></div></div>
+<div class='callout'><p><em>Confusion between these cycles is one of the primary reasons investors misjudge timing, misinterpret risk, and overestimate certainty at both market highs and market lows. Mastery comes not from tracking one cycle—but from understanding how all three interact and compound each other.</em></p></div>
+<p>This chapter breaks down the role each cycle plays, how they differ, and how sophisticated multifamily investors use them together to gain a structural edge.</p>
+<h2>The Business Cycle</h2>
+<p>The business cycle reflects fluctuations in overall economic activity—production, employment, income, and consumption. It is driven primarily by corporate investment, consumer behavior, monetary policy, and credit conditions.</p>
+<h3>BUSINESS CYCLE CHARACTERISTICS</h3>
+<p><strong>Timeframe: </strong>Short- to medium-term (historical average of 8 years) with primary drivers that include: employment and wages, corporate profits and investment, consumer confidence and spending, and central bank policy.</p>
+<h3>ROLE IN MULTIFAMILY REAL ESTATE</h3>
+<p>The business cycle influences tenant demand and their ability to pay rent. As businesses pass along profits in the form of wage increases and job creation, you will notice that job growth fuels household formation which has an impact on improving occupancies and rental increases. On the opposite side of the same coin, job losses reduce leasing velocity and increase delinquencies.</p>
+<p>However, the business cycle does not move in lockstep with real estate pricing overall. Economic contractions can occur while real estate prices remain elevated—and vice versa. <strong>The business cycle primarily affects the income side of multifamily assets, not always the valuation side—at least not immediately.</strong></p>
+<h2>The Real Estate Market Cycle</h2>
+<p>The real estate market cycle is more asset-specific and slower moving than the business cycle. It reflects changes in supply, demand, pricing, and capital flows within property markets.</p>
+<h3>REAL ESTATE CYCLE CHARACTERISTICS</h3>
+<p><strong>Timeframe: </strong>Medium-term (historical average of 18 years), with primary drivers that include: construction and development pipelines, capital availability, investor behavior and sentiment, and local market dynamics.</p>
+<h3>ROLE IN MULTIFAMILY REAL ESTATE</h3>
+<p>The real estate cycle directly governs asset pricing, cap rate movement and development feasibility. The irrational exuberance side of investor sentiment eventually kicks into high gear as transaction volumes increase. This movement causes the need for investors to place equal consideration on risk concentration as new acquisitions are planned.</p>
+<p>Unlike the business cycle, the real estate cycle is <strong>sticky.</strong> Supply decisions made today affect markets years later, which is why oversupply often peaks after economic growth has already slowed. Multifamily investors make money or lose money largely based on where they enter and exit within the real estate cycle, not simply on economic growth.</p>
+<h2>The Long-Term Debt Cycle</h2>
+<p>The long-term debt cycle is the least discussed—and most powerful—of the three. It reflects decades-long expansions and contractions in leverage across households, corporations, and governments.</p>
+<h3>DEBT CYCLE CHARACTERISTICS</h3>
+<p><strong>Timeframe: </strong>Long-term (50–100 years), with primary drivers that include: credit expansion, interest rate regimes, financial innovation, and leverage tolerance. Phases include: debt accumulation, debt saturation, and deleveraging or restructuring.</p>
+<h3>ROLE IN MULTIFAMILY REAL ESTATE</h3>
+<p>The long-term debt cycle shapes interest rate ceilings and floors, lending standards, investor reliance on leverage and severity of downturns. When debt levels are rising and credit is expanding, asset prices—including multifamily—tend to inflate. When debt capacity is exhausted, even small shocks can trigger outsized corrections.</p>
+<div class='callout'><p><em>The long-term debt cycle determines how extreme market highs and lows can become, not just when they occur.</em></p></div>
+<h2>Why These Cycles Are Often Confused</h2>
+<p>Many investors mistake a business-cycle slowdown for a real estate crash, a real estate downturn for an economic collapse and a debt-cycle reset for a normal contraction, or worse, a recession. This misinterpretation leads to poor decisions—selling too early, buying too late, or overleveraging at the wrong point in the cycle.</p>
+<h2>Why Multifamily Investors Must Track All Three Cycles</h2>
+<p>Multifamily real estate sits at the intersection of human shelter needs (business cycle), physical supply constraints (real estate cycle) and financial leverage (debt cycle). Ignoring any one of these creates blind spots and elite investors adjust strategy based on which cycle is dominant at the moment.</p>
+<div class='callout'><p><em>The strongest multifamily strategies align operations, acquisitions, and capital structure with all three cycles simultaneously.</em></p></div>
+<h2>Notes:</h2></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>Which of the following is TRUE about how multifamily cycles have repeated across recent decades?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Each cycle is completely unique with no recognizable patterns linking them.</button><button class='opt' data-k='B'><span class='k'>B</span>Cycles share consistent structural features (capital flow dynamics, supply lags, leverage cycles, behavioral feedback) even when specific manifestations differ across decades.</button><button class='opt' data-k='C'><span class='k'>C</span>All multifamily cycles since 1980 have had identical lengths, magnitudes, and sequencing.</button><button class='opt' data-k='D'><span class='k'>D</span>Multifamily cycles have only existed since the 2008 financial crisis. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Cycles share consistent structural features even when specific manifestations differ. The recurrence is what makes cycle analysis possible. If markets only experienced unique events, no historical pattern recognition would apply. The structural features are what operators recognize across cycles even as specific timing and magnitudes differ.</em></p></div></div><div class='q' data-a='A'><span class='qn'>Question 2</span><p class='qs'>Which structural feature has consistently appeared in late-Expansion or Peak phases across multiple multifamily cycles?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A multi-year construction pipeline that delivers into markets where demand has begun moderating.</button><button class='opt' data-k='B'><span class='k'>B</span>Government intervention preventing further development.</button><button class='opt' data-k='C'><span class='k'>C</span>A complete absence of capital flowing into the asset class.</button><button class='opt' data-k='D'><span class='k'>D</span>Identical cap rate levels across every cycle. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The supply lag in real estate produces a consistent late-Expansion / Peak feature: a multi-year construction pipeline that was initiated during favorable conditions delivers into markets where demand has begun moderating. The structural mismatch is what produces <strong>Hypersupply</strong> conditions and is recognizable across multiple historical cycles.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>What does the historical record suggest about operators who deployed aggressively during late Peak / early Contraction phases?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>They consistently outperformed operators who deployed during Recovery.</button><button class='opt' data-k='B'><span class='k'>B</span>They typically faced the highest concentration of catastrophic outcomes—overpayment at peak prices combined with peak debt terms entering Contraction without adequate reserves.</button><button class='opt' data-k='C'><span class='k'>C</span>They were rewarded with the most favorable lender terms.</button><button class='opt' data-k='D'><span class='k'>D</span>They captured asymmetric pricing opportunities. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Late-Peak / early-Contraction acquisitions historically cluster among the most catastrophic operator outcomes. The combination of peak pricing, peak debt terms, and entering Contraction without adequate reserves has destroyed many operators across multiple cycles. The pattern is consistent enough across cycles that disciplined operators specifically avoid this deployment window.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 4</span><p class='qs'>Why does studying past cycles produce better cycle awareness than relying purely on current data?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Past cycles are irrelevant because every cycle is completely different.</button><button class='opt' data-k='B'><span class='k'>B</span>Studying past cycles reveals the structural patterns that recur—propagation sequencing, transition mechanics, behavioral failure modes—which operators can recognize forming in current conditions before trailing data confirms the pattern.</button><button class='opt' data-k='C'><span class='k'>C</span>Past cycles tell operators exactly when current cycles will turn.</button><button class='opt' data-k='D'><span class='k'>D</span>Past cycles only matter for academic research, not operational decisions. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Studying past cycles reveals the structural patterns that recur—propagation sequencing, transition mechanics, behavioral failure modes. Operators who understand these patterns can recognize them forming in current conditions before trailing data confirms the pattern. Current data alone shows what is happening; historical study reveals what is forming.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>In 2–3 sentences, describe what “this cycle is different” thinking has typically produced across multifamily history, and why operators should be cautious when they encounter it during current cycle conditions. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>“This cycle is different” thinking has typically appeared at every Peak / <strong>Hypersupply</strong> phase across multifamily history and has consistently preceded the catastrophic outcomes that affected operators who believed it. The structural features that produce cycles—capital flow dynamics, supply lags, leverage cycles, behavioral feedback—operate across all cycles even when specific conditions differ. Operators encountering “this time is different” reasoning should treat it as a behavioral signal of late-Peak conditions rather than as analytical insight, because the same reasoning has appeared at every prior Peak and has been wrong every time.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator who entered the multifamily industry between 2014 and 2022 has only experienced late Recovery, Expansion, and the early stages of Peak. Looking at multifamily cycle history across the prior 30–40 years, what blind spots in this operator’s calibration should they be most aware of, and how might historical study help them prepare for conditions they haven’t yet experienced? ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Operators who entered the industry between 2014 and 2022 have only experienced favorable phases—they have not navigated Peak transitions to Contraction or Contraction conditions personally. Their calibration is therefore built on Expansion-phase frameworks that may not transfer to other phases. The specific blind spots include: (1) underestimating how rapidly conditions can deteriorate when Peak transitions to Contraction, (2) underestimating the capital structure stress that Contraction creates for over-leveraged portfolios, (3) overestimating the reliability of rent growth assumptions that have only been tested during favorable conditions. Historical study helps because it shows operators what Contraction phases <strong>actually look</strong> like, what failure modes have repeatedly destroyed operators in those phases, and what discipline preparation looks like before Contraction arrives. Reading prior Contractions is the closest substitute for <strong>actually experiencing</strong> one.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>Which of the following best describes the relationship between specific historical cycles and contemporary cycle analysis?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Historical cycles are templates that current cycles will exactly replicate.</button><button class='opt' data-k='B'><span class='k'>B</span>Historical cycles have no bearing on contemporary analysis.</button><button class='opt' data-k='C'><span class='k'>C</span>Historical cycles reveal recurring structural patterns and failure modes that inform current analysis, while specific timing, magnitude, and triggering events vary across cycles.</button><button class='opt' data-k='D'><span class='k'>D</span>Only the most recent historical cycle matters for contemporary analysis. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Historical cycles reveal recurring structural patterns and failure modes that inform current analysis. They are not templates for exact replication—specific timing, magnitude, and triggering events vary. But the structural features (capital flow dynamics, supply lags, leverage cycles, behavioral patterns) recur across cycles. The relationship is pattern-informative rather than precisely predictive.</em> <strong>Score and Reflection</strong> Total your score before reading the reflection guidance below. Each multiple choice question is worth one point. The short answer and scenario are assessed qualitatively against the sample strong responses. <strong>Score</strong> <strong>Guidance</strong> --- --- 5–7 correct Strong historical pattern recognition. Proceed to Module 1.4 with confidence. Revisit any questions you missed before moving on. 3–4 correct Review the recurring structural features and failure modes in Module 1.3 before proceeding. Focus especially on what late-Peak operators have consistently gotten wrong. 1–2 correct Return to Module 1.3 in full. Historical pattern recognition is what allows you to see current transitions forming before trailing data confirms them. <em>History doesn’t repeat exactly—but it rhymes consistently. The operators who study what has failed before are the ones who don’t repeat those failures. The operators who treat each cycle as unprecedented are the ones who rediscover the same failure modes from scratch.</em> <strong>Module 1.3 Knowledge </strong><strong>Check •</strong><strong> </strong><strong>Complete •</strong><strong> Proceed to Module 1.4</strong> © 2026 Benjamin Inman. All rights reserved. • Econiq • Module 1.3 Knowledge Check • v1.0 Page 2</p></div></div><div class='kcscore' id='score'></div></div></section>
+
+<nav class="lnav"><a href='1-1-2.html'>&larr; Previous<span>Introduction to The Four Phases</span></a><a href='1-2.html' style='text-align:right'>Next &rarr;<span>The Dynamic Duo</span></a></nav>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Move on to the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

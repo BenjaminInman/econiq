@@ -12,6 +12,7 @@ const nextConfig = {
         { source: `/:page(${PAGES.join('|')}).html`, destination: '/site/:page.html' },
         { source: `/:page(${PAGES.join('|')})`, destination: '/site/:page.html' },
         { source: '/assets/:path*', destination: '/site/assets/:path*' },
+        { source: '/recon/:page*', destination: '/site/recon/:page*' },
       ],
     };
   },
