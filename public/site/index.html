@@ -276,7 +276,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .sgo{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:14px;display:block}
 .twobooks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
 .twobooks .bkitem{display:block;min-width:0}
-.twobooks img{width:100%;height:auto;display:block}
+.twobooks .bookcover{width:100%;height:auto;display:block;box-shadow:none;border-radius:0}
 .twobooks .bk{border-radius:2px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);margin-bottom:8px}
 .twobooks .bookcover{width:100%;height:auto;display:block;box-shadow:none;border-radius:0}
 .twobooks span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);display:block}
@@ -426,8 +426,93 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
           <p>Two short books. Free to download; order in print if you'd rather hold it &mdash; print includes the PDF.</p>
           <span class="sgo" style="margin-top:14px">See both books &rarr;</span>
           <div class="twobooks">
-            <div class="bkitem"><div class="bk"><img src="assets/cover-the-dark-side.svg" alt="The Dark Side"></div><span>The Dark Side</span></div>
-            <div class="bkitem"><div class="bk"><img src="assets/cover-ahead-of-the-herd.svg" alt="Ahead of the Herd"></div><span>Ahead of the Herd</span></div>
+            <div class="bkitem"><div class="bk"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="The Dark Side of Multifamily Real Estate">
+  <defs>
+    <linearGradient id="dsbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#132A1E"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#08120C"/>
+    </linearGradient>
+    <linearGradient id="dsline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9A24B"/><stop offset="0.52" stop-color="#E0A93B"/><stop offset="1" stop-color="#A03A24"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#dsbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#08120C"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="62" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing="3.4" fill="#928A77">BENJAMIN INMAN</text>
+  <line x1="150" y1="78" x2="274" y2="78" stroke="rgba(201,162,75,.45)" stroke-width="1"/>
+
+  <text x="212" y="126" text-anchor="middle" font-family="Georgia,serif" font-size="26" letter-spacing="3" fill="#DFE1DB">THE</text>
+  <text x="212" y="186" text-anchor="middle" font-family="Georgia,serif" font-size="56" font-weight="700" letter-spacing="1" fill="#DFE1DB">DARK</text>
+  <text x="212" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="56" font-weight="700" letter-spacing="1" fill="#DFE1DB">SIDE</text>
+
+  <line x1="98" y1="266" x2="326" y2="266" stroke="#C9A24B" stroke-width="1.2"/>
+  <text x="212" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="2.4" fill="#C9A24B">OF MULTIFAMILY</text>
+  <text x="212" y="311" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="2.4" fill="#C9A24B">REAL ESTATE</text>
+
+  <path d="M46,452 C86,448 108,420 140,380 C176,334 196,300 212,300 C228,300 246,336 280,384 C310,426 336,450 372,456"
+        fill="none" stroke="url(#dsline)" stroke-width="2"/>
+  <circle cx="212" cy="300" r="3.4" fill="#E0A93B"/>
+  <line x1="212" y1="306" x2="212" y2="452" stroke="rgba(224,169,59,.22)" stroke-width="1" stroke-dasharray="2 4"/>
+
+  <text x="70" y="474" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#716B5B">EXPANSION</text>
+  <text x="212" y="474" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#928A77">PEAK</text>
+  <text x="354" y="474" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#8A5340">CORRECTION</text>
+
+  <text x="212" y="508" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-style="italic" fill="#999E8A">What goes wrong in this business,</text>
+  <text x="212" y="526" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-style="italic" fill="#999E8A">why it goes wrong, and when.</text>
+
+  <line x1="150" y1="550" x2="274" y2="550" stroke="rgba(201,162,75,.45)" stroke-width="1"/>
+  <text x="212" y="573" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="19" font-weight="600" letter-spacing="4" fill="#DFE1DB">ECONIQ</text>
+  <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+</svg></div><span>The Dark Side</span></div>
+            <div class="bkitem"><div class="bk"><svg class="bookcover" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 600" role="img" aria-label="Ahead of the Herd">
+  <defs>
+    <linearGradient id="ahbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F2417"/><stop offset="0.5" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
+    </linearGradient>
+    <linearGradient id="bull" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E0BC5E"/><stop offset="0.5" stop-color="#C9A24B"/><stop offset="1" stop-color="#9C7B2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#ahbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="58" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
+  <line x1="168" y1="72" x2="256" y2="72" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="90" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+
+  <text x="212" y="168" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-style="italic" fill="#DFE1DB">Ahead of</text>
+  <text x="212" y="226" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" letter-spacing="1.5" fill="#DFE1DB">THE HERD</text>
+
+  <line x1="86" y1="252" x2="338" y2="252" stroke="#C9A24B" stroke-width="1.2"/>
+  <text x="212" y="276" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">BEING EARLY IS THE ONLY</text>
+  <text x="212" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">DURABLE EDGE</text>
+
+  <g transform="translate(0,0)">
+    <path d="M40,436 C78,432 98,420 124,402 C176,366 212,330 262,326 C306,322 336,332 366,352"
+          fill="none" stroke="#555044" stroke-width="1.5"/>
+    <circle cx="96" cy="418" r="5" fill="#3E3A31"/>
+    <circle cx="118" cy="405" r="5" fill="#454137"/>
+    <circle cx="140" cy="392" r="5" fill="#4C473C"/>
+    <circle cx="160" cy="379" r="5" fill="#555044"/>
+    <circle cx="181" cy="366" r="5" fill="#5E584A"/>
+    <circle cx="201" cy="353" r="5" fill="#67614F"/>
+    <circle cx="221" cy="343" r="5" fill="#716B5B"/>
+    <circle cx="243" cy="333" r="5" fill="#7E7765"/>
+    <text x="150" y="452" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#716B5B">THE HERD</text>
+    <circle cx="322" cy="330" r="17" fill="none" stroke="rgba(224,169,59,.3)" stroke-width="1"/>
+    <circle cx="322" cy="330" r="10" fill="none" stroke="#E0A93B" stroke-width="1.6"/>
+    <circle cx="322" cy="330" r="4" fill="#E0A93B"/>
+    <path d="M266,330 L302,330" stroke="rgba(224,169,59,.45)" stroke-width="1" stroke-dasharray="2 4"/>
+    <text x="322" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#E0A93B">YOU</text>
+  </g>
+  <line x1="150" y1="524" x2="274" y2="524" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="550" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">How operators read the ordering</text>
+  <text x="212" y="567" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">before the crowd agrees</text>
+  <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="3" fill="#928A77">BENJAMIN INMAN</text>
+</svg></div><span>Ahead of the Herd</span></div>
           </div>
         </div>
       </a>
