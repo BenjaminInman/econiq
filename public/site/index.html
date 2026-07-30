@@ -239,15 +239,28 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 
 
 
-.door .bookcover{border-radius:0;box-shadow:none;border-bottom:1px solid rgba(223,225,219,.11)}
 .doors{align-items:stretch}
 .door{overflow:hidden}
-.door > .bookcover{aspect-ratio:2/3;object-fit:cover}
 
 .shotimg{width:100%;height:auto;display:block;border:1px solid rgba(223,225,219,.14);border-radius:var(--r);box-shadow:0 16px 40px rgba(0,0,0,.5)}
 
 .privfine{font-size:.76rem;color:var(--olive-lift);margin-top:11px;line-height:1.55}
 .privfine a{color:var(--gold)}
+
+/* three ways in — proportionate covers */
+.doors{grid-template-columns:repeat(3,1fr);gap:18px;max-width:940px;margin:0 auto}
+.door{align-items:stretch}
+.door .bookcover{max-height:268px;width:auto;max-width:100%;margin:0 auto;display:block;
+  border-radius:2px;box-shadow:0 10px 24px rgba(0,0,0,.4)}
+.door .covwrap{padding:26px 22px 22px;display:flex;align-items:center;justify-content:center;
+  border-bottom:1px solid rgba(223,225,219,.11);background:var(--forest-black)}
+.door-body{padding:20px 22px 22px}
+.door h3{font-size:1.02rem}
+.door p{font-size:.85rem}
+@media(max-width:900px){
+  .doors{grid-template-columns:1fr;max-width:460px}
+  .door .bookcover{max-height:300px}
+}
 </style>
 </head>
 <body>
@@ -299,7 +312,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
     </div>
     <div class="doors">
       <a class="door" href="#playbook">
-        <svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="The 4-Phase Cycle Playbook">
+        <div class="covwrap"><svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="The 4-Phase Cycle Playbook">
   <defs><linearGradient id="pbbg" x1="0" y1="0" x2="1" y2="1">
     <stop offset="0" stop-color="#122313"/><stop offset="1" stop-color="#08120C"/></linearGradient></defs>
   <rect width="400" height="600" fill="url(#pbbg)"/>
@@ -331,7 +344,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
   <line x1="150" y1="552" x2="274" y2="552" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
   <text x="212" y="574" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="17" font-weight="600" letter-spacing="4" fill="#DFE1DB">ECONIQ</text>
   <text x="212" y="589" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="3" fill="#C9A24B">WHEN &gt; HOW</text>
-</svg>
+</svg></div>
         <div class="door-body">
           <span class="tagline">Free</span>
           <h3>The 4-Phase Cycle Playbook</h3>
@@ -340,7 +353,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
         </div>
       </a>
       <a class="door" href="#book">
-        <svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="The Dark Side of Multifamily Real Estate">
+        <div class="covwrap"><svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="The Dark Side of Multifamily Real Estate">
   <defs>
     <linearGradient id="dsbg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#132A1E"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#08120C"/>
@@ -379,7 +392,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
   <line x1="150" y1="550" x2="274" y2="550" stroke="rgba(201,162,75,.45)" stroke-width="1"/>
   <text x="212" y="573" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="19" font-weight="600" letter-spacing="4" fill="#DFE1DB">ECONIQ</text>
   <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
-</svg>
+</svg></div>
         <div class="door-body">
           <span class="tagline">$9.95 · Shipped</span>
           <h3>The Dark Side of Multifamily</h3>
@@ -388,7 +401,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
         </div>
       </a>
       <a class="door" href="ahead-of-the-herd.html">
-        <svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Ahead of the Herd">
+        <div class="covwrap"><svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Ahead of the Herd">
   <defs>
     <linearGradient id="ahbg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0F2417"/><stop offset="0.5" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
@@ -434,7 +447,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
   <text x="212" y="550" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">How operators read the ordering</text>
   <text x="212" y="567" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">before the crowd agrees</text>
   <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="3" fill="#928A77">BENJAMIN INMAN</text>
-</svg>
+</svg></div>
         <div class="door-body">
           <span class="tagline">Free &middot; For subscribers</span>
           <h3>Ahead of the Herd</h3>
