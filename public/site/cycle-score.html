@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cycle Score — Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+ background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+ display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift)}
+.stage{width:min(860px,92vw);margin:0 auto;padding:70px 0 90px}
+.tm{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 22px}
+.stage h1{font-size:clamp(2.1rem,4.6vw,3.4rem);line-height:1.06;margin:0 0 24px}
+.stage h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.stage .lead{font-size:1.06rem;color:var(--muted);max-width:58ch;margin:0 0 34px}
+.specs{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);
+ border-radius:var(--r);overflow:hidden;margin-bottom:34px}
+.specs div{background:var(--forest-panel);padding:18px 16px}
+.specs b{display:block;font-family:var(--mono);font-size:.95rem;color:var(--platinum);font-weight:500}
+.specs small{display:block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-lift);margin-top:6px}
+@media(max-width:720px){.specs{grid-template-columns:repeat(2,1fr)}}
+.fineline{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--olive-lift);margin-top:18px}
+
+.bands{margin-top:44px;border-top:1px solid var(--line);padding-top:30px}
+.bands h2{font-size:1.2rem;margin:0 0 6px}
+.bands p.sub{font-size:.9rem;color:var(--muted);margin:0 0 20px}
+.bandrow{display:flex;align-items:center;gap:14px;padding:11px 0;border-bottom:1px solid var(--line)}
+.bandrow:last-child{border-bottom:0}
+.bandrow i{width:34px;font-family:var(--mono);font-size:9.5px;color:var(--olive-lift);flex:none;font-style:normal}
+.bandrow b{font-family:var(--display);font-size:.96rem;color:var(--platinum);flex:none;width:150px}
+.bandrow span{font-size:.86rem;color:var(--muted)}
+.bandrow.top b{color:var(--amber)}
+@media(max-width:700px){.bandrow{flex-wrap:wrap;gap:6px}.bandrow b{width:auto}}
+
+/* quiz */
+#quiz{display:none}
+.qtop{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:10px}
+.qtop .cnt{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.qtop .cat{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-lift)}
+.bar{height:2px;background:var(--forest-raise);border-radius:2px;overflow:hidden;margin-bottom:34px}
+.bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .3s ease}
+.qtext{font-family:var(--display);font-weight:500;font-size:clamp(1.15rem,2.1vw,1.5rem);line-height:1.3;color:var(--platinum);margin:0 0 26px;letter-spacing:-.01em}
+.opts{display:flex;flex-direction:column;gap:10px}
+.opt{text-align:left;background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);
+ padding:16px 18px;color:var(--muted);font-family:var(--body);font-size:.95rem;cursor:pointer;transition:all .16s;line-height:1.45}
+.opt:hover{border-color:var(--gold);color:var(--platinum)}
+.opt.sel{border-color:var(--amber);background:rgba(224,169,59,.1);color:var(--platinum)}
+.qnav{display:flex;justify-content:space-between;gap:12px;margin-top:28px;align-items:center}
+.qnav .back{background:none;border:0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--olive-lift);cursor:pointer;padding:8px 0}
+.qnav .back:hover{color:var(--platinum)}
+.qnav .back[disabled]{opacity:.3;cursor:default}
+
+/* results */
+#result{display:none}
+.scorehead{display:grid;grid-template-columns:auto 1fr;gap:34px;align-items:center;
+ background:var(--forest-panel);border:1px solid rgba(224,169,59,.42);border-radius:var(--r);padding:34px 36px;margin-bottom:26px}
+.dial{width:132px;height:132px;flex:none}
+.dial text{font-family:var(--mono);fill:var(--platinum)}
+.scorehead .band{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+.scorehead h2{font-size:1.9rem;margin:0 0 10px;color:var(--amber)}
+.scorehead p{margin:0;font-size:.95rem}
+@media(max-width:700px){.scorehead{grid-template-columns:1fr;gap:22px;padding:26px 22px}}
+
+.catlist{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 30px;margin-bottom:26px}
+.catlist h3{font-size:1.05rem;margin:0 0 20px}
+.crow{margin-bottom:16px}
+.crow:last-child{margin-bottom:0}
+.crow .lb{display:flex;justify-content:space-between;gap:12px;font-size:.9rem;margin-bottom:7px}
+.crow .lb span:first-child{color:var(--platinum)}
+.crow .lb span:last-child{font-family:var(--mono);font-size:.82rem;color:var(--olive-lift)}
+.crow .tr{height:5px;background:var(--forest-raise);border-radius:3px;overflow:hidden}
+.crow .tr i{display:block;height:100%;background:var(--olive-lift);border-radius:3px}
+.crow.weak .tr i{background:var(--amber)}
+.crow.weak .lb span:last-child{color:var(--amber)}
+
+.blind{background:var(--forest-raise);border:1px solid rgba(224,169,59,.35);border-radius:var(--r);padding:28px 30px;margin-bottom:26px}
+.blind .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--amber);display:block;margin-bottom:12px}
+.blind h3{font-size:1.25rem;margin:0 0 12px}
+.blind p{margin:0 0 14px;font-size:.95rem}
+.blind p:last-child{margin:0}
+.blind .mod{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive-lift);
+ border-top:1px solid var(--line);padding-top:16px;margin-top:18px;display:block}
+
+.capture{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 30px}
+.capture h3{font-size:1.05rem;margin:0 0 8px}
+.frow{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.frow input{flex:1;min-width:220px;background:var(--forest-black);border:1px solid var(--line);border-radius:var(--r);
+ padding:13px 15px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
+.frow input::placeholder{color:var(--muted)}
+.frow input:focus{outline:none;border-color:var(--amber)}
+.retake{background:none;border:0;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+ color:var(--olive-lift);cursor:pointer;margin-top:22px;padding:0}
+.retake:hover{color:var(--platinum)}
+.disc{font-size:.8rem;color:var(--olive-lift);margin-top:24px;max-width:76ch}
+
+
+.bookcover{width:100%;height:auto;display:block;border-radius:2px;box-shadow:0 14px 34px rgba(0,0,0,.45)}
+.introgrid{display:grid;grid-template-columns:1.25fr .75fr;gap:44px;align-items:start}
+@media(max-width:860px){.introgrid{grid-template-columns:1fr;gap:30px}.introgrid .cov{max-width:280px}}
+
+.privfine{font-size:.76rem;color:var(--olive-lift);margin-top:11px;line-height:1.55}
+.privfine a{color:var(--gold)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html" class="on">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+
+<div class="stage">
+
+  <!-- INTRO -->
+  <section id="intro">
+    <div class="introgrid"><div>
+    <p class="tm">Cycle Score&trade; &middot; Cycle Knowledge Assessment</p>
+    <h1>You know the cycle exists.<br><em>How well do you actually read it?</em></h1>
+    <p class="lead">Eighteen questions on phase identification, indicator ordering, causation, submarket divergence, and the constraints that override a correct read. It scores what you know — and names the one gap costing you the most.</p>
+
+    <div class="specs">
+      <div><b>18</b><small>Questions</small></div>
+      <div><b>~6 min</b><small>Time</small></div>
+      <div><b>Free</b><small>No cost</small></div>
+      <div><b>4 Phase</b><small>Framework</small></div>
+    </div>
+
+    <button class="btn btn-amber btn-lg" id="begin">Begin assessment</button>
+    <p class="fineline">Free to take. Your score and blind-spot report appear the moment you finish.</p>
+
+    </div>
+    <div class="cov"><svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Cycle Score Assessment">
+  <defs><linearGradient id="csbg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#122A1B"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
+  </linearGradient></defs>
+  <rect width="400" height="600" fill="url(#csbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="52" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
+  <line x1="168" y1="66" x2="256" y2="66" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+
+  <text x="212" y="158" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">CYCLE</text>
+  <text x="212" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">SCORE</text>
+  <text x="212" y="244" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" letter-spacing="5.5" fill="#C9A24B">ASSESSMENT</text>
+  <line x1="92" y1="266" x2="332" y2="266" stroke="#C9A24B" stroke-width="1.2"/>
+
+  <text x="212" y="292" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">A data-driven framework to</text>
+  <text x="212" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">score the market cycle</text>
+
+  <g>
+    <path d="M126.0,432.0 A86,86 0 0 1 151.2,371.2" fill="none" stroke="#4C4739" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M151.2,371.2 A86,86 0 0 1 212.0,346.0" fill="none" stroke="#716B5B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M212.0,346.0 A86,86 0 0 1 272.8,371.2" fill="none" stroke="#C9A24B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M272.8,371.2 A86,86 0 0 1 298.0,432.0" fill="none" stroke="#E0A93B" stroke-width="17" stroke-linecap="butt"/>
+    <line x1="157.6" y1="377.6" x2="144.8" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212.0" y1="355.0" x2="212.0" y2="337.0" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="266.4" y1="377.6" x2="279.2" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212" y1="432" x2="256.6" y2="378.1" stroke="#E0A93B" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="212" cy="432" r="7" fill="#E0A93B"/>
+    <circle cx="212" cy="432" r="3" fill="#0C1E15"/>
+    <text x="212" y="472" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="30" fill="#E0A93B">72</text>
+    <text x="212" y="492" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#C9A24B">EXPANSION STRENGTHENING</text>
+  </g>
+
+    <line x1="58" y1="522" x2="366" y2="522" stroke="#302C25" stroke-width="2"/>
+    <line x1="58.0" y1="522" x2="135.0" y2="522" stroke="#4C4739" stroke-width="2"/>
+    <circle cx="135.0" cy="522" r="3" fill="#4C4739"/>
+    <text x="96.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">RECESSION</text>
+    <text x="96.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">0–25</text>
+    <line x1="135.0" y1="522" x2="212.0" y2="522" stroke="#716B5B" stroke-width="2"/>
+    <circle cx="212.0" cy="522" r="3" fill="#716B5B"/>
+    <text x="173.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">CORRECTION</text>
+    <text x="173.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">25–50</text>
+    <line x1="212.0" y1="522" x2="289.0" y2="522" stroke="#C9A24B" stroke-width="2"/>
+    <circle cx="289.0" cy="522" r="3" fill="#C9A24B"/>
+    <text x="250.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">PEAK</text>
+    <text x="250.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">50–75</text>
+    <line x1="289.0" y1="522" x2="366.0" y2="522" stroke="#E0A93B" stroke-width="2"/>
+    <circle cx="366.0" cy="522" r="3" fill="#E0A93B"/>
+    <text x="327.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">EXPANSION</text>
+    <text x="327.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">75–100</text>
+
+  <line x1="150" y1="566" x2="274" y2="566" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="583" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.6" fill="#DFE1DB">MEASURE. MONITOR. MOVE.</text>
+  <text x="212" y="595" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="2.6" fill="#928A77">BENJAMIN INMAN</text>
+</svg></div>
+    </div>
+
+    <div class="bands">
+      <h2>The five bands</h2>
+      <p class="sub">Named after the thing they describe. Most operators land in the middle two.</p>
+      <div class="bandrow"><i>0&ndash;39</i><b>In the Herd</b><span>Reading the same delayed picture as everyone else, at the same time.</span></div>
+      <div class="bandrow"><i>40&ndash;59</i><b>Trailing</b><span>You know the phases. You confirm them after the fact.</span></div>
+      <div class="bandrow"><i>60&ndash;74</i><b>Coincident</b><span>You read the market as it happens. Rarely before.</span></div>
+      <div class="bandrow"><i>75&ndash;89</i><b>Leading</b><span>You track what moves first and you act on it.</span></div>
+      <div class="bandrow top"><i>90+</i><b>Ahead of the Herd</b><span>You see the ordering, price the constraints, and move while pricing still reflects the prior phase.</span></div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz">
+    <div class="qtop">
+      <span class="cnt" id="cnt">Question 1 of 18</span>
+      <span class="cat" id="cat"></span>
+    </div>
+    <div class="bar"><i id="prog"></i></div>
+    <p class="qtext" id="qtext"></p>
+    <div class="opts" id="opts"></div>
+    <div class="qnav">
+      <button class="back" id="back">&larr; Previous</button>
+      <span class="cat" id="hint">Select an answer to continue</span>
+    </div>
+  </section>
+
+  <!-- RESULT -->
+  <section id="result">
+    <p class="tm">Cycle Score&trade; &middot; Your result</p>
+    <div class="scorehead">
+      <svg class="dial" viewBox="0 0 120 120" aria-hidden="true">
+        <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(219,223,221,.12)" stroke-width="6"/>
+        <circle id="ring" cx="60" cy="60" r="50" fill="none" stroke="#E0A93B" stroke-width="6"
+                stroke-linecap="round" stroke-dasharray="314" stroke-dashoffset="314"
+                transform="rotate(-90 60 60)" style="transition:stroke-dashoffset .9s ease"/>
+        <text id="pct" x="60" y="58" text-anchor="middle" font-size="26" font-weight="500">0</text>
+        <text x="60" y="76" text-anchor="middle" font-size="8" letter-spacing="2" fill="#928A77">SCORE</text>
+      </svg>
+      <div>
+        <p class="band" id="bandlabel">Band</p>
+        <h2 id="bandname"></h2>
+        <p id="banddesc"></p>
+      </div>
+    </div>
+
+    <div class="catlist">
+      <h3>Where you scored</h3>
+      <div id="cats"></div>
+    </div>
+
+    <div class="blind">
+      <span class="k">Your biggest blind spot</span>
+      <h3 id="bsname"></h3>
+      <p id="bstext"></p>
+      <p id="bswhy"></p>
+      <span class="mod" id="bsmod"></span>
+    </div>
+
+    <div class="capture">
+      <h3>Send me the full breakdown</h3>
+      <p style="font-size:.92rem;margin:0">Question-by-question results, what the right answer was and why, and which Recon modules address your two weakest areas.</p>
+      <div class="frow">
+        <input type="email" placeholder="you@company.com" aria-label="Email address">
+        <button class="btn btn-amber" type="button">Send my report</button>
+      </div>
+      <p class="privfine">We'll use your email only to send what you asked for and the Signals newsletter. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
+    </div>
+
+    <div style="margin-top:26px;display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+      <a class="btn btn-amber" href="recon.html">See what Recon covers</a>
+      <a class="btn btn-ghost" href="ahead-of-the-herd.html">Read: Ahead of the Herd</a>
+    </div>
+
+    <button class="retake" id="retake">Retake the assessment</button>
+
+    <p class="disc">Educational assessment only. Scores measure familiarity with the Econiq Method framework, not investment skill or likely returns. Not investment advice.</p>
+  </section>
+</div>
+
+<script>
+const CATS = {
+  phase:  {name:"Phase identification", mod:"Recon &middot; Modules 01\u201302"},
+  order:  {name:"Indicator ordering",   mod:"Recon &middot; Module 03"},
+  cause:  {name:"Correlation vs. causation", mod:"Recon &middot; Module 04"},
+  layer:  {name:"Submarket divergence", mod:"Recon &middot; Modules 05\u201306"},
+  play:   {name:"Phase playbooks",      mod:"Recon &middot; Modules 08\u201310"},
+  hold:   {name:"Constraints \u0026 discipline", mod:"Recon &middot; Module 07 \u2014 The Collision"}
+};
+
+const BLIND = {
+  phase:["You can't name where you are.","Every downstream decision \u2014 what you pay, how you operate, when you exit \u2014 depends on establishing the phase first. Getting this wrong doesn't produce a slightly worse outcome. It produces the right playbook applied to the wrong market."],
+  order:["You're reading confirmation, not signal.","Occupancy, closed comps and T-12s describe a market that priced months ago. If these are your primary inputs, you are structurally late on every call, no matter how carefully you analyse them."],
+  cause:["You're building theses on the wrong variable.","This is where experienced operators get surprised. Two things moving together feels like understanding, and a relationship that held for a decade can break in a single regime change without warning."],
+  layer:["You're reading the wrong altitude.","National conditions don't determine your submarket. Two submarkets in one MSA routinely sit in different phases, and averaging them produces a number that describes neither."],
+  play:["You know the phase but not the response.","Identifying hyper supply and then pushing rate over occupancy is worse than not identifying it at all \u2014 it converts a correct read into a confident mistake."],
+  hold:["You have no rule for when the clock overrules the read.","Exchange deadlines, fund terms, lender pressure and partner liquidity all override cycle discipline unless you've priced the tradeoff in advance. This is the gap that cost me 353 units."]
+};
+
+const Q = [
+ {c:"phase",q:"Deliveries are outpacing absorption. Concessions have appeared at the top of the market. Reported rent growth is still positive. What phase is this?",
+   o:["Expansion","Hyper supply","Recovery","Recession"],a:1},
+ {c:"phase",q:"Occupancy is tightening off the bottom, construction starts are near zero, and sentiment is still clearly negative. What phase is this?",
+   o:["Recovery","Expansion","Recession","Hyper supply"],a:0},
+ {c:"phase",q:"Which misidentification is most common and most expensive?",
+   o:["Reading recovery as recession","Reading hyper supply as expansion","Reading expansion as recovery","Reading recession as hyper supply"],a:1},
+ {c:"order",q:"Which of these moves first?",
+   o:["Closed sale comparables","Concession depth","Cap rates at sale","Trailing twelve-month NOI"],a:1},
+ {c:"order",q:"An operator times dispositions off closed comps. What is the structural problem with that?",
+   o:["Comps are often inaccurate","Comps reflect conditions that priced months before closing","Comps exclude concessions","Comps are seasonally distorted"],a:1},
+ {c:"order",q:"The spread between renewal rent and new-lease rent is compressing. What is that telling you first?",
+   o:["Occupancy is about to rise","New-lease pricing is softening before it appears in reported rent","Renewals are being pushed too aggressively","Nothing \u2014 the metric is noise"],a:1},
+ {c:"cause",q:"Employment growth and rent growth have moved together in your market for years. Which inference is safest?",
+   o:["Employment growth causes rent growth","Both may respond to a shared driver, and the relationship can break","Rent growth attracts employers","The pair reliably forecasts each other"],a:1},
+ {c:"cause",q:"Rents in a submarket rose in the year after a grocery anchor opened. What is the strongest reason for caution in attributing the rise to the anchor?",
+   o:["Grocery anchors have no measurable rent effect","The anchor and the rent growth may both follow the same underlying demand signal","Rents rose everywhere that year","Retail and residential data aren't comparable"],a:1},
+ {c:"cause",q:"Two indicators have tracked each other closely for ten years. What does that establish?",
+   o:["A causal relationship","A reliable forecasting tool","An association that may not survive a regime change","Nothing whatsoever"],a:2},
+ {c:"layer",q:"National data indicates expansion. Your submarket has 3,000 units delivering within 18 months against roughly 400 units of annual absorption. What governs the decision?",
+   o:["The national read","The submarket read","An average of the two","Wait for national data to confirm"],a:1},
+ {c:"layer",q:"Which layer of the Onion Framework do operators most often skip?",
+   o:["Macro","Market","Submarket","None \u2014 most cover all three"],a:2},
+ {c:"layer",q:"Why can two submarkets inside the same MSA sit in different phases?",
+   o:["Inconsistent data providers","Supply and employment concentrate unevenly at a local level","Different reporting periods","They can't \u2014 an MSA moves as one market"],a:1},
+ {c:"play",q:"You've identified hyper supply. Which operating move is correct?",
+   o:["Push rate over occupancy","Lock renewals long, even at flat rates","Cut staffing to protect margin","Hold vacant units for stronger rents"],a:1},
+ {c:"play",q:"In which phase is favourable basis available with debt markets still functioning?",
+   o:["Recovery","Expansion","Hyper supply","Recession"],a:0},
+ {c:"play",q:"Late expansion. An asset has hit its business plan. What's the correct action?",
+   o:["Hold for further rent growth","Set an exit date","Refinance and hold indefinitely","Add capex to push rents higher"],a:1},
+ {c:"hold",q:"A 1031 exchange puts you under a 180-day deadline to acquire in a phase you're actively exiting. How should you think about it?",
+   o:["Complete the exchange \u2014 deferral always beats paying tax","Price the deferred tax against the risk of buying into the wrong phase","Never use exchanges","Assume the deadline can be extended"],a:1},
+ {c:"hold",q:"Bridge debt is survivable in expansion and dangerous in hyper supply. Why?",
+   o:["Bridge rates are higher in hyper supply","Exit and refinance assumptions depend on continued rent growth and cap rate stability","Lenders tighten covenants in hyper supply","Bridge debt is always dangerous"],a:1},
+ {c:"hold",q:"What most often causes an operator who understands the cycle to still make a mis-timed acquisition?",
+   o:["Inaccurate market data","No thresholds or decision rules committed to in advance","The wrong equity partner","Ordinary bad luck"],a:1}
+];
+
+const BANDS=[
+ [0,39,"In the Herd","You're working from the same delayed picture as everyone else, at the same time, in the same direction. That's not a knowledge gap so much as a starting point \u2014 and it's where most of this industry operates."],
+ [40,59,"Trailing","You know the phases exist and you can name them after the fact. What's missing is the ordering \u2014 which signals move first, and what to do while they're moving."],
+ [60,74,"Coincident","You read the market roughly as it happens. That's better than most and still not early. The gap between coincident and leading is where the entire timing advantage lives."],
+ [75,89,"Leading","You track what moves first and you're willing to act before consensus forms. Tighten the weak areas below and you're operating ahead of the field."],
+ [90,100,"Ahead of the Herd","You read the ordering, you price the constraints, and you move while pricing still reflects the prior phase. Very few operators score here."]
+];
+
+const ans = {};
+let i = 0;
+const $ = id => document.getElementById(id);
+
+function render(){
+  const q = Q[i];
+  $('cnt').textContent = `Question ${i+1} of ${Q.length}`;
+  $('cat').innerHTML = CATS[q.c].name;
+  $('prog').style.width = ((i)/Q.length*100)+'%';
+  $('qtext').innerHTML = q.q;
+  $('opts').innerHTML = '';
+  q.o.forEach((t,k)=>{
+    const b=document.createElement('button');
+    b.className='opt'+(ans[i]===k?' sel':'');
+    b.innerHTML=t;
+    b.onclick=()=>{ ans[i]=k; render(); setTimeout(next,180); };
+    $('opts').appendChild(b);
+  });
+  $('back').disabled = i===0;
+  $('hint').textContent = ans[i]===undefined ? 'Select an answer to continue' : '';
+}
+
+function next(){ if(i < Q.length-1){ i++; render(); } else { finish(); } }
+
+$('begin').onclick = ()=>{ $('intro').style.display='none'; $('quiz').style.display='block'; render(); window.scrollTo(0,0); };
+$('back').onclick = ()=>{ if(i>0){ i--; render(); } };
+
+function finish(){
+  const per={};
+  Object.keys(CATS).forEach(c=>per[c]={right:0,total:0});
+  Q.forEach((q,k)=>{ per[q.c].total++; if(ans[k]===q.a) per[q.c].right++; });
+  const right = Q.reduce((n,q,k)=> n + (ans[k]===q.a?1:0), 0);
+  const pct = Math.round(right/Q.length*100);
+
+  $('quiz').style.display='none';
+  $('result').style.display='block';
+  window.scrollTo(0,0);
+
+  setTimeout(()=>{ $('ring').style.strokeDashoffset = 314 - (314*pct/100); },80);
+  $('pct').textContent = pct;
+
+  const b = BANDS.find(x=>pct>=x[0] && pct<=x[1]);
+  $('bandname').textContent = b[2];
+  $('banddesc').innerHTML = b[3];
+  $('bandlabel').innerHTML = `${right} of ${Q.length} correct &middot; Band`;
+
+  const order = Object.keys(CATS).sort((a,c)=>
+    (per[a].right/per[a].total) - (per[c].right/per[c].total));
+  $('cats').innerHTML = Object.keys(CATS).map(c=>{
+    const p = Math.round(per[c].right/per[c].total*100);
+    const weak = c===order[0];
+    return `<div class="crow${weak?' weak':''}">
+      <div class="lb"><span>${CATS[c].name}</span><span>${per[c].right}/${per[c].total}</span></div>
+      <div class="tr"><i style="width:${p}%"></i></div></div>`;
+  }).join('');
+
+  const w = order[0];
+  $('bsname').innerHTML = BLIND[w][0];
+  $('bstext').innerHTML = BLIND[w][1];
+  $('bswhy').innerHTML = `You scored ${per[w].right} of ${per[w].total} on ${CATS[w].name.toLowerCase()} \u2014 your lowest area.`;
+  $('bsmod').innerHTML = 'Covered in: ' + CATS[w].mod;
+}
+
+$('retake').onclick = ()=>{
+  Object.keys(ans).forEach(k=>delete ans[k]);
+  i=0; $('result').style.display='none'; $('intro').style.display='block'; window.scrollTo(0,0);
+};
+</script>
+
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

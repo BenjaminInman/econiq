@@ -1,0 +1,47 @@
+<svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Ahead of the Herd">
+  <defs>
+    <linearGradient id="ahbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0F2417"/><stop offset="0.5" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
+    </linearGradient>
+    <linearGradient id="bull" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#E0BC5E"/><stop offset="0.5" stop-color="#C9A24B"/><stop offset="1" stop-color="#9C7B2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#ahbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="58" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
+  <line x1="168" y1="72" x2="256" y2="72" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="90" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+
+  <text x="212" y="168" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-style="italic" fill="#DFE1DB">Ahead of</text>
+  <text x="212" y="226" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" letter-spacing="1.5" fill="#DFE1DB">THE HERD</text>
+
+  <line x1="86" y1="252" x2="338" y2="252" stroke="#C9A24B" stroke-width="1.2"/>
+  <text x="212" y="276" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">BEING EARLY IS THE ONLY</text>
+  <text x="212" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">DURABLE EDGE</text>
+
+  <g transform="translate(0,0)">
+    <path d="M40,436 C78,432 98,420 124,402 C176,366 212,330 262,326 C306,322 336,332 366,352"
+          fill="none" stroke="#555044" stroke-width="1.5"/>
+    <circle cx="96" cy="418" r="5" fill="#3E3A31"/>
+    <circle cx="118" cy="405" r="5" fill="#454137"/>
+    <circle cx="140" cy="392" r="5" fill="#4C473C"/>
+    <circle cx="160" cy="379" r="5" fill="#555044"/>
+    <circle cx="181" cy="366" r="5" fill="#5E584A"/>
+    <circle cx="201" cy="353" r="5" fill="#67614F"/>
+    <circle cx="221" cy="343" r="5" fill="#716B5B"/>
+    <circle cx="243" cy="333" r="5" fill="#7E7765"/>
+    <text x="150" y="452" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#716B5B">THE HERD</text>
+    <circle cx="322" cy="330" r="17" fill="none" stroke="rgba(224,169,59,.3)" stroke-width="1"/>
+    <circle cx="322" cy="330" r="10" fill="none" stroke="#E0A93B" stroke-width="1.6"/>
+    <circle cx="322" cy="330" r="4" fill="#E0A93B"/>
+    <path d="M266,330 L302,330" stroke="rgba(224,169,59,.45)" stroke-width="1" stroke-dasharray="2 4"/>
+    <text x="322" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#E0A93B">YOU</text>
+  </g>
+  <line x1="150" y1="524" x2="274" y2="524" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="550" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">How operators read the ordering</text>
+  <text x="212" y="567" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">before the crowd agrees</text>
+  <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="3" fill="#928A77">BENJAMIN INMAN</text>
+</svg>

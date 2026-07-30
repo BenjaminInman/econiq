@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signals &mdash; Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+ background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+ display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+.hero{padding:66px 0 50px}
+.hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
+.feat{list-style:none;padding:0;margin:22px 0 26px}
+.feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
+.feat li:last-child{border-bottom:0}
+.feat li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:1px;background:var(--amber)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--display);font-weight:500;font-size:1.02rem;
+ display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--platinum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-family:var(--mono);color:var(--gold)}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{padding:0 0 22px;margin:0;font-size:.94rem;max-width:70ch}
+
+.lead-post{background:var(--forest-panel);border:1px solid rgba(224,169,59,.35);border-radius:var(--r);overflow:hidden;
+ display:grid;grid-template-columns:1.05fr .95fr;margin-bottom:26px;text-decoration:none}
+.lead-post .im{aspect-ratio:16/10;border:0;border-radius:0}
+.lead-post .tx{padding:34px 32px;display:flex;flex-direction:column;justify-content:center}
+.lead-post h2{font-size:1.6rem;margin-bottom:12px}
+.lead-post p{font-size:.94rem;margin:0}
+@media(max-width:900px){.lead-post{grid-template-columns:1fr}}
+.meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.post{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;text-decoration:none;display:block;transition:border-color .2s}
+.post:hover{border-color:rgba(224,169,59,.42)}
+.post h3{font-size:1rem;margin-bottom:8px}
+.post p{font-size:.86rem;margin:0}
+@media(max-width:900px){.posts{grid-template-columns:1fr}}
+.pledge{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 34px;max-width:80ch}
+.pledge p:last-child{margin:0}
+.form-row{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
+.form-row input{flex:1;min-width:220px;background:var(--forest-black);border:1px solid var(--line);border-radius:var(--r);
+ padding:13px 15px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
+.form-row input::placeholder{color:var(--muted)}
+.form-row input:focus{outline:none;border-color:var(--amber)}
+
+
+.privfine{font-size:.76rem;color:var(--olive-lift);margin-top:11px;line-height:1.55}
+.privfine a{color:var(--gold)}
+
+.empty{background:var(--forest-panel);border:1px dashed rgba(146,138,119,.4);border-radius:var(--r);padding:44px 42px;text-align:left}
+.empty p:last-child{margin:0}
+@media(max-width:700px){.empty{padding:28px 22px}}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html" class="on">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+
+<section class="hero"><div class="wrap" style="max-width:58ch">
+  <p class="eyebrow">Signals</p>
+  <h1>Calls on the record, dated.</h1>
+  <p class="sub">Every phase read gets published with a date and stays up &mdash; whether it holds or not. The framework is new, so rather than ask you to take my word for it, the record builds in public.</p>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="empty">
+    <p class="eyebrow">No reads published yet</p>
+    <h2>The record starts here.</h2>
+    <p style="margin-top:16px;max-width:62ch">The first phase read publishes shortly. Rather than backfill this page with commentary written after the fact, it stays empty until there is a real call to put a date on.</p>
+    <p style="max-width:62ch">Subscribe below and you'll get the first one as it goes out.</p>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div class="pledge">
+    <p class="eyebrow">The standard</p>
+    <h2 style="margin-bottom:16px">What gets published here.</h2>
+    <p>Each read states the market, the date, the indicators it rests on, and the phase call. Nothing gets edited after publication and nothing gets removed &mdash; if a call ages badly, it stays up with a dated follow-up rather than a quiet correction.</p>
+    <p>This is the only honest evidence available for a framework built in 2026. It costs nothing to claim a system works. It costs something to date your calls.</p>
+  </div>
+</div></section>
+
+<section class="sec" style="background:var(--forest-panel)"><div class="wrap">
+  <p class="eyebrow">Subscribe</p>
+  <h2 style="margin-bottom:14px">One read, every other week.</h2>
+  <p style="max-width:54ch;margin-bottom:22px">Which indicators moved, what they suggest, and what an operator should do about it.</p>
+  <div class="form-row">
+    <input type="email" placeholder="you@company.com" aria-label="Email address">
+    <button class="btn btn-amber" type="button">Subscribe</button>
+  </div>
+      <p class="privfine">We'll use your email only to send what you asked for and the Signals newsletter. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
+</div></section>
+
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

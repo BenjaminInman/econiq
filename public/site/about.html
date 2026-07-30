@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why this exists — Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html" class="on">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <p class="eyebrow">Why this exists</p>
+      <h1>I built this because nobody taught it to me — and not knowing it <em>cost me real assets</em>.</h1>
+      <p class="sub">Twenty years in multifamily. Two full cycles — one from inside the business, one with my own capital in the deals. A framework that came out of the mistakes, not the wins.</p>
+    </div>
+    <div class="ph portrait"><span>Portrait<br>3:4 · analyst, not guru</span></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat"><b>$500M+</b><small>Multifamily acquired</small></div>
+      <div class="stat"><b>4,500</b><small>Units operated</small></div>
+      <div class="stat"><b>$150M+</b><small>Equity raised</small></div>
+      <div class="stat"><b>2</b><small>Full cycles, operated through</small></div>
+    </div>
+    <p class="stats-note">Operator track record — not a performance claim for these programs.</p>
+  </div>
+</section>
+
+<!-- NARRATIVE -->
+<section class="sec">
+  <div class="narrow body-copy">
+    <p class="pull">I didn't lose properties because I picked bad deals. I lost them because I bought into a phase I couldn't yet name.</p>
+
+    <p>I've spent my career acquiring and operating multifamily across the Southeast — Nashville, Atlanta, Jacksonville, Daytona Beach, Greensboro, Knoxville, Houston, Orlando, Tallahassee. Over $500 million acquired. More than $150 million raised from investors who trusted me with it.</p>
+
+    <p><strong>I've been through two full cycles in this business.</strong> The first from inside a multifamily company as an employee — close enough to watch the whole thing happen, not close enough to decide anything about it. The second as the investor and operator, with my capital and other people's in every deal.</p>
+
+    <p>That difference matters more than it sounds. Watching a cycle turn when it isn't your money teaches you the pattern. Living one when it is teaches you what the pattern costs — and those turn out to be two completely different educations.</p>
+
+    <p>In 2017 I bought in Nashville and Atlanta while sentiment was still negative and most people were waiting for confirmation. That turned out to be the best basis I'd ever set. <strong>I couldn't have told you why at the time.</strong> It felt right. The deals penciled. I went.</p>
+
+    <p>Through 2019 to 2021 I accumulated across Florida, Tennessee, and the Carolinas. Then in late 2021 and through 2022, I exited most of the portfolio — ahead of the repricing, before the debt markets closed, while buyers were still paying last year's prices. Those were the best decisions of my career.</p>
+
+    <p><strong>I made them on instinct.</strong> Not on a framework. Not on a system I could have handed to someone else, or repeated deliberately, or taught to my own team.</p>
+
+    <h3>Then I got it wrong.</h3>
+
+    <p>In the same year I was selling on that read, I was also buying. Some of it wasn't a choice — 1031 exchange clocks put me into replacement property under a 180-day deadline, in markets already tipping into oversupply. One of those exchanges took me into Houston. Another into Tallahassee.</p>
+
+    <p>And some of it was a choice. Orlando and Tallahassee — fresh capital, no clock, no forcing function. I bought into a phase I was actively exiting elsewhere, because I had no framework strong enough to tell me not to.</p>
+
+    <p><strong>The Houston asset went back to the lender in November 2024.</strong> That isn't a statistic to me. It's a deal I underwrote, investors I answered to, and a team I'd built.</p>
+
+    <h3>The part that convinced me to build this</h3>
+
+    <p>I wasn't alone on those calls. Each of those deals had an institutional private equity partner alongside me — <strong>sophisticated capital, with research teams, investment committees, and access to every data provider in the industry.</strong> They underwrote the same markets, at the same time, and reached the same conclusion I did.</p>
+
+    <p>They misread the signals too. Or weren't reading them at all.</p>
+
+    <p>That's the moment this stopped being a personal failure I needed to get over and became a gap I needed to close. If institutions with dedicated research functions can walk into an oversupplied market alongside an operator with twenty years of experience, the problem isn't diligence or effort or intelligence. <strong>The problem is that nobody has built a usable, repeatable way to read the phase — and then act differently because of it.</strong></p>
+
+    <h3>What I couldn't find</h3>
+
+    <p>After that, I went looking for the thing that would have prevented it. Institutional allocators structure holdings around cycle position — that thinking exists, and the largest owners in the country operate on it. But it lives in research departments and investment committees. Nobody had translated it into something an operator running a few hundred units could actually use on a Tuesday afternoon against a specific submarket.</p>
+
+    <p>Every education program in this industry is organized around a stage of your journey. First deal. First raise. First thousand units. The curriculum is identical whether the market is expanding or drowning in deliveries. That's the gap, and it's the expensive one — because most losses in this business aren't deal-selection failures. They're timing failures.</p>
+
+    <h3>So I built it</h3>
+
+    <p>Late 2025 through mid 2026. Four phases, three disciplines, the distinction between leading and trailing indicators, and the difference between two things moving together and one causing the other.</p>
+
+    <p><strong>It's new.</strong> It didn't produce the track record above — the record is what taught me I needed it. I want to be precise about that, because this industry is full of people who reverse-engineer a system from their wins and sell it as the cause.</p>
+
+    <p>What this framework has done is name every mistake that cost me. That's the part I'd have paid almost anything to learn earlier, and it's the reason I teach the misses alongside everything else.</p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec">
+  <div class="wrap">
+    <div style="max-width:56ch;margin-bottom:44px">
+      <p class="eyebrow">The sequence</p>
+      <h2>How it actually happened.</h2>
+    </div>
+    <div class="tl">
+      <div class="tl-item">
+        <span class="yr">The first cycle</span>
+        <h3>Watched it from the inside</h3>
+        <p>Employed by a multifamily company through a complete cycle. I saw every phase arrive and every decision get made — without making any of them, and without anything of mine at risk.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2017</span>
+        <h3>Bought while nobody wanted to</h3>
+        <p>Acquired in Nashville and Atlanta during late recovery. Right call, wrong reason — I couldn't have named the phase.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2019 – 2021</span>
+        <h3>Accumulated through expansion</h3>
+        <p>Daytona Beach, Jacksonville, Greensboro, Knoxville. Everything worked, which is what expansion does — and what it hides.</p>
+      </div>
+      <div class="tl-item key">
+        <span class="yr">2021 – 2022</span>
+        <h3>Exited ahead of the repricing</h3>
+        <p>Sold most of the portfolio at the front edge of oversupply, while comps still reflected the prior year. The best decisions I've made, made on feel.</p>
+      </div>
+      <div class="tl-item key">
+        <span class="yr">2022</span>
+        <h3>Bought into the phase I was selling</h3>
+        <p>Exchange clocks forced some of it. Orlando and Tallahassee were my own call — made alongside institutional private equity partners who read it the same way. This is where it went wrong.</p>
+      </div>
+      <div class="tl-item">
+        <span class="yr">2023 – 2024</span>
+        <h3>Defended what could be defended</h3>
+        <p>Refinanced bridge debt into fixed where the asset could carry it. Held Knoxville through the correction. Handed Houston back to the lender.</p>
+      </div>
+      <div class="tl-item key">
+        <span class="yr">2025 – 2026</span>
+        <h3>Built the framework I needed in 2022</h3>
+        <p>Four phases. Three disciplines. The system I couldn't find when it would have mattered most.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HONEST -->
+<section class="sec">
+  <div class="wrap">
+    <div class="honest">
+      <p class="eyebrow">Being straight with you</p>
+      <h3>This framework has no track record. On purpose.</h3>
+      <p>It was finalized in 2026. Nothing in my portfolio was bought or sold using it, and I'm not going to pretend otherwise by putting a chart next to my exits and letting you draw a line between them.</p>
+      <p>What I can offer instead is the reasoning, in full, and a public record going forward. Every phase read I publish gets a date and stays up — whether it holds or not. In two years that archive is the evidence. Today it's the honest substitute for one.</p>
+      <p>The sequence of indicators is reliable and it's been documented since the 1800s. The timing and severity are not. This teaches you to read the ordering earlier than operators watching trailing data — it does not name a date, and anyone who tells you they can is selling something.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="sec">
+  <div class="wrap">
+    <div style="max-width:56ch;margin-bottom:40px">
+      <p class="eyebrow">Fit</p>
+      <h2>Who this is for.</h2>
+    </div>
+    <div class="fw">
+      <div class="fw-col">
+        <h3>You'll get value if</h3>
+        <ul>
+          <li>You're underwriting deals now and can't articulate what phase your market is in</li>
+          <li>You've held through a downturn and want to understand what you actually saw</li>
+          <li>You run acquisitions, operations, or asset management and need one shared read</li>
+          <li>You're raising capital and your LPs ask timing questions you answer with feel</li>
+          <li>You've done a 1031 and felt the clock override your judgment</li>
+        </ul>
+      </div>
+      <div class="fw-col no">
+        <h3>Look elsewhere if</h3>
+        <ul>
+          <li>You want a prediction of when the market turns</li>
+          <li>You're looking for deal flow, a broker network, or capital introductions</li>
+          <li>You want tactics for finding and closing your first deal — that's covered well by others</li>
+          <li>You need proof the framework produced returns before you'll consider it</li>
+          <li>You're not willing to change what you do based on what you read</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="sec cta">
+  <div class="wrap">
+    <p class="eyebrow">Start here</p>
+    <h2>Recon is open.</h2>
+    <p>The complete framework, self-paced, with assessments after every chapter — including The Collision, the module I wrote because of Houston.</p>
+    <a class="btn btn-amber btn-lg" href="recon.html">Enroll in Recon — $997</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>© 2026 Econiq Systems LLC · econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Cycle Score Assessment">
+  <defs><linearGradient id="csbg" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#122A1B"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
+  </linearGradient></defs>
+  <rect width="400" height="600" fill="url(#csbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="52" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
+  <line x1="168" y1="66" x2="256" y2="66" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="84" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+
+  <text x="212" y="158" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">CYCLE</text>
+  <text x="212" y="210" text-anchor="middle" font-family="Georgia,serif" font-size="50" font-weight="700" letter-spacing="1" fill="#DFE1DB">SCORE</text>
+  <text x="212" y="244" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="14" letter-spacing="5.5" fill="#C9A24B">ASSESSMENT</text>
+  <line x1="92" y1="266" x2="332" y2="266" stroke="#C9A24B" stroke-width="1.2"/>
+
+  <text x="212" y="292" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">A data-driven framework to</text>
+  <text x="212" y="310" text-anchor="middle" font-family="Georgia,serif" font-size="13" font-style="italic" fill="#999E8A">score the market cycle</text>
+
+  <g>
+    <path d="M126.0,432.0 A86,86 0 0 1 151.2,371.2" fill="none" stroke="#4C4739" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M151.2,371.2 A86,86 0 0 1 212.0,346.0" fill="none" stroke="#716B5B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M212.0,346.0 A86,86 0 0 1 272.8,371.2" fill="none" stroke="#C9A24B" stroke-width="17" stroke-linecap="butt"/>
+    <path d="M272.8,371.2 A86,86 0 0 1 298.0,432.0" fill="none" stroke="#E0A93B" stroke-width="17" stroke-linecap="butt"/>
+    <line x1="157.6" y1="377.6" x2="144.8" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212.0" y1="355.0" x2="212.0" y2="337.0" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="266.4" y1="377.6" x2="279.2" y2="364.8" stroke="#08120C" stroke-width="1.6"/>
+    <line x1="212" y1="432" x2="256.6" y2="378.1" stroke="#E0A93B" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="212" cy="432" r="7" fill="#E0A93B"/>
+    <circle cx="212" cy="432" r="3" fill="#0C1E15"/>
+    <text x="212" y="472" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="30" fill="#E0A93B">72</text>
+    <text x="212" y="492" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#C9A24B">EXPANSION STRENGTHENING</text>
+  </g>
+
+    <line x1="58" y1="522" x2="366" y2="522" stroke="#302C25" stroke-width="2"/>
+    <line x1="58.0" y1="522" x2="135.0" y2="522" stroke="#4C4739" stroke-width="2"/>
+    <circle cx="135.0" cy="522" r="3" fill="#4C4739"/>
+    <text x="96.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">RECESSION</text>
+    <text x="96.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">0–25</text>
+    <line x1="135.0" y1="522" x2="212.0" y2="522" stroke="#716B5B" stroke-width="2"/>
+    <circle cx="212.0" cy="522" r="3" fill="#716B5B"/>
+    <text x="173.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">CORRECTION</text>
+    <text x="173.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">25–50</text>
+    <line x1="212.0" y1="522" x2="289.0" y2="522" stroke="#C9A24B" stroke-width="2"/>
+    <circle cx="289.0" cy="522" r="3" fill="#C9A24B"/>
+    <text x="250.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">PEAK</text>
+    <text x="250.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">50–75</text>
+    <line x1="289.0" y1="522" x2="366.0" y2="522" stroke="#E0A93B" stroke-width="2"/>
+    <circle cx="366.0" cy="522" r="3" fill="#E0A93B"/>
+    <text x="327.5" y="538" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7" letter-spacing="1.1" fill="#928A77">EXPANSION</text>
+    <text x="327.5" y="549" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="6.5" letter-spacing="1" fill="#6B6455">75–100</text>
+
+  <line x1="150" y1="566" x2="274" y2="566" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
+  <text x="212" y="583" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.6" fill="#DFE1DB">MEASURE. MONITOR. MOVE.</text>
+  <text x="212" y="595" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="2.6" fill="#928A77">BENJAMIN INMAN</text>
+</svg>

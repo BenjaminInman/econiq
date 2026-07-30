@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms of Service — Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.doc{width:min(760px,92vw);margin:0 auto;padding:62px 0 84px}
+.doc h1{font-size:clamp(1.9rem,3.6vw,2.6rem);margin:0 0 8px}
+.doc .upd{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-lift);margin:0 0 8px}
+.doc .ent{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin:0 0 34px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.doc h2{font-size:1.18rem;margin:36px 0 12px}
+.doc h3{font-size:1rem;margin:24px 0 8px;color:var(--platinum)}
+.doc p,.doc li{font-size:.97rem;color:var(--muted)}
+.doc ul{padding-left:20px}.doc li{margin-bottom:8px}
+.doc a{color:var(--gold)}
+.doc strong{color:var(--platinum);font-weight:500}
+.toc{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin-bottom:30px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.toc li{margin-bottom:5px;font-size:.88rem}
+@media(max-width:640px){.toc ol{columns:1}}
+.keybox{background:var(--forest-panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:26px 0}
+.keybox p:last-child{margin:0}
+
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+<div class="doc">
+  <h1>Terms of Service</h1>
+  <p class="upd">Last updated 29 July 2026</p>
+  <p class="ent">Econiq Systems LLC &middot; 6688 Nolensville Rd, Suite 108, Brentwood, TN 37027 &middot; <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a></p>
+
+  <div class="toc"><ol>
+    <li><a href="#parties">Who we are</a></li>
+    <li><a href="#licence">What you're buying</a></li>
+    <li><a href="#payment">Payment</a></li>
+    <li><a href="#refunds">Refunds</a></li>
+    <li><a href="#upgrades">Tier upgrades</a></li>
+    <li><a href="#cert">Certification</a></li>
+    <li><a href="#ip">Intellectual property</a></li>
+    <li><a href="#conduct">Acceptable use</a></li>
+    <li><a href="#noadvice">No professional advice</a></li>
+    <li><a href="#warranty">Disclaimer of warranties</a></li>
+    <li><a href="#liability">Limitation of liability</a></li>
+    <li><a href="#indemnity">Indemnification</a></li>
+    <li><a href="#termination">Termination</a></li>
+    <li><a href="#law">Governing law &amp; disputes</a></li>
+    <li><a href="#changes">Changes</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ol></div>
+
+  <p>These Terms of Service govern your access to and use of econiqmethod.com and any Econiq Method course, assessment, workbook, or digital product (together, the "Services"). By enrolling or using the Services you agree to these terms. If you do not agree, do not use the Services.</p>
+
+  <h2 id="parties">1. Who we are</h2>
+  <p>The Services are provided by <strong>Econiq Systems LLC</strong>, a Tennessee limited liability company, with its principal place of business at 6688 Nolensville Rd, Suite 108, Brentwood, TN 37027. "We," "us," and "our" refer to Econiq Systems LLC. "You" refers to the individual or entity accessing the Services.</p>
+
+  <h2 id="licence">2. What you're buying</h2>
+  <p>Enrollment grants you a limited, personal, non-exclusive, non-transferable, revocable licence to access the tier you purchased, for the access period stated at checkout. Recon enrollment includes access to the Recon curriculum and subsequent updates to that curriculum for as long as we offer it.</p>
+  <p>Enrollment is for one named individual. It does not grant rights to any other person, entity, team, or organization. Team and organizational licences are available separately.</p>
+
+  <h2 id="payment">3. Payment</h2>
+  <p>Prices are stated in US dollars. Payment is processed by Stripe, Inc.; we do not receive or store your full payment card details. By enrolling you authorize us and our payment processor to charge the payment method you provide.</p>
+  <p>Where you select a payment plan, you authorize the full schedule of instalments. <strong>All scheduled instalments remain due regardless of course progress or completion.</strong> If an instalment fails, we may suspend access until the balance is resolved. You are responsible for any taxes applicable in your jurisdiction.</p>
+
+  <h2 id="refunds">4. Refunds — the 14-Day Decision Window</h2>
+  <div class="keybox">
+  <p>You may request a full refund within <strong>fourteen (14) days</strong> of your enrollment date, provided you have <strong>completed Lesson 1.1.1</strong>. Email <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a> from the address associated with your enrollment. No form, no call, and no retention process.</p>
+  <p>Refunds are issued to the original payment method and typically appear within five to ten business days. After fourteen days, or where Lesson 1.1.1 has not been completed, enrollment is non-refundable.</p>
+  <p>Nothing in this section limits any non-waivable statutory cancellation or refund right you may have under the consumer protection laws of your state or country. Where such a right applies and is more favourable to you, it governs.</p>
+  </div>
+
+  <h2 id="upgrades">5. Tier upgrades</h2>
+  <p>Amounts you have paid for one Econiq Method tier apply as credit toward the enrollment price of a higher tier. Credits apply only to Econiq Method tiers, are non-refundable once applied, are non-transferable, and have no cash value.</p>
+
+  <h2 id="cert">6. Certification</h2>
+  <p>ECF, ECCA and CMCS are certificates of curriculum completion issued by Econiq Systems LLC. <strong>They are not accredited by, affiliated with, endorsed by, or recognised by any governmental, academic, professional, or industry licensing body.</strong> They confer no professional qualification, licence, designation, or authority to practise, and should not be represented as such.</p>
+
+  <h2 id="ip">7. Intellectual property</h2>
+  <p>The Econiq Method framework, the four-phase model, the Cycle Score, Signal Cards, the Rule of 6, the Onion Framework, all course text, video, workbooks, assessments, charts, templates, and the Econiq name and marks are owned by Econiq Systems LLC and protected by copyright, trademark, and other laws.</p>
+  <p>You may use the materials for your own personal and internal business purposes. You may not, without our prior written permission: copy, reproduce, distribute, publish, sell, sublicense, or publicly display the materials; record, screenshot, or capture course content for distribution; share your login credentials; use the materials to create, deliver, or market competing training or advisory services; or use the materials to train any machine learning or artificial intelligence system.</p>
+  <p>Course materials may carry per-user identifying marks. Unauthorized distribution is traceable.</p>
+
+  <h2 id="conduct">8. Acceptable use</h2>
+  <p>You agree not to interfere with the Services, attempt to gain unauthorized access, circumvent access controls or content protection, scrape or bulk-download materials, or use community features to harass others or to solicit for unrelated commercial purposes.</p>
+
+  <h2 id="noadvice">9. No professional advice</h2>
+  <p>All content is educational. Nothing in the Services is investment, legal, tax, accounting, or financial advice, a recommendation to buy or sell any property or security, or an offer or solicitation of any investment. We are not a registered investment adviser, broker-dealer, or fiduciary to you. See our <a href="disclaimer.html">Disclaimer</a>, which forms part of these terms.</p>
+
+  <h2 id="warranty">10. Disclaimer of warranties</h2>
+  <p>The Services are provided "as is" and "as available." To the fullest extent permitted by law, we disclaim all warranties, express or implied, including merchantability, fitness for a particular purpose, non-infringement, and any warranty as to accuracy, completeness, or results. <strong>We do not warrant that use of the Services will produce any particular financial outcome.</strong></p>
+
+  <h2 id="liability">11. Limitation of liability</h2>
+  <p>To the fullest extent permitted by law, Econiq Systems LLC and its members, officers, employees and contractors will not be liable for any indirect, incidental, special, consequential, exemplary, or punitive damages, or for lost profits, lost revenue, lost data, lost business opportunity, diminution in property value, or investment losses, arising out of or relating to the Services — whether based in contract, tort, strict liability, or any other theory, and whether or not we were advised of the possibility of such damages.</p>
+  <p><strong>Our total aggregate liability for all claims relating to the Services will not exceed the total amount you paid to us in the twelve months preceding the event giving rise to the claim.</strong></p>
+  <p>Some jurisdictions do not allow certain exclusions or limitations. In those jurisdictions our liability is limited to the greatest extent permitted by law. Nothing in these terms excludes liability for fraud or for any liability that cannot lawfully be excluded.</p>
+
+  <h2 id="indemnity">12. Indemnification</h2>
+  <p>You agree to indemnify and hold harmless Econiq Systems LLC from any claim, loss, liability, or expense (including reasonable legal fees) arising from your breach of these terms, your misuse of the Services, or your unauthorized reproduction or distribution of course materials.</p>
+
+  <h2 id="termination">13. Termination</h2>
+  <p>You may stop using the Services at any time. We may suspend or terminate your access, without refund, if you materially breach these terms — including credential sharing, unauthorized distribution of materials, or circumvention of content protection. Sections 6 through 12 survive termination.</p>
+
+  <h2 id="law">14. Governing law and disputes</h2>
+  <p>These terms are governed by the laws of the State of Tennessee, without regard to conflict-of-laws principles. Before filing any claim, you agree to contact us at <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a> and attempt to resolve the dispute informally for at least thirty days.</p>
+  <p>Any dispute not resolved informally will be brought exclusively in the state or federal courts located in Williamson County or Davidson County, Tennessee, and you consent to personal jurisdiction there. Each party waives any right to a jury trial and agrees that claims will be brought individually and not as a class action, to the extent permitted by law.</p>
+
+  <h2 id="changes">15. Changes</h2>
+  <p>We may update these terms. Material changes will be posted here with a revised date and, for enrolled students, notified by email at least fourteen days before taking effect. Continued use after that date constitutes acceptance.</p>
+
+  <h2 id="contact">16. Contact</h2>
+  <p>Econiq Systems LLC<br>6688 Nolensville Rd, Suite 108, Brentwood, TN 37027<br><a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a></p>
+</div>
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

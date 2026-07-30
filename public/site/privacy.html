@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.doc{width:min(760px,92vw);margin:0 auto;padding:62px 0 84px}
+.doc h1{font-size:clamp(1.9rem,3.6vw,2.6rem);margin:0 0 8px}
+.doc .upd{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-lift);margin:0 0 8px}
+.doc .ent{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);margin:0 0 34px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+.doc h2{font-size:1.18rem;margin:36px 0 12px}
+.doc h3{font-size:1rem;margin:24px 0 8px;color:var(--platinum)}
+.doc p,.doc li{font-size:.97rem;color:var(--muted)}
+.doc ul{padding-left:20px}.doc li{margin-bottom:8px}
+.doc a{color:var(--gold)}
+.doc strong{color:var(--platinum);font-weight:500}
+.toc{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 24px;margin-bottom:30px}
+.toc ol{margin:0;padding-left:20px;columns:2;column-gap:28px}
+.toc li{margin-bottom:5px;font-size:.88rem}
+@media(max-width:640px){.toc ol{columns:1}}
+.keybox{background:var(--forest-panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:26px 0}
+.keybox p:last-child{margin:0}
+
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+<div class="doc">
+  <h1>Privacy Policy</h1>
+  <p class="upd">Last updated 29 July 2026</p>
+  <p class="ent">Econiq Systems LLC &middot; 6688 Nolensville Rd, Suite 108, Brentwood, TN 37027 &middot; <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a></p>
+
+  <p>This policy explains what personal information Econiq Systems LLC collects through econiqmethod.com and the Econiq Method products, why we collect it, who we share it with, and the choices you have. Econiq Systems LLC is the controller of this information.</p>
+
+  <h2>1. Information we collect</h2>
+  <h3>Information you provide</h3>
+  <ul>
+    <li><strong>Enrollment:</strong> name, email address, company name, and billing information.</li>
+    <li><strong>Assessments:</strong> your Cycle Score answers, scores, and results.</li>
+    <li><strong>Course activity:</strong> lessons viewed, progress, Knowledge Check responses, and workbook entries.</li>
+    <li><strong>Communications:</strong> messages you send us, and community posts if you participate.</li>
+  </ul>
+  <h3>Information collected automatically</h3>
+  <ul>
+    <li>IP address, approximate location derived from it, browser and device type, operating system.</li>
+    <li>Pages viewed, referring URLs, timestamps, and session duration.</li>
+  </ul>
+  <h3>What we do not collect</h3>
+  <p><strong>We do not receive or store full payment card numbers.</strong> Card details are transmitted directly to Stripe, Inc. and handled under Stripe's privacy policy. We receive only a transaction confirmation and limited card metadata such as brand and last four digits.</p>
+  <p>The Services are not directed to children and we do not knowingly collect information from anyone under 18.</p>
+
+  <h2>2. Why we use it</h2>
+  <ul>
+    <li>To provide the Services, deliver course access, and track your progress — performance of our contract with you.</li>
+    <li>To process payments and maintain tax and accounting records — contract and legal obligation.</li>
+    <li>To send transactional messages about your enrollment — contract.</li>
+    <li>To send the Signals newsletter and marketing where you have opted in — consent, withdrawable at any time.</li>
+    <li>To improve the curriculum using aggregated, de-identified assessment data — legitimate interest.</li>
+    <li>To secure the Services, prevent fraud, and enforce our terms, including detecting credential sharing and unauthorized distribution — legitimate interest.</li>
+  </ul>
+  <p><strong>We do not sell your personal information, and we do not share it for cross-context behavioural advertising.</strong></p>
+
+  <h2>3. Who we share it with</h2>
+  <p>We share personal information only with service providers who process it on our behalf under contract, and only what they need:</p>
+  <ul>
+    <li><strong>Stripe, Inc.</strong> — payment processing</li>
+    <li><strong>Hosting and infrastructure providers</strong> — operating the site and course platform</li>
+    <li><strong>Email service provider</strong> — transactional and newsletter delivery</li>
+    <li><strong>Analytics provider</strong> — aggregate usage measurement</li>
+    <li><strong>Video hosting provider</strong> — secure course video delivery</li>
+  </ul>
+  <p>We may also disclose information where required by law, to enforce our terms, or in connection with a merger or sale of assets, in which case we will notify you.</p>
+
+  <h2>4. Cookies and similar technologies</h2>
+  <p>We use cookies that are strictly necessary for authentication and session management, and analytics cookies to understand aggregate usage. You can block or delete cookies in your browser settings; strictly necessary cookies are required for the course platform to function. Where consent is legally required for non-essential cookies, we will request it before setting them.</p>
+
+  <h2>5. How long we keep it</h2>
+  <ul>
+    <li><strong>Enrollment and course records:</strong> for the duration of your access, then up to seven years for tax, accounting and legal purposes.</li>
+    <li><strong>Assessment results:</strong> for the duration of your access, unless you request deletion sooner.</li>
+    <li><strong>Marketing contacts:</strong> until you unsubscribe, then a suppression record only.</li>
+    <li><strong>Server logs:</strong> typically 12 months.</li>
+  </ul>
+
+  <h2>6. Your rights</h2>
+  <p>Regardless of where you live, you may ask us to provide a copy of the personal information we hold about you, correct it if inaccurate, delete it, or stop sending you marketing. Email <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a> and we will respond within 45 days. We will not discriminate against you for exercising these rights.</p>
+  <p>Deleting your account information will end your course access, and we may retain records we are legally required to keep.</p>
+  <h3>Residents of Tennessee, California, and other states with privacy statutes</h3>
+  <p>Depending on your state, you may have additional rights to know the categories of information collected and disclosed, to correct, to delete, to obtain a portable copy, to opt out of sale or targeted advertising, and to appeal a denied request. We do not sell personal information or use it for targeted advertising. To appeal a decision, reply to our response or email <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a> with "Privacy Appeal" in the subject line.</p>
+  <h3>If you are in the United Kingdom or European Economic Area</h3>
+  <p>You additionally have the right to object to processing based on legitimate interests, the right to data portability, the right to withdraw consent, and the right to lodge a complaint with your supervisory authority. Information you provide is transferred to and processed in the United States, which may not offer equivalent protections; we rely on appropriate safeguards including standard contractual clauses with our processors.</p>
+
+  <h2>7. Security</h2>
+  <p>We use encryption in transit, access controls, and least-privilege practices to protect your information. No method of transmission or storage is completely secure, and we cannot guarantee absolute security. If a breach affects your information, we will notify you and any regulator as required by law.</p>
+
+  <h2>8. Changes</h2>
+  <p>We may update this policy. Material changes will be posted here with a revised date and, where required, notified to you directly.</p>
+
+  <h2>9. Contact</h2>
+  <p>Econiq Systems LLC<br>6688 Nolensville Rd, Suite 108, Brentwood, TN 37027<br><a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a></p>
+</div>
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

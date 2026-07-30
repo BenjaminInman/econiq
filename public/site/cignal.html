@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cignal System &mdash; Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+ background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+ display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+.hero{padding:66px 0 50px}
+.hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
+.feat{list-style:none;padding:0;margin:22px 0 26px}
+.feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
+.feat li:last-child{border-bottom:0}
+.feat li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:1px;background:var(--amber)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--display);font-weight:500;font-size:1.02rem;
+ display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--platinum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-family:var(--mono);color:var(--gold)}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{padding:0 0 22px;margin:0;font-size:.94rem;max-width:70ch}
+
+.split{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+@media(max-width:940px){.split{grid-template-columns:1fr;gap:32px}}
+.shot{aspect-ratio:16/10;min-height:270px}
+.tri{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.tri div{background:var(--forest-panel);padding:26px 22px}
+.tri h3{margin-bottom:10px;font-size:1.02rem}
+.tri p{font-size:.88rem;margin:0}
+.tri .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block}
+@media(max-width:860px){.tri{grid-template-columns:1fr}}
+.plan{background:var(--forest-panel);border:1px solid rgba(224,169,59,.4);border-radius:var(--r);padding:32px 30px;max-width:520px}
+.plan .price{font-family:var(--mono);font-size:2rem;color:var(--platinum);margin:0 0 4px}
+.plan .pn{font-family:var(--mono);font-size:.78rem;color:var(--olive-lift);letter-spacing:.08em;margin:0 0 22px}
+
+
+.shotimg{width:100%;height:auto;display:block;border:1px solid rgba(223,225,219,.14);border-radius:var(--r);box-shadow:0 16px 40px rgba(0,0,0,.5)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html" class="on">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+
+<section class="hero"><div class="wrap" style="max-width:58ch">
+  <p class="eyebrow">The tool</p>
+  <h1>Cignal System</h1>
+  <p class="sub">Econiq Method teaches you to read the cycle. Cignal System runs that read every morning &mdash; against your markets, with the indicators sorted by when they actually move.</p>
+</div></section>
+
+<section class="sec"><div class="wrap split">
+  <div>
+    <p class="eyebrow">What it does</p>
+    <h2>Ordering, not a pile of numbers.</h2>
+    <p style="margin-top:16px">Most market dashboards give you every metric at equal weight. That's the problem the framework exists to solve &mdash; occupancy and closed comps confirm what already happened, while concession depth and renewal spread are already telling you what's next.</p>
+    <p>Cignal sorts every indicator into leading, coincident, or trailing, and shows you the sequence rather than the snapshot.</p>
+    <ul class="feat">
+      <li>Phase read by market and submarket</li>
+      <li>Leading indicators tracked, dated, and versioned</li>
+      <li>Concession depth and renewal-to-new-lease spread</li>
+      <li>Permit velocity against absorption</li>
+      <li>Alerts when the ordering shifts</li>
+    </ul>
+  </div>
+  <img class="shotimg" src="assets/cignal-6b9d306a.jpg" alt="Cignal System dashboard showing indicators split into leading and trailing">
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div style="max-width:56ch;margin-bottom:38px">
+    <p class="eyebrow">Structure</p>
+    <h2>Three tiers of signal.</h2>
+    <p style="margin-top:14px">The classification that sits underneath everything Econiq Method teaches.</p>
+  </div>
+  <div class="tri">
+    <div><span class="k">Moves first</span><h3>Leading</h3><p>Concession depth, renewal spread, permit velocity, employer announcements, absorption against deliveries. The signals that turn before anyone agrees the market has.</p></div>
+    <div><span class="k">Moves with</span><h3>Coincident</h3><p>Occupancy, effective rent, traffic. Useful for confirming a call &mdash; useless for making one early.</p></div>
+    <div><span class="k">Moves last</span><h3>Trailing</h3><p>Closed comps, cap rates at sale, T-12 performance. By the time these confirm the turn, the window has closed.</p></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap split">
+  <img class="shotimg" src="assets/cignal-e84d05e4.jpg" alt="Cignal System showing individual indicators diverging from trend">
+  <div>
+    <p class="eyebrow">Who it's for</p>
+    <h2>Built for the person making the call.</h2>
+    <p style="margin-top:16px">Acquisitions teams underwriting against a phase rather than a spreadsheet assumption. Asset managers setting renewal strategy. Principals who need one shared read across a portfolio instead of four people with four opinions.</p>
+    <p>Recon teaches you to run the read manually, which is how you should learn it. Cignal is what you use once you know what you're looking at.</p>
+    <a class="btn btn-ghost" href="recon.html">Start with Recon &rarr;</a>
+    <a class="btn btn-ghost" href="ahead-of-the-herd.html" style="margin-left:10px">Read: Ahead of the Herd &rarr;</a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div style="max-width:56ch;margin-bottom:34px"><p class="eyebrow">Access</p><h2>Subscription.</h2></div>
+  <div class="plan">
+    <p class="eyebrow" style="margin-bottom:10px">Cignal System</p>
+    <p class="price">&mdash;</p>
+    <p class="pn">Pricing announced at launch</p>
+    <p style="font-size:.92rem;margin-bottom:22px">Econiq Method graduates get first access. Join the list and you'll hear before it opens publicly.</p>
+    <a class="btn btn-amber" href="#" style="width:100%;text-align:center">Request access</a>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div style="max-width:56ch;margin-bottom:30px"><p class="eyebrow">Questions</p><h2>About the tool.</h2></div>
+  <div class="faq">
+    <details open><summary>Do I need Cignal to use the framework?</summary>
+      <p>No. Every method taught in Recon can be run by hand with public data. Cignal removes the assembly work once you understand what you're assembling.</p></details>
+    <details><summary>Which markets are covered?</summary>
+      <p>Coverage expands over time. Market list and submarket depth are published at launch.</p></details>
+    <details><summary>Is this a prediction engine?</summary>
+      <p>No. It reports where indicators sit and in what order they've moved. The judgment stays yours &mdash; which is why the training comes first.</p></details>
+    <details><summary>How does it relate to Econiq Method?</summary>
+      <p>Econiq Method is the training and owns the framework. Cignal System is the software that runs it. Learn it at Econiq, apply it with Cignal.</p></details>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

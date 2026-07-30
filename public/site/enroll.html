@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Enroll in Recon &mdash; Econiq Method</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --forest-black:#0B130A; --forest-panel:#121E10; --forest-raise:#1E2B1A;
+  --olive-dim:#555044; --olive:#716B5B; --olive-lift:#928A77;
+  --gold:#C9A24B; --amber:#E0A93B; --platinum:#DFE1DB; --muted:#999E8A;
+  --line:rgba(223,225,219,.11); --r:4px;
+  --display:'Space Grotesk',system-ui,sans-serif; --editorial:Georgia,'Times New Roman',serif;
+  --body:'Inter',system-ui,sans-serif; --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{width:min(1200px,92vw);margin:0 auto}
+.narrow{width:min(760px,92vw);margin:0 auto}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
+h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
+h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
+h3{font-size:1.08rem;letter-spacing:-.01em}
+p{margin:0 0 18px;color:var(--muted)}
+.eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.sec{padding:84px 0;border-top:1px solid var(--line)}
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
+.btn-amber:hover{background:#EDB94A}
+.btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
+.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-lg{padding:15px 30px;font-size:.95rem}
+
+header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;padding:12px 0;gap:24px}
+.wordmark{flex:none;display:block;line-height:0}
+.wordmark img{width:clamp(122px,13vw,168px);height:auto;display:block}
+.nav-links{display:flex;gap:26px;align-items:center}
+.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a:hover{color:var(--platinum)}
+.nav-links a.on{color:var(--platinum)}
+@media(max-width:940px){.nav-links a:not(.btn){display:none}}
+
+/* hero */
+.hero{padding:76px 0 62px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+.hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
+.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
+.portrait{aspect-ratio:3/4;min-height:340px}
+@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+
+/* narrative */
+.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
+  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
+.body-copy p{font-size:1.03rem}
+.body-copy p strong{color:var(--platinum);font-weight:500}
+.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+
+/* timeline */
+.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
+.tl-item{position:relative;padding-bottom:34px}
+.tl-item:last-child{padding-bottom:0}
+.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
+.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
+.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
+.tl-item h3{margin-bottom:8px}
+.tl-item p{font-size:.95rem;margin:0}
+
+/* stats */
+.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
+.stat{background:var(--forest-panel);padding:30px 24px}
+.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
+.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
+.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
+@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* honest box */
+.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
+.honest h3{margin-bottom:14px;font-size:1.3rem}
+.honest p:last-child{margin:0}
+@media(max-width:760px){.honest{padding:26px 22px}}
+
+/* for-whom */
+.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
+.fw-col h3{margin-bottom:16px}
+.fw-col ul{list-style:none;padding:0;margin:0}
+.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
+.fw-col li:last-child{border-bottom:0}
+.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
+.fw-col.no li:before{background:var(--olive)}
+@media(max-width:840px){.fw{grid-template-columns:1fr}}
+
+/* cta */
+.cta{background:var(--forest-panel);text-align:center}
+.cta h2{margin-bottom:16px}
+.cta p{max-width:56ch;margin:0 auto 26px}
+
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark{margin-bottom:22px;line-height:0}
+.foot-mark img{width:clamp(140px,16vw,190px);height:auto;display:block;opacity:.9}
+.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
+.foot p{margin:0;font-size:.8rem}
+.foot nav{display:flex;gap:22px;flex-wrap:wrap}
+.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+
+
+.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
+ background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
+ display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
+.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
+.hero{padding:66px 0 50px}
+.hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
+.feat{list-style:none;padding:0;margin:22px 0 26px}
+.feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
+.feat li:last-child{border-bottom:0}
+.feat li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:1px;background:var(--amber)}
+.faq details{border-bottom:1px solid var(--line)}
+.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--display);font-weight:500;font-size:1.02rem;
+ display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--platinum)}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary:after{content:"+";font-family:var(--mono);color:var(--gold)}
+.faq details[open] summary:after{content:"\2013"}
+.faq details p{padding:0 0 22px;margin:0;font-size:.94rem;max-width:70ch}
+
+.eg{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:start}
+@media(max-width:940px){.eg{grid-template-columns:1fr;gap:30px}}
+.order{background:var(--forest-panel);border:1px solid rgba(224,169,59,.42);border-radius:var(--r);padding:30px 28px;position:sticky;top:78px}
+.line{display:flex;justify-content:space-between;gap:16px;padding:13px 0;border-bottom:1px solid var(--line);font-size:.92rem}
+.line span:first-child{color:var(--muted)}
+.line span:last-child{font-family:var(--mono);color:var(--platinum)}
+.line.tot{border-bottom:0;padding-top:18px}
+.line.tot span{font-size:1.15rem;color:var(--platinum);font-weight:600}
+.bump{background:var(--forest-raise);border:1px solid rgba(224,169,59,.3);border-radius:var(--r);padding:18px;margin:18px 0}
+.bump label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.bump input{margin-top:4px;accent-color:var(--amber);width:16px;height:16px;flex:none}
+.bump b{display:block;font-family:var(--display);font-size:.94rem;color:var(--platinum);margin-bottom:5px}
+.bump p{font-size:.83rem;margin:0}
+.fld{margin-bottom:14px}
+.fld label{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive-lift);margin-bottom:7px}
+.fld input{width:100%;background:var(--forest-black);border:1px solid var(--line);border-radius:var(--r);
+ padding:13px 14px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
+.fld input:focus{outline:none;border-color:var(--amber)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.trust{display:flex;gap:18px;flex-wrap:wrap;margin-top:18px;font-family:var(--mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift)}
+.guar{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:26px 28px;margin-top:26px}
+.guar h3{margin-bottom:10px}
+.guar p:last-child{margin:0;font-size:.92rem}
+
+
+.tiercard{width:100%;height:auto;display:block;border-bottom:1px solid rgba(223,225,219,.11)}
+
+.consent{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin:6px 0 16px}
+.consent label{display:flex;gap:12px;align-items:flex-start;cursor:pointer}
+.consent input{margin-top:3px;accent-color:var(--amber);width:16px;height:16px;flex:none}
+.consent span{font-size:.83rem;color:var(--muted);line-height:1.55}
+.consent a{color:var(--gold)}
+.legalfine{font-size:.78rem;color:var(--olive-lift);margin-top:14px;line-height:1.6}
+.legalfine a{color:var(--gold)}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html" class="on">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html">Signals</a><a class="btn btn-amber" href="enroll.html">Enroll</a></nav>
+  </div>
+</header>
+
+<section class="hero"><div class="wrap" style="max-width:56ch">
+  <p class="eyebrow">Enrollment</p>
+  <h1>Recon</h1>
+  <p class="sub">Ten lessons across three parts. 63 questions with full explanations, the Capstone Workbook, and ECF certification.</p>
+</div></section>
+
+<section class="sec"><div class="wrap eg">
+  <div>
+    <p class="eyebrow">Your details</p>
+    <h2 style="margin-bottom:24px">Checkout</h2>
+    <div class="two">
+      <div class="fld"><label>First name</label><input type="text" autocomplete="given-name"></div>
+      <div class="fld"><label>Last name</label><input type="text" autocomplete="family-name"></div>
+    </div>
+    <div class="fld"><label>Email</label><input type="email" autocomplete="email" placeholder="you@company.com"></div>
+    <div class="fld"><label>Company</label><input type="text" autocomplete="organization"></div>
+
+    <div class="bump">
+      <label>
+        <input type="checkbox">
+        <span>
+          <b>Add The Collision case study &mdash; $197</b>
+          <p>The full Houston exchange breakdown: dates, the read I had, the decision, and what the deferral actually cost. Normally reserved for Special Ops.</p>
+        </span>
+      </label>
+    </div>
+
+    <p class="eyebrow" style="margin-top:26px">Payment</p>
+    <div class="ph" style="min-height:150px;margin-bottom:16px"><span>Stripe payment element<br>card &middot; wallets</span></div>
+        <div class="consent">
+      <label>
+        <input type="checkbox" id="agree">
+        <span>I have read and agree to the <a href="terms.html">Terms of Service</a>, the <a href="terms.html#refunds">14-Day Decision Window refund policy</a>, the <a href="privacy.html">Privacy Policy</a> and the <a href="disclaimer.html">Disclaimer</a> &mdash; including that this is educational content, not investment advice, and that no financial result is promised.</span>
+      </label>
+    </div>
+    <a class="btn btn-amber btn-lg" href="#" style="width:100%;text-align:center">Complete enrollment</a>
+    <div class="trust"><span>Secure checkout</span><span>Instant access</span><span>14-day window</span></div>
+    <p class="legalfine">Sold by Econiq Systems LLC, 6688 Nolensville Rd, Suite 108, Brentwood, TN 37027. Payments processed by Stripe. Questions: <a href="mailto:support@econiqsystems.com">support@econiqsystems.com</a>. Educational content only &mdash; see <a href="disclaimer.html">Disclaimer</a>.</p>
+
+    <div class="guar">
+      <h3>14-Day Decision Window</h3>
+      <p>If you've completed Module 1.1 and decided Recon isn't for you, request a full refund within fourteen days. No form, no call, no retention attempt. This only works if the people in it want to be.</p>
+    </div>
+  </div>
+
+  <div>
+    <div class="order">
+      <p class="eyebrow">Order summary</p>
+      <div class="line"><span>Recon &mdash; full course</span><span>$997</span></div>
+      <div class="line"><span>10 lessons &middot; ~4.6 hrs reading</span><span>Included</span></div>
+      <div class="line"><span>Cycle Score + monthly re-takes</span><span>Included</span></div>
+      <div class="line"><span>Signal Cards Tier 1 deck</span><span>Included</span></div>
+      <div class="line"><span>ECF certification</span><span>Included</span></div>
+      <div class="line"><span>Lifetime access + updates</span><span>Included</span></div>
+      <div class="line tot"><span>Total</span><span>$997</span></div>
+      <p style="font-size:.82rem;margin-top:16px">Pay in full, or 3 payments of $349. Your full enrollment credits toward Special Ops if you ascend.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap">
+  <div style="max-width:56ch;margin-bottom:28px"><p class="eyebrow">Before you buy</p><h2>Common questions.</h2></div>
+  <div class="faq">
+    <details open><summary>When do I get access?</summary>
+      <p>Immediately. You'll receive login details at the email above within a minute of enrolling.</p></details>
+    <details><summary>Is the video version an extra cost?</summary>
+      <p>No. Recon launches as a read-through with assessments; the video version is included in this enrollment when it ships.</p></details>
+    <details><summary>Can I expense this?</summary>
+      <p>Yes &mdash; you'll get an itemised receipt with your company name on it if you fill in the company field.</p></details>
+    <details><summary>What if I want Special Ops instead?</summary>
+      <p>Special Ops is waitlist only right now, and it assumes Recon. Start here; you'll be first in line when the cohort opens.</p></details>
+  </div>
+</div></section>
+
+<footer>
+  <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
+  <div class="wrap foot">
+    <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
+    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+  </div>
+</footer>
+</body>
+</html>

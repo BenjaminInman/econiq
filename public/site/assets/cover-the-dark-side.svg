@@ -1,0 +1,40 @@
+<svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="The Dark Side of Multifamily Real Estate">
+  <defs>
+    <linearGradient id="dsbg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#132A1E"/><stop offset="0.55" stop-color="#0C1E15"/><stop offset="1" stop-color="#08120C"/>
+    </linearGradient>
+    <linearGradient id="dsline" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#C9A24B"/><stop offset="0.52" stop-color="#E0A93B"/><stop offset="1" stop-color="#A03A24"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="600" fill="url(#dsbg)"/>
+  <rect x="0" y="0" width="9" height="600" fill="#08120C"/>
+  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
+
+  <text x="212" y="62" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing="3.4" fill="#928A77">BENJAMIN INMAN</text>
+  <line x1="150" y1="78" x2="274" y2="78" stroke="rgba(201,162,75,.45)" stroke-width="1"/>
+
+  <text x="212" y="126" text-anchor="middle" font-family="Georgia,serif" font-size="26" letter-spacing="3" fill="#DFE1DB">THE</text>
+  <text x="212" y="186" text-anchor="middle" font-family="Georgia,serif" font-size="56" font-weight="700" letter-spacing="1" fill="#DFE1DB">DARK</text>
+  <text x="212" y="240" text-anchor="middle" font-family="Georgia,serif" font-size="56" font-weight="700" letter-spacing="1" fill="#DFE1DB">SIDE</text>
+
+  <line x1="98" y1="266" x2="326" y2="266" stroke="#C9A24B" stroke-width="1.2"/>
+  <text x="212" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="2.4" fill="#C9A24B">OF MULTIFAMILY</text>
+  <text x="212" y="311" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="12" letter-spacing="2.4" fill="#C9A24B">REAL ESTATE</text>
+
+  <path d="M46,452 C86,448 108,420 140,380 C176,334 196,300 212,300 C228,300 246,336 280,384 C310,426 336,450 372,456"
+        fill="none" stroke="url(#dsline)" stroke-width="2"/>
+  <circle cx="212" cy="300" r="3.4" fill="#E0A93B"/>
+  <line x1="212" y1="306" x2="212" y2="452" stroke="rgba(224,169,59,.22)" stroke-width="1" stroke-dasharray="2 4"/>
+
+  <text x="70" y="474" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#716B5B">EXPANSION</text>
+  <text x="212" y="474" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#928A77">PEAK</text>
+  <text x="354" y="474" text-anchor="end" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="1.8" fill="#8A5340">CORRECTION</text>
+
+  <text x="212" y="508" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-style="italic" fill="#999E8A">What goes wrong in this business,</text>
+  <text x="212" y="526" text-anchor="middle" font-family="Georgia,serif" font-size="12.5" font-style="italic" fill="#999E8A">why it goes wrong, and when.</text>
+
+  <line x1="150" y1="550" x2="274" y2="550" stroke="rgba(201,162,75,.45)" stroke-width="1"/>
+  <text x="212" y="573" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="19" font-weight="600" letter-spacing="4" fill="#DFE1DB">ECONIQ</text>
+  <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
+</svg>
