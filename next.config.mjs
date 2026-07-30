@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const PAGES = [
   'index','about','courses','recon','enroll','cycle-score',
-  'cignal','signals','ahead-of-the-herd','terms','privacy','disclaimer',
+  'cignal','signals','books','ahead-of-the-herd','terms','privacy','disclaimer',
 ];
 
 const nextConfig = {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ahead of the Herd — Econiq Method</title>
+<title>The Books — Econiq Method</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -177,6 +177,25 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 
 .privfine{font-size:.76rem;color:var(--olive-lift);margin-top:11px;line-height:1.55}
 .privfine a{color:var(--gold)}
+
+
+.bookrow{display:grid;grid-template-columns:270px 1fr;gap:44px;align-items:start;padding:44px 0;border-top:1px solid var(--line)}
+.bookrow:first-of-type{border-top:0;padding-top:6px}
+.bookrow .cov img{width:100%;height:auto;display:block;border-radius:2px;box-shadow:0 16px 38px rgba(0,0,0,.5)}
+.bookrow h2{margin-bottom:8px}
+.bookrow .sub2{font-family:var(--editorial);font-style:italic;color:var(--muted);font-size:1.05rem;margin:0 0 18px}
+.bookrow p{font-size:.96rem}
+.getrow{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:24px;padding-top:22px;border-top:1px solid var(--line)}
+.price{font-family:var(--mono);font-size:.82rem;color:var(--olive-lift);letter-spacing:.06em}
+.note{background:var(--forest-panel);border-left:2px solid var(--amber);padding:16px 20px;border-radius:0 var(--r) var(--r) 0;margin-top:20px}
+.note p{margin:0;font-size:.88rem}
+.grabber{background:var(--forest-panel);border:1px solid rgba(224,169,59,.4);border-radius:var(--r);padding:30px 32px;max-width:640px}
+.frow{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.frow input{flex:1;min-width:230px;background:var(--forest-black);border:1px solid var(--line);border-radius:var(--r);padding:13px 15px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
+.frow input::placeholder{color:var(--muted)}
+.frow input:focus{outline:none;border-color:var(--amber)}
+@media(max-width:880px){.bookrow{grid-template-columns:1fr;gap:24px}.bookrow .cov{max-width:220px}}
+
 </style>
 </head>
 <body>
@@ -187,153 +206,65 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
   </div>
 </header>
 
-<section class="hero"><div class="wrap split">
-  <div>
-    <p class="eyebrow">Guide &middot; For Recon graduates and subscribers</p>
-    <h1>Ahead of the Herd</h1>
-    <p class="sub">Being early is the only durable edge in this business. Not smarter underwriting, not better relationships, not a bigger balance sheet — earlier information, acted on before the crowd agrees with you.</p>
-    <p style="margin-top:18px;font-size:.94rem">How Special Ops and Cignal System turn a phase read into a timing advantage you can actually execute.</p>
-  </div>
-  <svg viewBox="0 0 400 600" class="bookcover" role="img" aria-label="Ahead of the Herd">
-  <defs>
-    <linearGradient id="ahbg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0F2417"/><stop offset="0.5" stop-color="#0C1E15"/><stop offset="1" stop-color="#07100B"/>
-    </linearGradient>
-    <linearGradient id="bull" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#E0BC5E"/><stop offset="0.5" stop-color="#C9A24B"/><stop offset="1" stop-color="#9C7B2E"/>
-    </linearGradient>
-  </defs>
-  <rect width="400" height="600" fill="url(#ahbg)"/>
-  <rect x="0" y="0" width="9" height="600" fill="#07100B"/>
-  <rect x="9" y="0" width="1" height="600" fill="rgba(201,162,75,.28)"/>
-
-  <text x="212" y="58" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-size="15" font-weight="600" letter-spacing="4.4" fill="#DFE1DB">ECONIQ</text>
-  <line x1="168" y1="72" x2="256" y2="72" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
-  <text x="212" y="90" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="3.2" fill="#C9A24B">WHEN &gt; HOW</text>
-
-  <text x="212" y="168" text-anchor="middle" font-family="Georgia,serif" font-size="34" font-style="italic" fill="#DFE1DB">Ahead of</text>
-  <text x="212" y="226" text-anchor="middle" font-family="Georgia,serif" font-size="52" font-weight="700" letter-spacing="1.5" fill="#DFE1DB">THE HERD</text>
-
-  <line x1="86" y1="252" x2="338" y2="252" stroke="#C9A24B" stroke-width="1.2"/>
-  <text x="212" y="276" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">BEING EARLY IS THE ONLY</text>
-  <text x="212" y="292" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="9" letter-spacing="1.9" fill="#C9A24B">DURABLE EDGE</text>
-
-  <g transform="translate(0,0)">
-    <path d="M40,436 C78,432 98,420 124,402 C176,366 212,330 262,326 C306,322 336,332 366,352"
-          fill="none" stroke="#555044" stroke-width="1.5"/>
-    <circle cx="96" cy="418" r="5" fill="#3E3A31"/>
-    <circle cx="118" cy="405" r="5" fill="#454137"/>
-    <circle cx="140" cy="392" r="5" fill="#4C473C"/>
-    <circle cx="160" cy="379" r="5" fill="#555044"/>
-    <circle cx="181" cy="366" r="5" fill="#5E584A"/>
-    <circle cx="201" cy="353" r="5" fill="#67614F"/>
-    <circle cx="221" cy="343" r="5" fill="#716B5B"/>
-    <circle cx="243" cy="333" r="5" fill="#7E7765"/>
-    <text x="150" y="452" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#716B5B">THE HERD</text>
-    <circle cx="322" cy="330" r="17" fill="none" stroke="rgba(224,169,59,.3)" stroke-width="1"/>
-    <circle cx="322" cy="330" r="10" fill="none" stroke="#E0A93B" stroke-width="1.6"/>
-    <circle cx="322" cy="330" r="4" fill="#E0A93B"/>
-    <path d="M266,330 L302,330" stroke="rgba(224,169,59,.45)" stroke-width="1" stroke-dasharray="2 4"/>
-    <text x="322" y="300" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.4" fill="#E0A93B">YOU</text>
-  </g>
-  <line x1="150" y1="524" x2="274" y2="524" stroke="rgba(201,162,75,.4)" stroke-width="1"/>
-  <text x="212" y="550" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">How operators read the ordering</text>
-  <text x="212" y="567" text-anchor="middle" font-family="Georgia,serif" font-size="12" font-style="italic" fill="#999E8A">before the crowd agrees</text>
-  <text x="212" y="588" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="3" fill="#928A77">BENJAMIN INMAN</text>
-</svg>
+<section class="hero"><div class="wrap" style="max-width:56ch">
+  <p class="eyebrow">The books</p>
+  <h1>Two books. Both free.</h1>
+  <p class="sub">Download either as a PDF at no cost. Order in print if you'd rather hold it — every print order includes the PDF.</p>
 </div></section>
 
-<section class="sec"><div class="narrow">
-  <p class="pull">By the time the data confirms the turn, the advantage has already been distributed to whoever moved on the signal instead of the confirmation.</p>
-
-  <p>Every operator has access to the same trailing data. Closed comps, T-12s, cap rate surveys, market reports — all of it published, all of it accurate, all of it describing a market that no longer exists by the time you read it.</p>
-
-  <p>That's not a criticism of the data. It's a structural feature of it. Sales close months after they're negotiated. Rent reports lag collections. Cap rate surveys average transactions that priced under conditions that have since changed. <strong>Trailing data is a photograph of the past sold as a picture of the present.</strong></p>
-
-  <p>Which means the entire competitive field is making decisions from the same delayed picture, at the same time, in the same direction. That's what a herd is. Not stupidity — synchronisation.</p>
-
-  <h2>Being early isn't a prediction</h2>
-
-  <p>The distinction that matters: you're not trying to forecast a date. You're trying to observe a sequence that has already begun and that most participants haven't registered yet.</p>
-
-  <p>Supply lags demand because construction takes years. Concessions appear before reported rents move. Renewal spreads compress before occupancy does. Permits turn before deliveries. <strong>None of this is speculative — it's mechanical, and it's been documented since the 1800s.</strong> The sequence is knowable. The timing and severity are not.</p>
-
-  <p>That's a narrower claim than most people in this industry make, and it's the reason it holds. You don't need to know when. You need to know what has already started and what usually follows it.</p>
-
-  <div class="seq">
-    <div><span class="n">01</span><h3>Observe</h3><p>The leading indicators move. Almost nobody is watching them.</p></div>
-    <div><span class="n">02</span><h3>Position</h3><p>You act while pricing still reflects the prior phase.</p></div>
-    <div><span class="n">03</span><h3>Confirm</h3><p>Trailing data catches up. Consensus forms.</p></div>
-    <div><span class="n">04</span><h3>Crowd</h3><p>Everyone moves at once. The advantage is gone.</p></div>
+<section class="sec"><div class="wrap">
+  <div class="bookrow" id="dark-side">
+    <div class="cov"><img src="assets/cover-the-dark-side.svg" alt="The Dark Side"></div>
+    <div>
+      <p class="eyebrow">Book one &middot; Start here</p>
+      <h2>The Dark Side</h2>
+      <p class="sub2">Of Multifamily Real Estate</p>
+      <p>What goes wrong in this business, why it goes wrong, and — the part almost nobody teaches — when. Deals fail on timing far more often than on selection, and those failures follow a pattern that repeats across every cycle on record.</p>
+      <p>Written from twenty years of operating, including the assets that didn't work. If you've ever bought a well-underwritten property that still underperformed, this explains what you were standing in.</p>
+      <div class="getrow">
+        <a class="btn btn-amber" href="#get">Download the PDF &mdash; free</a>
+        <a class="btn btn-ghost" href="#get">Order in print</a>
+        <span class="price">$9.95 print &middot; PDF included</span>
+      </div>
+    </div>
   </div>
 
-  <p>The window between step one and step three is the entire opportunity. It is measured in quarters, not years, and it closes quietly — which is why most operators discover it retroactively, as a thing they should have done.</p>
-
-  <h2>Why reading it is harder than knowing it</h2>
-
-  <p>This is the part I got wrong with real money. I understood cycles conceptually for twenty years and still deployed capital into a market that was already tipping, alongside institutional partners with research teams who read it the same way I did.</p>
-
-  <p>Knowing the pattern exists doesn't produce the discipline to act against consensus. That requires three things most operators don't have: a defined set of indicators you actually track, thresholds you've committed to in advance, and a decision rule for what you do when they trip. <strong>Without those, being early feels indistinguishable from being wrong.</strong></p>
-
-  <p>Because it does feel wrong. Selling into a market where comps are still climbing looks like leaving money on the table. Declining a deal that pencils looks like timidity. Every incentive in this business — fee income, deployment pressure, partner expectations — pushes you toward the herd.</p>
-
-  <h2>What the two products actually do</h2>
-
-  <p><strong>Special Ops</strong> is where the thresholds get set. In a live cohort, against your markets and your pipeline, you define which indicators you're tracking, what levels constitute a signal, and what you will do when they hit — written down in advance, before the emotion of a live decision is in the room. Deals get reviewed against phase criteria rather than against sentiment. The full Collision case study is taught here with dates and numbers.</p>
-
-  <p><strong>Cignal System</strong> is what keeps it running. Indicators sorted by when they move, tracked continuously across your submarkets, with alerts when the ordering shifts. The read stops depending on you remembering to check.</p>
-
-  <p>Recon teaches you the framework. These two are what turn it into something that operates whether or not you're paying attention that week.</p>
-
-  <div class="chapters">
-    <div>Why every operator reads the same delayed picture</div>
-    <div>The mechanical sequence: permits, deliveries, absorption, concessions, reported rent</div>
-    <div>Setting indicator thresholds before you need them</div>
-    <div>What it feels like to be early, and why that feeling is the tax</div>
-    <div>The incentives that push you into the herd</div>
-    <div>Decision rules: what you do when a threshold trips</div>
-    <div>Where I ignored my own signals, and what it cost</div>
-  </div>
-
-  <div class="gate">
-    <p>This guide assumes you already know the four phases. If you haven't been through Recon yet, start there — this will make considerably more sense afterward.</p>
-  </div>
-</div></section>
-
-<section class="sec"><div class="wrap split">
-  <div>
-    <p class="eyebrow">Get the guide</p>
-    <h2>Free for Recon graduates.</h2>
-    <p style="margin-top:16px">If you've enrolled in Recon, it's already in your course library. If you're on the Signals list, enter your email and I'll send it.</p>
-    <p>Otherwise, Recon comes first — the guide is written on the assumption you know the framework.</p>
-  </div>
-  <div>
-    <div class="getbox">
-      <p class="eyebrow" style="margin-bottom:12px">Ahead of the Herd</p>
-      <p class="price">Free</p>
-      <p class="pn">For graduates &amp; subscribers</p>
-      <div class="fld"><input type="email" placeholder="you@company.com" aria-label="Email address"></div>
-      <a class="btn btn-amber" href="#">Send me the guide</a>
-      <p class="privfine">We'll use your email only to send what you asked for and the Signals newsletter. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
-      <a class="btn btn-ghost" href="recon.html">Start with Recon instead</a>
+  <div class="bookrow" id="herd">
+    <div class="cov"><img src="assets/cover-ahead-of-the-herd.svg" alt="Ahead of the Herd"></div>
+    <div>
+      <p class="eyebrow">Book two &middot; Assumes the framework</p>
+      <h2>Ahead of the Herd</h2>
+      <p class="sub2">Being early is the only durable edge</p>
+      <p>Every operator reads the same trailing data at the same time and moves in the same direction. That isn't stupidity, it's synchronisation — and it's why the advantage goes to whoever acts on the signal rather than on the confirmation.</p>
+      <p>Covers the mechanical sequence, why being early feels indistinguishable from being wrong, and how thresholds set in advance are what make it survivable.</p>
+      <div class="note"><p><strong>Read The Dark Side first.</strong> This one assumes you already know the four phases. It'll make considerably more sense afterward.</p></div>
+      <div class="getrow">
+        <a class="btn btn-amber" href="#get">Download the PDF &mdash; free</a>
+        <a class="btn btn-ghost" href="ahead-of-the-herd.html">Read the summary</a>
+        <span class="price">$9.95 print &middot; PDF included</span>
+      </div>
     </div>
   </div>
 </div></section>
 
-<section class="sec"><div class="wrap">
-  <div style="max-width:56ch;margin-bottom:30px"><p class="eyebrow">Where this leads</p><h2>The two that execute it.</h2></div>
-  <div class="nextrow">
-    <a href="courses.html">
-      <p class="st">Waitlist open</p>
-      <h3>Special Ops</h3>
-      <p>Live cohort, submarket workshops, thresholds set in advance, deal review against phase criteria, and the full Collision case study.</p>
-    </a>
-    <a href="cignal.html">
-      <p class="st">Access by request</p>
-      <h3>Cignal System</h3>
-      <p>Indicators sorted by when they move, tracked continuously, with alerts when the ordering shifts.</p>
-    </a>
+<section class="sec" id="get"><div class="wrap">
+  <div class="grabber">
+    <p class="eyebrow">Send them over</p>
+    <h2 style="font-size:1.5rem;margin-bottom:10px">Both PDFs, one email.</h2>
+    <p style="font-size:.94rem;margin:0">Enter your address and both books come straight over. Print orders open at launch.</p>
+    <div class="frow">
+      <input type="email" placeholder="you@company.com" aria-label="Email address">
+      <button class="btn btn-amber" type="button">Send both books</button>
+    </div>
+    <p class="privfine">We'll use your email only to send the books and the Signals newsletter. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
   </div>
+</div></section>
+
+<section class="sec" style="background:var(--forest-panel)"><div class="wrap">
+  <p class="eyebrow">After the books</p>
+  <h2 style="margin-bottom:14px">Recon is where the method gets taught.</h2>
+  <p style="max-width:58ch;margin-bottom:24px">The books make the argument. Recon teaches you to run it — ten lessons, all four phases, 63 questions with explanations.</p>
+  <a class="btn btn-amber btn-lg" href="recon.html">See the curriculum &rarr;</a>
 </div></section>
 
 <footer>

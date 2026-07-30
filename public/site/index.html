@@ -275,7 +275,8 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .step p{font-size:.87rem;margin:0}
 .sgo{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-top:14px;display:block}
 .twobooks{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
-.twobooks a{text-decoration:none;display:block}
+.twobooks .bkitem{display:block;min-width:0}
+.twobooks img{width:100%;height:auto;display:block}
 .twobooks .bk{border-radius:2px;overflow:hidden;box-shadow:0 8px 18px rgba(0,0,0,.4);margin-bottom:8px}
 .twobooks .bookcover{width:100%;height:auto;display:block;box-shadow:none;border-radius:0}
 .twobooks span{font-family:var(--mono);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);display:block}
@@ -417,18 +418,19 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
         </div>
       </a>
 
-      <div class="step">
+      <a class="step" href="books.html">
         <span class="sn">02</span>
         <div class="sbody">
           <span class="stag">Free PDF &middot; Print available</span>
           <h3>Read the argument</h3>
           <p>Two short books. Free to download; order in print if you'd rather hold it &mdash; print includes the PDF.</p>
+          <span class="sgo" style="margin-top:14px">See both books &rarr;</span>
           <div class="twobooks">
-            <a href="#dark-side"><div class="bk"></div><span>The Dark Side</span></a>
-            <a href="ahead-of-the-herd.html"><div class="bk"></div><span>Ahead of the Herd</span></a>
+            <div class="bkitem"><div class="bk"><img src="assets/cover-the-dark-side.svg" alt="The Dark Side"></div><span>The Dark Side</span></div>
+            <div class="bkitem"><div class="bk"><img src="assets/cover-ahead-of-the-herd.svg" alt="Ahead of the Herd"></div><span>Ahead of the Herd</span></div>
           </div>
         </div>
-      </div>
+      </a>
 
       <a class="step lit" href="recon.html">
         <span class="sn">03</span>
@@ -699,7 +701,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
   </div>
   <div class="wrap foot">
     <p>© 2026 Econiq Systems LLC · econiqmethod.com</p>
-    <nav><a href="index.html">Home</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+    <nav><a href="index.html">Home</a><a href="books.html">Books</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
   </div>
 </footer>
 
