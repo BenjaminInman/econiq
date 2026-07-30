@@ -293,7 +293,6 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .smedia.twobooks .bk{height:100%;border-radius:2px;overflow:hidden;box-shadow:0 10px 22px rgba(0,0,0,.45);margin-bottom:0}
 .smedia.twobooks .bookcover{height:100%;width:auto;display:block;box-shadow:none;border-radius:0}
 .smedia.twobooks span{display:none}
-.opt2{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--olive-lift);margin:10px 0 0}
 .step .sgo{margin-top:14px}
 
 
@@ -304,7 +303,13 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
 .sbody{display:flex;flex-direction:column;height:100%}
 .step .sgo{margin-top:auto;padding-top:14px}
 .smedia{margin:14px 0 0}
-.opt2{margin:12px 0 0;order:99}
+
+/* steps — links share a baseline, artwork sits directly beneath */
+.step .sgo{margin-top:auto;padding-top:14px;margin-bottom:0}
+.smedia{margin:12px 0 0}
+.opt2{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--olive-lift);margin:10px 0 0}
+.step .sbody > p{margin-bottom:0}
 </style>
 </head>
 <body>
@@ -495,7 +500,7 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
   <text x="212" y="583" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="8" letter-spacing="2.6" fill="#DFE1DB">MEASURE. MONITOR. MOVE.</text>
   <text x="212" y="595" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="2.6" fill="#928A77">BENJAMIN INMAN</text>
 </svg></div>
-          <p class="opt2">Take it online now &middot; printed at-home version at launch</p>
+          <span class="opt2">Take online. Or printed at home.</span>
           
         </div>
       </a>
