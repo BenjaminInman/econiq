@@ -46,3 +46,7 @@
    - numbered concept tables: --paper-well background
    - Knowledge Check options: --paper-panel, --amber when selected
 */
+
+/* Curriculum / read-along pages:
+   add class="no-rail" to <body> to suppress the floating social rail.
+   Reading pages should carry no persistent outbound links. */
