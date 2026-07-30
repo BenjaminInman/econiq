@@ -307,8 +307,9 @@ a.step:hover{border-color:rgba(224,169,59,.45);transform:translateY(-2px)}
   color:var(--olive-lift);margin:10px 0 0}
 .step .sbody > p{margin-bottom:0}
 
-/* steps — equalise the text block so links and artwork align top-down */
-.steps{align-items:start}
+/* steps — equal-height cards; text block equalised so artwork aligns */
+.steps > .step{height:100%}
+.steps{align-items:stretch}
 .step .sbody > p{min-height:4.9em;margin-bottom:0}
 .step .sgo{margin-top:14px;display:block}
 .smedia{margin:12px 0 0}
