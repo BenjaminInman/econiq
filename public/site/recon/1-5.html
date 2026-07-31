@@ -49,6 +49,29 @@ a{color:var(--gold)}
 .partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
  color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
 
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
 /* article */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
@@ -241,6 +264,20 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>Notes:</h2></article>
 <section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>How do phase transitions typically develop?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Suddenly, in a single moment that operators can pinpoint exactly.</button><button class='opt' data-k='B'><span class='k'>B</span>In stages, with macroeconomic indicators moving first, capital markets activity shifting next, construction dynamics responding, and operating fundamentals confirming the transition months or years after upstream indicators have already shifted.</button><button class='opt' data-k='C'><span class='k'>C</span>Only after trailing data has fully confirmed the new phase.</button><button class='opt' data-k='D'><span class='k'>D</span>Randomly, with no predictable sequencing. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Phase transitions develop in stages with predictable sequencing. Macroeconomic indicators move first (12–18 months before multifamily operations reflect the shift), then capital markets activity shifts (6–12 months before operating fundamentals reflect the change), then construction dynamics shift (3–9 months before delivered supply moderates), then operating fundamentals shift, then trailing data confirms last. The staged development is what makes transitions observable for operators watching the right signals.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>Which of the following is the timing-lag hierarchy as established in Module 1.5?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Submarket signals first, then national multifamily, then macroeconomic, then trailing data.</button><button class='opt' data-k='B'><span class='k'>B</span>Macroeconomic indicators first, then national multifamily indicators, then submarket operational indicators, then trailing data confirming last.</button><button class='opt' data-k='C'><span class='k'>C</span>All indicators move at exactly the same time.</button><button class='opt' data-k='D'><span class='k'>D</span>Trailing data first, then leading data. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Macroeconomic indicators move first (longest time horizons), then national multifamily indicators (responding to macro environment with 6–<strong>12 month</strong> lag), then submarket operational indicators (12–24 months downstream from macro), then trailing data confirming last. The hierarchy explains why operators who only watch submarket conditions are systematically late to every transition.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>Which of the following is NOT one of the five transition signals introduced in Module 1.5?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Construction Start Trends</button><button class='opt' data-k='B'><span class='k'>B</span>Permit Velocity</button><button class='opt' data-k='C'><span class='k'>C</span>Quarterly Vacancy Reports</button><button class='opt' data-k='D'><span class='k'>D</span>Capital Markets Sentiment Shift **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The five transition signals are: Construction Start Trends, Permit Velocity, Absorption vs. Delivery Rate, Concession Activity, and Capital Markets Sentiment Shift. Quarterly vacancy reports are trailing data that confirm transitions after they have already developed at the operational level—the opposite of leading transition signals.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 4</span><p class='qs'>What is the most consequential analytical mistake operators make when reading cycle data?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Reading leading data as if it were trailing data.</button><button class='opt' data-k='B'><span class='k'>B</span>Reading trailing data as if it were leading data—adjusting strategy in response to recent vacancy or rent growth reports that describe conditions that have already shifted, rather than positioning for conditions that haven’t yet arrived.</button><button class='opt' data-k='C'><span class='k'>C</span>Reading too many indicators simultaneously.</button><button class='opt' data-k='D'><span class='k'>D</span>Reading only Layer 3 macroeconomic data. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The most consequential analytical mistake is reading trailing data as if it were leading data. When vacancy rises, the operational reality has already shifted; the data is confirming a transition that has been forming for months. Operators who treat vacancy data as a leading signal are responding to conditions that already happened, not positioning for conditions that haven’t yet arrived.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>In 2–3 sentences, explain why “capital markets sentiment shift” leads transaction volume by 3–6 months and why operators who can read this signal gain meaningful timing advantage over operators who only watch transaction volume itself. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Capital markets sentiment shifts because capital allocators talk to each other and respond to upstream macroeconomic conditions before those conditions reach transaction-level data. When sophisticated capital partners begin using language like “selective” or “patient” instead of “aggressive,” they are responding to information that hasn’t yet propagated to closed transactions. Operators who can read sentiment shifts gain 3–6 months of timing advantage because they can position before transaction volume confirms what sentiment has already revealed—that gap is where cycle-aware advantage gets generated.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator notices the following pattern over the past two quarters: capital markets sentiment has shifted toward more selective deployment, permit velocity in their primary submarkets has decelerated, construction starts are plateauing, but absorption-versus-delivery rates and concession activity remain stable. What does this pattern suggest about the cycle position, and what operational and strategic responses should the operator be considering? ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>The pattern indicates a Peak transition is forming in the upstream stages of development. Capital markets sentiment has shifted, permit velocity has decelerated, construction starts are plateauing—these are the early-stage transition signals at the capital and supply-decision layers. Absorption and concession activity remain stable because the transition hasn’t yet reached the operational layer (it typically takes 6–12 more months for upstream shifts to manifest in submarket operational data). The operator should be considering: (1) reducing acquisition pacing despite current strong operational metrics, (2) reviewing existing portfolio for assets vulnerable to potential Peak/Contraction conditions, (3) considering capital structure adjustments while debt markets remain favorable, (4) preparing capital reserves for opportunistic deployment if conditions deepen. The framework calls for acting on upstream signals rather than waiting for operational confirmation that arrives only after the optimal response window has closed.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>Which of the following best describes the relationship between the 5 transition signals introduced in Module 1.5 and the deeper signal work in Special Ops training?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The 5 transition signals are the complete signal system and Special Ops adds nothing further.</button><button class='opt' data-k='B'><span class='k'>B</span>The 5 transition signals are the conceptual entry point into the deeper signal work that Special Ops operationalizes through the Onion Framework, the Cignal Dashboard, and the Signal Threshold.</button><button class='opt' data-k='C'><span class='k'>C</span>The 5 transition signals are unrelated to Special Ops content.</button><button class='opt' data-k='D'><span class='k'>D</span>Special Ops replaces the 5 transition signals with completely different signals. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The 5 transition signals are the conceptual entry point into the deeper signal work in Special Ops. The leading-vs.-trailing distinction becomes systematic classification in the <strong>Cignal</strong> Intelligence system. The timing-lag hierarchy becomes the architectural backbone of the Onion Framework. The 5 signals introduced in Module 1.5 connect to Layers 1, 2, and 3 of the Onion Framework but Recon presents them as a sequence rather than as a complete operational system.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong transition recognition capability. Proceed to Lesson 1.6 (The Bridge) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the timing-lag hierarchy and the five transition signals in Lesson 1.5 before proceeding. Focus especially on the distinction between leading signals and the trailing data that operators typically rely on.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.5 in full. Transition recognition is the application of everything Recon has built—the most important skill in cycle-aware investing—and the foundation for Special Ops signal work.</p></div></div></div></section>
 
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 10 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
 <nav class="lnav"><a href='1-4-2.html'>&larr; Previous<span>The Contraction Phase</span></a><a href='1-6.html' style='text-align:right'>Next &rarr;<span>The Bridge</span></a></nav>
 
 <footer class="lfoot">
@@ -257,6 +294,41 @@ addEventListener('scroll',function(){
   var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
   pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
 },{passive:true});
+
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='1.5', KEY='econiq-recon-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.classList.toggle('here', a.dataset.for===cur);
+    });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/10*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
 
 // knowledge check
 var answered=0, correct=0;
@@ -280,6 +352,7 @@ mcqs.forEach(function(q){
            correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
            'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
         s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
         document.querySelectorAll('.rrow').forEach(function(rw){
           var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
           if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;

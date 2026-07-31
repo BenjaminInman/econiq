@@ -49,6 +49,29 @@ a{color:var(--gold)}
 .partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
  color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
 
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
 /* article */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
@@ -264,6 +287,20 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>Notes:</h2></article>
 <section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>Which of the following best characterizes the Recovery phase of the multifamily cycle?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Vacancy is at historic lows, rent growth is at historic highs, and capital is flowing aggressively into the asset class.</button><button class='opt' data-k='B'><span class='k'>B</span>Vacancy is elevated, pricing has corrected from prior peak levels, capital partners are cautious, and the operational opportunity is foundation-building.</button><button class='opt' data-k='C'><span class='k'>C</span>New supply is delivering aggressively while demand is moderating, producing softening operational metrics.</button><button class='opt' data-k='D'><span class='k'>D</span>Pricing is collapsing, foreclosure activity is accelerating, and capital partners have largely withdrawn from the asset class. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Recovery is characterized by elevated vacancy, corrected pricing, cautious capital, and the foundation-building opportunity. Operators who recognize Recovery deploy with discipline at favorable basis while less aware operators wait for confirmation that arrives only as Recovery transitions to Expansion.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>An operator observes the following conditions in their primary market: rent growth has been strong for three years, capital is flowing aggressively, new construction starts are at multi-year highs, cap rates have compressed substantially, and lenders are extending credit on aggressive terms. Which phase is the market most likely in?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery</button><button class='opt' data-k='B'><span class='k'>B</span>Early Expansion</button><button class='opt' data-k='C'><span class='k'>C</span>Late Expansion / Peak forming</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The constellation of indicators (multi-year strong rent growth, aggressive capital flow, multi-year-high construction starts, substantial cap rate compression, aggressive lender posture) indicates Late Expansion or Peak forming. The conditions that produce continued strong performance are also the conditions that produce the next transition. Operators recognizing this constellation should be tightening selectivity rather than accelerating deployment.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>Which phase is characterized by the structural mismatch between supply being delivered (decisions made years earlier) and current demand conditions, often producing concession activity and softening rent growth despite continued capital deployment?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery</button><button class='opt' data-k='B'><span class='k'>B</span>Expansion</button><button class='opt' data-k='C'><span class='k'>C</span>Peak / Hypersupply</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Peak / <strong>Hypersupply</strong> is the phase where supply decisions made during prior Expansion conditions are delivering into a market where demand has begun moderating. The structural mismatch produces concessions, softening rent growth, and lengthening days on market even as broader operational metrics initially appear healthy.</em></p></div></div><div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>What strategic posture typically produces advantage during the Contraction phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Aggressive capital deployment to capture asymmetric pricing while less aware operators wait for confirmation, paired with extended hold periods that bridge through eventual Recovery.</button><button class='opt' data-k='B'><span class='k'>B</span>Maximum acquisition pacing because pricing is at peak levels.</button><button class='opt' data-k='C'><span class='k'>C</span>Complete withdrawal from the asset class until conditions improve.</button><button class='opt' data-k='D'><span class='k'>D</span>Aggressive value-add execution because renovation costs are at their highest. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Contraction creates the asymmetric opportunity for operators with capital available and conviction to deploy while pricing is corrected. The discipline required is extending hold periods to bridge through eventual Recovery, and capital structure that accommodates the possibility of Contraction lasting longer than expected.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>In 2–3 sentences, describe the difference between operational discipline in Recovery phase and operational discipline in Peak (Hypersupply) phase. What changes about what operators should prioritize? ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Recovery phase operational discipline prioritizes foundation-building: building a quality resident base, accepting slower lease-up in exchange for resident quality, and establishing operational standards that will distinguish the portfolio through Expansion. Peak (<strong>Hypersupply</strong>) phase operational discipline becomes defensive: defending rent levels selectively, investing aggressively in retention of quality residents who will be costly to replace, and maintaining operational fundamentals that distinguish assets when Contraction arrives. The same operator behaves differently in each phase because the operational priorities themselves change.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator is evaluating two markets simultaneously. Market A shows: declining transaction volume, expanding concessions, lengthening days on market, and softening rent growth. Market B shows: cap rate stabilization after a multi-year decline, modest rent growth, returning capital partners, and elevated but improving vacancy. Identify which phase each market is in and explain how the same operator should approach acquisitions differently in each. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p>*Market A is in Peak / <strong>Hypersupply</strong> or early Contraction (declining transaction volume, expanding concessions, lengthening days on market, softening rent growth all indicate **supply pressure exceeding demand). Market B is in Recovery (cap rate stabilization after decline, modest rent growth returning, capital partners returning, improving vacancy all indicate the bottom has formed and stabilization is underway). The operator should approach acquisitions in Market A with extreme selectivity (most opportunities should be passed on) while approaching acquisitions in Market B with disciplined deployment of capital at favorable basis with conservative financing terms locked in for the next cycle. The same operator with the same capital should be cautious in Market A and opportunistic in Market B.*</p></div></div><div class='q' data-a='A'><span class='qn'>Question 7</span><p class='qs'>Which of the following is the most consequential failure mode operators face during Peak / Hypersupply phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Failing to recognize the shift and continuing to deploy Expansion-phase strategies (aggressive acquisitions at peak prices, peak debt terms, aggressive value-add) into a phase where the patterns are about to invert.</button><button class='opt' data-k='B'><span class='k'>B</span>Acting too cautiously and missing operational upside.</button><button class='opt' data-k='C'><span class='k'>C</span>Diversifying geographically across submarkets.</button><button class='opt' data-k='D'><span class='k'>D</span>Investing in retention programs for existing residents. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The most consequential failure during Peak / <strong>Hypersupply</strong> is continuing to deploy Expansion-phase strategies into a phase where the patterns are about to invert. The frameworks that produced strong returns during Expansion produce overpayment, over-leverage, and operational vulnerability when applied to Peak conditions. The operators who outperform across cycles distinguish themselves by what they didn’t buy during Peak.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong phase recognition. Proceed to Lesson 1.1.3 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the relevant phase signatures in Lesson 1.1.2 before proceeding. Focus especially on the Peak / Hypersupply characteristics and the applied scenario.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.1.2 in full. Phase recognition is the foundational skill—every subsequent module assumes you can identify which phase a market is in.</p></div></div></div></section>
 
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 10 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
 <nav class="lnav"><a href='1-1-1.html'>&larr; Previous<span>What Is a Market Cycle</span></a><a href='1-1-3.html' style='text-align:right'>Next &rarr;<span>The Big 3</span></a></nav>
 
 <footer class="lfoot">
@@ -280,6 +317,41 @@ addEventListener('scroll',function(){
   var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
   pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
 },{passive:true});
+
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='1.1.2', KEY='econiq-recon-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.classList.toggle('here', a.dataset.for===cur);
+    });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/10*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
 
 // knowledge check
 var answered=0, correct=0;
@@ -303,6 +375,7 @@ mcqs.forEach(function(q){
            correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
            'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
         s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
         document.querySelectorAll('.rrow').forEach(function(rw){
           var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
           if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;

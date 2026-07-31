@@ -49,6 +49,29 @@ a{color:var(--gold)}
 .partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
  color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
 
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
 /* article */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
@@ -656,6 +679,20 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>Notes:</h2></article>
 <section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>The lesson identifies the Recovery phase as the phase where contrarian investors thrive. Which of the following best describes a contrarian investor as defined in the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A reckless risk-taker who gambles on uncertain markets in search of outsized returns.</button><button class='opt' data-k='B'><span class='k'>B</span>An investor who follows the crowd and reacts to recent market performance.</button><button class='opt' data-k='C'><span class='k'>C</span>A disciplined operator who deliberately positions capital against prevailing market sentiment, focuses on fundamentals and downside protection first, and accepts short-term discomfort for long-term gains.</button><button class='opt' data-k='D'><span class='k'>D</span>An investor who waits for full optimism to return before making any acquisitions. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson is explicit that contrarian investors are not reckless risk-takers or gamblers. They are disciplined operators who deliberately position capital against prevailing market sentiment, buy when others are selling, underwrite conservatively while assuming long-term normalization, focus on downside protection first and upside second, and accept short-term discomfort in exchange for long-term gains. Contrarian investing is not about being early for the sake of being early—it is about being prepared to act when conditions begin improving but confidence has not yet returned.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>The lesson separates Recovery phase signals into two components. Which of the following correctly identifies these two components?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Leading signals and trailing signals</button><button class='opt' data-k='B'><span class='k'>B</span>National signals and Local market signals</button><button class='opt' data-k='C'><span class='k'>C</span>Quantitative signals and qualitative signals</button><button class='opt' data-k='D'><span class='k'>D</span>Public signals and proprietary signals **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson clearly separates Recovery phase signals into two components: National (signals like GDP, unemployment, wage growth, consumer confidence, inflation, interest rates, yield curve, behavioral signals, flow of funds, foreclosures) and Local market signals (job growth, population trends, construction pipeline, path of progress, housing supply/DOM). This separation matters because national signals provide the macro context while local signals reveal which specific markets will lead the multifamily Recovery wave.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>According to the lesson, what is the most important insight about Real Personal Consumption Expenditures (Real PCE) during the Recovery phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Real PCE always grows at exactly 3% during Recovery.</button><button class='opt' data-k='B'><span class='k'>B</span>Real PCE growth is technical rather than behavioral and applies only to retail spending.</button><button class='opt' data-k='C'><span class='k'>C</span>The behavioral shift occurs when consumers simply stop cutting—stabilization in behavior often becomes visible in PCE data before it appears in leasing reports or property-level metrics.</button><button class='opt' data-k='D'><span class='k'>D</span>Real PCE has no relationship to multifamily fundamentals during the Recovery phase. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson states this directly: ‘The most important insight about Real PCE during Recovery is behavioral. The behavioral shift occurs when consumers simply stop cutting. This stabilization in behavior often becomes visible in PCE data before it appears in leasing reports or property-level metrics.’ This is why disciplined, cycle-aware investors study consumer behavior more closely than lagging real estate indicators—spending patterns often stabilize before property-level fundamentals visibly improve, providing an early signal that rental demand is quietly rebuilding from the ground up.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>What does the yield curve typically do during the Recovery phase, and why does this matter for multifamily investors?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The yield curve inverts during Recovery, signaling worsening conditions.</button><button class='opt' data-k='B'><span class='k'>B</span>The yield curve flattens completely during Recovery, eliminating the spread between short and long-term rates.</button><button class='opt' data-k='C'><span class='k'>C</span>The yield curve begins to steepen—short-term rates remain low while long-term yields rise modestly as optimism returns and investors expect higher growth and inflation. The steepening is one of the clearest macro indicators that the economy has turned a corner.</button><button class='opt' data-k='D'><span class='k'>D</span>The yield curve becomes irrelevant during Recovery because interest rates are stable. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson explicitly describes the yield curve as a ‘forward-looking compass’ during the Recovery phase. Just before Contraction, the yield curve often inverts as investors flee to long-term safety. As the economy stabilizes, the yield curve begins to steepen—short-term rates remain low because the Federal Reserve keeps policy accommodative, while long-term yields rise as investors anticipate renewed growth and inflation. This steepening is one of the clearest macro indicators that the economy has turned a corner. Investors who acted when the yield curve steepened (not when GDP confirmed growth) historically acquired prime assets at 20–30% discounts and locked in 10-year fixed debt at record-low rates.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson states that wage growth during Recovery is rarely broad-based at first and that ‘rent growth that outpaces wage growth is unsustainable.’ In 2–3 sentences, explain why wage growth is treated as a leading indicator of rent expansion during the Recovery phase, and what the difference between nominal wage growth and real wage growth means for multifamily underwriting. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p>*Wage growth is treated as a leading indicator of rent expansion during Recovery because rent growth that outpaces wage growth is <strong>unsustainable—renters</strong> cannot pay rents they cannot afford from their incomes. Wage growth during Recovery often begins in resilient industries (healthcare, logistics, technology, infrastructure, essential services) before **broadening, and as wages stabilize across multiple sectors in a market, it signals the foundation for rent stabilization and eventual growth. The difference between nominal and real wage growth is critical for underwriting: if wages rise 2% but inflation runs at 3%, renters lose purchasing power; if wages rise 3% while inflation falls to 2%, purchasing power improves. Cycle-aware investors confirm that real wage growth supports rent growth before pricing rent increases into underwriting, rather than relying on nominal wage growth that may be eroded by inflation.*</p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>You are evaluating a 150-unit Class B property in a market where vacancy peaked at 12% during the prior downturn. Currently: occupancy has climbed back to 90%, rent concessions have dropped, and employers in the local market are hiring again. The acquisition price is $80,000 per unit, well below the replacement cost of $120,000 per unit. Using the strategic moves the lesson recommends for the Recovery phase, identify three specific actions you would take with this opportunity and explain why each is appropriate for Recovery-phase investing. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Three specific actions appropriate for this Recovery-phase opportunity: (1) Acquire strategically—the property is selling at $80,000/unit versus $120,000 replacement cost in a market with stabilizing occupancy (90% recovered from 12% peak vacancy), declining concessions, and returning employment growth. This matches the lesson’s guidance to focus on undervalued markets where employment is rebounding, supply remains limited, and rents are below replacement cost. (2) Secure long-term fixed-rate financing—Recovery phase financing offers low nominal rates paired with rising inflation expectations, creating positive leverage where debt costs stay fixed while rents and values rise. The lesson specifically recommends locking in 7–10 year fixed-rate debt during this window before rates climb in Expansion. (3) Execute value-add early with conservative underwriting—the lesson recommends renovating before material and labor inflation erodes margins, while keeping rent growth assumptions modest (1–2% in early Recovery) and maintaining conservative expense growth until income stability is proven. The 5–<strong>7 year</strong> hold strategy captures both rental income growth and appreciation as the market moves from Recovery into Expansion. The combination of below-replacement-cost basis, fixed long-term debt at favorable rates, and disciplined value-add execution is the classic Recovery play the lesson describes.</em></p></div></div><div class='q' data-a='D'><span class='qn'>Question 7</span><p class='qs'>The lesson explicitly identifies several risks investors face during the Recovery phase. Which of the following is NOT one of the risks the lesson warns about?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Misreading the signals—mistaking a short-term ‘dead cat bounce’ for true Recovery.</button><button class='opt' data-k='B'><span class='k'>B</span>Underestimating the time it takes for rents and occupancy to improve, since demand builds gradually in Recovery.</button><button class='opt' data-k='C'><span class='k'>C</span>Overestimating renovations—over-improving a property before rents justify it.</button><button class='opt' data-k='D'><span class='k'>D</span>Acquiring properties below replacement cost during the Recovery phase, as this typically results in losses. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson explicitly identifies the first three options (A, B, and C) as risks investors face during the Recovery phase, along with extended stagnation and financing hurdles. Option D is the opposite of the lesson’s guidance—acquiring properties below replacement cost during Recovery is precisely the strategic opportunity the lesson recommends, not a risk. The example scenario in the lesson specifically describes acquiring a property at $80,000/unit when replacement cost is $120,000/unit as ‘the classic Recovery play—buy low, improve operations, and position for strong gains as demand accelerates.’ Below-replacement-cost basis is one of the defining advantages of Recovery-phase acquisitions.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong Recovery-phase understanding. Proceed to the next lesson with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the Recovery-phase signals and strategy in Lesson 1.3.1 before proceeding. Focus especially on the PCE behavioral insight, the yield curve steepening signal, and the nominal versus real wage growth distinction for underwriting.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.3.1 in full. The contrarian investor discipline—acting on stabilization signals before optimism returns—is the foundational principle of Recovery-phase advantage.</p></div></div></div></section>
 
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 10 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
 <nav class="lnav"><a href='1-2.html'>&larr; Previous<span>The Dynamic Duo</span></a><a href='1-3-2.html' style='text-align:right'>Next &rarr;<span>The Expansion Phase</span></a></nav>
 
 <footer class="lfoot">
@@ -672,6 +709,41 @@ addEventListener('scroll',function(){
   var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
   pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
 },{passive:true});
+
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='1.3.1', KEY='econiq-recon-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.classList.toggle('here', a.dataset.for===cur);
+    });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/10*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
 
 // knowledge check
 var answered=0, correct=0;
@@ -695,6 +767,7 @@ mcqs.forEach(function(q){
            correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
            'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
         s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
         document.querySelectorAll('.rrow').forEach(function(rw){
           var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
           if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;

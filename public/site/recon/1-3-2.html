@@ -49,6 +49,29 @@ a{color:var(--gold)}
 .partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
  color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
 
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
 /* article */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
@@ -562,6 +585,20 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>Notes:</h2></article>
 <section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>The lesson identifies the Expansion phase as the phase where momentum investors thrive. Which of the following best describes a momentum investor as defined in the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>An investor who buys against fear and prevailing market sentiment, focusing on turnaround stories.</button><button class='opt' data-k='B'><span class='k'>B</span>A reckless investor who chases trends without analysis or discipline.</button><button class='opt' data-k='C'><span class='k'>C</span>An investor who allocates capital in the direction of strengthening trends, buys into confirmed improvement, relies on observable data, and uses leverage strategically to scale during favorable conditions.</button><button class='opt' data-k='D'><span class='k'>D</span>An investor who waits for the next Contraction before making any acquisitions. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson is explicit that momentum investors are not reckless trend-chasers—they are disciplined operators who allocate capital in the direction of strengthening trends. They buy into confirmed improvement (not against fear, which characterizes contrarians in Recovery), rely on observable data like rising occupancy, rent growth, and tightening supply, favor markets with strong population and job growth, and use leverage strategically to scale during favorable conditions. The lesson states directly: ‘Momentum investing is not reckless. When done correctly, it is disciplined growth built on confirmation, not speculation.’ This is the natural counterpart to the Recovery phase’s contrarian investor—different phase, different dominant style, both requiring <strong>discipline</strong>.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>How does Real Personal Consumption Expenditures (PCE) behavior in the Expansion phase differ from PCE behavior during the Recovery phase, according to the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Real PCE behavior is identical across both phases—there is no meaningful difference.</button><button class='opt' data-k='B'><span class='k'>B</span>In Recovery, the behavioral shift occurs when consumers simply stop cutting; in Expansion, Real PCE does not just stabilize but accelerates as households deploy income freely, upgrade lifestyles, form new households, and increase discretionary spending on travel, dining, entertainment, and durable goods.</button><button class='opt' data-k='C'><span class='k'>C</span>In Recovery, Real PCE accelerates dramatically; in Expansion, it stabilizes.</button><button class='opt' data-k='D'><span class='k'>D</span>Real PCE only matters during Contraction phases. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson draws this distinction explicitly. In Recovery, the key behavioral insight is that consumers simply stop <strong>cutting—stabilization</strong> in spending behavior often becomes visible in PCE data before it appears in leasing reports. In Expansion, Real PCE does not just stabilize—it accelerates. Households deploy income more freely, upgrade lifestyles, form new households, and make discretionary purchases with greater confidence. Service-sector spending accelerates, consumer credit usage often expands alongside rising incomes, and renters begin upgrading housing choices. This shift directly supports multifamily performance and fuels rent growth across many markets—but disciplined investors monitor whether spending growth is supported by wage growth or fueled increasingly by debt.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>The lesson describes how the yield curve evolves across the Expansion phase. Which of the following correctly describes this progression and the specific 10-year minus 2-year Treasury spread thresholds?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The yield curve remains perfectly flat throughout the entire Expansion phase regardless of rate environment.</button><button class='opt' data-k='B'><span class='k'>B</span>Early Expansion has a healthy steep curve (above +1%); as Expansion matures the Fed raises short-term rates while long yields stay steady, causing flattening (between +0.5% and 0% indicates Late Expansion); below 0% (inversion) is a Contraction signal.</button><button class='opt' data-k='C'><span class='k'>C</span>The yield curve always inverts during Expansion as a healthy signal of growth.</button><button class='opt' data-k='D'><span class='k'>D</span>The yield curve becomes irrelevant during Expansion because interest rates are stable. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson provides specific quantitative thresholds: above +1% indicates a Healthy Expansion (steep curve reflecting optimism and strong growth), between +0.5% and 0% indicates Late Expansion (the Fed has raised short-term rates while long-term yields stay steady, causing flattening), and below 0% (inversion) is a Contraction signal. The lesson notes that ‘historically, every U.S. contraction in the past 50 years has been preceded by an inverted yield curve,’ which is why monitoring the 10-year minus 2-year Treasury spread is essential during Expansion. The yield curve evolution—steep in early Expansion, flattening as Expansion matures, inverting as <strong>Hypersupply</strong> approaches—is one of the most reliable late-cycle warning signals.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>The lesson identifies several behavioral signals that emerge late in the Expansion phase. Which of the following is described as ‘Cycle Amnesia’ in the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Investors who carefully study historical cycles before making acquisitions.</button><button class='opt' data-k='B'><span class='k'>B</span>Disciplined operators who acknowledge cyclical risk in offering documents.</button><button class='opt' data-k='C'><span class='k'>C</span>The phenomenon where phrases like ‘this cycle is different’ become common, analysts project never-ending rent growth, buyers start justifying negative leverage, and investors forget that cycles eventually turn.</button><button class='opt' data-k='D'><span class='k'>D</span>Lenders who tighten underwriting standards in response to rising rates. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The lesson explicitly names this phenomenon ‘Cycle Amnesia.’ It is characterized by phrases like ‘this cycle is different’ becoming common, analysts projecting never-ending rent growth, buyers starting to justify negative leverage (accepting borrowing costs higher than property yields), and proformas that assume perpetual rent growth. Cycle Amnesia is a behavioral signal—the kind of subtle indicator that distinguishes operators who absorbed the lesson from those who skimmed it. Recognizing Cycle Amnesia in real time is one of the most powerful capabilities cycle-aware investors develop.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson states that the same employment strength that powers the Expansion phase can also plant the seeds of the next downturn, and references the 2014–2019 case example where unemployment fell from 6% to under 4%. In 2–3 sentences, explain (a) why extremely low unemployment (below 4%) often precedes the end of Expansion, and (b) what the 2014–2019 case demonstrates about how ultra-low unemployment created the illusion of perpetual strength. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>(a) Extremely low unemployment (below 4%) often precedes the end of Expansion because the labor market becomes ‘too tight,’ triggering late-cycle symptoms: wage inflation, rising interest rates, higher operating costs, and slowing job growth. When unemployment hits its cyclical floor, it often marks the turning point—the transition from healthy growth to overheating. The discipline is to track not just how low unemployment is, but how long it stays low—a prolonged period of sub-4% unemployment is historically unsustainable. (b) The 2014–2019 case demonstrates this dynamic clearly: U.S. unemployment fell steadily from 6% to under 4%, multifamily occupancy stayed above 95%, rent growth averaged 3–4% annually, and construction surged. Yet by 2019, wage inflation was rising, the Fed had already raised rates multiple times to prevent overheating, and developers continued building aggressively assuming demand would remain infinite. By early 2020, the market entered <strong>Hypersupply</strong> in many metros—and the pandemic accelerated what was already structurally forming. Ultra-low unemployment created the illusion of perpetual strength, but the combination of tight labor markets, rising costs, and rate hikes had already marked the top of the cycle before any external shock arrived.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>You are evaluating a Class B+ property in a market with 97% occupancy and 4% annual rent growth. Lenders are offering favorable terms, and the property has room for minor upgrades—new flooring, updated kitchens, and enhanced amenities. Acquisition price is $120,000 per unit. Using the Expansion-phase strategy the lesson describes, identify three specific actions you would take with this opportunity and explain why each is appropriate for Expansion-phase investing. Then identify at least one risk the lesson warns about that you would specifically guard against in your underwriting. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Three specific actions appropriate for this Expansion-phase opportunity: (1) Execute light value-add quickly while market conditions support pricing power—the property has room for minor upgrades (flooring, kitchens, amenities) and the market shows 97% occupancy with 4% rent growth, which validates pushing rents 8–10% on renovated units. The lesson explicitly recommends value-add execution during Expansion when concessions have <strong>disappeared</strong> and pricing power is real. (2) Lock in 10-year fixed-rate financing immediately while capital markets remain favorable—the lesson warns that interest rates often stabilize before preparing to rise toward the end of Expansion, and that even a single percentage-point rise can wipe out equity gains. Securing long-term fixed-rate debt now protects against the rate environment that will likely emerge in late Expansion and <strong>Hypersupply</strong>. (3) Plan a 7–10 year hold with disciplined exit timing before <strong>Hypersupply</strong> impacts values—the classic Expansion play is buy-and-hold with stable cash flow and selling before the cycle turns. Risk to guard <strong>against:</strong> overpaying for the deal—competition is fierce and capital is flooding the market, tempting buyers to stretch underwriting assumptions or accept thinner margins. The lesson also warns against assuming rent growth forever: underwrite rent growth supported by wage growth rather than extrapolating Expansion-phase rates indefinitely. Conservative leverage and strong reserves are the late-Expansion defense.</em></p></div></div><div class='q' data-a='D'><span class='qn'>Question 7</span><p class='qs'>The lesson explicitly identifies several transition warnings that signal Expansion is maturing into Hypersupply. Which of the following is NOT one of the late-Expansion warning signs the lesson identifies?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>CPI exceeds 4%, cap rate compression halts, and rent growth slows while supply spikes.</button><button class='opt' data-k='B'><span class='k'>B</span>The yield curve inverts (10-year minus 2-year Treasury spread falls below 0%).</button><button class='opt' data-k='C'><span class='k'>C</span>Construction pipelines remain full despite flattening demand, and developers accelerate new projects despite flattening rents.</button><button class='opt' data-k='D'><span class='k'>D</span>Foreclosure rates spike to multi-year highs, and lenders abruptly stop all new loan origination. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- *The lesson identifies options A, B, and C as late-Expansion transition warnings (CPI exceeding 4%, cap rate compression halting, rent growth slowing while supply spikes, the yield curve inverting, construction pipelines remaining full despite flattening demand, and developers accelerating projects despite flattening rents). Option D describes Contraction-phase symptoms, not late-Expansion warnings. During Expansion, foreclosure rates often fall to cyclical lows—they hide beneath optimism rather than spiking—and lenders compete aggressively for deals before tightening as the phase matures. Foreclosure activity typically remains low even at the end of Expansion; it emerges meaningfully only in <strong>Hypersupply</strong> transitioning to Contraction. Recognizing this **distinction separates operators who accurately read late-Expansion warning signs from those who wait for Contraction-phase symptoms before adjusting strategy.* **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong Expansion-phase understanding. Proceed to the next lesson with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the Expansion-phase signals and strategy section of Lesson 1.3.2 before proceeding. Focus especially on the yield curve progression thresholds and the late-Expansion warning signs that distinguish Expansion from early Hypersupply.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.3.2 in full. Expansion-phase discipline—particularly the distinction between momentum investing and reckless trend-chasing, and the specific behavioral signals like Cycle Amnesia—are foundational to recognizing the transition that follows.</p></div></div></div></section>
 
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 10 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
 <nav class="lnav"><a href='1-3-1.html'>&larr; Previous<span>The Recovery Phase</span></a><a href='1-4-1.html' style='text-align:right'>Next &rarr;<span>The Hypersupply Phase</span></a></nav>
 
 <footer class="lfoot">
@@ -578,6 +615,41 @@ addEventListener('scroll',function(){
   var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
   pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
 },{passive:true});
+
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='1.3.2', KEY='econiq-recon-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.classList.toggle('here', a.dataset.for===cur);
+    });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/10*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
 
 // knowledge check
 var answered=0, correct=0;
@@ -601,6 +673,7 @@ mcqs.forEach(function(q){
            correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
            'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
         s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
         document.querySelectorAll('.rrow').forEach(function(rw){
           var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
           if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;

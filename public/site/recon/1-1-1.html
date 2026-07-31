@@ -49,6 +49,29 @@ a{color:var(--gold)}
 .partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
  color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
 
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
 /* article */
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
@@ -239,6 +262,20 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>Notes:</h2></article>
 <section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>Which of the following best defines a market cycle as established in Module 1.1?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A random pattern of expansion and contraction in market conditions that cannot be analyzed or predicted.</button><button class='opt' data-k='B'><span class='k'>B</span>A recurring pattern of expansion and contraction driven by structural mechanics that operate predictably enough to be analyzed and anticipated, even though the precise timing and magnitude vary.</button><button class='opt' data-k='C'><span class='k'>C</span>A precisely predictable sequence of market events that allows operators to know exactly when transitions will occur.</button><button class='opt' data-k='D'><span class='k'>D</span>A theoretical concept that applies to equity markets but not to multifamily real estate. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>A market cycle is a recurring pattern of expansion and contraction driven by structural mechanics that operate predictably enough to be analyzed, with appropriate uncertainty about precise timing and magnitude. The methodology emphasizes structural predictability without overpromising precise prediction.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>Which of these is NOT one of the four structural mechanics that drive cyclical behavior in capital-intensive markets?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Capital flow dynamics</button><button class='opt' data-k='B'><span class='k'>B</span>Supply lags</button><button class='opt' data-k='C'><span class='k'>C</span>Government regulatory cycles</button><button class='opt' data-k='D'><span class='k'>D</span>Behavioral feedback loops **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The four structural mechanics are capital flow dynamics, supply lags, leverage and credit cycles, and behavioral feedback loops. Government regulatory cycles can amplify or moderate the broader cycle but are not one of the four core structural mechanics that produce cyclical behavior.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>What distinguishes cyclical movement from ordinary market volatility?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Cyclical movement happens in equity markets while volatility happens in real estate.</button><button class='opt' data-k='B'><span class='k'>B</span>Cyclical movement is sustained directional change over multi-year periods, while volatility is short-term fluctuation around a relatively stable trend.</button><button class='opt' data-k='C'><span class='k'>C</span>Cyclical movement is always negative while volatility can be positive or negative.</button><button class='opt' data-k='D'><span class='k'>D</span>Volatility is real and cyclical movement is theoretical. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The timeframe distinction is what separates cyclical movement from volatility. Volatility happens over weeks and quarters around a relatively stable trend. Cyclical movement happens over years and shows directional consistency rather than mean reversion. Misclassifying one as the other produces both overreaction and underreaction failures.</em></p></div></div><div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>Why does the supply lag in real estate produce predictable cyclicality?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because supply decisions made during peak conditions arrive in market years after the conditions that triggered them have changed, producing structural oversupply at cycle peaks.</button><button class='opt' data-k='B'><span class='k'>B</span>Because supply always matches demand exactly in real estate markets.</button><button class='opt' data-k='C'><span class='k'>C</span>Because government regulations prevent rapid supply response.</button><button class='opt' data-k='D'><span class='k'>D</span>Because lenders refuse to finance new construction. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Real estate has a structural feature absent in many other asset classes: supply takes 18–30 months to deliver. This means supply decisions made during peak conditions arrive in market after conditions have already changed. The lag produces predictable oversupply at cycle peaks and undersupply at cycle troughs.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>Explain in 2–3 sentences why cycle awareness produces compounding advantage over multiple cycles, and why single-cycle outperformance might not reflect systematic capability.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Cycle awareness produces compounding advantage because the analytical capability deepens with each cycle navigated, the avoided catastrophic mistakes preserve capital that compounds across cycles, and the asymmetric opportunities captured during contraction phases produce returns that fund larger deployments in subsequent cycles. Single-cycle outperformance might be luck—multi-cycle outperformance reflects systematic capability because the advantage persists across different cycle conditions, demonstrating that the methodology produces results across varied environments rather than being specific to one favorable condition.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator notices that cap rates in their primary submarket have moved 25 basis points over the past quarter. They are considering whether this is volatility or cyclical movement. What additional information should they consider before drawing conclusions, and why does the distinction matter for their strategic decisions?</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p>*The operator should consider: (1) the timeframe of the movement—has this been a single quarter or part of a multi-quarter pattern? (2) the direction relative to longer-term **trends—is the 25bp move continuation of a sustained directional shift or mean reversion within a stable trend? (3) corroborating signals at other layers—are macroeconomic and industry-level indicators showing similar directional movement, or is this an isolated submarket variation? The distinction matters because reading volatility as cyclical movement produces overreaction (constant strategic adjustment in response to noise that erodes discipline), while reading cyclical movement as volatility produces underreaction (missing genuine shifts and finding the optimal response window has closed).*</p></div></div><div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>Which of the following is TRUE about multifamily cycles compared to other asset classes?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Multifamily is more cyclical than equity markets but less cyclical than fixed income.</button><button class='opt' data-k='B'><span class='k'>B</span>Multifamily cycles are exactly the same as office and retail cycles in length and pattern.</button><button class='opt' data-k='C'><span class='k'>C</span>Multifamily is more cyclical than fixed income but less cyclical than equity markets, with the broader real estate cycle running roughly 18 years on average.</button><button class='opt' data-k='D'><span class='k'>D</span>Multifamily does not cycle in any meaningful way. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Multifamily sits between fixed income (slow cycling) and equity markets (volatile cycling), with the broader real estate cycle running roughly 18 years on average and the shorter business cycle running roughly 8 years. The intermediate pacing creates the opportunity for disciplined cycle awareness to produce advantage.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong foundation. Proceed to Lesson 1.1.2 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the relevant sections of Lesson 1.1.1 before proceeding. Focus especially on the four structural mechanics and the volatility vs. cycle distinction.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.1.1 in full. The foundational concepts are prerequisites for everything that follows—solid understanding here will make every subsequent module more productive.</p></div></div></div></section>
 
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 10 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
 <nav class="lnav"><div class='sp'></div><a href='1-1-2.html' style='text-align:right'>Next &rarr;<span>Introduction to The Four Phases</span></a></nav>
 
 <footer class="lfoot">
@@ -255,6 +292,41 @@ addEventListener('scroll',function(){
   var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
   pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
 },{passive:true});
+
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='1.1.1', KEY='econiq-recon-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){
+      a.classList.toggle('here', a.dataset.for===cur);
+    });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/10*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
 
 // knowledge check
 var answered=0, correct=0;
@@ -278,6 +350,7 @@ mcqs.forEach(function(q){
            correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
            'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
         s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
         document.querySelectorAll('.rrow').forEach(function(rw){
           var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
           if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;

@@ -132,6 +132,14 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 .sum b{display:block;font-family:var(--mono);font-size:1.2rem;color:var(--amber)}
 .sum small{display:block;font-size:.72rem;color:var(--faint);margin-top:5px}
 @media(max-width:640px){.lrow{grid-template-columns:56px 1fr 60px}.lq{display:none}.sum{grid-template-columns:repeat(2,1fr)}}
+
+.lrow .done{font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:#2E7D50;text-align:right}
+.lrow.is-done{background:var(--well)}
+.lrow.is-done .lt{color:var(--soft)}
+.idxbar{margin:0 0 8px}
+.idxbar .cp-bar{height:4px;background:var(--well);border-radius:2px;overflow:hidden}
+.idxbar .cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s}
+.idxbar span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:8px}
 </style></head><body class="no-rail">
 <header class="rbar"><div class="rbar-in">
   <a class="rmark" href="../index.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
@@ -142,6 +150,7 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
   <p class="eyebrow">Recon</p>
   <h1>All lessons</h1>
   <p class="deck">Three parts, ten lessons. Every lesson closes with a Knowledge Check.</p>
+  <div class="idxbar"><span><b id="ixDone">0</b> of 10 lessons complete</span><div class="cp-bar"><i id="ixBar"></i></div></div>
   <div class="sum">
     <div><b>3</b><small>Parts</small></div><div><b>10</b><small>Lessons</small></div>
     <div><b>63</b><small>Questions</small></div><div><b>ECF</b><small>Certification</small></div>
@@ -151,4 +160,15 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <footer class="lfoot"><div class="lfoot-in">
   <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
   <span>The Econiq Method &middot; Recon Tier One &middot; v1.0</span>
-</div></footer></body></html>
+</div></footer><script id="cpIndexJS">
+(function(){
+  var d=[]; try{ d=JSON.parse(localStorage.getItem('econiq-recon-progress')||'[]'); }catch(e){}
+  document.getElementById('ixDone').textContent=d.length;
+  document.getElementById('ixBar').style.width=(d.length/10*100)+'%';
+  document.querySelectorAll('.lrow').forEach(function(a){
+    var code=a.querySelector('.lc').textContent.trim();
+    if(d.indexOf(code)>-1){ a.classList.add('is-done'); a.querySelector('.lq').outerHTML='<span class="done">&#10003;</span>'; }
+  });
+})();
+</script>
+</body></html>
