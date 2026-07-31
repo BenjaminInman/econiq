@@ -140,22 +140,48 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 .idxbar .cp-bar{height:4px;background:var(--well);border-radius:2px;overflow:hidden}
 .idxbar .cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s}
 .idxbar span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:8px}
+
+.hero{background:var(--deep);border-bottom:1px solid rgba(255,255,255,.10);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.16), transparent 62%)}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.20;pointer-events:none}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.hero-in{width:min(760px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.hero-in .eyebrow{color:#D9B25E}
+.hero-in h1{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.02em;margin:0 0 12px;color:#F2F3EF}
+.hero-in .deck{color:#A9BBAC;font-family:var(--ed);font-style:italic;font-size:1.16rem;max-width:56ch;margin:0}
+.hero .sum{margin:28px 0 0;background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.12)}
+.hero .sum div{background:rgba(255,255,255,.04)}
+.hero .sum b{color:#D9B25E}
+.hero .sum small{color:#8FA394}
+.hero .idxbar{margin:24px 0 0}
+.hero .idxbar span{color:#8FA394}
+.hero .idxbar span b{color:#D9B25E}
+.hero .idxbar .cp-bar{background:rgba(255,255,255,.14)}
+.wrapx{padding:8px 0 80px}
+.wrapx h2:first-of-type{border-top:0;margin-top:34px;padding-top:0}
 </style></head><body class="no-rail">
 <header class="rbar"><div class="rbar-in">
   <a class="rmark" href="../index.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
   <span class="rmeta">Recon &middot; Tier One</span>
   <a class="rexit" href="../recon.html">Course page</a>
 </div><div class="rprog"><i style="width:0"></i></div></header>
-<div class="wrapx">
-  <p class="eyebrow">Recon</p>
-  <h1>All lessons</h1>
-  <p class="deck">Three parts, ten lessons. Every lesson closes with a Knowledge Check.</p>
-  <div class="idxbar"><span><b id="ixDone">0</b> of 10 lessons complete</span><div class="cp-bar"><i id="ixBar"></i></div></div>
-  <div class="sum">
+<section class="hero">
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="hero-in">
+    <p class="eyebrow">Recon &middot; Tier One</p>
+    <h1>All lessons</h1>
+    <p class="deck">Three parts, ten lessons. Every lesson closes with a Knowledge Check.</p>
+    <div class="sum">
     <div><b>3</b><small>Parts</small></div><div><b>10</b><small>Lessons</small></div>
     <div><b>63</b><small>Questions</small></div><div><b>ECF</b><small>Certification</small></div>
   </div>
-  <h2>Part One</h2><div class='ltable'><a class='lrow' href='1-1-1.html'><span class='lc'>1.1.1</span><span class='lt'>What Is a Market Cycle</span><span class='lm'>12 min</span><span class='lq'>7</span></a><a class='lrow' href='1-1-2.html'><span class='lc'>1.1.2</span><span class='lt'>Introduction to The Four Phases</span><span class='lm'>19 min</span><span class='lq'>7</span></a><a class='lrow' href='1-1-3.html'><span class='lc'>1.1.3</span><span class='lt'>The Big 3</span><span class='lm'>4 min</span><span class='lq'>7</span></a><a class='lrow' href='1-2.html'><span class='lc'>1.2</span><span class='lt'>The Dynamic Duo</span><span class='lm'>3 min</span><span class='lq'>7</span></a></div><h2>Part Two</h2><div class='ltable'><a class='lrow' href='1-3-1.html'><span class='lc'>1.3.1</span><span class='lt'>The Recovery Phase</span><span class='lm'>66 min</span><span class='lq'>7</span></a><a class='lrow' href='1-3-2.html'><span class='lc'>1.3.2</span><span class='lt'>The Expansion Phase</span><span class='lm'>45 min</span><span class='lq'>7</span></a><a class='lrow' href='1-4-1.html'><span class='lc'>1.4.1</span><span class='lt'>The Hypersupply Phase</span><span class='lm'>43 min</span><span class='lq'>7</span></a><a class='lrow' href='1-4-2.html'><span class='lc'>1.4.2</span><span class='lt'>The Contraction Phase</span><span class='lm'>54 min</span><span class='lq'>7</span></a></div><h2>Part Three</h2><div class='ltable'><a class='lrow' href='1-5.html'><span class='lc'>1.5</span><span class='lt'>The Phase Transitions</span><span class='lm'>13 min</span><span class='lq'>7</span></a><a class='lrow' href='1-6.html'><span class='lc'>1.6</span><span class='lt'>The Bridge</span><span class='lm'>18 min</span><span class='lq'>&mdash;</span></a></div>
+    <div class="idxbar"><span><b id="ixDone">0</b> of 10 lessons complete</span><div class="cp-bar"><i id="ixBar"></i></div></div>
+  </div>
+</section>
+
+<div class="wrapx">
+<h2>Part One</h2><div class='ltable'><a class='lrow' href='1-1-1.html'><span class='lc'>1.1.1</span><span class='lt'>What Is a Market Cycle</span><span class='lm'>12 min</span><span class='lq'>7</span></a><a class='lrow' href='1-1-2.html'><span class='lc'>1.1.2</span><span class='lt'>Introduction to The Four Phases</span><span class='lm'>19 min</span><span class='lq'>7</span></a><a class='lrow' href='1-1-3.html'><span class='lc'>1.1.3</span><span class='lt'>The Big 3</span><span class='lm'>4 min</span><span class='lq'>7</span></a><a class='lrow' href='1-2.html'><span class='lc'>1.2</span><span class='lt'>The Dynamic Duo</span><span class='lm'>3 min</span><span class='lq'>7</span></a></div><h2>Part Two</h2><div class='ltable'><a class='lrow' href='1-3-1.html'><span class='lc'>1.3.1</span><span class='lt'>The Recovery Phase</span><span class='lm'>66 min</span><span class='lq'>7</span></a><a class='lrow' href='1-3-2.html'><span class='lc'>1.3.2</span><span class='lt'>The Expansion Phase</span><span class='lm'>45 min</span><span class='lq'>7</span></a><a class='lrow' href='1-4-1.html'><span class='lc'>1.4.1</span><span class='lt'>The Hypersupply Phase</span><span class='lm'>43 min</span><span class='lq'>7</span></a><a class='lrow' href='1-4-2.html'><span class='lc'>1.4.2</span><span class='lt'>The Contraction Phase</span><span class='lm'>54 min</span><span class='lq'>7</span></a></div><h2>Part Three</h2><div class='ltable'><a class='lrow' href='1-5.html'><span class='lc'>1.5</span><span class='lt'>The Phase Transitions</span><span class='lm'>13 min</span><span class='lq'>7</span></a><a class='lrow' href='1-6.html'><span class='lc'>1.6</span><span class='lt'>The Bridge</span><span class='lm'>18 min</span><span class='lq'>&mdash;</span></a></div>
 </div>
 <footer class="lfoot"><div class="lfoot-in">
   <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
