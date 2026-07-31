@@ -34,7 +34,9 @@ a{color:var(--gold)}
 
 
 /* lesson hero — inverted forest band */
-.hero{background:var(--deep);border-bottom:1px solid rgba(255,255,255,.10);position:relative;overflow:hidden}
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
 .hero:before{content:"";position:absolute;inset:0;pointer-events:none;
  background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
 .hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none}
@@ -134,12 +136,19 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 .kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
 
 /* footer nav */
-.lnav{width:min(680px,92vw);margin:0 auto;padding:40px 0 70px;display:flex;justify-content:space-between;gap:16px}
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
 .lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
- text-decoration:none;color:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 20px;
- background:var(--panel);transition:all .18s;max-width:46%}
-.lnav a:hover{border-color:var(--amber);color:var(--ink)}
-.lnav a span{display:block;font-family:var(--body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:5px}
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
 .lnav .sp{flex:1}
 @media(max-width:640px){article p{font-size:1.04rem}}
 .rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
@@ -484,10 +493,10 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <h2>RECON TIER 1 COMPLETE • ECF CERTIFICATION EARNED • WHEN > HOW</h2>
 <p>© 2026 Benjamin Inman. All rights reserved. • Econiq • The Recon Workbook • Tier 1 Capstone • v1.0</p></div>
 
-<nav class="lnav">
+<div class="navband"><nav class="lnav">
   <a href="1-6.html">&larr; Previous<span>The Bridge</span></a>
   <a href="index.html" style="text-align:right">Finish &rarr;<span>All lessons</span></a>
-</nav>
+</nav></div>
 
 <footer class="lfoot"><div class="lfoot-in">
   <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
