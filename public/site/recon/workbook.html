@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Recon Capstone Workbook</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#12301F;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);border-bottom:1px solid rgba(255,255,255,.10);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.16), transparent 62%)}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.20;pointer-events:none}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.lnav{width:min(680px,92vw);margin:0 auto;padding:40px 0 70px;display:flex;justify-content:space-between;gap:16px}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 20px;
+ background:var(--panel);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:var(--amber);color:var(--ink)}
+.lnav a span{display:block;font-family:var(--body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:5px}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.wb{width:min(760px,92vw);margin:0 auto;padding:8px 0 40px}
+.wb h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;margin:46px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+.wb p{font-family:var(--ed);font-size:1.06rem;line-height:1.72;margin:0 0 20px}
+.wb .em{font-family:var(--ed);font-style:italic;color:var(--soft);font-size:1.06rem;margin:0 0 22px}
+.wb li{font-family:var(--ed);font-size:1.03rem;line-height:1.7;margin:0 0 12px;list-style:none;padding-left:20px;position:relative}
+.wb li:before{content:"";position:absolute;left:0;top:14px;width:8px;height:1px;background:var(--amber)}
+.partmark{background:var(--deep);color:#D9B25E;font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+ text-transform:uppercase;padding:9px 16px;border-radius:3px;display:inline-block;margin:56px 0 4px}
+.ex{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:34px 0 4px;background:var(--panel)}
+.ex-h{display:grid;grid-template-columns:56px 1fr;align-items:center;background:var(--well);border-bottom:1px solid var(--line)}
+.ex-h .n{font-family:var(--mono);font-size:15px;color:var(--amber);text-align:center;padding:18px 0}
+.ex-h .t{padding:16px 20px 16px 0}
+.ex-h .t b{font-family:var(--disp);font-weight:600;font-size:1.06rem;display:block}
+.ex-h .t span{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);display:block;margin-top:5px}
+.box{background:var(--well);border-left:2px solid var(--olive);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:22px 0}
+.box em,.box{font-family:var(--ed);font-size:1rem;line-height:1.68;color:var(--ink)}
+.prompt{font-family:var(--disp);font-weight:500;font-size:.99rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.fieldwrap{position:relative;margin:0 0 8px}
+.fieldwrap textarea{width:100%;min-height:120px;background:var(--paper);border:1px solid var(--dim);
+ border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;
+ color:var(--ink);resize:vertical}
+.fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+.fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;
+ letter-spacing:.1em;color:var(--dim);pointer-events:none}
+.wbtable{width:100%;border-collapse:collapse;margin:24px 0;font-size:.93rem}
+.wbtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:500}
+.wbtable td{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--soft);vertical-align:top}
+.wbbar{position:sticky;top:47px;z-index:55;background:rgba(242,240,235,.96);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--line)}
+.wbbar-in{width:min(760px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:16px;padding:11px 0;flex-wrap:wrap}
+.wbstat{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.wbstat b{color:var(--amber)}
+.wbacts{display:flex;gap:8px}
+.wbbtn{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;
+ border-radius:var(--r);border:1px solid var(--dim);background:var(--paper);color:var(--soft);cursor:pointer}
+.wbbtn:hover{border-color:var(--amber);color:var(--ink)}
+.wbbtn.pri{background:var(--amber);border-color:var(--amber);color:var(--amber-txt)}
+@media print{.rbar,.wbbar,.lnav,.cpanel{display:none}.fieldwrap textarea{border:1px solid #999;min-height:0}}
+</style></head>
+<body class="no-rail">
+<header class="rbar"><div class="rbar-in">
+  <a class="rmark" href="index.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+  <span class="rmeta">Recon &middot; Capstone</span>
+  <a class="rexit" href="index.html">All lessons</a>
+</div><div class="rprog"><i id="pg"></i></div></header>
+
+<section class="hero">
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+    <span class="partchip">Capstone</span>
+    <p class="eyebrow">End of course &middot; ECF certification</p>
+    <h1>The Recon Workbook</h1>
+    <p class="deck">Synthesis, application, and the capstone thesis.</p>
+    <div class="leadmeta"><span><b>5</b> parts</span><span><b>16</b> exercises</span><span><b>76</b> responses</span><span><b>4&ndash;8</b> hrs</span></div>
+  </div>
+</section>
+
+<div class="wbbar"><div class="wbbar-in">
+  <span class="wbstat"><b id="wbDone">0</b> of 76 answered &middot; <b id="wbWords">0</b> words</span>
+  <span class="wbacts">
+    <button class="wbbtn" id="wbSave">Saved automatically</button>
+    <button class="wbbtn" id="wbExport">Export</button>
+    <button class="wbbtn pri" id="wbPrint">Print / PDF</button>
+  </span>
+</div></div>
+
+<div class="wb"><h2>The Recon Workbook</h2>
+<p class='em'><em>Synthesis, Application, and the Capstone Thesis</em></p>
+<p class='em'><em>“The work that produces the operator. Take it seriously, and the operator you become will reflect the seriousness of the work.”</em></p>
+<h2>Welcome to the Workbook</h2>
+<p>You have completed the six modules of Recon Tier 1. You have absorbed new analytical vocabulary, examined the four phases of the multifamily cycle, studied the historical patterns that recur across decades, understood the economic forces that drive cyclical behavior, learned to recognize phase transitions in their early stages, and produced your Personal Bridge Document mapping your prior education across the cycle lens.</p>
+<p>This Workbook is the culminating instrument of Recon. It does work that no individual module Knowledge Check could do: it tests your ability to integrate concepts across the full curriculum, apply cycle-aware thinking to realistic multifamily scenarios, and produce a capstone thesis that demonstrates the synthesis capability cycle-aware operators need.</p>
+<p>The Workbook is also the second substantial artifact you will produce in Recon. Your Personal Bridge Document captures your own multifamily methodology integrated through the cycle lens. The completed Workbook demonstrates your synthesis capability applied to scenarios that approximate real multifamily decisions. Together, these two artifacts serve as visible evidence—in your own writing—that the methodology has produced operational capability.</p>
+<h2>How to Engage With the Workbook</h2>
+<p>The Workbook requires 4–8 hours of focused work, ideally completed across two or three sessions rather than in a single sitting. Engagement principles that will produce the strongest outcomes:</p>
+<li>Complete sections in order. The Workbook builds from foundation synthesis through phase recognition through practice area application to the capstone scenario. Earlier sections develop the analytical muscle that later sections require.</li>
+<li>Write substantively, not minimally. The answer spaces are sized for genuine analytical engagement. Brief one-line responses produce thin Workbook completions that don’t reflect synthesis capability. Operators who treat the Workbook seriously produce documents that become reference material for years.</li>
+<li>Reference back to module materials. The Workbook tests integration, not memorization. If you find yourself uncertain about a concept while completing an exercise, return to the relevant module material rather than guessing.</li>
+<li>Engage with the capstone scenario seriously. Part 4—the Capstone Scenario—produces the most substantial deliverable in the Workbook. Plan to spend 1.5–2.5 hours on this section alone.</li>
+<p>The Workbook does not have a passing score in the conventional sense. It produces a deliverable that demonstrates your synthesis capability. Operators who engage seriously produce strong deliverables. The Workbook reflects what you put into it.</p>
+<p class='em'><em>This is the proof artifact. The depth of your engagement determines what it proves.</em></p>
+<h2>Workbook Structure at a Glance</h2>
+<table class='wbtable'><thead><tr><th>Part</th><th>Title</th><th>Exercises</th><th>Est. Time</th></tr></thead><tbody><tr><td>Part 1</td><td>Foundation Synthesis</td><td>1–4</td><td>45–60 min</td></tr><tr><td>Part 2</td><td>Phase Recognition Practice</td><td>5–7</td><td>60–90 min</td></tr><tr><td>Part 3</td><td>Practice Area Application</td><td>8–12</td><td>60–90 min</td></tr><tr><td>Part 4</td><td>The Capstone Scenario</td><td>Sections 1–8</td><td>90–150 min</td></tr><tr><td>Part 5</td><td>Personal Reflection</td><td>13–16</td><td>30–45 min</td></tr></tbody></table>
+<div class='partmark'>PART 1 OF 5</div>
+<h2>Foundation Synthesis</h2>
+<p class='em'><em>Integrating Concepts <strong>From</strong> Modules 1.1 Through 1.4</em></p>
+<p>Part 1 verifies your ability to integrate the foundational concepts from the first four modules. The exercises require synthesis across modules rather than isolated mastery of any single module’s content.</p>
+<div class='ex'><div class='ex-h'><div class='n'>1</div><div class='t'><b>The Structural Mechanics Synthesis</b><span>Module 1.1 • Module 1.4</span></div></div></div>
+<p>Module 1.1 introduced four structural mechanics that drive cyclical behavior in capital-intensive markets like multifamily real estate. Module 1.4 deepened the explanation of how these mechanics operate. In your own words, describe how each mechanic contributes to the cyclical pattern, and explain why these mechanics together produce both the upside momentum of expansion and the downside momentum of contraction rather than smooth equilibrium-seeking behavior.</p>
+<p class='prompt'><strong>Capital flow dynamics:</strong></p>
+<div class='fieldwrap'><textarea id='f1' data-f='f1' placeholder='Your answer…'></textarea><span class='wc' id='wc-f1'>0 words</span></div>
+<p class='prompt'><strong>Supply lags:</strong></p>
+<div class='fieldwrap'><textarea id='f2' data-f='f2' placeholder='Your answer…'></textarea><span class='wc' id='wc-f2'>0 words</span></div>
+<p class='prompt'><strong>Leverage and credit cycles:</strong></p>
+<div class='fieldwrap'><textarea id='f3' data-f='f3' placeholder='Your answer…'></textarea><span class='wc' id='wc-f3'>0 words</span></div>
+<p class='prompt'><strong>Behavioral feedback loops:</strong></p>
+<div class='fieldwrap'><textarea id='f4' data-f='f4' placeholder='Your answer…'></textarea><span class='wc' id='wc-f4'>0 words</span></div>
+<p class='prompt'><strong>How they operate together — Why do these four mechanics produce overshooting in both directions rather than smooth correction?</strong></p>
+<div class='fieldwrap'><textarea id='f5' data-f='f5' placeholder='Your answer…'></textarea><span class='wc' id='wc-f5'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>2</div><div class='t'><b>Cycles vs. Volatility Distinction</b><span>Module 1.1</span></div></div></div>
+<p>Module 1.1 established that cyclical movement and ordinary market volatility are structurally different and require different analytical postures. For each of the following observations, classify it as likely volatility, likely cyclical, or genuinely ambiguous—and briefly explain your reasoning.</p>
+<p class='prompt'><strong>(a) Cap rates in your primary submarket fluctuated 25 basis points across the most recent quarter. Classification + Reasoning:</strong></p>
+<div class='fieldwrap'><textarea id='f6' data-f='f6' placeholder='Your answer…'></textarea><span class='wc' id='wc-f6'>0 words</span></div>
+<p class='prompt'><strong>(b) National multifamily transaction volume has declined for six consecutive quarters from peak levels. Classification + Reasoning:</strong></p>
+<div class='fieldwrap'><textarea id='f7' data-f='f7' placeholder='Your answer…'></textarea><span class='wc' id='wc-f7'>0 words</span></div>
+<p class='prompt'><strong>(c) Days on market in your submarket extended from 32 days to 38 days over the past month. Classification + Reasoning:</strong></p>
+<div class='fieldwrap'><textarea id='f8' data-f='f8' placeholder='Your answer…'></textarea><span class='wc' id='wc-f8'>0 words</span></div>
+<p class='prompt'><strong>(d) Concession activity in your submarket has expanded steadily over the past nine months, from one month free to two-to-three months free. Classification + Reasoning:</strong></p>
+<div class='fieldwrap'><textarea id='f9' data-f='f9' placeholder='Your answer…'></textarea><span class='wc' id='wc-f9'>0 words</span></div>
+<p class='prompt'><strong>(e) The Federal Reserve raised the federal funds rate by 25 basis points at its most recent meeting after holding rates unchanged at the prior five meetings. Classification + Reasoning:</strong></p>
+<div class='fieldwrap'><textarea id='f10' data-f='f10' placeholder='Your answer…'></textarea><span class='wc' id='wc-f10'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>3</div><div class='t'><b>Phase Identification Across Multiple Markets</b><span>Module 1.2</span></div></div></div>
+<p>Module 1.2 introduced the four phases of the multifamily cycle. For each market profile below, identify which phase the market is most likely in and explain your reasoning by referencing specific characteristics of that phase.</p>
+<h2>Market A — Sunbelt Metro</h2>
+<div class='box'><em>Cap rates have compressed 175 basis points over the past four years. Construction starts hit a multi-decade high last quarter. Capital partners are deploying aggressively, with debt being extended on the most favorable terms in over a decade. Rent growth has averaged 9–12% annually for three consecutive years. New supply pipeline shows 8% inventory addition coming over the next 24 months. Lender risk perception remains relaxed.</em></div>
+<p class='prompt'><strong>Phase identification:</strong></p>
+<div class='fieldwrap'><textarea id='f11' data-f='f11' placeholder='Your answer…'></textarea><span class='wc' id='wc-f11'>0 words</span></div>
+<p class='prompt'><strong>Specific characteristics that justify your identification:</strong></p>
+<div class='fieldwrap'><textarea id='f12' data-f='f12' placeholder='Your answer…'></textarea><span class='wc' id='wc-f12'>0 words</span></div>
+<h2>Market B — Secondary Market</h2>
+<div class='box'><em>Cap rates have stabilized after a multi-year decline from peak levels. Vacancy remains elevated relative to historical norms but is improving for the third consecutive quarter. Rent growth has turned modestly positive after multiple quarters of decline. Capital partners are returning selectively, primarily to quality assets at favorable basis. Distressed transactions still occur but are less common than 12 months ago. Construction starts <strong>remain</strong> depressed.</em></div>
+<p class='prompt'><strong>Phase identification:</strong></p>
+<div class='fieldwrap'><textarea id='f13' data-f='f13' placeholder='Your answer…'></textarea><span class='wc' id='wc-f13'>0 words</span></div>
+<p class='prompt'><strong>Specific characteristics that justify your identification:</strong></p>
+<div class='fieldwrap'><textarea id='f14' data-f='f14' placeholder='Your answer…'></textarea><span class='wc' id='wc-f14'>0 words</span></div>
+<h2>Market C — Tertiary Market</h2>
+<div class='box'><em>Transaction volume has declined for five consecutive quarters from peak levels. Cap rates are widening from compressed peak levels. Days on market have extended significantly. Concessions have expanded across the competitive set. New construction completions are still delivering into the market from prior pipeline decisions. Capital partners are pulling back from new deployment. Lender posture has shifted toward selectivity. Foreclosure activity remains low but has begun emerging.</em></div>
+<p class='prompt'><strong>Phase identification:</strong></p>
+<div class='fieldwrap'><textarea id='f15' data-f='f15' placeholder='Your answer…'></textarea><span class='wc' id='wc-f15'>0 words</span></div>
+<p class='prompt'><strong>Specific characteristics that justify your identification:</strong></p>
+<div class='fieldwrap'><textarea id='f16' data-f='f16' placeholder='Your answer…'></textarea><span class='wc' id='wc-f16'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>4</div><div class='t'><b>Historical Pattern Recognition</b><span>Module 1.3</span></div></div></div>
+<p>Module 1.3 examined the history of multifamily market cycles and what contemporary operators can learn from past cycle behavior. Choose one specific historical multifamily cycle from the past 30 years that you have studied or experienced. Identify what about that cycle’s transition pattern would inform an operator analyzing current conditions, and explain what would be naive about assuming the current cycle will replicate the past cycle exactly.</p>
+<p class='prompt'><strong>Historical cycle reference:</strong></p>
+<div class='fieldwrap'><textarea id='f17' data-f='f17' placeholder='Your answer…'></textarea><span class='wc' id='wc-f17'>0 words</span></div>
+<p class='prompt'><strong>What about that cycle’s transition pattern is informative for current analysis:</strong></p>
+<div class='fieldwrap'><textarea id='f18' data-f='f18' placeholder='Your answer…'></textarea><span class='wc' id='wc-f18'>0 words</span></div>
+<p class='prompt'><strong>What would be naive about assuming current conditions will replicate past conditions exactly:</strong></p>
+<div class='fieldwrap'><textarea id='f19' data-f='f19' placeholder='Your answer…'></textarea><span class='wc' id='wc-f19'>0 words</span></div>
+<div class='partmark'>PART 2 OF 5</div>
+<h2>Phase Recognition Practice</h2>
+<p class='em'><em>Reading Multi-Signal Scenarios <strong>With</strong> Discipline</em></p>
+<p>Part 2 develops your phase recognition discipline through three multi-signal scenarios. Each scenario presents a constellation of indicators across multiple analytical layers. Your work is to diagnose phase position, justify your reasoning with specific evidence, and identify what additional information would strengthen or weaken your conclusion.</p>
+<p>These scenarios approximate the analytical work cycle-aware operators do continuously. The discipline is reading multiple signals together rather than reading any single signal in isolation.</p>
+<div class='ex'><div class='ex-h'><div class='n'>5</div><div class='t'><b>Scenario A — Multi-Layer Signal Reading</b><span>Module 1.5 • Timing-lag hierarchy • Three-layer reading</span></div></div></div>
+<div class='box'><em>You operate a 3,200-unit multifamily portfolio concentrated in three Southeast metros. Over the past 18 months, you have observed: the Federal Reserve has signaled tighter monetary conditions and raised rates four times; the 10-Year Treasury yield has risen 175 basis points; the yield curve has flattened to near-inversion; national multifamily transaction volume has declined for three consecutive quarters; capital partners across your network have shifted language from 'aggressive' to 'selective'; permit velocity in your three submarkets has decelerated meaningfully; construction starts have plateaued. However, your operational metrics remain strong—absorption is healthy, concessions remain modest, days on market are stable, and rent growth continues at 6–8%. Your acquisition committee meets in two weeks.</em></div>
+<p class='prompt'><strong>Phase diagnosis — Which phase is the market most likely in, and what specific stage of that phase?</strong></p>
+<div class='fieldwrap'><textarea id='f20' data-f='f20' placeholder='Your answer…'></textarea><span class='wc' id='wc-f20'>0 words</span></div>
+<p class='prompt'><strong>Reasoning by layer — What specific evidence at the macroeconomic, national multifamily, and submarket layers supports your diagnosis?</strong></p>
+<div class='fieldwrap'><textarea id='f21' data-f='f21' placeholder='Your answer…'></textarea><span class='wc' id='wc-f21'>0 words</span></div>
+<p class='prompt'><strong>The operational disconnect — Why are your operational metrics still strong despite the upstream shifts? What does the timing-lag hierarchy from Module 1.5 tell you about when operational metrics would likely reflect what you’re seeing upstream?</strong></p>
+<div class='fieldwrap'><textarea id='f22' data-f='f22' placeholder='Your answer…'></textarea><span class='wc' id='wc-f22'>0 words</span></div>
+<p class='prompt'><strong>Strategic posture — What strategic posture should your acquisition committee consider? What specific decisions should be made versus deferred?</strong></p>
+<div class='fieldwrap'><textarea id='f23' data-f='f23' placeholder='Your answer…'></textarea><span class='wc' id='wc-f23'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>6</div><div class='t'><b>Scenario B — Divergent Signals</b><span>Module 1.5 • Divergence patterns • Submarket-level reading</span></div></div></div>
+<div class='box'>*You manage a 1,500-unit value-add portfolio in two Midwest metros. Over the past 12 months: macroeconomic conditions have stabilized after a period of significant volatility; rates have plateaued at **elevated levels; national multifamily transaction volume has begun recovering modestly; capital partners are cautiously returning to quality opportunities. However, your specific submarkets show divergent patterns—Submarket 1 is showing concession expansion, lengthening days on market, and softening absorption; Submarket 2 is showing concession compression, shortening days on market, and accelerating absorption. The two submarkets are roughly 40 miles apart in the same metro.*</div>
+<p class='prompt'><strong>Reading the divergence — What does it tell you when the macroeconomic and national multifamily layers point in one direction while your submarkets point in different directions? Which of the three divergence patterns from Module 1.5 best describes what you’re seeing?</strong></p>
+<div class='fieldwrap'><textarea id='f24' data-f='f24' placeholder='Your answer…'></textarea><span class='wc' id='wc-f24'>0 words</span></div>
+<p class='prompt'><strong>Submarket-specific phase identification — Identify the most likely cycle position for each submarket and explain what local factors might be producing the divergence.</strong></p>
+<div class='fieldwrap'><textarea id='f25' data-f='f25' placeholder='Your answer…'></textarea><span class='wc' id='wc-f25'>0 words</span></div>
+<p class='prompt'><strong>Strategic implications — Should you treat the two submarkets identically or differently? What does this scenario teach about why the Onion Framework’s submarket layer matters even when macroeconomic and national signals are clear?</strong></p>
+<div class='fieldwrap'><textarea id='f26' data-f='f26' placeholder='Your answer…'></textarea><span class='wc' id='wc-f26'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>7</div><div class='t'><b>Scenario C — Transition Detection</b><span>Module 1.5 • Five-stage progression • Leading vs. trailing</span></div></div></div>
+<div class='box'><em>You operate a single-asset 280-unit Class B property in a growth market. Over the past two quarters, you have observed at the property level: lease velocity has slowed approximately 15% from prior trend; one competing property in your competitive set has begun offering two months free where they previously offered one month; your property managers report increased prospect activity but lower close rates; renewal retention remains strong at 65%. At the broader market level: capital markets sentiment has shifted toward selectivity; permit velocity in the submarket has decelerated; construction starts <strong>remain</strong> elevated but are no longer accelerating; new deliveries from prior pipeline are arriving at high pace. Macroeconomic conditions remain mixed.</em></div>
+<p class='prompt'><strong>Transition detection — What stage of phase transition does this signal pattern most likely indicate? Reference the five-stage progression from Module 1.5.</strong></p>
+<div class='fieldwrap'><textarea id='f27' data-f='f27' placeholder='Your answer…'></textarea><span class='wc' id='wc-f27'>0 words</span></div>
+<p class='prompt'><strong>Leading vs. trailing reading — Which of the indicators in this scenario are leading, which are coincident, and which are trailing? What does this categorization tell you about the advantage you have if you act on the leading indicators rather than waiting for trailing confirmation?</strong></p>
+<div class='fieldwrap'><textarea id='f28' data-f='f28' placeholder='Your answer…'></textarea><span class='wc' id='wc-f28'>0 words</span></div>
+<p class='prompt'><strong>Operational response — What specific operational adjustments should you consider at this single-asset level? What strategic adjustments at the portfolio level would the same signal pattern justify?</strong></p>
+<div class='fieldwrap'><textarea id='f29' data-f='f29' placeholder='Your answer…'></textarea><span class='wc' id='wc-f29'>0 words</span></div>
+<div class='partmark'>PART 3 OF 5</div>
+<h2>Practice Area Application</h2>
+<p class='em'><em>Cycle Awareness Across the Five Practice Areas</em></p>
+<p>Part 3 reinforces The Bridge work from Module 1.6. Each exercise presents a specific operator situation in one of the five practice areas—acquisitions, operations, value-add, syndication, asset management—and asks you to apply cycle-aware thinking with phase-specific calibration.</p>
+<p>These exercises test the recalibration model that defines The Bridge: prior education isn’t replaced by cycle awareness—it’s recalibrated by it. Your responses should reflect both the existing frameworks you have internalized and the phase-specific recalibration that makes those frameworks cycle-aware.</p>
+<div class='ex'><div class='ex-h'><div class='n'>8</div><div class='t'><b>Acquisitions — Phase-Specific Underwriting Discipline</b><span>Module 1.6 • Acquisitions through the cycle lens</span></div></div></div>
+<div class='box'><em>You are evaluating two potential acquisitions, both Class B garden-style properties in your target submarket profile. Property A is being marketed during conditions you have identified as late Expansion approaching Peak—pricing is at multi-year highs, cap rates are at compression lows, capital is competitive, lenders are extending favorable terms. Property B is being marketed during conditions you have identified as early Recovery—pricing has corrected from peak by approximately 15–20%, cap rates have widened, capital partners are cautious, and lender posture is selective.</em></div>
+<p class='prompt'><strong>Recalibration of underwriting assumptions — Identify three specific underwriting assumptions you would calibrate differently for Property A versus Property </strong><strong>B, and</strong><strong> explain why each calibration is phase-appropriate.</strong></p>
+<div class='fieldwrap'><textarea id='f30' data-f='f30' placeholder='Your answer…'></textarea><span class='wc' id='wc-f30'>0 words</span></div>
+<p class='prompt'><strong>Capital structure decisions — How would you approach capital structure differently for the two properties? What specific debt terms, leverage levels, and reserve policies would differ?</strong></p>
+<div class='fieldwrap'><textarea id='f31' data-f='f31' placeholder='Your answer…'></textarea><span class='wc' id='wc-f31'>0 words</span></div>
+<p class='prompt'><strong>Selectivity discipline — Under what specific conditions would you walk away from Property A rather than acquire? What assumptions would the asking price require to justify acquisition?</strong></p>
+<div class='fieldwrap'><textarea id='f32' data-f='f32' placeholder='Your answer…'></textarea><span class='wc' id='wc-f32'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>9</div><div class='t'><b>Operations — Phase-Calibrated Operational Decisions</b><span>Module 1.6 • Operations through the cycle lens</span></div></div></div>
+<div class='box'><em>You are advising your operations team on rent strategy and concession deployment for the upcoming leasing season. Your portfolio is concentrated in markets you have identified as transitioning from late Expansion into early Peak conditions. Operating fundamentals remain strong—occupancy is high, rent growth has been robust—but you are seeing the early-stage signals (capital markets sentiment shift, permit velocity deceleration) that suggest the transition is forming.</em></div>
+<p class='prompt'><strong>Rent strategy calibration — How should your rent strategy reflect both current strong operational conditions and forming transition signals? What specific approach to renewal rents, new lease pricing, and revenue management would be appropriate?</strong></p>
+<div class='fieldwrap'><textarea id='f33' data-f='f33' placeholder='Your answer…'></textarea><span class='wc' id='wc-f33'>0 words</span></div>
+<p class='prompt'><strong>Retention investment posture — What specific retention investments would you prioritize now while operational conditions still allow for proactive deployment?</strong></p>
+<div class='fieldwrap'><textarea id='f34' data-f='f34' placeholder='Your answer…'></textarea><span class='wc' id='wc-f34'>0 words</span></div>
+<p class='prompt'><strong>Operational discipline against momentum-extrapolation — What specific risks do you face if your operations team extrapolates current strong conditions indefinitely? How do you maintain discipline while still capturing the momentum that exists now?</strong></p>
+<div class='fieldwrap'><textarea id='f35' data-f='f35' placeholder='Your answer…'></textarea><span class='wc' id='wc-f35'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>10</div><div class='t'><b>Value-Add — Phase-Specific Deployment Decisions</b><span>Module 1.6 • Value-add through the cycle lens</span></div></div></div>
+<div class='box'><em>You operate a value-add platform that has historically deployed across multiple cycle phases. You are evaluating whether to initiate a new value-add project in the current cycle environment. Conditions: construction labor and materials costs are at multi-year highs; achievable rent premiums for quality renovations have been strong but show early signs of moderating; capital partners remain willing to fund value-add but are scrutinizing more carefully than in prior years; lender posture toward heavy renovation strategies has tightened modestly.</em></div>
+<p class='prompt'><strong>Phase position assessment — What does this conditions profile suggest about the current cycle phase? What are the implications for value-add deployment specifically?</strong></p>
+<div class='fieldwrap'><textarea id='f36' data-f='f36' placeholder='Your answer…'></textarea><span class='wc' id='wc-f36'>0 words</span></div>
+<p class='prompt'><strong>Recalibration of value-add fundamentals — Apply the four diagnostic questions from Module 1.6 to a specific value-add framework you have used in prior projects. Which phase did you learn it in, in which phases does it still apply, what does it miss when applied outside that phase, and what recalibration is needed?</strong></p>
+<div class='fieldwrap'><textarea id='f37' data-f='f37' placeholder='Your answer…'></textarea><span class='wc' id='wc-f37'>0 words</span></div>
+<p class='prompt'><strong>Deployment decision — Would you initiate a new value-add project under current conditions? If yes, what specific structural protections would you build in? If no, what specific signal change would shift your decision?</strong></p>
+<div class='fieldwrap'><textarea id='f38' data-f='f38' placeholder='Your answer…'></textarea><span class='wc' id='wc-f38'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>11</div><div class='t'><b>Syndication — Cycle-Aware LP Communication and Offering Discipline</b><span>Module 1.6 • Syndication through the cycle lens</span></div></div></div>
+<div class='box'><em>You are preparing an offering memorandum for a 200-unit value-add acquisition. Capital partners are eager to deploy and have indicated willingness to oversubscribe the offering. Industry peers are raising aggressively with offering documents projecting strong continued growth. You have identified current conditions as late Expansion approaching Peak—strong operational fundamentals masking early-stage transition signals at the macroeconomic and capital markets layers.</em></div>
+<p class='prompt'><strong>Cycle position in the offering memorandum — What specific cycle-related disclosures would you include in this offering memorandum that less cycle-aware peers would likely omit?</strong></p>
+<div class='fieldwrap'><textarea id='f39' data-f='f39' placeholder='Your answer…'></textarea><span class='wc' id='wc-f39'>0 words</span></div>
+<p class='prompt'><strong>Underwriting assumptions and exit cap rate — How would you calibrate hold-period assumptions and exit cap rate projections to reflect the possibility of Peak transitioning to Contraction during the hold period? What scenario modeling would you build in?</strong></p>
+<div class='fieldwrap'><textarea id='f40' data-f='f40' placeholder='Your answer…'></textarea><span class='wc' id='wc-f40'>0 words</span></div>
+<p class='prompt'><strong>LP conversation discipline — Some LPs will pressure you to project Expansion-phase rent growth into the full hold period because that’s what produces the most attractive return projections. How do you maintain offering discipline while still successfully raising capital in a competitive environment?</strong></p>
+<div class='fieldwrap'><textarea id='f41' data-f='f41' placeholder='Your answer…'></textarea><span class='wc' id='wc-f41'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>12</div><div class='t'><b>Asset Management — Phase-Specific Portfolio Oversight</b><span>Module 1.6 • Asset management through the cycle lens</span></div></div></div>
+<div class='box'><em>You serve as the asset manager for a 6,000-unit multifamily portfolio across multiple operating partners and property management companies. Conditions you have identified at the macroeconomic level suggest a Peak transition is forming, with cycle-aware analysis indicating Contraction conditions could emerge within 12–24 months. Your property management partners report continued strong performance and resist any operational adjustments that would reduce near-term metrics.</em></div>
+<p class='prompt'><strong>Asset management role calibration — Module 1.6 described how the asset management role shifts across phases: architect in Recovery, governor in Expansion, risk interceptor in Peak, stabilizer in Contraction. Which role description fits the current phase, and what specific behaviors does that role require?</strong></p>
+<div class='fieldwrap'><textarea id='f42' data-f='f42' placeholder='Your answer…'></textarea><span class='wc' id='wc-f42'>0 words</span></div>
+<p class='prompt'><strong>Intercepting reactive responses — What specific reactive responses are you most likely to see from property managers as Peak conditions develop, and how do you intercept them before they become policy that compromises long-term portfolio positioning?</strong></p>
+<div class='fieldwrap'><textarea id='f43' data-f='f43' placeholder='Your answer…'></textarea><span class='wc' id='wc-f43'>0 words</span></div>
+<p class='prompt'><strong>Portfolio-level decisions — What specific portfolio-level decisions should be made now while strong operational conditions still allow flexibility? Consider capital structure review, debt structure adjustments, capital reserve building, and disposition timing.</strong></p>
+<div class='fieldwrap'><textarea id='f44' data-f='f44' placeholder='Your answer…'></textarea><span class='wc' id='wc-f44'>0 words</span></div>
+<div class='partmark'>PART 4 OF 5</div>
+<h2>The Capstone Scenario</h2>
+<p class='em'><em>Develop a Complete Cycle-Aware Investment Thesis</em></p>
+<p>Part 4 is the culminating exercise of the Recon Workbook. You will develop a complete cycle-aware investment thesis for a detailed operator scenario—diagnosing phase position, identifying signal monitoring priorities, articulating strategic posture, planning capital deployment, calibrating capital structure, prioritizing operational decisions, and producing a 24-month action sequence.</p>
+<p>This exercise produces the most substantial deliverable in the Workbook. Plan to spend 1.5–2.5 hours on this section. Engage with the seriousness you would bring to an actual investment decision affecting your portfolio.</p>
+<p class='em'><em>This is where Recon comes together. The thesis you develop here is the most concrete demonstration of cycle-aware capability you can produce.</em></p>
+<h2>The Operator Profile</h2>
+<p>Read the full operator profile and current market conditions before beginning any of the eight thesis sections. The signal constellation described is designed to require synthesis across all layers and all modules.</p>
+<h2>Background</h2>
+<div class='box'><em>You are the principal of a multifamily sponsorship firm with 4,500 units under management across five Sunbelt metros. Your strategy has historically been value-add renovation of mid-1990s and 2000s vintage product. You have $40 million of dry powder available for deployment, an established LP base of 65 active investors, banking relationships with three primary lenders, and operational infrastructure capable of integrating 1,500–2,000 additional units over a 24-month timeline. Your team consists of a chief investment officer, a chief operating officer, two acquisitions associates, and an asset management group of four professionals.</em></div>
+<h2>Current Market Conditions</h2>
+<div class='box'><em>Macroeconomic layer: Federal Reserve has held rates steady for three quarters after a sustained tightening cycle. The 10-Year Treasury yield has stabilized at elevated levels. The yield curve remains modestly inverted but has flattened from peak inversion. Headline CPI has moderated toward target. GDP growth has slowed to roughly 1.5% annualized. National multifamily layer: Transaction volume has declined approximately 50% from peak levels. National multifamily building permits are down 35% from peak. Capital flows into multifamily have moderated significantly. Lender posture has tightened meaningfully. National multifamily fundamentals are mixed—rent growth has decelerated to low single digits, vacancy has risen modestly, concessions have expanded. Submarket layer: Significant new supply is delivering from prior pipeline decisions; concession activity has expanded substantially; days on market have lengthened; absorption has slowed; rent growth has decelerated and turned modestly negative in two of your five markets.</em></div>
+<h2>Strategic Question</h2>
+<div class='box'><em>Your acquisition committee meets in 30 days. Your LP base is asking what your strategy will be for the next 12–24 months. Your operational team needs guidance on portfolio-level priorities. Your banking relationships are inquiring about your capital deployment plans. The cycle-aware investment thesis you develop will inform every strategic decision your firm makes for the next 24 months.</em></div>
+<p class='prompt'><strong>Section 1 — Phase Diagnosis</strong></p>
+<p class='prompt'><strong>Macroeconomic layer reading:</strong></p>
+<div class='fieldwrap'><textarea id='f45' data-f='f45' placeholder='Your answer…'></textarea><span class='wc' id='wc-f45'>0 words</span></div>
+<p class='prompt'><strong>National multifamily layer reading:</strong></p>
+<div class='fieldwrap'><textarea id='f46' data-f='f46' placeholder='Your answer…'></textarea><span class='wc' id='wc-f46'>0 words</span></div>
+<p class='prompt'><strong>Submarket layer reading:</strong></p>
+<div class='fieldwrap'><textarea id='f47' data-f='f47' placeholder='Your answer…'></textarea><span class='wc' id='wc-f47'>0 words</span></div>
+<p class='prompt'><strong>Phase diagnosis with stage — Identify the current phase and the stage within that phase. Justify your conclusion by referencing the timing-lag hierarchy from Module 1.5.</strong></p>
+<div class='fieldwrap'><textarea id='f48' data-f='f48' placeholder='Your answer…'></textarea><span class='wc' id='wc-f48'>0 words</span></div>
+<p class='prompt'><strong>Section 2 — Signal Monitoring Priorities</strong></p>
+<p class='prompt'><strong>Layer 3 (macroeconomic) signals to prioritize — Which macroeconomic signals will provide the earliest indication of regime change? What specific thresholds or movements would meaningfully shift your strategic posture?</strong></p>
+<div class='fieldwrap'><textarea id='f49' data-f='f49' placeholder='Your answer…'></textarea><span class='wc' id='wc-f49'>0 words</span></div>
+<p class='prompt'><strong>Layer 2 (national multifamily) signals to prioritize — Which industry-level signals will reveal whether multifamily-specific conditions are improving, stabilizing, or deteriorating?</strong></p>
+<div class='fieldwrap'><textarea id='f50' data-f='f50' placeholder='Your answer…'></textarea><span class='wc' id='wc-f50'>0 words</span></div>
+<p class='prompt'><strong>Layer 1 (submarket) signals to prioritize — Which submarket-specific signals will provide the </strong><strong>most timely</strong><strong> operational intelligence in your five markets?</strong></p>
+<div class='fieldwrap'><textarea id='f51' data-f='f51' placeholder='Your answer…'></textarea><span class='wc' id='wc-f51'>0 words</span></div>
+<p class='prompt'><strong>Signal sequencing expectations — If conditions are transitioning from Contraction toward Recovery over the next 24 months, what sequence of signals would you expect to see, and how would you avoid mistaking volatility for genuine cyclical movement?</strong></p>
+<div class='fieldwrap'><textarea id='f52' data-f='f52' placeholder='Your answer…'></textarea><span class='wc' id='wc-f52'>0 words</span></div>
+<p class='prompt'><strong>Section 3 — Strategic Posture</strong></p>
+<p class='prompt'><strong>Overall strategic stance — How would you characterize your strategic posture in a single sentence?</strong></p>
+<div class='fieldwrap'><textarea id='f53' data-f='f53' placeholder='Your answer…'></textarea><span class='wc' id='wc-f53'>0 words</span></div>
+<p class='prompt'><strong>Justification of the strategic stance — Why is this stance appropriate for the diagnosed phase position? How does it balance asymmetric opportunity with structural risk?</strong></p>
+<div class='fieldwrap'><textarea id='f54' data-f='f54' placeholder='Your answer…'></textarea><span class='wc' id='wc-f54'>0 words</span></div>
+<p class='prompt'><strong>Conditions that would shift the strategic stance — What specific signal changes would shift your posture? Identify both conditions that would lead you to become more aggressive and conditions that would lead you to become more defensive.</strong></p>
+<div class='fieldwrap'><textarea id='f55' data-f='f55' placeholder='Your answer…'></textarea><span class='wc' id='wc-f55'>0 words</span></div>
+<p class='prompt'><strong>Section 4 — Capital Deployment Plan</strong></p>
+<p class='prompt'><strong>Deployment pacing — What pace of deployment is appropriate given current phase conditions? Justify your pacing decision by referencing the phase position you diagnosed.</strong></p>
+<div class='fieldwrap'><textarea id='f56' data-f='f56' placeholder='Your answer…'></textarea><span class='wc' id='wc-f56'>0 words</span></div>
+<p class='prompt'><strong>Deal selectivity criteria — What specific criteria will deals need to meet to justify deployment in current conditions? How do these differ from Expansion-phase criteria?</strong></p>
+<div class='fieldwrap'><textarea id='f57' data-f='f57' placeholder='Your answer…'></textarea><span class='wc' id='wc-f57'>0 words</span></div>
+<p class='prompt'><strong>Geographic allocation — Across your five Sunbelt metros, where would you concentrate deployment and where would you avoid? What submarket-level signals would inform this allocation?</strong></p>
+<div class='fieldwrap'><textarea id='f58' data-f='f58' placeholder='Your answer…'></textarea><span class='wc' id='wc-f58'>0 words</span></div>
+<p class='prompt'><strong>Reserve discipline — What capital reserves should you maintain rather than deploy? How does reserve discipline differ during the diagnosed phase from other phases?</strong></p>
+<div class='fieldwrap'><textarea id='f59' data-f='f59' placeholder='Your answer…'></textarea><span class='wc' id='wc-f59'>0 words</span></div>
+<p class='prompt'><strong>Section 5 — Capital Structure Decisions</strong></p>
+<p class='prompt'><strong>New acquisition financing — What specific debt terms, leverage levels, and structural protections will you require on new acquisitions? How does this differ from terms appropriate during other phases?</strong></p>
+<div class='fieldwrap'><textarea id='f60' data-f='f60' placeholder='Your answer…'></textarea><span class='wc' id='wc-f60'>0 words</span></div>
+<p class='prompt'><strong>Existing portfolio refinancing — Which existing assets require refinancing attention given current capital market conditions? What sequencing of refinancing decisions would protect against further deterioration?</strong></p>
+<div class='fieldwrap'><textarea id='f61' data-f='f61' placeholder='Your answer…'></textarea><span class='wc' id='wc-f61'>0 words</span></div>
+<p class='prompt'><strong>Lender relationship management — How should you manage relationships with your three primary lenders during the diagnosed phase? What conversations should you initiate now?</strong></p>
+<div class='fieldwrap'><textarea id='f62' data-f='f62' placeholder='Your answer…'></textarea><span class='wc' id='wc-f62'>0 words</span></div>
+<p class='prompt'><strong>Section 6 — Operational Priorities</strong></p>
+<p class='prompt'><strong>Top three operational priorities — What are the three most important operational priorities for your portfolio over the next 12–24 months? Why does each matter specifically </strong><strong>given</strong><strong> the diagnosed phase position?</strong></p>
+<div class='fieldwrap'><textarea id='f63' data-f='f63' placeholder='Your answer…'></textarea><span class='wc' id='wc-f63'>0 words</span></div>
+<p class='prompt'><strong>Operational discipline — What specific operational responses to current conditions would </strong><strong>actually compromise</strong><strong> long-term portfolio positioning even if they appear to defend short-term metrics?</strong></p>
+<div class='fieldwrap'><textarea id='f64' data-f='f64' placeholder='Your answer…'></textarea><span class='wc' id='wc-f64'>0 words</span></div>
+<p class='prompt'><strong>LP and stakeholder communication — How will you communicate your operational priorities to LPs, lenders, and other stakeholders? What language will you use to explain why your operational stance differs from peers?</strong></p>
+<div class='fieldwrap'><textarea id='f65' data-f='f65' placeholder='Your answer…'></textarea><span class='wc' id='wc-f65'>0 words</span></div>
+<p class='prompt'><strong>Section 7 — The 24-Month Action Sequence</strong></p>
+<p class='prompt'><strong>Months 1–6 — What specific actions will you take in the first six months? Include capital deployment decisions, operational adjustments, capital structure work, and signal monitoring milestones.</strong></p>
+<div class='fieldwrap'><textarea id='f66' data-f='f66' placeholder='Your answer…'></textarea><span class='wc' id='wc-f66'>0 words</span></div>
+<p class='prompt'><strong>Months 7–12 — How will your actions evolve in the second six months? What signal patterns would shift your trajectory, and what decisions remain consistent regardless of how signals evolve?</strong></p>
+<div class='fieldwrap'><textarea id='f67' data-f='f67' placeholder='Your answer…'></textarea><span class='wc' id='wc-f67'>0 words</span></div>
+<p class='prompt'><strong>Months 13–18 — What strategic adjustments will the third six-month window likely require? Consider both deepening Contraction and early Recovery signal emergence.</strong></p>
+<div class='fieldwrap'><textarea id='f68' data-f='f68' placeholder='Your answer…'></textarea><span class='wc' id='wc-f68'>0 words</span></div>
+<p class='prompt'><strong>Months 19–24 — What positioning will you have achieved by the end of the 24-month horizon? How will your portfolio look different from where you started?</strong></p>
+<div class='fieldwrap'><textarea id='f69' data-f='f69' placeholder='Your answer…'></textarea><span class='wc' id='wc-f69'>0 words</span></div>
+<p class='prompt'><strong>Section 8 — Thesis Summary</strong></p>
+<p class='prompt'><strong>Your Cycle-Aware Investment Thesis — Synthesize your complete investment thesis into approximately 300–500 words. This summary should be readable as a coherent strategic statement you could share with your acquisition committee, LP base, or banking partners.</strong></p>
+<div class='fieldwrap'><textarea id='f70' data-f='f70' placeholder='Your answer…'></textarea><span class='wc' id='wc-f70'>0 words</span></div>
+<div class='partmark'>PART 5 OF 5</div>
+<h2>Personal Reflection</h2>
+<p class='em'><em>Connecting the Workbook to Your Own Practice</em></p>
+<p>Part 5 connects the Workbook’s analytical work back to your own multifamily practice. These reflection prompts are open-ended—there are no “correct” answers. The work is to articulate what you have learned, what has changed in how you will operate going forward, and what you will commit to as a cycle-aware operator.</p>
+<p>These reflections, combined with your Personal Bridge Document from Module 1.6, become the operational document set you will reference as you apply cycle-aware methodology to your actual portfolio.</p>
+<div class='ex'><div class='ex-h'><div class='n'>13</div><div class='t'><b>What Has Changed in How You See Multifamily</b><span>200–400 words • Your complete perspective shift</span></div></div></div>
+<p>Describe how completing Recon has changed how you see multifamily as an asset class and an operator practice. What do you understand now that you did not understand before? What assumptions have you discarded? What capabilities do you now have that you did not have when you began?</p>
+<div class='fieldwrap'><textarea id='f71' data-f='f71' placeholder='Your answer…'></textarea><span class='wc' id='wc-f71'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>14</div><div class='t'><b>Your Greatest Calibration Gap</b><span>Your single most consequential prior-framework recalibration</span></div></div></div>
+<p>Reflect on your prior multifamily education and operational experience. Identify the single greatest calibration gap that Recon has revealed to you—the area where your existing frameworks were most heavily calibrated to specific cycle conditions and most needed phase-aware recalibration. What specifically did Recon teach you about that gap, and what will you do differently as a result?</p>
+<div class='fieldwrap'><textarea id='f72' data-f='f72' placeholder='Your answer…'></textarea><span class='wc' id='wc-f72'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>15</div><div class='t'><b>Your Cycle-Aware Commitments</b><span>Three operational commitments that will change how you actually behave</span></div></div></div>
+<p>Articulate three specific commitments you are making as a result of completing Recon. These should be operational commitments that will change how you actually behave going forward—not abstract intentions. For each commitment, identify what specifically will be different in your practice and how you will hold yourself accountable.</p>
+<p class='prompt'><strong>Commitment 1:</strong></p>
+<div class='fieldwrap'><textarea id='f73' data-f='f73' placeholder='Your answer…'></textarea><span class='wc' id='wc-f73'>0 words</span></div>
+<p class='prompt'><strong>Commitment 2:</strong></p>
+<div class='fieldwrap'><textarea id='f74' data-f='f74' placeholder='Your answer…'></textarea><span class='wc' id='wc-f74'>0 words</span></div>
+<p class='prompt'><strong>Commitment 3:</strong></p>
+<div class='fieldwrap'><textarea id='f75' data-f='f75' placeholder='Your answer…'></textarea><span class='wc' id='wc-f75'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>16</div><div class='t'><b>Where Recon Has Taken You</b><span>A final reflection on capability earned</span></div></div></div>
+<p>In a final reflection, describe where Recon has taken you. What capability do you have now that operators without cycle awareness simply cannot access? How will you continue developing that capability through deliberate practice over the years ahead? And what role will Special Ops play in that development if you choose to continue into the next tier of the methodology?</p>
+<div class='fieldwrap'><textarea id='f76' data-f='f76' placeholder='Your answer…'></textarea><span class='wc' id='wc-f76'>0 words</span></div>
+<h2>Workbook Completion</h2>
+<p>You have completed the Recon Workbook. Combined with your Personal Bridge Document from Module 1.6, you now hold two substantial artifacts that demonstrate your cycle-aware capability—one mapping your prior education across the cycle lens, the other demonstrating your synthesis ability through realistic scenarios and a complete investment thesis.</p>
+<p>These two artifacts are operational documents, not certificates. Their value is not in completion alone—their value is in what they demonstrate about your capability and what they will provide as reference material for your future operational decisions.</p>
+<p class='em'><em>The work you have done across Recon is genuine. The capabilities you have built are real. The methodology that has produced these capabilities is built on years of cycle observation, structural analysis, and operational refinement. Now that the foundation is in place, the path forward is yours to choose.</em></p>
+<h2>ECF Certification</h2>
+<p>Your completion of Recon—including the six modules, six Knowledge Checks, the Personal Bridge Document, and this Workbook—qualifies you for the Econiq Cycle Fundamentals (ECF) certification. ECF certification recognizes your demonstrated capability in cycle-aware multifamily investing at the foundational level.</p>
+<p>Operators who continue into Special Ops Tier 2 will build on the ECF foundation toward operational capability and deeper signal mastery, ultimately earning the Econiq Certified Cycle Analyst (ECCA) certification at the conclusion of Special Ops training.</p>
+<table class='wbtable'><thead><tr><th>Credential</th><th>Training Completed</th><th>Recognition</th></tr></thead><tbody><tr><td>ECF — Econiq Cycle Fundamentals</td><td>Recon Tier 1: 6 modules, 6 KCs, Bridge Document, Workbook</td><td>Cycle-aware operator at foundational level</td></tr><tr><td>ECCA — Econiq Certified Cycle Analyst</td><td>Special Ops Tier 2: Onion Framework, Cignal Dashboard, Signal Threshold</td><td>Signal mastery and operational cycle discipline</td></tr></tbody></table>
+<h2>What Comes Next</h2>
+<p>Some operators will complete Recon and stop, satisfied with the conceptual foundation and the integration of cycle awareness into their existing practice. This is a legitimate choice. The work you have done here will produce durable analytical advantage even if you do not pursue the deeper methodology.</p>
+<p>Other operators will continue into Special Ops, where the conceptual capability you have built becomes operational practice through the Onion Framework’s three-layer signal architecture, the Cignal Dashboard’s systematic intelligence-gathering infrastructure, and the Signal Threshold’s decision discipline. Special Ops takes the awareness you have developed in Recon and operationalizes it into systematic practice that produces compounding advantage across multiple cycles.</p>
+<p>Whichever path you choose, the foundation you have built in Recon is yours. The capability is real. The artifacts are substantial. The methodology has produced what it was designed to produce—an operator who sees multifamily through the cycle lens and applies that vision to operational and strategic decisions with discipline.</p>
+<p class='em'><em>Welcome to the end of Recon. You have done the work. The capability is yours.</em></p>
+<h2>RECON TIER 1 COMPLETE • ECF CERTIFICATION EARNED • WHEN > HOW</h2>
+<p>© 2026 Benjamin Inman. All rights reserved. • Econiq • The Recon Workbook • Tier 1 Capstone • v1.0</p></div>
+
+<nav class="lnav">
+  <a href="1-6.html">&larr; Previous<span>The Bridge</span></a>
+  <a href="index.html" style="text-align:right">Finish &rarr;<span>All lessons</span></a>
+</nav>
+
+<footer class="lfoot"><div class="lfoot-in">
+  <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+  <span>The Econiq Method &middot; Recon Capstone Workbook &middot; v1.0</span>
+</div></footer>
+
+<script>
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+ pg.style.width=(m>0?h.scrollTop/m*100:0)+'%';},{passive:true});
+
+var KEY='econiq-recon-workbook', N=76;
+function load(){ try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};} }
+function save(d){ try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){} }
+var data=load();
+var areas=[].slice.call(document.querySelectorAll('textarea[data-f]'));
+function words(s){ s=(s||'').trim(); return s?s.split(/\s+/).length:0; }
+function stats(){
+  var done=0,w=0;
+  areas.forEach(function(a){ var v=a.value.trim(); if(v){done++;} w+=words(v); });
+  document.getElementById('wbDone').textContent=done;
+  document.getElementById('wbWords').textContent=w.toLocaleString();
+}
+areas.forEach(function(a){
+  var id=a.dataset.f;
+  if(data[id]) a.value=data[id];
+  var wc=document.getElementById('wc-'+id);
+  function upd(){ wc.textContent=words(a.value)+' words'; }
+  upd();
+  a.addEventListener('input',function(){
+    data[id]=a.value; save(data); upd(); stats();
+    var b=document.getElementById('wbSave'); b.textContent='Saved'; clearTimeout(b._t);
+    b._t=setTimeout(function(){b.textContent='Saved automatically';},1200);
+  });
+  a.addEventListener('input',function(){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; });
+  if(a.value){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; }
+});
+stats();
+
+document.getElementById('wbPrint').onclick=function(){ window.print(); };
+document.getElementById('wbExport').onclick=function(){
+  var out='THE RECON CAPSTONE WORKBOOK\nThe Econiq Method\n\n';
+  document.querySelectorAll('.wb > *').forEach(function(el){
+    if(el.classList.contains('partmark')) out+='\n\n=== '+el.textContent+' ===\n';
+    else if(el.tagName==='H2') out+='\n## '+el.textContent+'\n';
+    else if(el.classList.contains('ex')) out+='\n--- '+el.textContent.trim().replace(/\s+/g,' ')+'\n';
+    else if(el.classList.contains('prompt')) out+='\n'+el.textContent.trim()+'\n';
+    else if(el.classList.contains('fieldwrap')){
+      var t=el.querySelector('textarea'); out+=(t.value.trim()||'[not answered]')+'\n';
+    }
+  });
+  var blob=new Blob([out],{type:'text/plain'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='recon-capstone-workbook.txt'; a.click();
+};
+</script>
+</body></html>
