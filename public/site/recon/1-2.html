@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LESSON 1.2 &middot; Recon 1.2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#12301F;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+/* article */
+.lead{width:min(1080px,92vw);margin:0 auto;padding:52px 0 10px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.lnav{width:min(680px,92vw);margin:0 auto;padding:40px 0 70px;display:flex;justify-content:space-between;gap:16px}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 20px;
+ background:var(--panel);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:var(--amber);color:var(--ink)}
+.lnav a span{display:block;font-family:var(--body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:5px}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../recon.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Recon &middot; Part One &middot; Lesson 1.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="lead">
+  <p class="eyebrow">Lesson 1.2</p>
+  <h1>LESSON 1.2</h1>
+  <p class='deck'>at the National and Local Level</p>
+  <div class="leadmeta"><span>563 words</span><span>3 min read</span><span>7 questions</span></div>
+</div>
+
+<article><h2>Market Cycles and Their Signals</h2>
+<p>Every multifamily investor is taught to analyze deals, study rent comps, review financials, and walk properties. But the most powerful force shaping your investment outcomes isn’t inside the building—<strong>it’s happening outside of it.</strong> It’s the market cycle, and a lack of its awareness not only limits profits, but it also creates unnecessary exposure to risk.</p>
+<p>Market cycles determine when capital flows in or out of real estate. They shape rent growth, occupancy, cap rates, valuations, lending terms, and buyer competition. They influence the mood of the market itself—fear, confidence, greed, or hesitation. But here’s the part most investors miss:</p>
+<div class='callout'><p><em>There isn’t just one component to a market cycle.</em> <strong>There are two happening simultaneously.</strong></p></div>
+<h2>The National Market Cycle</h2>
+<p>This is the broader economic pulse of the country—GDP growth, job creation, inflation trends, interest rates, capital markets, housing policy, and institutional appetite for real estate. National market signals set the tone for investor behavior and shape the cost of capital, which directly affects property values from coast to coast.</p>
+<p>When the economy expands, debt becomes cheaper, equity flows more freely, and transaction activity accelerates. When contractionary signals appear, lending tightens, construction slows, and values reset.</p>
+<div class='callout'><p><em>For the most part, the national cycle affects everyone, everywhere.</em></p></div>
+<h2>The Local Market Cycle</h2>
+<p>But real estate is local—always has been, always will be. A city can be booming while the nation is slowing, a region can be oversupplied even though the U.S. is undersupplied and a submarket can spike in demand even during a national downturn. Local cycles are shaped by micro-level drivers—Job growth, population trends, local supply pipelines, path of progress trends, market-specific rent growth, local city regulation and landlord policies and affordability.</p>
+<p>This means you can have a national expansion but a local hypersupply… or a national contraction while your local submarket sits in recovery or expansion phase. <strong>These mismatches create some of the greatest opportunities, and the greatest risks, in multifamily investing.</strong></p>
+<h2>Why Both Matter Today More Than Ever</h2>
+<p>We are living through one of the most dynamic and fast-moving real estate environments in modern history. Interest rates have fluctuated sharply, construction costs have soared, migration patterns have shifted dramatically, and capital has flowed in tidal waves from metro to metro. These conditions have magnified the importance of both national and local signals.</p>
+<p>Relying only on national data leaves you blind to what is happening at the neighborhood level. Likewise, relying only on local data blinds you to the economic forces reshaping the entire country.</p>
+<p>The investors who win big in today’s market are those who can:</p>
+<p>- Read national signals to know when to adjust their investing playbook</p>
+<p>- Read local signals to know where opportunities are emerging or fading</p>
+<p>- Align the two to make decisions with precision rather than hope</p>
+<div class='callout'><p><em>Understanding market cycles at both levels gives you an advantage most investors don’t even realize exists. It allows you to anticipate the shifts that create wealth, avoid the traps that destroy it, and position yourself ahead of the market instead of reacting to it.</em></p></div>
+<p>By the time you’ve finished reading, you’ll understand:</p>
+<p>- The four phases of the market cycle</p>
+<p>- The national-level indicators that guide big-picture strategy</p>
+<p>- The local-market signals that reveal true investment timing</p>
+<p>- How to use both to make smarter, strategic decisions in multifamily real estate—no matter where the market stands today</p>
+<h2>Notes:</h2></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='A'><span class='qn'>Question 1</span><p class='qs'>Which of the following is the structural reason capital flow dynamics produce cyclical behavior?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Capital is mobile and seeks return, but capital deployment compounds rather than self-correcting in real time—flows accelerate when conviction grows and reverse abruptly when conviction breaks.</button><button class='opt' data-k='B'><span class='k'>B</span>Capital is regulated by government to prevent any cyclical behavior.</button><button class='opt' data-k='C'><span class='k'>C</span>Capital flows are completely random and have no relationship to cyclical patterns.</button><button class='opt' data-k='D'><span class='k'>D</span>Capital only flows into multifamily during recessions. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Capital flow dynamics produce significant portions of cyclical behavior because capital deployment compounds rather than self-correcting in real time. Flows accelerate during expansion when conviction grows and reverse abruptly during transitions when conviction breaks. The compounding nature is what makes capital flows a structural source of cyclicality rather than a smoothing force.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>How does the supply lag specifically produce predictable cycle behavior?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It prevents new supply from ever being delivered.</button><button class='opt' data-k='B'><span class='k'>B</span>Multifamily projects take 18–30 months to deliver, so supply decisions made during peak conditions arrive in market years after the conditions that triggered them have changed, producing structural oversupply at peaks and undersupply at troughs.</button><button class='opt' data-k='C'><span class='k'>C</span>It guarantees that supply always matches demand exactly.</button><button class='opt' data-k='D'><span class='k'>D</span>It only operates in single-family residential markets. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The 18–<strong>30 month</strong> supply lag is a structural feature of real estate that doesn’t exist in many other asset classes. Supply decisions made during peak conditions deliver into markets where conditions have already changed, producing the predictable oversupply at cycle peaks. The lag is what makes <strong>Hypersupply</strong> phases consistent across cycles.</em></p></div></div><div class='q' data-a='A'><span class='qn'>Question 3</span><p class='qs'>What role does the credit cycle play in amplifying multifamily market cycles?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Lenders extend credit aggressively during expansion and restrict credit during contraction, amplifying the underlying market cycle in both directions.</button><button class='opt' data-k='B'><span class='k'>B</span>Lenders maintain identical credit terms throughout all phases of the cycle.</button><button class='opt' data-k='C'><span class='k'>C</span>The credit cycle has no relationship to the broader market cycle.</button><button class='opt' data-k='D'><span class='k'>D</span>Lenders only provide credit during contraction phases. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The credit cycle amplifies the underlying market cycle. Easier credit during expansion produces more transaction activity and higher valuations. Restricted credit during contraction produces less transaction activity and lower valuations. The amplification follows predictable patterns tied to lender risk perception and regulatory cycles.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 4</span><p class='qs'>What produces the “overshooting” pattern characteristic of cycles in both directions?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Government policy interventions.</button><button class='opt' data-k='B'><span class='k'>B</span>Behavioral feedback loops where operators and capital allocators observe each other’s behavior and amplify momentum beyond what fundamentals justify, on both the upside and downside.</button><button class='opt' data-k='C'><span class='k'>C</span>Random market events that have no structural cause.</button><button class='opt' data-k='D'><span class='k'>D</span>International capital flow restrictions. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Behavioral feedback loops are what produce overshooting in both directions. Operators and capital allocators observe each other’s behavior and amplify momentum beyond what fundamentals justify. The behavioral component makes cycles overshoot in both directions rather than self-correcting smoothly to fundamental values.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>Describe in 2–3 sentences how the four structural mechanics (capital flow dynamics, supply lags, leverage and credit cycles, behavioral feedback loops) operate together to produce the recurring expansion-and-contraction pattern that defines the market cycle. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Capital flows respond to perceived returns and compound rather than self-correct. Supply lags create periodic mismatches between current supply (delivered from prior decisions) and current demand. Credit cycles amplify both directions by making capital available aggressively during expansion and restricting it during contraction. Behavioral feedback loops produce overshooting in both directions as operators observe peer behavior and amplify momentum. Together, these four mechanics produce the recurring expansion-and-contraction pattern that defines the market cycle, with each mechanic reinforcing the others rather than dampening them.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator observes that the Federal Reserve has begun signaling tighter monetary conditions, the yield curve is flattening, and lenders are scrutinizing deals more carefully even as multifamily-specific operational metrics remain healthy. How would you explain to a colleague why these macroeconomic shifts matter for multifamily, even though they appear disconnected from current multifamily operations? ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>These macroeconomic shifts matter for multifamily because of the timing-lag hierarchy: macroeconomic indicators move first (12–24 months ahead of multifamily-specific operational reality), then capital markets respond, then construction dynamics shift, then operational fundamentals reflect the change. The fact that current operational metrics remain healthy doesn’t mean conditions will remain healthy—it means the propagation hasn’t yet reached the operational layer. Operators who only watch operational metrics are systematically late to every transition because the signals they watch are the last to move. The macroeconomic shifts visible now are signaling conditions that will reach operational reality 12–18 months later, which means the strategic positioning decisions made now should reflect these upstream signals rather than current operational stability.</em></p></div></div><div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>Which of the following best describes the relationship between the four structural mechanics and the specific signals operators track to anticipate cycle transitions?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The signals operators track have no relationship to the structural mechanics.</button><button class='opt' data-k='B'><span class='k'>B</span>The structural mechanics produce observable indicators (interest rate changes, capital flow data, construction permit velocity, transaction volume, etc.) that operators can track to anticipate transitions before trailing data confirms them. Special Ops training operationalizes the deeper signal work.</button><button class='opt' data-k='C'><span class='k'>C</span>The signals are completely independent of the structural mechanics.</button><button class='opt' data-k='D'><span class='k'>D</span>Only one signal matters and operators should focus exclusively on that signal. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The structural mechanics produce observable indicators that operators can track. Interest rate changes reflect macroeconomic capital cost shifts. Capital flow data reflects the dynamics described in the first mechanic. Construction permit velocity reflects supply-side decision-making in advance of delivered supply. These signals connect to the structural mechanics—they are not random data points but observable manifestations of the forces that produce cyclical behavior. Special Ops training operationalizes the deeper signal work, but Recon establishes the conceptual foundation.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong understanding of the structural mechanics. Proceed to Lesson 1.3.1 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the four structural mechanics and their interactions in Lesson 1.2 before proceeding. Pay particular attention to the timing-lag hierarchy in the scenario answer.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.2 in full. Understanding why cycles happen is the prerequisite for understanding where they’re going—every subsequent module builds on this causal foundation.</p></div></div></div></section>
+
+<nav class="lnav"><a href='1-1-3.html'>&larr; Previous<span>The Big 3</span></a><a href='1-3-1.html' style='text-align:right'>Next &rarr;<span>The Recovery Phase</span></a></nav>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Lesson 1.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Move on to the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

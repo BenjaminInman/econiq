@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>An Introduction to the 4 Cycles of Multifamily Real Estate &middot; Recon 1.1.2</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#12301F;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+/* article */
+.lead{width:min(1080px,92vw);margin:0 auto;padding:52px 0 10px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.lnav{width:min(680px,92vw);margin:0 auto;padding:40px 0 70px;display:flex;justify-content:space-between;gap:16px}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:var(--soft);border:1px solid var(--line);border-radius:var(--r);padding:14px 20px;
+ background:var(--panel);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:var(--amber);color:var(--ink)}
+.lnav a span{display:block;font-family:var(--body);font-size:.95rem;text-transform:none;letter-spacing:0;color:var(--ink);margin-top:5px}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../recon.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Recon &middot; Part One &middot; Lesson 1.1.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="lead">
+  <p class="eyebrow">Lesson 1.1.2</p>
+  <h1>An Introduction to the 4 Cycles of Multifamily Real Estate</h1>
+  
+  <div class="leadmeta"><span>4,162 words</span><span>19 min read</span><span>7 questions</span></div>
+</div>
+
+<article><p>Recovery • Expansion • Hypersupply • Contraction</p>
+<h2>Introduction: The Four Cycles of Multifamily Real Estate</h2>
+<p><em>Like the broader economy, the multifamily real estate industry moves in predictable cycles. These cycles don’t follow an exact timeline, but they repeat over and over, shaping opportunities and risks for investors. Understanding where the market stands—and how to respond at each stage—is one of the most important skills you can develop as a multifamily investor.</em></p>
+<p>There are four primary phases in the multifamily market cycle. Each phase requires a different investment mindset and strategy. What works in Expansion may fail in Hypersupply, and the bold moves of Recovery are very different from the defensive plays of Contraction. By learning how to recognize the signals of each stage and applying the right strategies, you can protect your investments, maximize returns, and position yourself ahead of the cycle—rather than chasing it.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Recovery — The Quiet Beginning</span><p>The market begins to stabilize after a downturn. Occupancy levels stop falling, rents flatten, and early investors find opportunities to acquire undervalued properties, often through value-add strategies.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Expansion — The Growth Phase</span><p>Demand outpaces supply. Occupancy rates climb above 95%, rents rise steadily, and new construction surges. This is the growth phase, offering strong opportunities for buy-and-hold, development, and repositioning strategies.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Hypersupply</span><p><strong> — The Defensive Phase</strong> Developers overshoot, delivering more units than the market can absorb. Vacancies rise, rent growth slows or stalls, and concessions return. The focus for investors shifts from growth to defense—retention, efficiency, and cash flow preservation.</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Contraction — The Reset</span><p>The market resets. Occupancies fall, rents decline, and distressed sales appear as overleveraged owners struggle. While this phase can be painful, it also provides some of the greatest buying opportunities, as disciplined investors acquire assets below replacement cost and prepare for the next Recovery.</p></div></div></div>
+<p>This training will walk you through each phase in detail, equipping you with the tools, strategies, and insights to navigate the multifamily market with confidence, no matter where we are in the cycle.</p>
+<h3>PHASE 1</h3>
+<h2>Recovery</h2>
+<p><em>The Quiet Beginning — Where Bold Investors Find Their Best Opportunities</em></p>
+<p><em>The Recovery phase is the quiet beginning of the real estate cycle’s rebirth. It follows the downturn and often goes unnoticed by most investors because headlines are still negative, lenders remain cautious, and many owners are struggling to stabilize their properties. Yet for those who understand the signals, this phase presents some of the best buying opportunities in the entire cycle.</em></p>
+<h2>Understanding the Recovery Phase</h2>
+<p>The Recovery phase of the multifamily real estate cycle begins right after a downturn, when the market is showing its first signs of stabilizing. Occupancy rates, which fell during the Contraction, begin to flatten or rise slightly. Rent declines stop, and landlords slowly phase out heavy concessions like free rent or giveaways. New construction is minimal at this point because developers pulled back during the downturn, which allows existing supply to be absorbed more easily. From the outside, Recovery can feel uncertain—headlines may still be negative, and many investors hesitate to act. But beneath the surface, demand is quietly returning, and fundamentals are starting to improve.</p>
+<p>For investors, understanding this phase means recognizing that the worst is over, but the rebound isn’t obvious yet. Recovery is often the stage with the greatest opportunity for long-term gains because properties can be purchased at discounted prices before values start climbing again. The key is to watch for signals such as stabilizing vacancies, job growth in the local market, and declining concessions. By stepping in early and positioning for the next phase—Expansion—savvy investors can ride the upswing while many others are still sitting on the sidelines.</p>
+<h2>Key Signals of Recovery</h2>
+<p>The key signals of the Recovery phase are subtle but powerful indicators that the market has hit bottom and is beginning to stabilize. Vacancy rates stop rising and begin to level off—a shift that shows supply and demand are moving back into balance. Rent declines slow or flatten, and in some markets you’ll see the first modest increases after months or years of downward pressure. Landlords who once relied heavily on concessions start to scale them back as tenants return.</p>
+<p>Another critical signal is job and population growth in the local economy, since employment drives household formation and rental demand. There is also a pause in new construction, because developers who pulled back during the downturn aren’t yet reentering aggressively, giving existing units time to absorb. Finally, transaction volume begins to tick upward as early, opportunistic investors regain confidence. When you see these signals together, it’s a strong indication that the market is shifting from Contraction into Recovery, creating some of the best buying opportunities of the entire cycle.</p>
+<div class='callout'><p><strong>#</strong> <strong>Recovery Signal</strong> <strong>What It Tells You</strong></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'></span><p>Vacancy rates flattening or improving Supply is finally being absorbed</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'></span><p>Job growth returning Employment drives rental demand, especially in multifamily</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'></span><p>Declining concessions Owners no longer need to give away rent to attract tenants</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'></span><p>Transaction volume increasing modestly More deals closing indicates growing confidence in the market</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'></span><p>Limited new construction starts Developers are still cautious, preventing oversupply</p></div></div></div>
+<h2>Investment Strategies for Recovery</h2>
+<p>During the Recovery phase, the best investment strategies focus on buying low and positioning for growth. This is the stage where properties are often undervalued, yet fundamentals are quietly improving. One proven strategy is targeting value-add acquisitions—properties that have deferred maintenance, poor management, or low occupancy. Investors can acquire these assets at a discount, renovate or reposition them, and ride the wave of improving demand as occupancies and rents begin to climb.</p>
+<p>Another smart play is seeking out distressed owners or lenders offloading assets. Many who struggled through the downturn are overleveraged and motivated to sell. This creates opportunities to purchase properties below replacement cost, ensuring long-term value. The key to Recovery investing is combining courage and discipline—it requires the courage to buy when headlines are still negative and the discipline to focus on fundamentals like job growth, population trends, and supply pipelines. This is a high-opportunity, high-reward phase for investors who approach it with the right mindset.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Target Value-Add Properties</span><p>Look for distressed or underperforming assets that can be stabilized through better management, renovations, and repositioning.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Focus on Distressed Sellers</span><p>Many owners who survived the downturn are overleveraged and eager to sell. Negotiate favorable terms, often below replacement cost.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Lock in Favorable Financing</span><p>Lenders may be cautious, but rates are often still attractive. Establish relationships early with local banks and credit unions.</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Partner with Patient Capital</span><p>Recovery deals require longer hold times before full rent growth kicks in. Investors with a quick-flip mindset may not align with this phase.</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>Emphasize Market Fundamentals</span><p>Buy in markets with strong population growth, job diversification, and limited new supply. Avoid markets dependent on a single industry.</p></div></div></div>
+<h2>Risks to Watch Out For</h2>
+<p>While the Recovery phase offers some of the greatest upside in the multifamily real estate cycle, it also comes with risks that investors must manage carefully. One major risk is misreading the signals—what looks like Recovery can sometimes be just a short-term bounce before fundamentals weaken again. If investors buy too aggressively without confirming job growth, occupancy stabilization, or reduced concessions, they may find themselves stuck in a market that hasn’t fully turned around.</p>
+<p>Another risk is underestimating the time it takes for rents and occupancy to improve. Even in Recovery, demand builds gradually, and it may take years before properties reach stabilized cash flow. Investors who over-leverage or assume rapid rent growth could face financing challenges if improvements take longer than expected. The investors who succeed are those who remain conservative in their underwriting, patient in their expectations, and selective in their acquisitions.</p>
+<div class='callout'><p><strong>Risk</strong> <strong>Description</strong></p></div>
+<div class='callout'><p>False Signals A short-term rebound can be mistaken for true Recovery—confirm multiple signals before acting</p></div>
+<div class='callout'><p>Extended Stagnation Rent growth may remain flat longer than expected; plan hold periods accordingly</p></div>
+<div class='callout'><p>Financing Hurdles Lenders may require higher equity or reserves than anticipated</p></div>
+<div class='callout'><p>Over-Improving Avoid heavy renovation investment before rents justify the capital outlay</p></div>
+<h3>PHASE 2</h3>
+<h2>Expansion</h2>
+<p><em>The Growth Phase — Riding the Wave with Discipline</em></p>
+<p><em>If Recovery is where the bold investor buys when others are hesitant, Expansion is where the market begins to reward that courage. During Expansion, fundamentals strengthen across the board: occupancies rise, rents grow, lenders are eager to finance deals, and new construction cranes start to appear on the skyline.</em></p>
+<h2>Understanding the Expansion Phase</h2>
+<p>The Expansion phase of the multifamily real estate cycle is when the market feels strong and optimistic. After the early stabilization of Recovery, demand accelerates, pushing occupancy rates above 95% in many markets. Rents begin rising consistently, often outpacing inflation, and landlords no longer need to offer concessions. With steady job growth and population increases driving household formation, this is the phase where both tenants and investors compete aggressively for space. Developers, encouraged by high rents and tight vacancies, re-enter the market, and new construction pipelines begin to grow.</p>
+<p>For investors, Expansion is often seen as the sweet spot. Properties perform well, financing is readily available, and values appreciate as cap rates compress. It’s a period of growth and opportunity, but also one that requires discipline. While Expansion offers the chance to build wealth through buy-and-hold strategies, repositioning assets, or even ground-up development, it’s also when competition heats up and the seeds of Hypersupply are planted. Understanding this balance—riding the wave of strong fundamentals while avoiding overpaying or overleveraging—is the key to thriving in the Expansion phase.</p>
+<h2>Key Signals of Expansion</h2>
+<p>The key signals of the Expansion phase are clear indicators that demand is outpacing supply and market fundamentals are strong. High occupancy rates—often 95% or greater—show that units are leasing quickly and vacancy is minimal. Alongside this, rent growth accelerates—landlords are no longer just holding rents steady, but are raising them consistently, sometimes even outpacing inflation. Concessions largely disappear as tenants compete for available units.</p>
+<p>Another important signal is a noticeable increase in new construction activity. Developers, encouraged by strong performance, begin launching new projects to capture growing demand. Transaction volume surges as buyers flood the market, driving prices higher and compressing cap rates. When these signals align—high occupancy, steady rent growth, reduced concessions, rising construction, and surging deal activity—it’s a strong confirmation that the market has entered the Expansion phase.</p>
+<div class='callout'><p><strong>#</strong> <strong>Expansion Signal</strong> <strong>What It Tells You</strong></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'></span><p>Occupancies at or above 95% Properties lease quickly, with waiting lists in hot markets</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'></span><p>Rent growth above inflation A clear sign of strong demand outpacing supply</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'></span><p>Construction activity picking up New projects announced and underway as developers re-enter</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'></span><p>Capital markets opening up Lenders loosen terms; more equity groups chase deals</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'></span><p>Transaction volume surging More buyers, higher prices, compressed cap rates</p></div></div></div>
+<h2>Investment Strategies for Expansion</h2>
+<p>During the Expansion phase, the market is firing on all cylinders. Occupancies are strong, rents are rising, and lenders are eager to finance deals. The best strategies during Expansion aren’t about chasing every opportunity—they’re about balancing growth with discipline. Well-placed capital can generate attractive returns, but only for investors who avoid the overconfidence that characterizes late Expansion behavior.</p>
+<p>One of the most effective approaches is to buy and hold stabilized assets in strong markets. With high occupancies and growing rents, these properties generate reliable cash flow and appreciate in value as cap rates compress. Another strategy is repositioning assets, especially upgrading Class B properties to compete with newer Class A stock. Similarly, ground-up development or redevelopment can be lucrative in Expansion, since demand is strong and new supply is absorbed quickly—though timing is critical to avoid delivering units during the next phase of Hypersupply.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Buy and Hold Core Assets</span><p>Acquire stabilized properties in strong markets. Cash flow is reliable and values rise as cap rates compress. This is the safe-money play.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Development and New Construction</span><p>High demand makes this the best time for new projects. Build-to-hold or build-to-sell both work—but factor in delivery timing to avoid being caught in Hypersupply.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Reposition Assets</span><p>Upgrading Class B into B+ or A- assets is profitable when tenants can afford rent increases. Cosmetic renovations and amenity improvements add significant value.</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Leverage Favorable Debt Markets</span><p>Lenders are competing for deals, offering attractive rates and terms. Lock in long-term financing now, before rates shift.</p></div></div></div>
+<h2>Risks to Watch Out For</h2>
+<p>While the Expansion phase feels like the safest time to invest, it also comes with hidden risks that can catch even seasoned investors off guard. One of the biggest dangers is overpaying for deals. With competition fierce and capital flooding the market, buyers may stretch underwriting assumptions or accept thinner margins, assuming that rent growth will continue indefinitely. This creates vulnerability if growth slows or expenses rise faster than expected.</p>
+<p>Another major risk is timing missteps in development or repositioning projects. Because developers are active during Expansion, a wave of new supply often hits the market just as demand begins to plateau. Properties delivered too late in the cycle can suffer from increased vacancies and slower lease-ups as the market shifts into Hypersupply. Overleveraging with easy debt can backfire—if interest rates rise or income softens, highly leveraged deals may struggle to cover debt service. The lesson: Expansion is an excellent time to build wealth, but it requires discipline.</p>
+<div class='callout'><p><strong>Risk</strong> <strong>Description</strong></p></div>
+<div class='callout'><p>Overpaying for Deals Competition drives prices up, reducing margins and leaving little room for error</p></div>
+<div class='callout'><p>Assuming Rent Growth Forever Rent increases eventually slow or stop; underwrite conservatively</p></div>
+<div class='callout'><p>Timing Risk for Development Projects delivered late in Expansion may hit Hypersupply headwinds</p></div>
+<div class='callout'><p>Over-Leverage Easy debt tempts investors into risky structures that can’t survive a softening</p></div>
+<h3>PHASE 3</h3>
+<h2>Hypersupply</h2>
+<p><em>The Defensive Phase — Protect What You Own, Prepare for What’s Next</em></p>
+<p><em>The <strong>Hypersupply</strong> phase is where optimism from Expansion begins to fade. Developers, emboldened by strong demand and rising rents, have built too much too fast. Supply outpaces demand, vacancies begin to climb, and rent growth slows—or even reverses. For the disciplined investor, <strong>Hypersupply</strong> is not a death sentence—it’s a time to protect what you own and prepare for the opportunities that will come in Contraction.</em></p>
+<h2>Understanding the Hypersupply Phase</h2>
+<p>The Hypersupply phase of the multifamily real estate cycle occurs when new development outpaces demand, leading to an oversupply of units in the market. This usually follows the Expansion phase, when strong rent growth and high occupancies encouraged aggressive building. As those projects are delivered all at once, the balance tips: vacancies start to rise, rent growth slows or even stalls, and landlords may need to reintroduce concessions to attract tenants. While demand may still exist, it simply can’t keep up with the surge of new supply.</p>
+<p>For investors, Hypersupply is a turning point that shifts the focus from growth to defense. It’s a period where cash flow can tighten, competition for tenants intensifies, and property values may begin to soften. Recognizing the signs—such as occupancy slipping below 95%, rental growth flattening, and cranes dominating the skyline—is key to navigating this stage. Understanding Hypersupply helps investors shift strategies, protect existing assets, and prepare for the opportunities that arise in Contraction.</p>
+<h2>Key Signals of Hypersupply</h2>
+<p>The key signals of the Hypersupply phase show up when the market has too much new supply chasing too few renters. Occupancy slips below 95%, even though the overall economy may still look strong. Rent growth flattens or turns negative, as owners can no longer raise rents without losing tenants. To compete, landlords begin offering concessions again—like free months of rent or discounts—which is a strong indicator that demand is no longer keeping pace with supply.</p>
+<p>Another signal is the presence of excessive new construction deliveries. Projects that were started during Expansion now flood the market all at once, and absorption rates slow down. You’ll also notice increasing competition among owners for the same tenant pool, which can trigger higher vacancy rates and downward pressure on income.</p>
+<div class='callout'><p><strong>#</strong> <strong>Hypersupply</strong><strong> Signal</strong> <strong>What It Tells You</strong></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'></span><p>Occupancy slipping below 95% Supply is outpacing demand despite a still-functional economy</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'></span><p>Rent growth stalling or turning negative Landlords can no longer raise rents without losing tenants</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'></span><p>Concessions returning Owners must incentivize leasing as competition intensifies</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'></span><p>Overbuilding — cranes everywhere New supply is flooding the market faster than it can be absorbed</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'></span><p>Absorption rates slowing New units take longer to lease up; market is oversaturated</p></div></div></div>
+<h2>Investment Strategies for Hypersupply</h2>
+<p>During the Hypersupply phase, the focus for investors shifts from offense to defense. New development has overshot demand, vacancy rates begin climbing, and rent growth flattens or declines. With cash flow under pressure, the best strategies are designed to protect existing investments rather than chase aggressive growth.</p>
+<p>One of the most important strategies in Hypersupply is tenant retention. When competition for renters is fierce, keeping current tenants is often cheaper and more profitable than trying to backfill vacant units. Similarly, tight operational control is critical—trimming unnecessary expenses, negotiating vendor contracts, and ensuring every dollar spent improves the bottom line. Investors should also exercise caution when it comes to acquisitions. Buying aggressively during Hypersupply can be risky unless a property is secured at a deep discount with clear value-add potential.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Strengthen Tenant Retention</span><p>Offer renewal incentives to keep tenants in place. Losing tenants is more expensive than retaining them—provide excellent service and strong community engagement.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Control Expenses and Operate Lean</span><p>Tighten operating budgets. Focus on efficient property management and preventative maintenance to protect NOI.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Defer Aggressive Acquisitions</span><p>New deals are risky in Hypersupply unless they are at a steep discount. Avoid chasing properties with unrealistic rent growth assumptions.</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Focus on Cash Flow Stability</span><p>Protect income streams. Refinance only if it improves stability, not just because debt is available.</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>Position for the Future</span><p>Monitor distressed properties that may become true bargains in Contraction. Build relationships with brokers and lenders who will call you first.</p></div></div></div>
+<h2>Risks to Watch Out For</h2>
+<p>The Hypersupply phase is filled with risks that can quickly erode returns if investors aren’t cautious. The most obvious danger is declining occupancy rates as new units flood the market faster than demand can absorb them. This leads directly to rent stagnation or rent declines, forcing owners to offer concessions to stay competitive. These factors put pressure on net operating income, which can squeeze cash flow and reduce property values.</p>
+<p>Another major risk is buying at the wrong time or price. In Hypersupply, it’s easy to overestimate demand and pay too much for properties that struggle to stabilize. Additionally, overleveraging during this phase is especially dangerous—if occupancy and rents continue to fall, debt service can quickly outpace income, leading to defaults. The key lesson is that Hypersupply isn’t the time to chase aggressive growth; it’s the time to manage defensively, underwrite conservatively, and protect liquidity.</p>
+<div class='callout'><p><strong>Risk</strong> <strong>Description</strong></p></div>
+<div class='callout'><p>Declining Occupancy Erodes NOI quickly as new supply floods the market</p></div>
+<div class='callout'><p>Rent Concessions Cut into profitability as landlords compete for the same tenant pool</p></div>
+<div class='callout'><p>Aggressive New Construction Keeps competition high with no near-term relief</p></div>
+<div class='callout'><p>Overleveraged Investors High debt service may be impossible to cover when rents soften</p></div>
+<div class='callout'><p>Ill-Timed Acquisitions Can lock you into deals that underperform for years</p></div>
+<h3>PHASE 4</h3>
+<h2>Contraction</h2>
+<p><em>The Reset — Pain for the Unprepared, Opportunity for the Disciplined</em></p>
+<p><em>Contraction follows <strong>Hypersupply</strong>, when too much inventory, declining demand, or economic contraction pushes occupancies and rents downward. For unprepared owners, this phase can be devastating. For disciplined investors, it’s the ultimate buying window—the chance to acquire properties below replacement cost, reposition distressed assets, and prepare for the next Recovery.</em></p>
+<h2>Understanding the Contraction Phase</h2>
+<p>The Contraction phase of the multifamily real estate cycle is the point where the market feels the most painful, but also where the greatest opportunities often emerge. This stage follows Hypersupply, when new deliveries overwhelm demand and the broader economy may also be slowing. As a result, occupancies decline, rents fall, and net operating income shrinks. Property values correct downward, and overleveraged owners may be forced into distressed sales or foreclosure. Lenders tighten their standards, making debt harder to secure, and investor sentiment tends to swing negative as fear dominates headlines.</p>
+<p>For multifamily investors, understanding this phase means recognizing that while the short-term outlook looks bleak, the market is in the process of resetting. Distress creates opportunity—assets can often be acquired at significant discounts, sometimes well below replacement cost. This is the stage where patient, disciplined capital can step in to stabilize underperforming assets and hold them until the next Recovery phase. Contraction represents the bottom of the cycle, but for patient capital, it’s where opportunities are richest.</p>
+<h2>Key Signals of Contraction</h2>
+<p>The key signals of the Contraction phase show up when the market has clearly shifted from oversupply to distress. Rising vacancies are the most visible sign—occupancy rates fall steadily as demand weakens or new deliveries outpace absorption. Alongside this, rents begin to decline, often accompanied by steep concessions as landlords compete to attract tenants. These drops in rental income drive down net operating income, putting pressure on owners who are already carrying heavy debt loads.</p>
+<p>Another signal is the rise of distressed sales and foreclosures. Overleveraged owners, unable to cover debt service, may be forced to sell at a discount, while lenders step in to take back properties. Transaction volume falls sharply, as many investors step to the sidelines amid uncertainty. On the financing side, lenders tighten credit, requiring higher equity contributions, stricter underwriting, and stronger borrower balance sheets.</p>
+<div class='callout'><p><strong>#</strong> <strong>Contraction Signal</strong> <strong>What It Tells You</strong></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'></span><p>Vacancy rates climbing steadily Demand is falling or supply remains elevated across the metro</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'></span><p>Rents dropping year-over-year Pricing power has collapsed; owners cannot hold the line</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'></span><p>Widespread concessions Multiple months of free rent signal deep market stress</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'></span><p>Transaction volume slowing Fewer deals, prices correcting downward as buyers step back</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'></span><p>Foreclosures and distressed sales rising Overleveraged owners can’t cover debt service; forced to sell</p></div></div></div>
+<h2>Investment Strategies for Contraction</h2>
+<p>During the Contraction phase, the headlines may be negative, but disciplined investors see opportunity. This is the stage when properties often trade at significant discounts, either because owners are overleveraged or because declining rents and occupancy have reduced net operating income. The most effective strategy here is to buy when others are fearful, focusing on acquisitions that can be stabilized and held through the eventual Recovery and Expansion phases.</p>
+<p>One of the most powerful strategies is targeting distressed acquisitions—properties in foreclosure, assets in receivership, or motivated sellers who can no longer cover debt service. Investors who step in with cash or strong financing can acquire these deals well below replacement cost, giving them built-in protection against future competition. Because Contraction cycles can last for several years, successful investors rely on patient capital and conservative underwriting. It’s important to structure deals with adequate reserves, lower leverage, and longer hold periods, avoiding the temptation to chase a quick turnaround.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Target Distressed Acquisitions</span><p>Look for assets owned by overleveraged operators or lenders. Properties in receivership or foreclosure often trade at steep discounts.</p></div></div><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Buy Below Replacement Cost</span><p>If you can purchase a property for significantly less than it would cost to build new, you lock in long-term value that new competition cannot undercut.</p></div></div><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Reposition Underperforming Assets</span><p>Invest in assets where operations can be stabilized and improved—better management, cost controls, and moderate renovations prepare them for Recovery.</p></div></div><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Use Patient Capital</span><p>Contractions take time to cycle out. Structure deals with longer hold periods, conservative projections, and adequate reserves.</p></div></div><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>Prioritize Cash Reserves</span><p>Capital buffers are critical to weather uncertain income streams and avoid being forced to sell at the worst possible moment.</p></div></div></div>
+<h2>Risks to Watch Out For</h2>
+<p>The Contraction phase offers deep opportunities, but it also comes with significant risks that investors must navigate carefully. The most immediate challenge is declining income streams—with rising vacancies, falling rents, and heavy concessions, properties may struggle to generate enough net operating income to cover expenses or debt service. This can make even discounted acquisitions difficult to stabilize in the short term. Additionally, lending becomes more restrictive, as banks tighten underwriting standards and demand higher equity contributions.</p>
+<p>Another risk is underestimating how long the downturn will last. It’s easy to assume a quick bounce back, but recoveries often take years, and investors who overestimate rent growth or exit timing can find themselves stuck with underperforming assets. There’s also the danger of capital constraints—without adequate reserves, investors may face cash flow shortfalls, unexpected capital calls, or even forced sales. The risks in Contraction aren’t just about buying at the wrong price—they’re about surviving the period of weak fundamentals.</p>
+<div class='callout'><p><strong>Risk</strong> <strong>Description</strong></p></div>
+<div class='callout'><p>Prolonged Vacancy Issues Rents and occupancy may take years to rebound; plan hold periods accordingly</p></div>
+<div class='callout'><p>Lending Constraints Debt is harder to secure, often requiring significantly more equity</p></div>
+<div class='callout'><p>Capital Calls Investors without adequate reserves may be forced to sell at the worst time</p></div>
+<div class='callout'><p>Overestimating Recovery Speed Cycles don’t turn overnight; avoid underwriting aggressive timelines</p></div>
+<h2>Navigating All Four Phases</h2>
+<p>Each of the four phases of the multifamily real estate cycle presents its own combination of opportunity and risk. The investors who build durable wealth across multiple cycles are not necessarily the ones who found the best individual deals—they are the ones who understood which phase they were in and calibrated their strategy accordingly.</p>
+<p><em>Cycle awareness is not about predicting the future with precision. It is about knowing where you are, understanding what typically comes next, and positioning your capital and operations to take advantage of the transitions that are always, inevitably, on the way.</em></p>
+<p>This training has introduced all four phases at a foundational level. The deeper work—reading the specific signals that reveal phase position, classifying indicators as leading or trailing, and building the systematic intelligence infrastructure that produces compounding advantage—is the work of the modules and tiers that follow.</p>
+<p>The foundation is here. Every advanced skill you build on top of it will compound in value the longer you practice it.</p>
+<h2>Notes:</h2></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p><div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>Which of the following best characterizes the Recovery phase of the multifamily cycle?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Vacancy is at historic lows, rent growth is at historic highs, and capital is flowing aggressively into the asset class.</button><button class='opt' data-k='B'><span class='k'>B</span>Vacancy is elevated, pricing has corrected from prior peak levels, capital partners are cautious, and the operational opportunity is foundation-building.</button><button class='opt' data-k='C'><span class='k'>C</span>New supply is delivering aggressively while demand is moderating, producing softening operational metrics.</button><button class='opt' data-k='D'><span class='k'>D</span>Pricing is collapsing, foreclosure activity is accelerating, and capital partners have largely withdrawn from the asset class. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Recovery is characterized by elevated vacancy, corrected pricing, cautious capital, and the foundation-building opportunity. Operators who recognize Recovery deploy with discipline at favorable basis while less aware operators wait for confirmation that arrives only as Recovery transitions to Expansion.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>An operator observes the following conditions in their primary market: rent growth has been strong for three years, capital is flowing aggressively, new construction starts are at multi-year highs, cap rates have compressed substantially, and lenders are extending credit on aggressive terms. Which phase is the market most likely in?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery</button><button class='opt' data-k='B'><span class='k'>B</span>Early Expansion</button><button class='opt' data-k='C'><span class='k'>C</span>Late Expansion / Peak forming</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The constellation of indicators (multi-year strong rent growth, aggressive capital flow, multi-year-high construction starts, substantial cap rate compression, aggressive lender posture) indicates Late Expansion or Peak forming. The conditions that produce continued strong performance are also the conditions that produce the next transition. Operators recognizing this constellation should be tightening selectivity rather than accelerating deployment.</em></p></div></div><div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>Which phase is characterized by the structural mismatch between supply being delivered (decisions made years earlier) and current demand conditions, often producing concession activity and softening rent growth despite continued capital deployment?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery</button><button class='opt' data-k='B'><span class='k'>B</span>Expansion</button><button class='opt' data-k='C'><span class='k'>C</span>Peak / Hypersupply</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Peak / <strong>Hypersupply</strong> is the phase where supply decisions made during prior Expansion conditions are delivering into a market where demand has begun moderating. The structural mismatch produces concessions, softening rent growth, and lengthening days on market even as broader operational metrics initially appear healthy.</em></p></div></div><div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>What strategic posture typically produces advantage during the Contraction phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Aggressive capital deployment to capture asymmetric pricing while less aware operators wait for confirmation, paired with extended hold periods that bridge through eventual Recovery.</button><button class='opt' data-k='B'><span class='k'>B</span>Maximum acquisition pacing because pricing is at peak levels.</button><button class='opt' data-k='C'><span class='k'>C</span>Complete withdrawal from the asset class until conditions improve.</button><button class='opt' data-k='D'><span class='k'>D</span>Aggressive value-add execution because renovation costs are at their highest. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>Contraction creates the asymmetric opportunity for operators with capital available and conviction to deploy while pricing is corrected. The discipline required is extending hold periods to bridge through eventual Recovery, and capital structure that accommodates the possibility of Contraction lasting longer than expected.</em></p></div></div><div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>In 2–3 sentences, describe the difference between operational discipline in Recovery phase and operational discipline in Peak (Hypersupply) phase. What changes about what operators should prioritize? ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em>Recovery phase operational discipline prioritizes foundation-building: building a quality resident base, accepting slower lease-up in exchange for resident quality, and establishing operational standards that will distinguish the portfolio through Expansion. Peak (<strong>Hypersupply</strong>) phase operational discipline becomes defensive: defending rent levels selectively, investing aggressively in retention of quality residents who will be costly to replace, and maintaining operational fundamentals that distinguish assets when Contraction arrives. The same operator behaves differently in each phase because the operational priorities themselves change.</em></p></div></div><div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator is evaluating two markets simultaneously. Market A shows: declining transaction volume, expanding concessions, lengthening days on market, and softening rent growth. Market B shows: cap rate stabilization after a multi-year decline, modest rent growth, returning capital partners, and elevated but improving vacancy. Identify which phase each market is in and explain how the same operator should approach acquisitions differently in each. ---</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p>*Market A is in Peak / <strong>Hypersupply</strong> or early Contraction (declining transaction volume, expanding concessions, lengthening days on market, softening rent growth all indicate **supply pressure exceeding demand). Market B is in Recovery (cap rate stabilization after decline, modest rent growth returning, capital partners returning, improving vacancy all indicate the bottom has formed and stabilization is underway). The operator should approach acquisitions in Market A with extreme selectivity (most opportunities should be passed on) while approaching acquisitions in Market B with disciplined deployment of capital at favorable basis with conservative financing terms locked in for the next cycle. The same operator with the same capital should be cautious in Market A and opportunistic in Market B.*</p></div></div><div class='q' data-a='A'><span class='qn'>Question 7</span><p class='qs'>Which of the following is the most consequential failure mode operators face during Peak / Hypersupply phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Failing to recognize the shift and continuing to deploy Expansion-phase strategies (aggressive acquisitions at peak prices, peak debt terms, aggressive value-add) into a phase where the patterns are about to invert.</button><button class='opt' data-k='B'><span class='k'>B</span>Acting too cautiously and missing operational upside.</button><button class='opt' data-k='C'><span class='k'>C</span>Diversifying geographically across submarkets.</button><button class='opt' data-k='D'><span class='k'>D</span>Investing in retention programs for existing residents. **</button></div><div class='expl'><span class='lbl'>Why</span><p>--- <em>The most consequential failure during Peak / <strong>Hypersupply</strong> is continuing to deploy Expansion-phase strategies into a phase where the patterns are about to invert. The frameworks that produced strong returns during Expansion produce overpayment, over-leverage, and operational vulnerability when applied to Peak conditions. The operators who outperform across cycles distinguish themselves by what they didn’t buy during Peak.</em> **</p></div></div><div class='kcscore' id='score'></div><div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong phase recognition. Proceed to Lesson 1.1.3 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the relevant phase signatures in Lesson 1.1.2 before proceeding. Focus especially on the Peak / Hypersupply characteristics and the applied scenario.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 1.1.2 in full. Phase recognition is the foundational skill—every subsequent module assumes you can identify which phase a market is in.</p></div></div></div></section>
+
+<nav class="lnav"><a href='1-1-1.html'>&larr; Previous<span>What Is a Market Cycle</span></a><a href='1-1-3.html' style='text-align:right'>Next &rarr;<span>The Big 3</span></a></nav>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Lesson 1.1.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Move on to the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>
