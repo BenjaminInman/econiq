@@ -32,13 +32,29 @@ a{color:var(--gold)}
 .rprog{height:2px;background:var(--well)}
 .rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
 
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);border-bottom:1px solid rgba(255,255,255,.10);position:relative;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.16), transparent 62%)}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.20;pointer-events:none}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
 /* article */
-.lead{width:min(1080px,92vw);margin:0 auto;padding:52px 0 10px}
 .eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
  font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
 .deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
-.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px;border-top:1px solid var(--line)}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
 .leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
 
 article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
@@ -120,17 +136,21 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 <header class="rbar">
   <div class="rbar-in">
     <a class="rmark" href="../recon.html"><img src="../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
-    <span class="rmeta">Recon &middot; Part One &middot; Lesson 1.1.3</span>
+    <span class="rmeta">Recon &middot; Lesson 1.1.3</span>
     <a class="rexit" href="index.html">All lessons</a>
   </div>
   <div class="rprog"><i id="pg"></i></div>
 </header>
 
-<div class="lead">
+<div class="hero">
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
   <p class="eyebrow">Lesson 1.1.3</p>
   <h1>A Brief History of The Big 3</h1>
   <p class='deck'>Understanding the Business Cycle, the Real Estate Cycle, and the Long-Term Debt Cycle.</p>
-  <div class="leadmeta"><span>803 words</span><span>4 min read</span><span>7 questions</span></div>
+  <div class="leadmeta"><span><b>803</b> words</span><span><b>4</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
 </div>
 
 <article><div class='epi'><p><em>“Those who cannot remember the past are doomed to repeat it.”</em></p><cite>George Santayana</cite></div>
