@@ -142,11 +142,12 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
 .idxbar span{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:8px}
 
 .hero{background:var(--deep);position:relative;overflow:hidden;border-bottom:1px solid rgba(217,178,94,.55);box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
-.hero:before{content:"";position:absolute;inset:0;pointer-events:none;
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
  background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),url('../assets/econiq-hero-texture.jpg');background-size:cover;background-position:center 62%}
 .hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none}
 .hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
-.hero-in{width:min(760px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.hero-in{width:min(760px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:2}
 .hero-in .eyebrow{color:#D9B25E}
 .hero-in h1{font-family:var(--disp);font-weight:600;font-size:clamp(2rem,4vw,2.8rem);letter-spacing:-.02em;margin:0 0 12px;color:#F2F3EF}
 .hero-in .deck{color:#A9BBAC;font-family:var(--ed);font-style:italic;font-size:1.16rem;max-width:56ch;margin:0}
@@ -167,6 +168,7 @@ article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing
   <a class="rexit" href="../recon.html">Course page</a>
 </div><div class="rprog"><i style="width:0"></i></div></header>
 <section class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
   <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
   <div class="hero-in">
     <p class="eyebrow">Recon &middot; Tier One</p>
