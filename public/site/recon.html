@@ -158,10 +158,12 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 .mods details[open] summary:after{content:"\2013"}
 .mods details > p{padding:0 22px 20px;margin:0;font-size:.92rem;max-width:78ch}
 .mods details[open]{border-color:rgba(224,169,59,.35)}
-.instr{display:grid;grid-template-columns:.55fr 1.45fr;gap:44px;align-items:center}
-.instr .por{aspect-ratio:3/4;min-height:280px}
+.instr{display:block}
+.instr .por{aspect-ratio:3/2;overflow:hidden;border-radius:var(--r);border:1px solid var(--line);box-shadow:0 20px 44px rgba(0,0,0,.5);margin-bottom:38px}
+.instr .por img{width:100%;height:100%;object-fit:cover;display:block}
+.instr > div:last-child{max-width:74ch}
 .instr blockquote{font-family:var(--editorial);font-style:italic;font-size:1.25rem;line-height:1.45;color:var(--platinum);border-left:2px solid var(--amber);padding-left:22px;margin:0 0 20px}
-@media(max-width:900px){.instr{grid-template-columns:1fr;gap:28px}}
+
 .faq details{border-bottom:1px solid var(--line)}
 .faq summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--display);font-weight:500;font-size:1.02rem;display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--platinum)}
 .faq summary::-webkit-details-marker{display:none}
@@ -333,7 +335,7 @@ body.no-rail .srail{display:none}
 
 <section class="sec" id="instructor">
   <div class="wrap instr">
-    <div class="ph por"><span>Portrait<br>3:4</span></div>
+    <div class="por"><img src="assets/instructor-desk.jpg" alt="Benjamin Inman working through the Econiq framework"></div>
     <div>
       <p class="eyebrow">Instructor</p>
       <blockquote>I didn't lose properties because I picked bad deals. I lost them because I bought into a phase I couldn't yet name.</blockquote>
