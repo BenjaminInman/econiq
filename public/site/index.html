@@ -81,7 +81,8 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 .hero .sub{font-size:1.06rem;max-width:48ch;margin:20px 0 28px}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
 .hero-micro{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--olive-lift);margin-top:18px}
-.hero-media{aspect-ratio:4/3;min-height:280px}
+.hero-media{aspect-ratio:3/2;min-height:280px;overflow:hidden;border-radius:var(--r);border:1px solid var(--line);box-shadow:0 20px 44px rgba(0,0,0,.5)}
+.hero-media img{width:100%;height:100%;object-fit:cover;display:block}
 @media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:36px}}
 
 /* trust bar */
@@ -366,7 +367,7 @@ body.no-rail .srail{display:none}
       </div>
       <p class="hero-micro">$500M+ acquired · 4,500 units · Two full cycles</p>
     </div>
-    <div class="ph hero-media"><span>Hero video or property image<br>16:9 or 4:3 · VSL slot</span></div>
+    <div class="hero-media"><img src="assets/hero-founder.jpg" alt="Benjamin Inman"></div>
   </div>
 </section>
 
