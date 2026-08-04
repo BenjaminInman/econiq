@@ -53,7 +53,7 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 @media(max-width:940px){.nav-links a:not(.btn){display:none}}
 
 /* hero */
-.hero{padding:76px 0 62px}
+
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
 .hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
 .hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
@@ -122,7 +122,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
 .ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
-.hero{padding:66px 0 50px}
+
 .hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
 .feat{list-style:none;padding:0;margin:22px 0 26px}
 .feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
@@ -166,6 +166,26 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 .srail a:hover svg{fill:var(--amber)}
 body.no-rail .srail{display:none}
 @media(max-width:1180px){.srail{display:none}}
+
+/* page hero band — mirrors the course reader */
+.hero{padding:0;background:var(--forest-black);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(201,162,75,.55);box-shadow:inset 0 -3px 0 -2px rgba(201,162,75,.28)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.80) 40%,rgba(11,19,10,.52) 100%),
+   url('assets/econiq-hero-texture.jpg');background-size:cover;background-position:center 62%}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(224,169,59,.18), transparent 60%)}
+.hero .instr-svg{position:absolute;right:2%;top:50%;transform:translateY(-50%);
+ width:min(430px,40%);opacity:.9;pointer-events:none;z-index:1}
+.hero .wrap{position:relative;z-index:2;padding:62px 0 54px}
+.hero .eyebrow{color:var(--amber)}
+.hero h1{color:#F2F3EF}
+.hero .sub{color:#A9BBAC}
+.herostats{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;padding-top:20px;
+ border-top:1px solid rgba(255,255,255,.14)}
+.herostats span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8FA394}
+.herostats b{color:var(--gold);font-weight:500}
+@media(max-width:900px){.hero .instr-svg{display:none}.hero .wrap{padding:48px 0 42px}}
 </style>
 </head>
 <body>
@@ -186,10 +206,29 @@ body.no-rail .srail{display:none}
   </div>
 </header>
 
-<section class="hero"><div class="wrap" style="max-width:58ch">
+<section class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="instr-svg" viewBox="0 0 430 260" aria-hidden="true">
+ <g stroke="#4C4739" stroke-width="1.4">
+  <path d="M18,86 L410,86" opacity=".5"/><path d="M18,150 L410,150" opacity=".5"/><path d="M18,214 L410,214" opacity=".5"/>
+ </g>
+ <path d="M18,86 C70,80 96,66 132,52 C186,32 226,58 272,64 C322,70 372,52 410,42"
+   fill="none" stroke="#E0A93B" stroke-width="1.8"/>
+ <path d="M18,150 C70,148 96,140 132,132 C186,120 226,140 272,146 C322,152 372,138 410,130"
+   fill="none" stroke="#867C65" stroke-width="1.6"/>
+ <path d="M18,214 C70,214 96,210 132,206 C186,198 226,212 272,216 C322,220 372,212 410,208"
+   fill="none" stroke="#555044" stroke-width="1.6"/>
+ <g font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="1.7" text-anchor="end">
+  <text x="410" y="30" fill="#E0A93B">LEADING</text>
+  <text x="410" y="120" fill="#8FA394">COINCIDENT</text>
+  <text x="410" y="198" fill="#6E664F">TRAILING</text>
+ </g>
+</svg>
+<div class="wrap" style="max-width:58ch">
   <p class="eyebrow">The tool</p>
   <h1>Cignal System</h1>
   <p class="sub">Econiq Method teaches you to read the cycle. Cignal System runs that read every morning &mdash; against your markets, with the indicators sorted by when they actually move.</p>
+    <div class="herostats"><span><b>68</b> indicators</span><span><b>670+</b> metros</span><span><b>9K</b> zip codes</span><span><b>3.9M+</b> data points</span></div>
 </div></section>
 
 <section class="sec"><div class="wrap split">

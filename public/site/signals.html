@@ -53,7 +53,7 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 @media(max-width:940px){.nav-links a:not(.btn){display:none}}
 
 /* hero */
-.hero{padding:76px 0 62px}
+
 .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
 .hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
 .hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
@@ -122,7 +122,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
 .ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
-.hero{padding:66px 0 50px}
+
 .hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
 .feat{list-style:none;padding:0;margin:22px 0 26px}
 .feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
@@ -180,6 +180,26 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 .srail a:hover svg{fill:var(--amber)}
 body.no-rail .srail{display:none}
 @media(max-width:1180px){.srail{display:none}}
+
+/* page hero band — mirrors the course reader */
+.hero{padding:0;background:var(--forest-black);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(201,162,75,.55);box-shadow:inset 0 -3px 0 -2px rgba(201,162,75,.28)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.80) 40%,rgba(11,19,10,.52) 100%),
+   url('assets/econiq-hero-texture.jpg');background-size:cover;background-position:center 62%}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(224,169,59,.18), transparent 60%)}
+.hero .instr-svg{position:absolute;right:2%;top:50%;transform:translateY(-50%);
+ width:min(430px,40%);opacity:.9;pointer-events:none;z-index:1}
+.hero .wrap{position:relative;z-index:2;padding:62px 0 54px}
+.hero .eyebrow{color:var(--amber)}
+.hero h1{color:#F2F3EF}
+.hero .sub{color:#A9BBAC}
+.herostats{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;padding-top:20px;
+ border-top:1px solid rgba(255,255,255,.14)}
+.herostats span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8FA394}
+.herostats b{color:var(--gold);font-weight:500}
+@media(max-width:900px){.hero .instr-svg{display:none}.hero .wrap{padding:48px 0 42px}}
 </style>
 </head>
 <body>
@@ -200,10 +220,28 @@ body.no-rail .srail{display:none}
   </div>
 </header>
 
-<section class="hero"><div class="wrap" style="max-width:58ch">
+<section class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="instr-svg" viewBox="0 0 430 260" aria-hidden="true">
+ <path d="M20,150 L410,150" stroke="#4C4739" stroke-width="1.4"/>
+ <g stroke="#555044" stroke-width="1.6">
+  <path d="M60,150 L60,120"/><path d="M118,150 L118,128"/><path d="M176,150 L176,116"/>
+  <path d="M234,150 L234,130"/><path d="M292,150 L292,122"/>
+ </g>
+ <path d="M360,150 L360,96" stroke="#E0A93B" stroke-width="2.2"/>
+ <circle cx="360" cy="92" r="6" fill="#E0A93B"/>
+ <circle cx="360" cy="92" r="14" fill="none" stroke="rgba(224,169,59,.4)" stroke-width="1.2"/>
+ <g font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="1.6">
+  <text x="360" y="70" text-anchor="middle" fill="#E0A93B">LATEST</text>
+  <text x="20" y="176" fill="#6E664F">DATED</text>
+  <text x="410" y="176" text-anchor="end" fill="#6E664F">ON THE RECORD</text>
+ </g>
+</svg>
+<div class="wrap" style="max-width:58ch">
   <p class="eyebrow">Signals</p>
   <h1>Calls on the record, dated.</h1>
   <p class="sub">Every phase read gets published with a date and stays up &mdash; whether it holds or not. The framework is new, so rather than ask you to take my word for it, the record builds in public.</p>
+    <div class="herostats"><span>Dated</span><span>Never edited</span><span>Never removed</span></div>
 </div></section>
 
 <section class="sec"><div class="wrap">
