@@ -17,9 +17,8 @@
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--forest-black);color:var(--platinum);font-family:var(--body);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
-a{color:inherit}
+a{color:inherit;text-decoration:none}
 .wrap{width:min(1200px,92vw);margin:0 auto}
-.narrow{width:min(760px,92vw);margin:0 auto}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 h1,h2,h3{font-family:var(--display);font-weight:600;letter-spacing:-.02em;margin:0;line-height:1.12}
 h1{font-size:clamp(2.2rem,4.4vw,3.4rem)}
@@ -27,9 +26,8 @@ h2{font-size:clamp(1.6rem,2.8vw,2.2rem)}
 h3{font-size:1.08rem;letter-spacing:-.01em}
 p{margin:0 0 18px;color:var(--muted)}
 .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
-.sec{padding:84px 0;border-top:1px solid var(--line)}
 
-.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
+.btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);border:1px solid transparent;cursor:pointer;transition:all .18s;text-decoration:none}
 .btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
 .btn-amber:hover{background:#EDB94A}
 .btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
@@ -41,7 +39,7 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 .wordmark{flex:none;display:block;line-height:0}
 .wordmark img{width:104px;height:auto;display:block}
 .nav-links{display:flex;gap:22px;align-items:center}
-.nav-links a{font-size:.88rem;color:var(--muted);text-decoration:none}
+.nav-links a{font-size:.88rem;color:var(--muted);}
 .nav-links a:hover{color:var(--platinum)}
 .nav-links a.on{color:var(--platinum)}
 .nav-links a.btn{font-family:var(--body);font-size:.83rem;letter-spacing:0;text-transform:none;padding:9px 16px}
@@ -52,49 +50,66 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(201,162,75,.07),transparent);pointer-events:none}
 .hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
 .hero .sub{font-size:1.06rem;margin:22px 0 32px;max-width:54ch;color:var(--muted)}
-.hero-meta{display:flex;gap:28px;align-items:center}
+.hero-meta{display:flex;gap:28px;align-items:center;flex-wrap:wrap}
 .hero-meta span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive-lift)}
 .hero-meta span::before{content:'—';margin-right:8px;color:var(--gold)}
 
 /* FILTER BAR */
-.filter-bar{padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:0}
-.filter-bar-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filter-bar{border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.filter-bar-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:18px 0}
 .filter-label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);margin-right:6px}
-.ftag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid rgba(223,225,219,.14);color:var(--muted);background:transparent;cursor:pointer;transition:all .16s;text-decoration:none}
+.ftag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid rgba(223,225,219,.14);color:var(--muted);background:transparent;cursor:pointer;transition:all .16s}
 .ftag:hover,.ftag.active{border-color:var(--gold);color:var(--gold);background:rgba(201,162,75,.06)}
 
 /* FEED */
-.feed{padding:64px 0 96px}
+.feed{padding:56px 0 96px}
 .feed-grid{display:flex;flex-direction:column;gap:2px}
+
+/* WEEK LABEL */
+.week-label{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive-dim);padding:28px 0 10px;display:flex;align-items:center;gap:16px}
+.week-label::after{content:'';flex:1;height:1px;background:var(--line)}
 
 /* POST CARD */
 .post{border:1px solid var(--line);border-radius:6px;background:var(--forest-panel);overflow:hidden;transition:border-color .18s}
-.post:hover{border-color:rgba(201,162,75,.3)}
-.post-inner{padding:34px 38px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
-@media(max-width:680px){.post-inner{grid-template-columns:1fr;padding:26px 22px}}
+.post:hover{border-color:rgba(201,162,75,.28)}
+.post-inner{padding:32px 36px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+@media(max-width:680px){.post-inner{grid-template-columns:1fr;padding:24px 20px}}
 
-.post-meta{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.post-meta{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:12px}
 .post-type{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-weight:500}
 .type-brief{background:rgba(201,162,75,.1);color:var(--gold);border:1px solid rgba(201,162,75,.22)}
 .type-deep{background:rgba(255,255,255,.05);color:var(--platinum);border:1px solid rgba(223,225,219,.18)}
 .post-date{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--olive-lift);text-transform:uppercase}
-.post-signal-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
-.stag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid rgba(223,225,219,.1);color:var(--olive-lift)}
 
-.post h3{font-size:1.18rem;letter-spacing:-.02em;color:var(--platinum);margin-bottom:10px;line-height:1.25}
-.post .deck{font-size:.9rem;color:var(--muted);line-height:1.6;margin:0;max-width:68ch}
-.post .commentary{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
-.post .commentary p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.65}
-.post .commentary strong{color:var(--platinum);font-weight:600}
+.post-cats{display:flex;gap:7px;flex-wrap:wrap;margin-top:8px}
+.pcat{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid rgba(223,225,219,.1);color:var(--olive-lift)}
 
-.post-cta{flex:none;text-align:right}
-.post-cta a{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.post h3{font-size:1.16rem;letter-spacing:-.02em;color:var(--platinum);margin:14px 0 10px;line-height:1.25}
+.post .dek{font-size:.9rem;color:var(--muted);line-height:1.6;margin:0;max-width:68ch}
+
+/* Ticker chips */
+.ticker-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.chip{background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:var(--r);padding:8px 12px}
+.chip-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--olive);display:block;margin-bottom:2px}
+.chip-value{font-family:var(--mono);font-size:12px;font-weight:500;color:var(--platinum)}
+
+/* Signal section */
+.signal-band{margin-top:16px;padding:14px 16px;background:rgba(201,162,75,.04);border:1px solid rgba(201,162,75,.12);border-radius:var(--r)}
+.signal-label{font-family:var(--mono);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:6px}
+.signal-text{font-size:.86rem;color:var(--muted);line-height:1.6;margin:0}
+
+.post-cta{flex:none}
+.post-cta a{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:6px;white-space:nowrap}
 .post-cta a:hover{color:var(--amber)}
 .post-cta a::after{content:'→'}
 
-/* DIVIDER LABEL */
-.week-divider{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive-dim);padding:28px 0 12px;display:flex;align-items:center;gap:16px}
-.week-divider::after{content:'';flex:1;height:1px;background:var(--line)}
+/* STATES */
+.state{padding:72px 0;text-align:center}
+.state p{color:var(--olive);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin:0}
+.spinner{width:24px;height:24px;border:2px solid rgba(201,162,75,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.load-more-wrap{text-align:center;padding:40px 0 0}
 
 /* SUBSCRIBE */
 .sub-band{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:58px 0}
@@ -111,7 +126,7 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 .foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .foot p{font-size:.78rem;color:var(--olive);margin:0}
 .foot nav{display:flex;gap:18px;flex-wrap:wrap}
-.foot nav a{font-size:.78rem;color:var(--olive);text-decoration:none}
+.foot nav a{font-size:.78rem;color:var(--olive)}
 .foot nav a:hover{color:var(--platinum)}
 </style>
 </head>
@@ -128,121 +143,51 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
   <div class="wrap">
     <p class="eyebrow">Market Reads</p>
     <h1>The week's signals,<br><em>with context.</em></h1>
-    <p class="sub">Real news. Framework commentary. Every article we cover gets tied back to the cycle — which signal it activates, what operators and investors should do about it.</p>
+    <p class="sub">Real news. Framework commentary. Every article we cover gets tied back to the cycle — which signal it activates, what operators and investors should know about it.</p>
     <div class="hero-meta">
+      <span>Daily feed</span>
       <span>Weekly Signal Brief</span>
       <span>Deep Dives</span>
-      <span>Signal-tagged</span>
     </div>
   </div>
 </section>
 
 <div class="filter-bar">
   <div class="wrap filter-bar-in">
-    <span class="filter-label">Filter by signal</span>
-    <a href="#" class="ftag active">All</a>
-    <a href="#" class="ftag">Interest Rates</a>
-    <a href="#" class="ftag">Employment</a>
-    <a href="#" class="ftag">Supply &amp; Construction</a>
-    <a href="#" class="ftag">Inflation</a>
-    <a href="#" class="ftag">Consumer Demand</a>
-    <a href="#" class="ftag">Capital Markets</a>
-    <a href="#" class="ftag">Submarket</a>
+    <span class="filter-label">Filter</span>
+    <button class="ftag active" data-cat="">All</button>
+    <button class="ftag" data-cat="rates">Interest Rates</button>
+    <button class="ftag" data-cat="demand">Employment</button>
+    <button class="ftag" data-cat="supply">Supply &amp; Construction</button>
+    <button class="ftag" data-cat="macro">Inflation / Macro</button>
+    <button class="ftag" data-cat="rents">Rents &amp; Occupancy</button>
+    <button class="ftag" data-cat="capital_markets">Capital Markets</button>
+    <button class="ftag" data-cat="distress">Distress</button>
   </div>
 </div>
 
 <section class="feed">
   <div class="wrap">
-    <div class="feed-grid">
-
-      <!-- WEEK DIVIDER -->
-      <div class="week-divider">Week of Aug 18, 2026</div>
-
-      <!-- POST 1: Weekly Brief -->
-      <article class="post">
-        <div class="post-inner">
-          <div>
-            <div class="post-meta">
-              <span class="post-type type-brief">Weekly Signal Brief</span>
-              <span class="post-date">Aug 22, 2026</span>
-            </div>
-            <div class="post-signal-tags">
-              <span class="stag">Interest Rates</span>
-              <span class="stag">Employment</span>
-              <span class="stag">Inflation</span>
-              <span class="stag">Supply &amp; Construction</span>
-            </div>
-            <h3 style="margin-top:16px">This Week in the Cycle — Signals Stacking, But Not All in the Same Direction</h3>
-            <p class="deck">Fed minutes revealed continued disagreement on the pace of future cuts. Payrolls came in softer than expected for the second consecutive month. Multifamily permit pulls declined for the third straight quarter nationally — while concession depth in Sunbelt submarkets widened again.</p>
-            <div class="commentary">
-              <p><strong>What this means:</strong> The employment signal is doing what late-cycle employment signals do — softening slowly before the headline number confirms it. Two consecutive softer prints aren't noise. The permit decline is the one worth watching most closely for multifamily operators: construction pipelines that were locked in 18 months ago are still delivering, but the forward pipeline is thinning. That gap between current deliveries and forward supply is a submarket-level signal, not a national one — which is exactly why Sunbelt data needs to be read city by city, not as a regional average.</p>
-            </div>
-          </div>
-          <div class="post-cta"><a href="#">Read full brief</a></div>
-        </div>
-      </article>
-
-      <!-- POST 2: Deep Dive -->
-      <article class="post">
-        <div class="post-inner">
-          <div>
-            <div class="post-meta">
-              <span class="post-type type-deep">Deep Dive</span>
-              <span class="post-date">Aug 19, 2026</span>
-            </div>
-            <div class="post-signal-tags">
-              <span class="stag">Interest Rates</span>
-              <span class="stag">Capital Markets</span>
-            </div>
-            <h3 style="margin-top:16px">The Fed Held — Again. Here's Why That's Not a Neutral Signal.</h3>
-            <p class="deck">The Federal Reserve held rates steady at its August meeting, citing "persistent core services inflation" as the primary constraint. Most coverage framed this as a non-event. We'd frame it differently.</p>
-            <div class="commentary">
-              <p><strong>Framework read:</strong> A hold is not neutral when the market has already priced in cuts. When rate cuts are consensus and they don't arrive, the behavioral signal shifts — Irrational Exuberance in the capital markets cools faster than the actual rate environment changes. Bridge lenders start repricing. Buyers who underwrote to an assumed rate environment in Q1 are now underwater on their assumptions without a single basis point moving. The signal here isn't the rate itself — it's what the hold does to deal structures that were already signed. Operators with floating-rate debt and upcoming maturity walls should be stress-testing now, not waiting for the next meeting.</p>
-            </div>
-          </div>
-          <div class="post-cta"><a href="#">Read full dive</a></div>
-        </div>
-      </article>
-
-      <!-- WEEK DIVIDER -->
-      <div class="week-divider">Week of Aug 11, 2026</div>
-
-      <!-- POST 3: Weekly Brief -->
-      <article class="post">
-        <div class="post-inner">
-          <div>
-            <div class="post-meta">
-              <span class="post-type type-brief">Weekly Signal Brief</span>
-              <span class="post-date">Aug 15, 2026</span>
-            </div>
-            <div class="post-signal-tags">
-              <span class="stag">Consumer Demand</span>
-              <span class="stag">Inflation</span>
-              <span class="stag">Submarket</span>
-            </div>
-            <h3 style="margin-top:16px">This Week in the Cycle — CPI Surprise, Renewal Spreads, and What Nashville Is Signaling Early</h3>
-            <p class="deck">CPI came in two tenths below consensus, driven by shelter cost deceleration. Renewal-to-new-lease spreads narrowed in three major metros. Nashville recorded its first month of positive net absorption after six months of negative reads.</p>
-            <div class="commentary">
-              <p><strong>What this means:</strong> Shelter deceleration in CPI is a lagging confirmation of what multifamily operators have been seeing in renewal spreads for months — the two just rarely move in sync, which is why the CPI print surprises the market even when operators already knew. Nashville's absorption flip is worth watching as a potential leading indicator for other oversupplied Sunbelt submarkets: it tends to turn before the data catches up. One month isn't a trend, but it goes on the watchlist.</p>
-            </div>
-          </div>
-          <div class="post-cta"><a href="#">Read full brief</a></div>
-        </div>
-      </article>
-
-    </div><!-- /feed-grid -->
+    <div id="feed-grid" class="feed-grid">
+      <div class="state" id="loading-state">
+        <div class="spinner"></div>
+        <p>Pulling latest reads&hellip;</p>
+      </div>
+    </div>
+    <div class="load-more-wrap" id="load-more-wrap" style="display:none">
+      <button class="btn btn-ghost" id="load-more-btn">Load more</button>
+    </div>
   </div>
 </section>
 
-<!-- SUBSCRIBE -->
 <div class="sub-band">
   <div class="wrap" style="max-width:56ch">
     <p class="eyebrow">Stay current</p>
     <h2 style="margin-bottom:12px">Get Market Reads in your inbox.</h2>
     <p style="margin-bottom:22px">Weekly Signal Brief every Monday. Deep Dives when the data warrants one. No filler.</p>
     <div class="form-row">
-      <input type="email" placeholder="you@company.com" aria-label="Email address">
-      <button class="btn btn-amber" type="button">Subscribe</button>
+      <input type="email" id="sub-email" placeholder="you@company.com" aria-label="Email address">
+      <button class="btn btn-amber" type="button" id="sub-btn">Subscribe</button>
     </div>
     <p class="privfine">We'll use your email only to send what you asked for. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
   </div>
@@ -255,5 +200,171 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
     <nav><a href="index.html">Home</a><a href="books.html">Books</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Market Reads</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
   </div>
 </footer>
+
+<script>
+const API = "https://www.cignalsystem.com/api/market-reads";
+const PER_PAGE = 10;
+
+let state = { offset: 0, cat: "", total: 0, loading: false };
+
+// ── Helpers ──────────────────────────────────────────────────────────────────
+function fmtDate(iso) {
+  if (!iso) return "";
+  return new Date(iso).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function weekLabel(iso) {
+  const d = new Date(iso);
+  // Roll back to Monday
+  const day = d.getDay();
+  const diff = (day === 0 ? -6 : 1 - day);
+  const mon = new Date(d);
+  mon.setDate(d.getDate() + diff);
+  return "Week of " + mon.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+}
+
+function renderChips(ticker) {
+  if (!ticker || !ticker.length) return "";
+  const chips = ticker.slice(0, 5).map(c =>
+    `<div class="chip"><span class="chip-label">${c.label || ""}</span><span class="chip-value">${c.value || ""}</span></div>`
+  ).join("");
+  return `<div class="ticker-row">${chips}</div>`;
+}
+
+function renderSignal(signal) {
+  if (!signal || !signal.cycle_read) return "";
+  const t = signal.cycle_read.text || "";
+  if (!t) return "";
+  return `<div class="signal-band"><div class="signal-label">Cycle read</div><p class="signal-text">${t}</p></div>`;
+}
+
+function renderCats(categories) {
+  if (!categories || !categories.length) return "";
+  return `<div class="post-cats">${categories.slice(0, 4).map(c =>
+    `<span class="pcat">${c.replace(/_/g," ")}</span>`).join("")}</div>`;
+}
+
+function cardHTML(post, showWeek, weekStr) {
+  const isDeep = (post.facts_body || []).length >= 3;
+  const typeClass = isDeep ? "type-deep" : "type-brief";
+  const typeLabel = isDeep ? "Deep Dive" : "Signal Brief";
+
+  return `
+    ${showWeek ? `<div class="week-label">${weekStr}</div>` : ""}
+    <article class="post">
+      <div class="post-inner">
+        <div>
+          <div class="post-meta">
+            <span class="post-type ${typeClass}">${typeLabel}</span>
+            <span class="post-date">${fmtDate(post.published_at)}</span>
+          </div>
+          ${renderCats(post.categories)}
+          <h3>${post.headline || ""}</h3>
+          <p class="dek">${post.dek || ""}</p>
+          ${renderChips(post.ticker)}
+          ${renderSignal(post.signal)}
+        </div>
+        <div class="post-cta"><a href="https://www.cignalsystem.com/news" target="_blank" rel="noopener">Read full</a></div>
+      </div>
+    </article>`;
+}
+
+// ── Fetch & render ────────────────────────────────────────────────────────────
+async function loadPosts(append = false) {
+  if (state.loading) return;
+  state.loading = true;
+
+  const grid = document.getElementById("feed-grid");
+  const loadingEl = document.getElementById("loading-state");
+  const moreWrap = document.getElementById("load-more-wrap");
+
+  if (!append) {
+    grid.innerHTML = `<div class="state" id="loading-state"><div class="spinner"></div><p>Pulling latest reads&hellip;</p></div>`;
+  }
+
+  try {
+    const url = `${API}?limit=${PER_PAGE}&offset=${state.offset}${state.cat ? "&cat=" + state.cat : ""}`;
+    const res = await fetch(url);
+    if (!res.ok) throw new Error("fetch failed");
+    const data = await res.json();
+
+    state.total = data.total || 0;
+    const items = data.items || [];
+
+    if (!append) grid.innerHTML = "";
+
+    if (items.length === 0 && !append) {
+      grid.innerHTML = `<div class="state"><p>No reads published yet &mdash; check back soon.</p></div>`;
+      moreWrap.style.display = "none";
+      state.loading = false;
+      return;
+    }
+
+    let lastWeek = append ? grid.dataset.lastWeek || "" : "";
+
+    items.forEach(post => {
+      const wk = weekLabel(post.published_at);
+      const showWeek = wk !== lastWeek;
+      grid.insertAdjacentHTML("beforeend", cardHTML(post, showWeek, wk));
+      lastWeek = wk;
+    });
+
+    grid.dataset.lastWeek = lastWeek;
+    state.offset += items.length;
+
+    // Show/hide load more
+    moreWrap.style.display = state.offset < state.total ? "block" : "none";
+
+  } catch (e) {
+    if (!append) {
+      grid.innerHTML = `<div class="state"><p>Unable to load reads right now &mdash; try refreshing.</p></div>`;
+    }
+    moreWrap.style.display = "none";
+  }
+
+  state.loading = false;
+}
+
+// ── Filter buttons ────────────────────────────────────────────────────────────
+document.querySelectorAll(".ftag").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".ftag").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    state.cat = btn.dataset.cat;
+    state.offset = 0;
+    loadPosts(false);
+  });
+});
+
+// ── Load more ─────────────────────────────────────────────────────────────────
+document.getElementById("load-more-btn").addEventListener("click", () => loadPosts(true));
+
+// ── Subscribe (wires to Cignal System newsletter endpoint) ────────────────────
+document.getElementById("sub-btn").addEventListener("click", async () => {
+  const email = document.getElementById("sub-email").value.trim();
+  const btn = document.getElementById("sub-btn");
+  if (!email || !email.includes("@")) {
+    document.getElementById("sub-email").focus();
+    return;
+  }
+  btn.textContent = "Subscribing…";
+  btn.disabled = true;
+  try {
+    const r = await fetch("https://www.cignalsystem.com/api/newsletter", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, source: "econiqmethod", delivery: "weekly" }),
+    });
+    btn.textContent = r.ok ? "You're in." : "Try again";
+    if (r.ok) btn.style.background = "#4bc878";
+  } catch {
+    btn.textContent = "Try again";
+  }
+  btn.disabled = false;
+});
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+loadPosts(false);
+</script>
 </body>
 </html>
