@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Signals &mdash; Econiq Method</title>
+<title>Market Reads &mdash; Econiq Method</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -29,18 +29,13 @@ p{margin:0 0 18px;color:var(--muted)}
 .eyebrow{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
 .sec{padding:84px 0;border-top:1px solid var(--line)}
 
-.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
-  background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
-  display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
-
 .btn{display:inline-block;font-size:.88rem;font-weight:600;padding:12px 22px;border-radius:var(--r);text-decoration:none;border:1px solid transparent;cursor:pointer;transition:all .18s}
 .btn-amber{background:var(--amber);color:#12100A;border-color:var(--amber)}
 .btn-amber:hover{background:#EDB94A}
 .btn-ghost{border-color:rgba(223,225,219,.22);color:var(--platinum)}
 .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
-.btn-lg{padding:15px 30px;font-size:.95rem}
 
+/* NAV */
 header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;padding:11px 0;gap:20px}
 .wordmark{flex:none;display:block;line-height:0}
@@ -52,232 +47,212 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(11,19,10,.92);backdr
 .nav-links a.btn{font-family:var(--body);font-size:.83rem;letter-spacing:0;text-transform:none;padding:9px 16px}
 @media(max-width:940px){.nav-links a:not(.btn){display:none}}
 
-/* hero */
-
-.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:52px;align-items:center}
+/* HERO */
+.hero{padding:86px 0 72px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(201,162,75,.07),transparent);pointer-events:none}
 .hero h1 em{font-family:var(--editorial);font-style:italic;font-weight:400;color:var(--amber)}
-.hero .sub{font-size:1.06rem;margin:22px 0 0;max-width:50ch}
-.portrait{aspect-ratio:3/4;min-height:340px}
-@media(max-width:940px){.hero-grid{grid-template-columns:1fr;gap:34px}}
+.hero .sub{font-size:1.06rem;margin:22px 0 32px;max-width:54ch;color:var(--muted)}
+.hero-meta{display:flex;gap:28px;align-items:center}
+.hero-meta span{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive-lift)}
+.hero-meta span::before{content:'—';margin-right:8px;color:var(--gold)}
 
-/* narrative */
-.pull{font-family:var(--editorial);font-style:italic;font-size:1.45rem;line-height:1.45;color:var(--platinum);
-  border-left:2px solid var(--amber);padding-left:26px;margin:0 0 30px}
-.body-copy p{font-size:1.03rem}
-.body-copy p strong{color:var(--platinum);font-weight:500}
-.body-copy h3{margin:38px 0 14px;color:var(--platinum)}
+/* FILTER BAR */
+.filter-bar{padding:22px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:0}
+.filter-bar-in{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.filter-label{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--olive);margin-right:6px}
+.ftag{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;padding:5px 12px;border-radius:20px;border:1px solid rgba(223,225,219,.14);color:var(--muted);background:transparent;cursor:pointer;transition:all .16s;text-decoration:none}
+.ftag:hover,.ftag.active{border-color:var(--gold);color:var(--gold);background:rgba(201,162,75,.06)}
 
-/* timeline */
-.tl{border-left:1px solid var(--line);padding-left:34px;max-width:70ch}
-.tl-item{position:relative;padding-bottom:34px}
-.tl-item:last-child{padding-bottom:0}
-.tl-item:before{content:"";position:absolute;left:-39px;top:9px;width:9px;height:9px;border-radius:50%;background:var(--forest-black);border:1.5px solid var(--olive)}
-.tl-item.key:before{background:var(--amber);border-color:var(--amber)}
-.tl-item .yr{font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:7px}
-.tl-item h3{margin-bottom:8px}
-.tl-item p{font-size:.95rem;margin:0}
+/* FEED */
+.feed{padding:64px 0 96px}
+.feed-grid{display:flex;flex-direction:column;gap:2px}
 
-/* stats */
-.stats{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line)}
-.stat{background:var(--forest-panel);padding:30px 24px}
-.stat b{display:block;font-family:var(--mono);font-size:1.5rem;color:var(--gold);font-weight:500}
-.stat small{display:block;font-size:.76rem;color:var(--muted);margin-top:6px}
-.stats-note{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--olive-lift);padding-top:16px}
-@media(max-width:720px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+/* POST CARD */
+.post{border:1px solid var(--line);border-radius:6px;background:var(--forest-panel);overflow:hidden;transition:border-color .18s}
+.post:hover{border-color:rgba(201,162,75,.3)}
+.post-inner{padding:34px 38px;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:start}
+@media(max-width:680px){.post-inner{grid-template-columns:1fr;padding:26px 22px}}
 
-/* honest box */
-.honest{background:var(--forest-panel);border:1px solid rgba(201,162,75,.3);border-radius:var(--r);padding:38px 40px;max-width:78ch}
-.honest h3{margin-bottom:14px;font-size:1.3rem}
-.honest p:last-child{margin:0}
-@media(max-width:760px){.honest{padding:26px 22px}}
+.post-meta{display:flex;gap:10px;align-items:center;margin-bottom:14px;flex-wrap:wrap}
+.post-type{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;padding:4px 10px;border-radius:20px;font-weight:500}
+.type-brief{background:rgba(201,162,75,.1);color:var(--gold);border:1px solid rgba(201,162,75,.22)}
+.type-deep{background:rgba(255,255,255,.05);color:var(--platinum);border:1px solid rgba(223,225,219,.18)}
+.post-date{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--olive-lift);text-transform:uppercase}
+.post-signal-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:6px}
+.stag{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:20px;border:1px solid rgba(223,225,219,.1);color:var(--olive-lift)}
 
-/* for-whom */
-.fw{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-.fw-col{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:28px 26px}
-.fw-col h3{margin-bottom:16px}
-.fw-col ul{list-style:none;padding:0;margin:0}
-.fw-col li{font-size:.92rem;color:var(--muted);padding:10px 0 10px 22px;position:relative;border-bottom:1px solid var(--line)}
-.fw-col li:last-child{border-bottom:0}
-.fw-col li:before{content:"";position:absolute;left:0;top:19px;width:7px;height:1px;background:var(--amber)}
-.fw-col.no li:before{background:var(--olive)}
-@media(max-width:840px){.fw{grid-template-columns:1fr}}
+.post h3{font-size:1.18rem;letter-spacing:-.02em;color:var(--platinum);margin-bottom:10px;line-height:1.25}
+.post .deck{font-size:.9rem;color:var(--muted);line-height:1.6;margin:0;max-width:68ch}
+.post .commentary{margin-top:16px;padding-top:16px;border-top:1px solid var(--line)}
+.post .commentary p{font-size:.88rem;color:var(--muted);margin:0;line-height:1.65}
+.post .commentary strong{color:var(--platinum);font-weight:600}
 
-/* cta */
-.cta{background:var(--forest-panel);text-align:center}
-.cta h2{margin-bottom:16px}
-.cta p{max-width:56ch;margin:0 auto 26px}
+.post-cta{flex:none;text-align:right}
+.post-cta a{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);text-decoration:none;display:flex;align-items:center;gap:6px;white-space:nowrap}
+.post-cta a:hover{color:var(--amber)}
+.post-cta a::after{content:'→'}
 
-footer{padding:46px 0;border-top:1px solid var(--line)}
-.foot-mark{margin-bottom:22px;line-height:0}
-.foot-mark img{width:104px;height:auto;display:block;opacity:.9}
-.foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}
-.foot p{margin:0;font-size:.8rem}
-.foot nav{display:flex;gap:22px;flex-wrap:wrap}
-.foot nav a{font-size:.8rem;color:var(--muted);text-decoration:none}
-@media(prefers-reduced-motion:reduce){*{transition:none!important}html{scroll-behavior:auto}}
+/* DIVIDER LABEL */
+.week-divider{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--olive-dim);padding:28px 0 12px;display:flex;align-items:center;gap:16px}
+.week-divider::after{content:'';flex:1;height:1px;background:var(--line)}
 
-
-.ph{position:relative;border:1px dashed rgba(146,138,119,.42);border-radius:var(--r);
- background:repeating-linear-gradient(45deg,transparent,transparent 9px,rgba(146,138,119,.06) 9px,rgba(146,138,119,.06) 18px);
- display:flex;align-items:center;justify-content:center;text-align:center;padding:20px}
-.ph span{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--olive-lift);line-height:1.7}
-
-.hero .sub{font-size:1.05rem;margin:20px 0 0;max-width:52ch}
-.feat{list-style:none;padding:0;margin:22px 0 26px}
-.feat li{font-size:.93rem;color:var(--muted);padding:11px 0 11px 22px;position:relative;border-bottom:1px solid var(--line)}
-.feat li:last-child{border-bottom:0}
-.feat li:before{content:"";position:absolute;left:0;top:20px;width:7px;height:1px;background:var(--amber)}
-.faq details{border-bottom:1px solid var(--line)}
-.faq summary{cursor:pointer;list-style:none;padding:20px 0;font-family:var(--display);font-weight:500;font-size:1.02rem;
- display:flex;justify-content:space-between;gap:20px;align-items:center;color:var(--platinum)}
-.faq summary::-webkit-details-marker{display:none}
-.faq summary:after{content:"+";font-family:var(--mono);color:var(--gold)}
-.faq details[open] summary:after{content:"\2013"}
-.faq details p{padding:0 0 22px;margin:0;font-size:.94rem;max-width:70ch}
-
-.lead-post{background:var(--forest-panel);border:1px solid rgba(224,169,59,.35);border-radius:var(--r);overflow:hidden;
- display:grid;grid-template-columns:1.05fr .95fr;margin-bottom:26px;text-decoration:none}
-.lead-post .im{aspect-ratio:16/10;border:0;border-radius:0}
-.lead-post .tx{padding:34px 32px;display:flex;flex-direction:column;justify-content:center}
-.lead-post h2{font-size:1.6rem;margin-bottom:12px}
-.lead-post p{font-size:.94rem;margin:0}
-@media(max-width:900px){.lead-post{grid-template-columns:1fr}}
-.meta{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-.posts{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-.post{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:24px 22px;text-decoration:none;display:block;transition:border-color .2s}
-.post:hover{border-color:rgba(224,169,59,.42)}
-.post h3{font-size:1rem;margin-bottom:8px}
-.post p{font-size:.86rem;margin:0}
-@media(max-width:900px){.posts{grid-template-columns:1fr}}
-.pledge{background:var(--forest-panel);border:1px solid var(--line);border-radius:var(--r);padding:32px 34px;max-width:80ch}
-.pledge p:last-child{margin:0}
-.form-row{display:flex;gap:10px;flex-wrap:wrap;max-width:520px}
-.form-row input{flex:1;min-width:220px;background:var(--forest-black);border:1px solid var(--line);border-radius:var(--r);
- padding:13px 15px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
-.form-row input::placeholder{color:var(--muted)}
-.form-row input:focus{outline:none;border-color:var(--amber)}
-
-
-.privfine{font-size:.76rem;color:var(--olive-lift);margin-top:11px;line-height:1.55}
+/* SUBSCRIBE */
+.sub-band{background:var(--forest-panel);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:58px 0}
+.form-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.form-row input{flex:1;min-width:220px;background:rgba(255,255,255,.04);border:1px solid rgba(223,225,219,.18);border-radius:var(--r);padding:12px 16px;color:var(--platinum);font-family:var(--body);font-size:.92rem}
+.form-row input::placeholder{color:var(--olive)}
+.form-row input:focus{outline:2px solid var(--amber);border-color:transparent}
+.privfine{font-size:.78rem;color:var(--olive);margin-top:12px}
 .privfine a{color:var(--gold)}
 
-.empty{background:var(--forest-panel);border:1px dashed rgba(146,138,119,.4);border-radius:var(--r);padding:44px 42px;text-align:left}
-.empty p:last-child{margin:0}
-@media(max-width:700px){.empty{padding:28px 22px}}
-
-/* ---- floating social rail ---- */
-.srail{position:fixed;left:0;top:50%;transform:translateY(-50%);z-index:70;
-  display:flex;flex-direction:column;align-items:center;gap:20px;
-  padding:26px 16px;background:rgba(18,30,16,.72);backdrop-filter:blur(8px);
-  border:1px solid var(--line);border-left:0;border-radius:0 var(--r) var(--r) 0}
-.srail-lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;
-  color:var(--olive-lift);writing-mode:vertical-rl;transform:rotate(180deg);margin-bottom:2px}
-.srail-line{width:1px;height:26px;background:var(--line)}
-.srail a{display:block;line-height:0;opacity:.62;transition:opacity .18s,transform .18s}
-.srail a:hover{opacity:1;transform:translateX(2px)}
-.srail svg{width:30px;height:30px;fill:var(--platinum)}
-.srail a:hover svg{fill:var(--amber)}
-body.no-rail .srail{display:none}
-@media(max-width:1180px){.srail{display:none}}
-
-/* page hero band — mirrors the course reader */
-.hero{padding:0;background:var(--forest-black);position:relative;overflow:hidden;
- border-bottom:1px solid rgba(201,162,75,.55);box-shadow:inset 0 -3px 0 -2px rgba(201,162,75,.28)}
-.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
- background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.80) 40%,rgba(11,19,10,.52) 100%),
-   url('assets/econiq-hero-texture.jpg');background-size:cover;background-position:center 62%}
-.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
- background:radial-gradient(120% 90% at 78% 8%, rgba(224,169,59,.18), transparent 60%)}
-.hero .instr-svg{position:absolute;right:2%;top:50%;transform:translateY(-50%);
- width:min(430px,40%);opacity:.9;pointer-events:none;z-index:1}
-.hero .wrap{position:relative;z-index:2;padding:62px 0 54px}
-.hero .eyebrow{color:var(--amber)}
-.hero h1{color:#F2F3EF}
-.hero .sub{color:#A9BBAC}
-.herostats{display:flex;gap:26px;flex-wrap:wrap;margin-top:28px;padding-top:20px;
- border-top:1px solid rgba(255,255,255,.14)}
-.herostats span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#8FA394}
-.herostats b{color:var(--gold);font-weight:500}
-@media(max-width:900px){.hero .instr-svg{display:none}.hero .wrap{padding:48px 0 42px}}
+/* FOOTER */
+footer{padding:46px 0;border-top:1px solid var(--line)}
+.foot-mark img{width:88px;height:auto;opacity:.5;margin-bottom:20px}
+.foot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.foot p{font-size:.78rem;color:var(--olive);margin:0}
+.foot nav{display:flex;gap:18px;flex-wrap:wrap}
+.foot nav a{font-size:.78rem;color:var(--olive);text-decoration:none}
+.foot nav a:hover{color:var(--platinum)}
 </style>
 </head>
 <body>
-<aside class="srail" aria-label="Social links">
-  <span class="srail-lbl">Connect</span>
-  <div class="srail-line"></div>
-  <a href="#" aria-label="LinkedIn" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 1 1-.02 5.001A2.5 2.5 0 0 1 4.98 3.5zM3 21h4V9H3v12zM10 9h3.8v1.64h.05c.53-.95 1.83-1.95 3.77-1.95 4.03 0 4.78 2.5 4.78 5.76V21h-4v-5.5c0-1.31-.03-3-1.9-3-1.9 0-2.2 1.42-2.2 2.9V21h-4V9z"/></svg></a>
-  <a href="#" aria-label="X" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.53 3h3.2l-6.99 7.99L22 21h-6.44l-5.04-6.59L4.75 21H1.54l7.48-8.55L2 3h6.6l4.56 6.03L17.53 3zm-1.12 16.13h1.77L7.68 4.78H5.78l10.63 14.35z"/></svg></a>
-  <a href="#" aria-label="YouTube" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M23 12s0-3.2-.41-4.73a2.51 2.51 0 0 0-1.77-1.78C19.29 5.08 12 5.08 12 5.08s-7.29 0-8.82.41a2.51 2.51 0 0 0-1.77 1.78C1 8.8 1 12 1 12s0 3.2.41 4.73a2.51 2.51 0 0 0 1.77 1.78c1.53.41 8.82.41 8.82.41s7.29 0 8.82-.41a2.51 2.51 0 0 0 1.77-1.78C23 15.2 23 12 23 12zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg></a>
-  <a href="#" aria-label="Instagram" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 3.25.15 4.77 1.69 4.92 4.92.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.15 3.23-1.66 4.77-4.92 4.92-1.27.06-1.64.07-4.85.07s-3.58-.01-4.85-.07c-3.26-.15-4.77-1.7-4.92-4.92-.06-1.27-.07-1.64-.07-4.85s.01-3.58.07-4.85C2.38 3.92 3.89 2.38 7.15 2.23 8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 2.7.27.28 2.69.08 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.2 4.36 2.62 6.78 6.98 6.98C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c4.35-.2 6.78-2.62 6.98-6.98.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.2-4.35-2.62-6.78-6.98-6.98C15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg></a>
-  <a href="#" aria-label="Facebook" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05V9.41c0-3.02 1.79-4.69 4.53-4.69 1.31 0 2.69.24 2.69.24v2.96h-1.52c-1.49 0-1.96.93-1.96 1.89v2.26h3.33l-.53 3.49h-2.8V24C19.61 23.09 24 18.1 24 12.07z"/></svg></a>
-</aside>
 
 <header class="nav">
   <div class="wrap nav-in">
     <a class="wordmark" href="index.html" aria-label="Econiq Method home"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
-    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html" class="on">Signals</a><a class="btn btn-amber" href="enroll.html">Join the list</a></nav>
+    <nav class="nav-links"><a href="index.html">Home</a><a href="about.html">Why this exists</a><a href="courses.html">Courses</a><a href="cycle-score.html">Cycle Score</a><a href="cignal.html">Cignal System</a><a href="signals.html" class="on">Market Reads</a><a class="btn btn-amber" href="enroll.html">Join the list</a></nav>
   </div>
 </header>
 
 <section class="hero">
-  <div class="bgtex" aria-hidden="true"></div>
-  <svg class="instr-svg" viewBox="0 0 430 260" aria-hidden="true">
- <path d="M20,150 L410,150" stroke="#4C4739" stroke-width="1.4"/>
- <g stroke="#555044" stroke-width="1.6">
-  <path d="M60,150 L60,120"/><path d="M118,150 L118,128"/><path d="M176,150 L176,116"/>
-  <path d="M234,150 L234,130"/><path d="M292,150 L292,122"/>
- </g>
- <path d="M360,150 L360,96" stroke="#E0A93B" stroke-width="2.2"/>
- <circle cx="360" cy="92" r="6" fill="#E0A93B"/>
- <circle cx="360" cy="92" r="14" fill="none" stroke="rgba(224,169,59,.4)" stroke-width="1.2"/>
- <g font-family="IBM Plex Mono,monospace" font-size="8.5" letter-spacing="1.6">
-  <text x="360" y="70" text-anchor="middle" fill="#E0A93B">LATEST</text>
-  <text x="20" y="176" fill="#6E664F">DATED</text>
-  <text x="410" y="176" text-anchor="end" fill="#6E664F">ON THE RECORD</text>
- </g>
-</svg>
-<div class="wrap" style="max-width:58ch">
-  <p class="eyebrow">Signals</p>
-  <h1>Calls on the record, dated.</h1>
-  <p class="sub">Every phase read gets published with a date and stays up &mdash; whether it holds or not. The framework is new, so rather than ask you to take my word for it, the record builds in public.</p>
-    <div class="herostats"><span>Dated</span><span>Never edited</span><span>Never removed</span></div>
-</div></section>
-
-<section class="sec"><div class="wrap">
-  <div class="empty">
-    <p class="eyebrow">No reads published yet</p>
-    <h2>The record starts here.</h2>
-    <p style="margin-top:16px;max-width:62ch">The first phase read publishes shortly. Rather than backfill this page with commentary written after the fact, it stays empty until there is a real call to put a date on.</p>
-    <p style="max-width:62ch">Subscribe below and you'll get the first one as it goes out.</p>
+  <div class="wrap">
+    <p class="eyebrow">Market Reads</p>
+    <h1>The week's signals,<br><em>with context.</em></h1>
+    <p class="sub">Real news. Framework commentary. Every article we cover gets tied back to the cycle — which signal it activates, what operators and investors should do about it.</p>
+    <div class="hero-meta">
+      <span>Weekly Signal Brief</span>
+      <span>Deep Dives</span>
+      <span>Signal-tagged</span>
+    </div>
   </div>
-</div></section>
+</section>
 
-<section class="sec"><div class="wrap">
-  <div class="pledge">
-    <p class="eyebrow">The standard</p>
-    <h2 style="margin-bottom:16px">What gets published here.</h2>
-    <p>Each read states the market, the date, the indicators it rests on, and the phase call. Nothing gets edited after publication and nothing gets removed &mdash; if a call ages badly, it stays up with a dated follow-up rather than a quiet correction.</p>
-    <p>This is the only honest evidence available for a framework built in 2026. It costs nothing to claim a system works. It costs something to date your calls.</p>
+<div class="filter-bar">
+  <div class="wrap filter-bar-in">
+    <span class="filter-label">Filter by signal</span>
+    <a href="#" class="ftag active">All</a>
+    <a href="#" class="ftag">Interest Rates</a>
+    <a href="#" class="ftag">Employment</a>
+    <a href="#" class="ftag">Supply &amp; Construction</a>
+    <a href="#" class="ftag">Inflation</a>
+    <a href="#" class="ftag">Consumer Demand</a>
+    <a href="#" class="ftag">Capital Markets</a>
+    <a href="#" class="ftag">Submarket</a>
   </div>
-</div></section>
+</div>
 
-<section class="sec" style="background:var(--forest-panel)"><div class="wrap">
-  <p class="eyebrow">Subscribe</p>
-  <h2 style="margin-bottom:14px">One read, every other week.</h2>
-  <p style="max-width:54ch;margin-bottom:22px">Which indicators moved, what they suggest, and what an operator should do about it.</p>
-  <div class="form-row">
-    <input type="email" placeholder="you@company.com" aria-label="Email address">
-    <button class="btn btn-amber" type="button">Subscribe</button>
+<section class="feed">
+  <div class="wrap">
+    <div class="feed-grid">
+
+      <!-- WEEK DIVIDER -->
+      <div class="week-divider">Week of Aug 18, 2026</div>
+
+      <!-- POST 1: Weekly Brief -->
+      <article class="post">
+        <div class="post-inner">
+          <div>
+            <div class="post-meta">
+              <span class="post-type type-brief">Weekly Signal Brief</span>
+              <span class="post-date">Aug 22, 2026</span>
+            </div>
+            <div class="post-signal-tags">
+              <span class="stag">Interest Rates</span>
+              <span class="stag">Employment</span>
+              <span class="stag">Inflation</span>
+              <span class="stag">Supply &amp; Construction</span>
+            </div>
+            <h3 style="margin-top:16px">This Week in the Cycle — Signals Stacking, But Not All in the Same Direction</h3>
+            <p class="deck">Fed minutes revealed continued disagreement on the pace of future cuts. Payrolls came in softer than expected for the second consecutive month. Multifamily permit pulls declined for the third straight quarter nationally — while concession depth in Sunbelt submarkets widened again.</p>
+            <div class="commentary">
+              <p><strong>What this means:</strong> The employment signal is doing what late-cycle employment signals do — softening slowly before the headline number confirms it. Two consecutive softer prints aren't noise. The permit decline is the one worth watching most closely for multifamily operators: construction pipelines that were locked in 18 months ago are still delivering, but the forward pipeline is thinning. That gap between current deliveries and forward supply is a submarket-level signal, not a national one — which is exactly why Sunbelt data needs to be read city by city, not as a regional average.</p>
+            </div>
+          </div>
+          <div class="post-cta"><a href="#">Read full brief</a></div>
+        </div>
+      </article>
+
+      <!-- POST 2: Deep Dive -->
+      <article class="post">
+        <div class="post-inner">
+          <div>
+            <div class="post-meta">
+              <span class="post-type type-deep">Deep Dive</span>
+              <span class="post-date">Aug 19, 2026</span>
+            </div>
+            <div class="post-signal-tags">
+              <span class="stag">Interest Rates</span>
+              <span class="stag">Capital Markets</span>
+            </div>
+            <h3 style="margin-top:16px">The Fed Held — Again. Here's Why That's Not a Neutral Signal.</h3>
+            <p class="deck">The Federal Reserve held rates steady at its August meeting, citing "persistent core services inflation" as the primary constraint. Most coverage framed this as a non-event. We'd frame it differently.</p>
+            <div class="commentary">
+              <p><strong>Framework read:</strong> A hold is not neutral when the market has already priced in cuts. When rate cuts are consensus and they don't arrive, the behavioral signal shifts — Irrational Exuberance in the capital markets cools faster than the actual rate environment changes. Bridge lenders start repricing. Buyers who underwrote to an assumed rate environment in Q1 are now underwater on their assumptions without a single basis point moving. The signal here isn't the rate itself — it's what the hold does to deal structures that were already signed. Operators with floating-rate debt and upcoming maturity walls should be stress-testing now, not waiting for the next meeting.</p>
+            </div>
+          </div>
+          <div class="post-cta"><a href="#">Read full dive</a></div>
+        </div>
+      </article>
+
+      <!-- WEEK DIVIDER -->
+      <div class="week-divider">Week of Aug 11, 2026</div>
+
+      <!-- POST 3: Weekly Brief -->
+      <article class="post">
+        <div class="post-inner">
+          <div>
+            <div class="post-meta">
+              <span class="post-type type-brief">Weekly Signal Brief</span>
+              <span class="post-date">Aug 15, 2026</span>
+            </div>
+            <div class="post-signal-tags">
+              <span class="stag">Consumer Demand</span>
+              <span class="stag">Inflation</span>
+              <span class="stag">Submarket</span>
+            </div>
+            <h3 style="margin-top:16px">This Week in the Cycle — CPI Surprise, Renewal Spreads, and What Nashville Is Signaling Early</h3>
+            <p class="deck">CPI came in two tenths below consensus, driven by shelter cost deceleration. Renewal-to-new-lease spreads narrowed in three major metros. Nashville recorded its first month of positive net absorption after six months of negative reads.</p>
+            <div class="commentary">
+              <p><strong>What this means:</strong> Shelter deceleration in CPI is a lagging confirmation of what multifamily operators have been seeing in renewal spreads for months — the two just rarely move in sync, which is why the CPI print surprises the market even when operators already knew. Nashville's absorption flip is worth watching as a potential leading indicator for other oversupplied Sunbelt submarkets: it tends to turn before the data catches up. One month isn't a trend, but it goes on the watchlist.</p>
+            </div>
+          </div>
+          <div class="post-cta"><a href="#">Read full brief</a></div>
+        </div>
+      </article>
+
+    </div><!-- /feed-grid -->
   </div>
-      <p class="privfine">We'll use your email only to send what you asked for and the Signals newsletter. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
-</div></section>
+</section>
+
+<!-- SUBSCRIBE -->
+<div class="sub-band">
+  <div class="wrap" style="max-width:56ch">
+    <p class="eyebrow">Stay current</p>
+    <h2 style="margin-bottom:12px">Get Market Reads in your inbox.</h2>
+    <p style="margin-bottom:22px">Weekly Signal Brief every Monday. Deep Dives when the data warrants one. No filler.</p>
+    <div class="form-row">
+      <input type="email" placeholder="you@company.com" aria-label="Email address">
+      <button class="btn btn-amber" type="button">Subscribe</button>
+    </div>
+    <p class="privfine">We'll use your email only to send what you asked for. Unsubscribe anytime. See our <a href="privacy.html">Privacy Policy</a>.</p>
+  </div>
+</div>
 
 <footer>
   <div class="wrap"><div class="foot-mark"><img src="assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></div></div>
   <div class="wrap foot">
     <p>&copy; 2026 Econiq Systems LLC &middot; econiqmethod.com</p>
-    <nav><a href="index.html">Home</a><a href="books.html">Books</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
+    <nav><a href="index.html">Home</a><a href="books.html">Books</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Market Reads</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
   </div>
 </footer>
 </body>
