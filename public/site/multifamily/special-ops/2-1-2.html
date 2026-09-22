@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.1.2 · Layer 1 — Submarket Signals &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Lesson 2.1.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
+  <p class="eyebrow">Lesson 2.1.2 &middot; 3–6 month lead time</p>
+  <h1>Layer 1 — Submarket Signals</h1>
+  <p class='deck'>The operational layer where decisions get executed</p>
+  <div class="leadmeta"><span><b>3,783</b> words</span><span><b>17</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><div class='epi'><p><em>“The market lives where the leases get signed.”</em></p></div>
+<p>In Lesson 2.1.1, we established why three layers is the structurally correct architecture for multifamily cycle intelligence. We now begin examining each layer in depth, starting with the layer closest to operational reality—the layer where multifamily decisions actually get made.</p>
+<p>Layer 1—submarket signals—is the outermost ring of the Onion Framework. It is also paradoxically both the most immediately useful and the most easily misread layer of the three. Operators interact with Layer 1 data daily. They see absorption velocity at their own communities. They watch local concessions emerge in competitor pricing. They feel days-on-market lengthen or shorten. The information arrives constantly, almost reflexively.</p>
+<p>But constant exposure produces familiarity, and familiarity produces complacency. Most operators think they understand Layer 1 because they live in it every day. Few operators actually read Layer 1 with discipline—separating signal from noise, distinguishing leading from coincident from trailing, recognizing what current operational reality is telling them about the next three to six months.</p>
+<p>This lesson provides that discipline. By the end, you will know what Layer 1 is, why it matters analytically, what specific indicators belong in this layer, what each indicator predicts and on what time horizon, how to read the layer with structural rigor, and what mistakes to avoid when interpreting submarket data.</p>
+<h2>What Layer 1 Is</h2>
+<p>Layer 1 is the submarket layer—the closest-to-ground-level operational intelligence in the Onion Framework. It captures what is happening right now in the specific submarkets where multifamily decisions get made.</p>
+<p>The defining characteristic of Layer 1 is operational immediacy. The signals in this layer reflect current conditions in the markets where you actually operate, lease, manage, and exit. They are not forecasts of what national multifamily might do—that’s Layer 2. They are not assessments of macroeconomic conditions—that’s Layer 3. They are reports from the ground level—what is happening in this submarket, right now, at the level where action occurs.</p>
+<p>This is what makes Layer 1 simultaneously the most actionable layer and the shortest-lead layer. The signals are immediately relevant to operational decisions, but they don’t lead by much—typically 3 to 6 months ahead of the next operational shift they predict. Layer 1 is the layer of now, with a small window into next.</p>
+<p>Layer 1 indicators share three distinguishing characteristics.</p>
+<h3>THEY ARE SUBMARKET-SPECIFIC</h3>
+<p>Layer 1 data is drawn from defined submarkets—specific geographic areas where the multifamily product types you operate compete with each other. National averages don’t apply at this level. A submarket in late Peak conditions might be seventy miles from a submarket in early Recovery. Layer 1 captures this divergence; broader layers smooth it out.</p>
+<h3>THEY ARE OPERATIONALLY PROXIMATE</h3>
+<p>Layer 1 signals reflect what is happening in leasing offices, in resident retention conversations, in concession decisions, in pricing meetings, in renewal negotiations. They are the signals operators see, hear, and respond to in the course of running multifamily assets. They are not abstractions—they are the texture of operational reality.</p>
+<h3>THEY ARE SHORT-LEAD</h3>
+<p>Layer 1 indicators provide 3–6 months of advance notice on the operational decisions they inform. Absorption velocity this month tells you something about leasing conditions next quarter. Days-on-market direction tells you something about pricing pressure over the next two to three months. Local concession activity tells you something about rent direction over the next quarter. The lead time is real, but it’s measured in months, not years.</p>
+<p>These three characteristics together define what Layer 1 is and what it isn’t. Anything broader than submarket-specific belongs in Layer 2 or Layer 3. Anything longer-lead than 3–6 months belongs in Layer 2 or Layer 3. Layer 1 is the immediate operational layer—submarket-specific, operationally proximate, short-lead.</p>
+<h2>Why Layer 1 Matters</h2>
+<p>Given that Layer 1 has the shortest lead time of the three layers, it would be tempting to assume that Layer 1 matters least. The deeper layers provide more advance notice, the argument goes, so they must be more analytically valuable. This reasoning is wrong, and getting it right matters for how operators actually use the framework.</p>
+<p>Layer 1 matters for four specific reasons that don’t depend on its lead time.</p>
+<h3>LAYER 1 IS WHERE DECISIONS GET EXECUTED</h3>
+<p>Every multifamily decision—every acquisition, every operational adjustment, every capital commitment—ultimately gets executed in a specific submarket. You don’t lease apartments in “national multifamily.” You don’t renew residents at “the macroeconomic level.” Layer 1 is the operational reality in which the business actually runs. A framework that treats Layer 1 as analytically inferior because it has shorter lead time is a framework that has lost track of where the business operates.</p>
+<h3>LAYER 1 IS THE MOST ACTIONABLE LAYER</h3>
+<p>The shorter lead time of Layer 1 isn’t a weakness—it’s why the layer is operationally immediate. When Layer 3 macro signals shift, you might consider strategic implications over a 12–24 month horizon. When Layer 2 industry signals shift, you might adjust tactical pacing over a 6–12 month horizon. When Layer 1 submarket signals shift, you act this quarter. The shorter horizon makes Layer 1 the layer that translates analysis into operational behavior.</p>
+<h3>LAYER 1 CONFIRMS OR CONTRADICTS WHAT THE DEEPER LAYERS PREDICTED</h3>
+<p>Layer 3 might have signaled twelve months ago that the cycle was approaching transition. Layer 2 might have echoed that signal six months ago. But Layer 1 is where you find out whether the prediction is materializing. When Layer 3 and Layer 2 signal one direction and Layer 1 confirms it, conviction grows. When Layer 1 contradicts what the deeper layers predicted, the discrepancy itself becomes information—either the prediction was wrong, or it’s still in the process of propagating, or there’s a submarket-specific dynamic masking the broader trend.</p>
+<h3>LAYER 1 IS WHERE SUBMARKET DIVERGENCE BECOMES VISIBLE</h3>
+<p>National multifamily can be in late Peak conditions while specific submarkets are in early Recovery, mid-Expansion, or full Contraction depending on local supply-demand dynamics, employment patterns, and capital flows. This divergence is one of the most consequential analytical realities in multifamily, and it is invisible at Layer 2 and Layer 3. It becomes visible only at Layer 1, where submarket-specific data lives.</p>
+<div class='callout'><p><em>Layer 1 doesn’t predict the longest. It just predicts what matters most for what you’re doing this quarter.</em></p></div>
+<h2>The Signature Characteristics of Layer 1</h2>
+<p>Each layer in the Onion Framework has a distinctive analytical fingerprint—the combination of data sources, update frequency, time horizon, and decision domain that makes it structurally distinct from the other two layers.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Characteristic</strong></th><th><strong>Layer 1 — Submarket</strong></th></tr></thead><tbody><tr><td>Data Sources</td><td>CoStar submarket reports, Yardi Matrix local, RealPage, Apartments.com competitive set, ApartmentList research, local MF association data, direct competitor reconnaissance, local government permit and employment data</td></tr><tr><td>Update Frequency</td><td>Weekly for lease velocity, days on market, concession activity; monthly for rent growth, vacancy, absorption</td></tr><tr><td>Time Horizon</td><td>3–6 months lead time on operational shifts</td></tr><tr><td>Decision Domain</td><td>Operational decisions: rent strategy, concession deployment, retention investment, expense management, leasing pace, marketing spend, competitive response</td></tr></tbody></table></div>
+<p>The four characteristics together define Layer 1’s structural place in the framework. A signal that doesn’t share these characteristics doesn’t belong in Layer 1. A signal that shares some but not all of them probably belongs in Layer 2.</p>
+<h2>The Specific Indicators of Layer 1</h2>
+<p>We now examine the specific indicators that populate Layer 1—what each one is, how it’s classified, what it predicts, and how to read it.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Days on Market</span><p><em>Classification: Coincident-to-leading  •  Lead time: 3–6 months ahead of rent direction and concession shifts</em></p></div></div></div>
+<p>Days on Market measures how long available units remain available before being leased. In submarkets with tight supply-demand balance, units lease quickly—days on market are short. In submarkets where supply is exceeding demand, units take longer to lease—days on market are long.</p>
+<p>The indicator is coincident in that it describes current leasing conditions, but it has leading characteristics for what’s coming. Rising days on market today signals weakening absorption, which predicts deceleration in rent growth and emergence of concession activity over the next 3–6 months. Declining days on market today signals strengthening absorption, which predicts rent growth direction strengthening over the same horizon.</p>
+<div class='callout'><p><em>The strategic value of Days on Market is its high update frequency and its near-real-time reflection of submarket supply-demand dynamics. Operators tracking Days on Market trends across their submarkets gain early warning on operational shifts before those shifts appear in trailing rent growth and vacancy data.</em></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Absorption Rates and Absorption Momentum</span><p><em>Classification: Coincident with leading characteristics via momentum  •  Lead time: 3–6 months via momentum signals</em></p></div></div></div>
+<p>Absorption is the number of units being leased net of units being vacated in a given period. Positive absorption means more units are being leased than vacated; the submarket is tightening. Negative absorption means more units are being vacated than leased; the submarket is loosening.</p>
+<p>Headline absorption is coincident—it describes what’s happening now. But absorption momentum—the rate of change in absorption from one period to the next—has leading characteristics. Decelerating absorption today predicts vacancy increases and rent growth deceleration over the next 3–6 months. Accelerating absorption today predicts vacancy declines and rent growth strengthening over the same horizon.</p>
+<p>The analytical discipline with absorption is to track momentum, not levels. A submarket reporting strong absorption that is decelerating is showing the early signs of a transition. A submarket reporting weak absorption that is stabilizing or accelerating is showing the early signs of recovery from a softer period.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Multifamily Deliveries (Submarket Level)</span><p><em>Classification: Coincident for supply impact  •  Lead time: 3–6 months for downstream concession and rent effects</em></p></div></div></div>
+<p>Submarket-level multifamily deliveries measure how many new units are being delivered to the rental market in a specific submarket in a given period. The deliveries themselves are coincident—they’re affecting the market now as they happen. But their downstream effects on concessions, rent direction, and absorption pressure follow over the next 3–6 months as the new supply works its way through lease-up.</p>
+<p>The structural mechanic is that new deliveries put pressure on existing properties through several pathways. Lease-up properties typically offer concessions to fill quickly, which pulls down market rents. Existing residents at older properties consider relocating to newer competitive product. Pricing pressure cascades from new deliveries through the competitive set.</p>
+<div class='callout'><p><em>The strategic discipline is to track deliveries against absorption capacity. Submarkets with strong absorption can absorb significant deliveries without operational stress. Submarkets with weak absorption can be destabilized by even modest delivery activity. The same delivery volume can be benign in one submarket and problematic in another—depending on the absorption capacity that is itself a Layer 1 signal.</em></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Construction Pipeline (Late-Stage, Submarket Level)</span><p><em>Classification: Leading  •  Lead time: 3–6 months for units close to delivery</em></p></div></div></div>
+<p>Construction Pipeline data tracks units under construction at various stages of completion. The full pipeline (from permit through delivery) operates across Layer 1 and Layer 2. The late-stage pipeline—units 3–6 months from delivery—is firmly Layer 1 because the supply impact is operationally imminent.</p>
+<p>Late-stage pipeline tells you what new supply is about to hit your submarket. Operators who track late-stage pipeline at the submarket level can anticipate concession environments, lease-up competitive pressure, and rent direction implications before deliveries actually arrive. Operators who track only deliveries (after they’ve occurred) are responding to changes that earlier-stage pipeline data made visible months in advance.</p>
+<p>The discipline is to integrate late-stage pipeline tracking into ongoing submarket analysis—typically monthly review of what’s coming online in the next two quarters at the submarket level. The data is available through CoStar, local government building department records, and specialized construction data services.</p>
+<div class='numlist'><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>Local Concession Activity</span><p><em>Classification: Leading  •  Lead time: 3–6 months ahead of rent growth direction</em></p></div></div></div>
+<p>Concessions are short-term incentives offered to lease units faster—typically one to two months free, reduced security deposits, or other promotional pricing. Concessions matter as a Layer 1 signal because they reveal what the effective rent environment looks like, beyond what published asking rents suggest.</p>
+<p>The signal mechanic is that concessions emerge before published rent declines. When supply pressure builds, operators initially preserve published asking rents and use concessions to maintain leasing pace. Only after concession activity has been sustained does published rent growth turn negative. This means rising concessions today predict rent direction softening over the next 3–6 months even when current published rent growth still appears healthy.</p>
+<div class='callout'><p><em>The discipline is to track concession activity in the local competitive set systematically—monthly review of advertised concessions across comparable properties, with attention to direction (rising, stable, declining) rather than absolute level. A competitive set offering one month free that begins offering two months free is signaling pricing pressure that will eventually appear in rent growth data.</em></p></div>
+<div class='numlist'><div class='numrow'><div class='n'>6</div><div class='c'><span class='term'>Local Job Growth</span><p><em>Classification: Leading  •  Lead time: 3–6 months on absorption; longer for sustained submarket health</em></p></div></div></div>
+<p>Local job growth (typically measured at the metro or MSA level, sometimes at finer geographic resolution) is one of the most consequential Layer 1 indicators because it directly drives household formation, migration, and rental demand. Submarkets with strong local job growth show strong absorption, sustained rent growth, and resilient occupancy. Submarkets with weak or negative local job growth struggle to maintain operational fundamentals regardless of broader market conditions.</p>
+<p>The lead time mechanic is that job growth precedes household formation by typically 3–6 months. New jobs in a metro lead to new household formation as workers relocate, get hired, and establish residences. New household formation leads to absorption demand. The 3–6 month lead time on absorption is what makes local job growth a Layer 1 indicator with predictive value, not just a coincident description of current conditions.</p>
+<p>The discipline is to track local job growth by sector, not just total. A metro adding jobs in stable sectors (healthcare, education, government) shows different multifamily implications than a metro adding jobs concentrated in cyclical sectors (energy, technology, manufacturing). Sector composition matters as much as headline numbers for projecting submarket sustainability.</p>
+<div class='numlist'><div class='numrow'><div class='n'>7</div><div class='c'><span class='term'>Submarket Supply-Demand Balance (Vacancy Direction)</span><p><em>Classification: Coincident-to-trailing  •  Lead time: Limited as direct predictor; valuable as confirmation</em></p></div></div></div>
+<p>Submarket vacancy is one of the most-tracked indicators in multifamily, and it deserves careful analytical treatment because it’s both useful and easily misused. The vacancy level is largely coincident—it describes current supply-demand balance. The vacancy direction (rising or declining) is more useful, and is best understood as a confirming indicator rather than a leading one.</p>
+<p>The structural reality is that vacancy lags absorption, days on market, and concession activity. By the time vacancy rises meaningfully, the leading Layer 1 signals—Days on Market, Absorption Momentum, Concessions—have typically been signaling the shift for several months. Operators who watch only vacancy are responding to changes that other Layer 1 signals predicted.</p>
+<div class='callout'><p><em>The discipline is to use vacancy as confirmation, not prediction. When other Layer 1 signals suggest a shift is occurring, vacancy direction confirms or contradicts the suggestion. Vacancy alone is too late to be a reliable Layer 1 leading indicator, but vacancy in conjunction with the leading Layer 1 indicators provides triangulated submarket reading.</em></p></div>
+<h2>How to Read Layer 1</h2>
+<p>Knowing the indicators is necessary but not sufficient. The discipline of reading Layer 1 requires interpretive principles that turn data into intelligence.</p>
+<h3>READ MOMENTUM, NOT LEVELS</h3>
+<p>The most consequential mistake operators make with Layer 1 data is reading levels (current absorption, current days on market, current concessions) without reading direction (accelerating, decelerating, stable). A submarket reporting strong current absorption that is decelerating is structurally different from a submarket reporting strong current absorption that is accelerating. The current level can look identical; the direction tells you what’s coming. Always read direction.</p>
+<h3>TRIANGULATE ACROSS MULTIPLE LAYER 1 INDICATORS</h3>
+<p>No single Layer 1 indicator is reliable in isolation. Days on Market can shift due to seasonal factors. Concessions can be deployed strategically rather than defensively. Absorption can be skewed by a single large lease-up event. The way to read Layer 1 with confidence is to triangulate across multiple indicators—when Days on Market, Absorption Momentum, and Concession Activity are all moving in the same direction, the signal is reliable. When they diverge, the divergence itself is information requiring further investigation.</p>
+<h3>DISTINGUISH SUBMARKET-SPECIFIC DYNAMICS FROM BROADER TRENDS</h3>
+<p>Some Layer 1 signals reflect submarket-specific factors (a single major employer hiring or laying off, a unique supply event, a competitor’s strategic shift). Others reflect broader trends propagating from Layer 2 or Layer 3 down to the submarket level. The discipline is to identify which is which. A single-employer event affecting one submarket isn’t predictive of broader patterns; a broader trend showing up in multiple submarkets simultaneously is.</p>
+<h3>READ THE COMPETITIVE SET, NOT JUST YOUR OWN PORTFOLIO</h3>
+<p>Operators sometimes read Layer 1 by tracking only their own properties’ performance. This is a mistake. Your own properties’ performance is one data point. The local competitive set is the relevant universe. A submarket where your properties are outperforming the local competitive set is showing you operating skill, not submarket health. A submarket where your properties are underperforming might still be a healthy submarket where your specific assets face competitive challenges. Read the broader competitive set, then position your performance against it.</p>
+<h3>MATCH UPDATE FREQUENCY TO INDICATOR VOLATILITY</h3>
+<p>Some Layer 1 indicators move quickly (concession activity, lease velocity). Others move more slowly (vacancy direction, sustained absorption trends). The review cadence should match the indicator’s volatility. Weekly review for fast-moving indicators; monthly review for slower-moving indicators; quarterly review for indicators that don’t change meaningfully week-to-week. Trying to track everything at the same cadence wastes analytical effort.</p>
+<h2>Common Mistakes at Layer 1</h2>
+<p>Operators consistently make four predictable mistakes when reading Layer 1 signals. Each one represents a failure to apply the framework rigorously.</p>
+<h3>TREATING LAYER 1 AS THE WHOLE PICTURE</h3>
+<p>Some operators get so close to submarket data that they stop watching Layer 2 and Layer 3. They know their submarkets in granular detail but lose track of what’s coming from broader layers. The mistake produces blindness to transitions that Layer 3 was signaling 12–18 months earlier. Layer 1 is necessary but not sufficient—it’s one of three layers, not the substitute for the others.</p>
+<h3>CONFUSING LAYER 1 QUIETNESS FOR ABSENCE OF ACTIVITY</h3>
+<p>When Layer 1 indicators are quiet—stable absorption, steady days on market, no concession activity—operators sometimes conclude that nothing is happening anywhere in the cycle. But Layer 1 quietness only tells you about Layer 1. Layer 2 industry signals or Layer 3 macro signals could be shifting meaningfully without yet propagating to the submarket level. Treating Layer 1 quietness as evidence of broader market stability is the mistake that produces operators getting blindsided by transitions that deeper layers were signaling.</p>
+<h3>READING INDIVIDUAL PROPERTIES AS LAYER 1 SIGNALS</h3>
+<p>A single property’s performance—your property, a competitor’s property—is not a Layer 1 signal. It’s a single data point that may or may not reflect submarket conditions. Reading individual property performance as if it were submarket data produces analytical errors in both directions. Strong performance at one property doesn’t mean the submarket is healthy. Weak performance at one property doesn’t mean the submarket is troubled. Aggregate the competitive set; don’t generalize from individual data points.</p>
+<h3>ASSUMING SUBMARKET-SPECIFIC DYNAMICS APPLY BROADLY</h3>
+<p>Conversely, sometimes operators read aggregate Layer 1 data without recognizing that submarkets within the same metro can be in genuinely different cycle positions. A coastal submarket with strong job growth and limited new supply might be in late Expansion while an outer-ring submarket with weaker employment and significant new deliveries is in Peak. Aggregate metro data smooths these dynamics, but the submarket-specific reality is what determines individual asset outcomes.</p>
+<h2>How Layer 1 Connects to the Other Layers</h2>
+<p>Layer 1 is not a standalone framework—it’s the operational layer of an integrated three-layer system. The way Layer 1 connects to Layers 2 and 3 is what produces the framework’s analytical power.</p>
+<h3>LAYER 1 CONFIRMS WHAT LAYER 2 WAS PREDICTING</h3>
+<p>Layer 2 industry signals (national capital flows, building permits, employment dynamics, transaction volumes) typically lead Layer 1 signals by 3–6 months. When Layer 2 signals point one direction, the question is whether Layer 1 will confirm. When confirmation appears, conviction grows. When Layer 1 contradicts what Layer 2 predicted, the discrepancy reveals either submarket-specific dynamics insulating the submarket from broader trends, or noise in the Layer 2 signal that didn’t actually predict propagation.</p>
+<h3>LAYER 1 VERIFIES WHAT LAYER 3 SET UP STRUCTURALLY</h3>
+<p>Layer 3 macro signals (interest rates, yield curve, inflation, GDP) operate at 12–24+ month horizons. They establish the structural environment within which the cycle plays out. Layer 1 is where you find out whether the structural environment is producing the operational reality you expected. When Layer 3 signaled tightening conditions twelve months ago, Layer 1 today is where you verify whether the tightening has reached the submarket level. The propagation from Layer 3 to Layer 1 is what makes the framework predictive—and Layer 1 is where the predictions get tested.</p>
+<h3>LAYER 1 SURFACES SUBMARKET DIVERGENCE THE DEEPER LAYERS CAN’T</h3>
+<p>The deeper layers operate at national or macroeconomic scales. They can’t show you which specific submarkets are diverging from broader trends. Layer 1 is the only layer that surfaces submarket-by-submarket variation. When a metro’s broader trends are deteriorating but a specific submarket within the metro is showing different dynamics, Layer 1 is where the divergence becomes visible. Layer 2 and Layer 3 will tell you what’s happening nationally and macroeconomically; only Layer 1 tells you what’s happening in the specific submarkets where your decisions actually execute.</p>
+<h3>LAYER 1 PROVIDES THE OPERATIONAL DECISION TRIGGERS</h3>
+<p>Layer 3 macro shifts inform strategic decisions over years. Layer 2 industry shifts inform tactical decisions over a year. Layer 1 submarket shifts inform operational decisions over a quarter. The decisions that get made each quarter—rent strategy, concession deployment, retention investment, expense calibration—are Layer 1 decisions. Even when Layer 2 and Layer 3 are shifting meaningfully, the operational decisions that respond to those shifts ultimately get triggered by Layer 1 signals reaching specific thresholds.</p>
+<div class='callout'><p><em>Layer 1 is where the cycle becomes real. It’s where prediction becomes confirmation, where strategy becomes execution, and where the framework either earns its keep or fails to.</em></p></div>
+<h2>What Comes Next</h2>
+<p>We’ve now examined Layer 1 in depth—what it is, why it matters, what specific indicators populate it, how to read them with discipline, and how the layer connects to the rest of the framework. Layer 1 is the operational layer where decisions get executed, where the cycle becomes real, where deeper-layer predictions get tested, and where submarket divergence becomes visible.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Layer 2: Industry Signals</span><p>The middle layer of the framework. The medium-lead tactical layer that translates broad macroeconomic context into multifamily-specific direction. The layer that two-layer frameworks miss entirely. Data sources are national rather than submarket-specific. Update cadence is monthly to quarterly. Decision domain is tactical rather than operational. And the lead time is meaningfully longer—providing a window into changes that haven’t yet appeared at the submarket level but will within months.</p></div></div></div>
+<p>Let’s examine the layer where what’s coming for multifamily becomes visible before it arrives at your doorstep.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>The lesson identifies three distinguishing characteristics shared by all Layer 1 indicators. Which of the following correctly lists them?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>National in scope, capital-markets driven, and 6–12 months of lead time.</button><button class='opt' data-k='B'><span class='k'>B</span>Submarket-specific, operationally proximate, and short-lead (3–6 months of advance notice).</button><button class='opt' data-k='C'><span class='k'>C</span>Macroeconomic, structural, and 12–24+ months of lead time.</button><button class='opt' data-k='D'><span class='k'>D</span>Property-specific, trailing, and updated quarterly.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Layer 1 indicators are submarket-specific (drawn from defined geographic areas where your product competes—a submarket in late Peak can be seventy miles from one in early Recovery, and broader layers smooth that divergence out), operationally proximate (they reflect what is happening in leasing offices, retention conversations, concession decisions, and pricing meetings), and short-lead (3–6 months of advance notice on the operational decisions they inform). Together these define what Layer 1 is and what it is not: anything broader than submarket-specific, or longer-lead than 3–6 months, belongs in Layer 2 or Layer 3. Option A describes Layer 2, option C describes Layer 3, and option D describes the individual-property data the lesson explicitly warns is not a Layer 1 signal.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>Given that Layer 1 has the shortest lead time of the three layers, the lesson anticipates the objection that it must therefore matter least. Which of the following is NOT one of the four reasons the lesson gives for why Layer 1 matters regardless of its lead time?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Layer 1 is where every multifamily decision ultimately gets executed.</button><button class='opt' data-k='B'><span class='k'>B</span>Layer 1 is the most actionable layer—when it shifts, you act this quarter.</button><button class='opt' data-k='C'><span class='k'>C</span>Layer 1 provides the earliest warning of cycle transitions, ahead of Layer 2 and Layer 3.</button><button class='opt' data-k='D'><span class='k'>D</span>Layer 1 is where submarket divergence from national conditions becomes visible.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Option C is the opposite of what the lesson teaches. Layer 1 has the shortest lead time of the three layers—Layer 3 leads by 12–24+ months and Layer 2 by 6–12 months—so it does not provide the earliest warning of transitions. The four reasons Layer 1 matters, none of which depend on lead time, are: it is where decisions get executed (you do not lease apartments in “national multifamily”); it is the most actionable layer (the shorter horizon is what translates analysis into operational behavior this quarter); it confirms or contradicts what the deeper layers predicted (Layer 1 is where you find out whether the prediction is materializing); and it is where submarket divergence becomes visible (national multifamily can be in late Peak while specific submarkets are in early Recovery—a reality invisible at Layers 2 and 3).</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>According to the lesson, why is Local Concession Activity classified as a leading Layer 1 indicator for rent growth direction?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because concessions are reported in the same data release as published rent growth, so the two always move together.</button><button class='opt' data-k='B'><span class='k'>B</span>Because concessions emerge before published rent declines—operators initially preserve asking rents and use concessions to hold leasing pace, so rising concessions predict rent softening 3–6 months out even while published rent growth still looks healthy.</button><button class='opt' data-k='C'><span class='k'>C</span>Because concessions are a trailing confirmation that rent growth has already turned negative.</button><button class='opt' data-k='D'><span class='k'>D</span>Because concessions are only offered by lease-up properties and therefore have no bearing on the broader competitive set.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The signal mechanic the lesson describes is sequencing: when supply pressure builds, operators initially preserve published asking rents and deploy concessions to maintain leasing pace. Only after concession activity has been sustained does published rent growth turn negative. That sequencing is what gives concessions 3–6 months of lead time on rent direction—rising concessions today predict softening even when current published rent growth still appears healthy, because concessions reveal the effective rent environment beneath the asking rents. The discipline is monthly review of advertised concessions across the competitive set, reading direction (rising, stable, declining) rather than absolute level. A competitive set moving from one month free to two months free is signaling pressure that will eventually appear in rent growth data.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>The lesson gives Submarket Vacancy Direction careful analytical treatment because it is “both useful and easily misused.” How does the lesson say vacancy should be used within Layer 1?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>As the primary leading indicator—vacancy rises before any other Layer 1 signal moves.</button><button class='opt' data-k='B'><span class='k'>B</span>As a substitute for Days on Market and Absorption Momentum, since it summarizes both.</button><button class='opt' data-k='C'><span class='k'>C</span>As confirmation rather than prediction—vacancy lags Days on Market, Absorption Momentum, and Concessions, so it confirms or contradicts what those leading signals have already suggested.</button><button class='opt' data-k='D'><span class='k'>D</span>It should be excluded from Layer 1 entirely because it is a Layer 2 industry signal.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson classifies vacancy as coincident-to-trailing. The level describes current supply-demand balance; the direction is more useful, but as a confirming indicator rather than a leading one. The structural reality is that vacancy lags absorption, days on market, and concession activity—by the time vacancy rises meaningfully, the leading Layer 1 signals have typically been pointing to the shift for several months. Operators who watch only vacancy are responding to changes other Layer 1 signals already predicted. Vacancy alone is too late to be a reliable leading indicator, but vacancy in conjunction with the leading indicators provides a triangulated submarket reading. Option A inverts the lag structure, option B discards the leading signals vacancy is meant to confirm, and option D misplaces a submarket-level indicator in Layer 2.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson states that the most consequential mistake operators make with Layer 1 data is reading levels without reading direction. In 2–3 sentences, explain the “read momentum, not levels” principle using Absorption as the example—specifically, how two submarkets can report identical current absorption yet be structurally different, and what each one is telling you about the next 3–6 months.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Headline absorption is coincident—it describes what is happening now—but absorption momentum, the rate of change from one period to the next, has leading characteristics. Two submarkets can both report strong positive absorption this month and look identical on a level basis, yet one is decelerating and the other is accelerating. The decelerating submarket is showing the early signs of a transition: it predicts vacancy increases and rent growth deceleration over the next 3–6 months, and it is the case where operators reading only the strong headline number get caught. The accelerating submarket predicts vacancy declines and strengthening rent growth over the same horizon. The current level cannot distinguish between them; only the direction tells you what is coming, which is why the discipline is always to read direction.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator owns two Class B communities in the same submarket, both running 95% occupancy with no concessions and strong renewal conversions. Based on this, the operator concludes the submarket is healthy and plans a 4% renewal rent push next quarter. A review of the broader competitive set shows the following over the past 90 days: days on market across comparable properties has lengthened from 18 to 31 days; three lease-up properties totaling roughly 900 units have begun offering six weeks free; submarket absorption is still positive but has decelerated for three consecutive months; late-stage pipeline shows another 600 units delivering within two quarters; and submarket vacancy is unchanged. Using the lesson’s framework, identify (a) which of the four common Layer 1 mistakes the operator is making, (b) how the leading Layer 1 indicators triangulate and what they predict for the next 3–6 months, (c) why unchanged vacancy does not contradict that reading, and (d) how the operator should adjust the renewal strategy.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The operator is making the third common mistake—reading individual properties as Layer 1 signals. Two communities at 95% occupancy with no concessions are two data points, not submarket data; strong performance at those assets shows operating skill or asset-specific positioning, not submarket health. The lesson’s principle is to read the competitive set, not just your own portfolio. (b) The leading Layer 1 indicators triangulate cleanly in one direction: Days on Market has lengthened from 18 to 31 days (weakening absorption ahead), lease-up properties covering roughly 900 units are offering six weeks free (concessions emerging before published rent declines), Absorption Momentum has decelerated for three consecutive months (early signs of a transition even though the level is still positive), and late-stage pipeline adds another 600 units within two quarters against decelerating absorption capacity. When Days on Market, Absorption Momentum, and Concession Activity all move the same way, the lesson says the signal is reliable—this predicts rent growth deceleration and broader concession spread across the competitive set over the next 3–6 months. (c) Unchanged vacancy does not contradict the reading because vacancy is coincident-to-trailing—it lags the leading signals by several months. Flat vacancy today is exactly what you would expect at this stage; it is confirmation that has not yet arrived, not evidence that the shift is not happening. (d) The 4% renewal push is priced for the submarket the operator’s two properties describe, not the one the competitive set describes. Renewals coming due over the next two quarters will be shopping against newer product offering six weeks free. The operator should moderate the push—prioritize retention over rate, hold or modestly increase renewal rents, prepare a targeted concession or retention-investment response for the competitive pressure arriving with the 600-unit delivery wave, and move Days on Market and concession tracking to a weekly cadence. Positive absorption and full occupancy today are the level; the direction says act this quarter.</em></em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>The lesson describes four ways Layer 1 connects to Layers 2 and 3. Which of the following correctly characterizes that relationship?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Layer 1 is a standalone framework; Layers 2 and 3 are optional context that sophisticated operators can skip once they know their submarkets well.</button><button class='opt' data-k='B'><span class='k'>B</span>Layer 1 leads Layers 2 and 3—submarket shifts propagate upward to the industry and macro levels over 6–24 months.</button><button class='opt' data-k='C'><span class='k'>C</span>Layer 1 confirms what Layer 2 predicted 3–6 months earlier, verifies whether the structural environment Layer 3 set up 12–24 months earlier has reached the submarket, surfaces submarket divergence the deeper layers cannot see, and provides the quarterly operational decision triggers.</button><button class='opt' data-k='D'><span class='k'>D</span>Layer 1 and Layer 2 are interchangeable because both draw on CoStar data; only Layer 3 is structurally distinct.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Layer 1 is the operational layer of an integrated three-layer system, not a standalone framework. The lesson names four connections: Layer 2 industry signals typically lead Layer 1 by 3–6 months, and Layer 1 is where confirmation appears (or where contradiction reveals submarket insulation or noise in the Layer 2 signal); Layer 3 macro signals operate at 12–24+ months and set the structural environment, and Layer 1 is where you verify whether that environment has produced the expected operational reality; only Layer 1 surfaces submarket-by-submarket divergence that national and macro scales cannot show; and the decisions made each quarter—rent strategy, concession deployment, retention investment, expense calibration—are triggered when Layer 1 signals reach specific thresholds. Option A is the first common mistake (treating Layer 1 as the whole picture). Option B reverses the direction of propagation. Option D ignores that Layer 1 and Layer 2 differ in scope, cadence, lead time, and decision domain regardless of shared vendors.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the operational layer. Proceed to Lesson 2.1.3 (Layer 2: Industry Signals) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the indicator section and “How to Read Layer 1” in Lesson 2.1.2 before proceeding. Focus especially on the classification of each indicator—which are leading, which are coincident, and why vacancy is confirmation rather than prediction—and on the momentum-not-levels principle.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 2.1.2 in full. Layer 1 is the layer operators believe they already understand because they live in it daily; the discipline of reading it—triangulating across indicators, reading the competitive set rather than your own assets, and separating submarket-specific dynamics from broader trends—is what Layers 2 and 3 will be tested against.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Layer 1 is where the cycle becomes real—where prediction becomes confirmation and strategy becomes execution. Familiarity with submarket data is not the same as reading it with discipline. If the answer key revealed gaps, closing them now is the highest-leverage investment you can make before Lesson 2.1.3.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='2-1-1.html'>&larr; Previous<span>Why Three Layers</span></a><a href='2-1-3.html' style='text-align:right'>Next &rarr;<span>Layer 2 — Industry Signals</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; 2.1.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='2.1.2', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

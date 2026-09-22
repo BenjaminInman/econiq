@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.3.1 · Building Your Cignal Dashboard &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Lesson 2.3.1</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 2.3.1</p>
+  <h1>Building Your Cignal Dashboard</h1>
+  <p class='deck'>A six-stage design process for building your v1.0</p>
+  <div class="leadmeta"><span><b>3,512</b> words</span><span><b>16</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><div class='epi'><p><em>“Design for version 1.0. Trust that version 5.0 will be better—and that you’ll get there only by maintaining v1.0 long enough to learn what v2.0 should change.”</em></p></div>
+<p>The Introduction established the principles. Generic dashboards fail. Personalization is structurally necessary. Industry-standard signals provide the foundation; strategy-specific signals complete the picture. Consistency matters more than sophistication. The dashboard is a discipline, not a thing.</p>
+<p>This Lesson takes those principles into the design work. By the end of this lesson, you will have a draft v1.0 of your personal Cignal dashboard—a working starting point that captures the foundational signals every multifamily operator should track, the strategy-specific signals that fit your specific approach, organized using the three-layer Onion Framework, calibrated to a review cadence you can actually sustain, integrated into your decision-making processes, with revision built into the design from the start.</p>
+<p>Notice the framing: a draft <strong>v1.0.</strong> Not a finished dashboard. Not a perfected analytical instrument. A working starting point.</p>
+<p>This framing matters for the design work itself. The most common reason operators never finish building their dashboards is the pursuit of perfection on the first attempt. They get blocked trying to identify the optimal indicator set, calibrate ideal thresholds, design the perfect spreadsheet template. The blocking is structurally counterproductive. The optimal indicator set, ideal thresholds, and perfect template don’t exist in advance—they only emerge through sustained use. Year three of dashboard discipline produces design refinements that no amount of pre-launch design work could have anticipated. The path to a great dashboard runs through a working dashboard, used consistently, refined iteratively.</p>
+<p>So design for v1.0. Get something working you can actually maintain. Trust that v2.0 will be better, v3.0 will be better still, and v5.0 will be unrecognizable from where you started. The trajectory only happens if v1.0 exists and gets used.</p>
+<p>This lesson walks through the design work in six stages. Each stage produces a specific design output. By the end, the outputs combine into your v1.0 dashboard.</p>
+<h2>Stage One — Identify Your Foundational Signals</h2>
+<p>Every multifamily operator needs to track a foundational set of industry-standard signals across the three layers. These are the signals that operate within the structural reality of multifamily as an asset class—the signals that affect every operator regardless of specific strategy.</p>
+<p>The foundational set is approximately fifteen to twenty signals across the three layers. The list below represents a defensible foundational architecture. You can add to it based on your specific strategy in Stage Two, but the foundational signals belong in every Cignal dashboard.</p>
+<h3>LAYER 3 (MACROECONOMIC) FOUNDATIONAL SIGNALS</h3>
+<p>These six signals describe the structural environment within which the multifamily cycle plays out. Track all of them.</p>
+<ul class='blist'>
+<li><strong></strong>Federal Funds Rate — current Fed policy stance</li>
+<li><strong></strong>10-Year Treasury Yield — capital cost benchmark and rate expectations</li>
+<li><strong></strong>Yield Curve Spread (10-Year minus 2-Year) — recession probability</li>
+<li><strong></strong>Headline CPI — inflation environment</li>
+<li><strong></strong>Core CPI — underlying inflation dynamics</li>
+<li><strong></strong>Headline GDP Growth — economic activity context</li>
+</ul>
+<h3>LAYER 2 (INDUSTRY) FOUNDATIONAL SIGNALS</h3>
+<p>These six signals describe the multifamily-specific national dynamics that translate macroeconomic conditions into industry-level implications. Track all of them.</p>
+<ul class='blist'>
+<li><strong></strong>National Multifamily Building Permits — earliest supply signal</li>
+<li><strong></strong>National Multifamily Construction Pipeline — mid-stage units under construction</li>
+<li><strong></strong>National Multifamily Transaction Volume — capital cycle position</li>
+<li><strong></strong>Federal Reserve Flow of Funds — capital allocation dynamics</li>
+<li><strong></strong>National Employment Growth — multifamily demand drivers</li>
+<li><strong></strong>National Wage Growth — rent growth ceiling</li>
+</ul>
+<h3>LAYER 1 (SUBMARKET) FOUNDATIONAL SIGNALS</h3>
+<p>These five signals describe operational reality in the specific submarkets where you operate or evaluate. The signals are universal; the specific submarkets are personal. Track these five Layer 1 signals in each submarket where you currently operate or are actively evaluating.</p>
+<ul class='blist'>
+<li><strong></strong>Absorption Rates — current operational reality</li>
+<li><strong></strong>Days on Market — supply-demand balance</li>
+<li><strong></strong>Multifamily Deliveries — submarket-specific supply impact</li>
+<li><strong></strong>Local Concession Activity — rent direction leading indicator</li>
+<li><strong></strong>Submarket Vacancy Direction — supply-demand confirmation</li>
+</ul>
+<p>If you operate in three submarkets, you have fifteen Layer 1 data points to monitor. If you operate in one submarket, you have five. The foundational set scales with your geographic concentration, settling in the twenty-to-twenty-five range for most operators.</p>
+<div class='callout'><p><em>Design output: a written list of your foundational signals, organized by layer.</em></p></div>
+<h2>Stage Two — Identify Your Strategy-Specific Signals</h2>
+<p>The foundational signals capture universal multifamily reality. The strategy-specific signals capture what’s specific to your particular approach.</p>
+<p>To identify your strategy-specific signals, work through these diagnostic questions.</p>
+<h3>WHAT IS YOUR PRIMARY STRATEGY?</h3>
+<p>Core-plus stabilized assets? Value-add renovation? Ground-up development? Distressed acquisition? Workforce housing? Build-to-rent? Each strategy has signal needs that go beyond the foundational set. Write down your primary strategy in one or two sentences.</p>
+<h3>WHAT SIGNALS WOULD HAVE WARNED YOU IN YOUR LAST BAD DECISION?</h3>
+<p>Look back at multifamily decisions in the past five years that didn’t work out as expected. What information, had you been tracking it, would have changed your decision? The answer reveals signals you need that you haven’t been monitoring.</p>
+<h3>WHAT SIGNALS DO OPERATORS YOU RESPECT TRACK THAT YOU DON’T?</h3>
+<p>When you read research from sponsors, asset managers, or analysts whose judgment you trust, what do they reference that you don’t currently watch? Those references often point to strategy-specific signals worth incorporating.</p>
+<h3>WHAT SIGNALS ARE UNIQUE TO YOUR GEOGRAPHIC CONCENTRATION?</h3>
+<p>Beyond the foundational Layer 1 signals, what about your specific markets requires monitoring? Markets with concentrated employer dependencies need to track those employers. Markets with active development cycles need granular permit tracking. Markets in regulatory transition need policy monitoring. The geographic specifics surface signals beyond the universal Layer 1 set.</p>
+<h3>WHAT SIGNALS DOES YOUR CAPITAL STRUCTURE REQUIRE?</h3>
+<p>A heavily leveraged portfolio requires different signals than a conservatively capitalized one. Active refinancing exposure requires monitoring of lending terms and spreads. Active fundraising requires monitoring of LP capital availability dynamics. Capital structure shapes which signals matter for your specific risk profile.</p>
+<h3>WHAT SIGNALS DOES YOUR TEAM’S DECISION-MAKING PROCESS NEED?</h3>
+<p>If your acquisition committee makes decisions monthly, you need monthly cadence on relevant signals. If your strategic planning happens quarterly, you need quarterly synthesis of broader trends. The team’s decision rhythm shapes which signals need to be readily available for which conversations.</p>
+<p>The answers to these questions surface five to fifteen strategy-specific signals beyond the foundational set. A simple stabilized-portfolio strategy might add only three or four signals. A multi-strategy operator with development, value-add, and stabilized exposures might add twelve or fifteen.</p>
+<div class='callout'><p><em>Design output: a written list of your strategy-specific signals, organized by which layer they belong to (most will be Layer 2 or Layer 1; some Layer 3 strategy-specific additions are possible but less common).</em></p></div>
+<h2>Stage Three — Organize Using the Three-Layer Architecture</h2>
+<p>You now have a list of signals—foundational signals plus strategy-specific signals—totaling somewhere between twenty and forty indicators. The next stage is organizing them using the three-layer Onion Framework architecture.</p>
+<p>This stage matters because the framework’s analytical power depends on layered organization. Indicators sitting in a flat list don’t triangulate. Indicators organized by data source don’t reveal cross-layer patterns. Indicators organized by the Onion Framework support the integrated reading that produces analytical advantage.</p>
+<h3>LAYER 1: SUBMARKET-SPECIFIC OPERATIONAL SIGNALS</h3>
+<p>Days on market in your specific markets, absorption in your specific markets, concessions in your specific markets, local job growth in your specific markets, submarket-specific permit data, and any strategy-specific signals that operate at the submarket level (specific employer monitoring, local regulatory tracking, etc.).</p>
+<h3>LAYER 2: NATIONAL MULTIFAMILY-SPECIFIC INDUSTRY SIGNALS</h3>
+<p>National permits, construction pipeline, transaction volume, employment, wage growth, capital flows, and any strategy-specific signals that operate at the national multifamily level (specific lender behavior, multifamily-specific fundraising activity, etc.).</p>
+<h3>LAYER 3: MACROECONOMIC STRUCTURAL SIGNALS</h3>
+<p>Rates, yield curve, inflation, GDP, broad capital allocation, and any strategy-specific signals that operate at the macroeconomic level (specific commodity prices for development-focused operators, specific currency dynamics for international-capital operators, etc.).</p>
+<p>When you organize your signals into these three categories, two things become visible. First, you can see whether you have appropriate coverage at each layer. A dashboard with twelve Layer 1 signals and two Layer 3 signals is structurally unbalanced—it will produce strong operational intelligence but weak strategic context. Second, you can see how the signals will speak to each other. A Layer 3 yield curve signal sits structurally upstream of Layer 2 capital flow signals, which sit upstream of Layer 1 transaction velocity signals. Organizing by layer makes the propagation chain visible.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Layer</strong></th><th><strong>Target Signal Count</strong></th><th><strong>Notes</strong></th></tr></thead><tbody><tr><td>Layer 3 — Macro</td><td>6–10 signals</td><td>Fewer signals, longer lead time, strategic decisions</td></tr><tr><td>Layer 2 — Industry</td><td>8–12 signals</td><td>Moderate count, tactical decision horizon</td></tr><tr><td>Layer 1 — Submarket</td><td>6–12 signals</td><td>Varies with geographic concentration; scales per market</td></tr></tbody></table></div>
+<p>If your distribution is dramatically different—twenty Layer 1 signals and three Layer 3 signals, for example—reconsider whether you’ve properly classified each signal or whether you’ve under-attended to a particular layer.</p>
+<div class='callout'><p><em>Design output: your full signal list reorganized into three layers, with each signal clearly assigned to the layer where it structurally belongs.</em></p></div>
+<h2>Stage Four — Set Review Cadences You Can Actually Sustain</h2>
+<p>The most common cadence design failure is committing to monitoring frequencies that don’t match real operating rhythms. The fix is to design cadences against your actual sustainable rhythm rather than aspirational rhythm.</p>
+<h3>LAYER 3 CADENCE: MONTHLY REVIEW</h3>
+<p>Macroeconomic data updates monthly for most major indicators. Reviewing Layer 3 monthly captures the meaningful movement without producing overwhelming review burden. Some operators benefit from weekly review of fast-moving Layer 3 signals (Treasury yields, equity markets) plus monthly synthesis. Daily Layer 3 review doesn’t work—the noise level is too high relative to the signal frequency.</p>
+<h3>LAYER 2 CADENCE: MONTHLY REVIEW</h3>
+<p>National multifamily-specific data updates monthly to quarterly. Monthly review captures most of the meaningful movement. Quarterly deep-dives provide synthesis of slower-moving Layer 2 indicators (transaction volume, capital flows). The combination—monthly tracking, quarterly synthesis—works for most operators.</p>
+<h3>LAYER 1 CADENCE: WEEKLY TO MONTHLY REVIEW</h3>
+<p>Submarket data updates more frequently and matters more directly to operational decisions. Weekly review of fast-moving Layer 1 signals (lease velocity, concession activity, days on market) is appropriate when you have direct operational responsibility. Monthly review is sufficient when you’re in passive evaluation mode for specific markets.</p>
+<h3>QUARTERLY DEEP-DIVE ACROSS ALL LAYERS</h3>
+<p>Beyond the regular monthly cadence, plan a quarterly deep-dive session where you review the dashboard holistically. Look for cross-layer patterns. Test current operational decisions against current dashboard reading. Identify divergences between layers that warrant investigation. The quarterly session is where the dashboard’s analytical advantage actually materializes—it’s the structured triangulation work that monthly tracking enables but doesn’t perform.</p>
+<p>When setting your specific cadences, apply this calibration: if your initial instinct is weekly, consider whether monthly is actually realistic. If your initial instinct is daily, consider whether weekly is actually realistic. The most sustainable cadence is usually one notch slower than your initial enthusiasm suggests. Better to set a sustainable cadence and exceed it occasionally than to set an aspirational cadence and gradually abandon it.</p>
+<div class='callout'><p><em>Design output: a written cadence schedule specifying when you review each layer, who reviews it, and when the quarterly deep-dive happens.</em></p></div>
+<h2>Stage Five — Integrate the Dashboard into Your Decision-Making</h2>
+<p>A dashboard that exists separately from your decision-making produces nothing. The integration with actual decisions is what turns dashboard discipline into operational advantage.</p>
+<p>There are four integration points worth designing explicitly.</p>
+<h3>ACQUISITION COMMITTEE INTEGRATION</h3>
+<p>Every acquisition committee meeting should reference current dashboard reading. Build dashboard review into the standard acquisition committee agenda. The relevant signals depend on the deal—Layer 3 signals for strategic fit, Layer 2 signals for market timing, Layer 1 signals for specific submarket conditions. The two-minute review at the start of every meeting reframes deal evaluation against current cycle position rather than evaluating deals as if cycle context didn’t matter.</p>
+<h3>STRATEGIC PLANNING INTEGRATION</h3>
+<p>Annual or quarterly strategic planning sessions should explicitly review Layer 3 dashboard reading and the strategic implications of current macroeconomic positioning. The Layer 3 reading should shape strategy formation, not be added after strategic decisions are already made. When your strategic planning starts with “where are we in the broader cycle, based on Layer 3 indicators?” the strategy that emerges is calibrated to the cycle. When strategic planning skips this step, the strategy is calibrated to the planner’s intuition about the cycle, which is usually incomplete.</p>
+<h3>CAPITAL STRUCTURE DECISION INTEGRATION</h3>
+<p>Refinancing decisions, lender selection, and capital structure architecture all benefit from Layer 2 and Layer 3 dashboard reading. Lock in long-term debt during favorable rate windows that Layer 3 signals identify. Sequence refinancings against capital flow dynamics that Layer 2 signals reveal. The integration ensures capital structure decisions reflect cycle position rather than being driven only by deal-level financial engineering.</p>
+<h3>OPERATIONAL DECISION INTEGRATION</h3>
+<p>Quarterly operational reviews—rent strategy, retention investment, expense management, concession deployment—should reference Layer 1 dashboard reading. The asset-level operational decisions that produce most multifamily NOI are calibrated against Layer 1 signals. Build the dashboard into the operational review process so the integration happens systematically rather than depending on individual managers remembering to consult signals.</p>
+<p>The integration design should be specific. Rather than committing generally to “use the dashboard in decisions,” specify which decisions, which signals, which meetings, which agenda items. Specificity is what produces sustained integration.</p>
+<div class='callout'><p><em>Design output: a written specification of when dashboard signals get reviewed in your decision-making processes—which meetings, which agenda items, which decisions.</em></p></div>
+<h2>Stage Six — Build Revision into the Design</h2>
+<p>The last stage is the one most operators skip entirely. They build a dashboard, start using it, and never plan for revision. The dashboard becomes static. Indicators that turn out to be useless stay because nobody removes them. Indicators whose absence becomes costly never get added. The dashboard slowly drifts away from being useful.</p>
+<p>The fix is to build revision into the design from the start. Three revision practices matter.</p>
+<h3>QUARTERLY MICRO-ADJUSTMENTS</h3>
+<p>During the quarterly deep-dive session, ask three questions: Which signals haven’t moved meaningfully this quarter and might not be worth the tracking effort? Which decisions in the past quarter would have been improved by signals we’re not tracking? Which indicators have produced consistently helpful intelligence and warrant more analytical attention? Use the answers to make small dashboard adjustments—adding, removing, or reweighting individual signals. The quarterly micro-adjustments keep the dashboard evolving incrementally.</p>
+<h3>ANNUAL STRUCTURAL REVIEW</h3>
+<p>Once a year, conduct a structural review of the entire dashboard architecture. Has your strategy shifted in ways that change which strategy-specific signals matter? Have you entered new submarkets that need Layer 1 monitoring? Have you exited submarkets that no longer warrant tracking? Has your analytical capability matured to the point where you can productively add complexity? Has team capacity changed in ways that require simplifying? The annual structural review produces larger adjustments—adding or removing signal categories, restructuring layer organization, adjusting cadences.</p>
+<h3>CYCLE-TRANSITION REVIEW</h3>
+<p>At major cycle transitions (entering a new cycle phase, observing significant macroeconomic regime change), conduct a focused review of which signals proved most analytically valuable during the prior cycle phase and which should be elevated, deprioritized, or replaced for the new phase. Different cycle phases call for different signal emphasis. A late-Peak environment makes capital flow and supply pipeline signals especially valuable. An early-Recovery environment makes distressed asset and capital availability signals more important. Cycle-transition reviews recalibrate the dashboard for what’s coming rather than what just happened.</p>
+<div class='callout'><p><em>Design output: a written revision schedule specifying when quarterly micro-adjustments happen, when the annual structural review happens, and the trigger conditions that prompt cycle-transition reviews.</em></p></div>
+<h2>A Worked Example</h2>
+<p>Abstract design principles get clearer through worked examples. Here’s how the design process plays out for a hypothetical operator profile.</p>
+<p><strong>The operator: </strong>A mid-sized sponsor with a 4,000-unit portfolio concentrated in three Sunbelt markets—Phoenix, Charlotte, and Nashville. The strategy is value-add renovation of mid-1990s and 2000s vintage product. The team makes acquisition decisions monthly, conducts quarterly strategic reviews, and the principal personally manages cycle awareness as part of broader portfolio oversight.</p>
+<h3>STAGE ONE — FOUNDATIONAL SIGNALS</h3>
+<p>The operator captures all six Layer 3 foundational signals, all six Layer 2 foundational signals, and five Layer 1 signals each in Phoenix, Charlotte, and Nashville—fifteen Layer 1 signals total. Foundational set total: 27 signals.</p>
+<h3>STAGE TWO — STRATEGY-SPECIFIC SIGNALS</h3>
+<p>Working through the diagnostic questions, the operator identifies six strategy-specific additions:</p>
+<ul class='blist'>
+<li><strong></strong>Renovation cost trajectory data (Layer 2) — value-add strategy depends on renovation economics</li>
+<li><strong></strong>Achievable rent premium data for Class B-to-A repositioning in their submarkets (Layer 1) — directly relevant to value-add returns</li>
+<li><strong></strong>Lender willingness to finance heavy renovation strategies (Layer 2) — capital availability for the specific strategy</li>
+<li><strong></strong>Phoenix-specific employer concentration tracking (Layer 1) — notable single-employer dependencies</li>
+<li><strong></strong>Charlotte banking sector employment specifically (Layer 1) — financial sector is especially relevant to Charlotte’s economic structure</li>
+<li><strong></strong>Nashville hospitality sector employment specifically (Layer 1) — tourism dependency creates specific cyclical vulnerability</li>
+</ul>
+<h3>STAGE THREE — LAYER ORGANIZATION</h3>
+<p>The operator’s full dashboard organizes across three layers: Layer 3 holds 6 signals (foundational). Layer 2 holds 8 signals (6 foundational + 2 strategy-specific). Layer 1 holds 19 signals (15 foundational across three markets + 4 market-specific strategy additions). The Layer 1 weighting is heavy because the operator works in three markets—appropriate for their geographic concentration, though Layer 1 review will require more time than Layer 2 or Layer 3 review.</p>
+<h3>STAGE FOUR — CADENCE</h3>
+<p>The operator commits to: Layer 3 and Layer 2 monthly review on the first Friday of each month (combined into a single 90-minute session). Layer 1 bi-weekly review of submarket signals during the first and third weeks of the month. Quarterly deep-dive on the first Friday of January, April, July, and October.</p>
+<h3>STAGE FIVE — DECISION INTEGRATION</h3>
+<p>Acquisition committee meets monthly—standard agenda includes a 5-minute Layer 2 and Layer 3 dashboard review, then a 10-minute Layer 1 review for the specific submarket of any deal under consideration. Quarterly strategic review opens explicitly with Layer 3 reading and discussion of macroeconomic implications. Annual capital structure review references Layer 2 capital flow dynamics and refinancing windows. Quarterly operational review at the asset management level references Layer 1 reading for each market.</p>
+<h3>STAGE SIX — REVISION</h3>
+<p>Quarterly micro-adjustments during the deep-dive sessions. Annual structural review every January. Cycle-transition review triggered by significant Layer 3 regime shifts (yield curve inversion, sustained inflation regime change, Federal Reserve policy regime shift).</p>
+<div class='callout'><p><em>Result: a 33-signal Cignal dashboard, organized across three layers, reviewed at appropriate cadences, integrated into specific decision-making processes, with revision scheduled into the design. This is v1.0. The trajectory to v2.0 and beyond only happens because v1.0 exists and gets used.</em></p></div>
+<h2>What You Now Have</h2>
+<p>By working through the six stages, you have produced a v1.0 Cignal dashboard. Your dashboard reflects a foundational signal set that every multifamily operator should track, strategy-specific signals that fit your particular approach, layered organization that supports integrated triangulation, sustainable review cadences calibrated to your actual operating rhythm, specific integration into your decision-making processes, and revision practices that keep the dashboard evolving.</p>
+<p>The dashboard is real. It’s yours. It’s designed to work for your specific strategy in your specific markets at your specific level of analytical sophistication.</p>
+<p>But it’s v1.0. It will not be perfect. Some indicators you’ve included will turn out to provide less value than expected. Some indicators you haven’t included will reveal their importance through their absence. The cadences will need adjustment as you discover what’s actually sustainable. The integration practices will need refinement as you observe how dashboard signals do or don’t make their way into decisions.</p>
+<div class='callout'><p><em>This is the right outcome. The dashboard’s value comes from sustained use, not perfect initial design. The path to a great dashboard runs through a working dashboard, used consistently, refined iteratively. You now have the working dashboard. The consistency and iteration are what come next.</em></p></div>
+<h2>A Few Notes on Mindset Before Closing</h2>
+<p>Three mindset commitments will determine whether your v1.0 dashboard becomes the foundation of durable analytical advantage or another abandoned tool.</p>
+<h3>COMMIT TO MAINTAINING V1.0 FOR AT LEAST EIGHTEEN MONTHS</h3>
+<p>The temptation to redesign quickly will be strong, especially in the first ninety days as you discover small flaws. Resist. Most early-life dashboard frustrations resolve themselves through familiarity. Major structural changes in the first year usually reflect impatience rather than informed refinement.</p>
+<h3>USE THE DASHBOARD EVEN WHEN ITS SIGNALS FEEL UNSURPRISING</h3>
+<p>Some quarters the dashboard will tell you what you already know. That’s not evidence the dashboard is failing—it’s evidence the dashboard is confirming the analytical intuition you’ve developed. The value comes during the quarters when the dashboard surfaces something you wouldn’t have seen otherwise. Those quarters are sparse, but they justify all the quarters of consistent maintenance.</p>
+<h3>TRUST THAT THE ARCHITECTURE COMPOUNDS</h3>
+<p>The first year of dashboard discipline produces modest advantage. The third year produces meaningful advantage. The fifth and tenth years produce advantage that no operator without sustained discipline can match. The compounding only happens through years of use. Year one feels like work; year five feels like edge.</p>
+<div class='callout'><p><em>The architecture is built. The principles are established. The design is complete. What remains is the practice—the sustained, year-after-year, cycle-after-cycle work of maintaining the dashboard, learning from it, refining it, and trusting that the framework will produce what it’s designed to produce. The advantage is real, but it accrues only to operators willing to sustain the practice long enough to access it. Your v1.0 dashboard is ready. The discipline begins now.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>The lesson repeatedly frames the deliverable as “a draft v1.0—not a finished dashboard.” According to the lesson, why does this framing matter?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because a v1.0 label lowers expectations with LPs and lenders if the dashboard produces a wrong call.</button><button class='opt' data-k='B'><span class='k'>B</span>Because the most common reason operators never finish a dashboard is pursuing perfection on the first attempt—and the optimal indicator set, ideal thresholds, and perfect template do not exist in advance; they only emerge through sustained use, so the path to a great dashboard runs through a working one used consistently and refined iteratively.</button><button class='opt' data-k='C'><span class='k'>C</span>Because version numbering is required for the dashboard to integrate with the Cignal System software.</button><button class='opt' data-k='D'><span class='k'>D</span>Because a v1.0 should be discarded and rebuilt from scratch after ninety days of use.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is explicit that the most common reason operators never finish building their dashboards is the pursuit of perfection on the first attempt—they get blocked trying to identify the optimal indicator set, calibrate ideal thresholds, and design the perfect template. That blocking is structurally counterproductive because those things do not exist in advance; they emerge only through sustained use. Year three of dashboard discipline produces refinements no amount of pre-launch design could anticipate. So the instruction is to design for v1.0, get something working you can actually maintain, and trust that v2.0 and v5.0 will follow—but only if v1.0 exists and gets used. Option D contradicts the eighteen-month commitment in the closing mindset section; options A and C are not reasons the lesson gives.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>Which of the following correctly lists the six Layer 2 (Industry) foundational signals the lesson says belong in every Cignal dashboard?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Federal Funds Rate, 10-Year Treasury Yield, Yield Curve Spread, Headline CPI, Core CPI, Headline GDP Growth.</button><button class='opt' data-k='B'><span class='k'>B</span>Absorption Rates, Days on Market, Multifamily Deliveries, Local Concession Activity, Submarket Vacancy Direction, Local Job Growth.</button><button class='opt' data-k='C'><span class='k'>C</span>National Multifamily Building Permits, National Multifamily Construction Pipeline, National Multifamily Transaction Volume, Federal Reserve Flow of Funds, National Employment Growth, National Wage Growth.</button><button class='opt' data-k='D'><span class='k'>D</span>Consumer Confidence, Stock Market, Foreclosures, Population Trends, PCE Composition, Renovation Cost Trajectory.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The six Layer 2 foundational signals are National Multifamily Building Permits (earliest supply signal), National Multifamily Construction Pipeline (mid-stage units under construction), National Multifamily Transaction Volume (capital cycle position), Federal Reserve Flow of Funds (capital allocation dynamics), National Employment Growth (multifamily demand drivers), and National Wage Growth (rent growth ceiling). Option A is the six Layer 3 foundational signals. Option B mixes the five Layer 1 foundational signals with Local Job Growth, which the lesson lists in Stage Three as a Layer 1 signal but not among the five-signal foundational Layer 1 set. Option D mixes non-foundational indicators from earlier lessons with a strategy-specific addition from the worked example—none of them are foundational.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>In Stage Three, the lesson explains why signals must be organized by the three-layer architecture rather than kept in a flat list or grouped by data source. What does the lesson say layered organization makes visible?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Which signals are cheapest to source and which require paid subscriptions.</button><button class='opt' data-k='B'><span class='k'>B</span>Whether you have appropriate coverage at each layer (a dashboard with twelve Layer 1 signals and two Layer 3 signals is structurally unbalanced), and how the signals speak to each other—the propagation chain from Layer 3 upstream through Layer 2 to Layer 1.</button><button class='opt' data-k='C'><span class='k'>C</span>Which signals are leading and which are trailing, since each layer contains only one type.</button><button class='opt' data-k='D'><span class='k'>D</span>The order in which signals should be presented to an acquisition committee.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The framework’s analytical power depends on layered organization: indicators in a flat list do not triangulate, and indicators organized by data source do not reveal cross-layer patterns. Organizing by the Onion Framework makes two things visible. First, coverage—the lesson’s example of twelve Layer 1 signals and two Layer 3 signals is structurally unbalanced, producing strong operational intelligence but weak strategic context. Second, relationship—a Layer 3 yield curve signal sits structurally upstream of Layer 2 capital flow signals, which sit upstream of Layer 1 transaction velocity, so organizing by layer makes the propagation chain visible. The target distribution is 6–10 Layer 3, 8–12 Layer 2, and 6–12 Layer 1 (scaling with geographic concentration). Option C is false—each layer contains a mix of leading, coincident, and trailing indicators, as the Part One lessons showed.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>The lesson offers a specific calibration rule for setting review cadences. Which of the following states it correctly?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Set the most frequent cadence you can imagine, because more frequent review always produces more intelligence.</button><button class='opt' data-k='B'><span class='k'>B</span>Review every layer daily during the first ninety days, then relax to weekly once the habit is formed.</button><button class='opt' data-k='C'><span class='k'>C</span>If your initial instinct is weekly, consider whether monthly is realistic; if your instinct is daily, consider whether weekly is realistic—the most sustainable cadence is usually one notch slower than your initial enthusiasm suggests, and it is better to set a sustainable cadence and exceed it occasionally than to set an aspirational one and gradually abandon it.</button><button class='opt' data-k='D'><span class='k'>D</span>Match every layer to the same cadence so the dashboard can be reviewed in one sitting.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The most common cadence design failure is committing to frequencies that do not match real operating rhythms. The lesson’s calibration rule is to step down one notch from initial enthusiasm—weekly instinct, consider monthly; daily instinct, consider weekly—because the most sustainable cadence is usually slower than the aspirational one, and a sustainable cadence exceeded occasionally beats an aspirational cadence gradually abandoned. The layer-specific guidance is Layer 3 monthly (weekly for fast-moving signals like Treasury yields is optional; daily does not work), Layer 2 monthly with quarterly synthesis, Layer 1 weekly to monthly depending on whether you hold direct operational responsibility, plus a quarterly deep-dive across all layers where the structured triangulation actually happens. Option D contradicts the layer-specific cadences; options A and B are the aspirational-frequency failure the lesson warns against.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>Stage Six is described as “the one most operators skip entirely.” In 2–3 sentences, name the three revision practices the lesson prescribes, state the cadence or trigger for each, and give one example from the lesson of how signal emphasis should change at a cycle transition.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>The three revision practices are quarterly micro-adjustments, an annual structural review, and cycle-transition reviews. Quarterly micro-adjustments happen during the quarterly deep-dive and ask which signals have not moved and may not be worth tracking, which past-quarter decisions would have been improved by untracked signals, and which indicators warrant more attention—producing small add/remove/reweight changes. The annual structural review, once a year, asks whether strategy, submarkets, analytical capability, or team capacity have changed in ways that warrant larger adjustments to signal categories, layer organization, or cadences. Cycle-transition reviews are triggered by entering a new phase or a significant macroeconomic regime change and recalibrate signal emphasis for what is coming; the lesson’s example is that a late-Peak environment makes capital flow and supply pipeline signals especially valuable, while early Recovery elevates distressed-asset and capital-availability signals.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator with a 1,200-unit stabilized core-plus portfolio in a single metro brings you their draft dashboard for review. It contains 31 signals: 22 Layer 1 signals for their metro (including rent comps for each of their eight properties), 6 Layer 2 signals, and 3 Layer 3 signals (Federal Funds Rate, Headline CPI, and the S&amp;P 500). Their portfolio is 70% leveraged with four loans maturing in the next 24 months. They plan to review every signal weekly, present the dashboard at the annual strategy retreat, and “update it whenever something big happens.” Using the six-stage process, evaluate this draft: (a) what does the layer distribution reveal, and how does it compare to the lesson’s target ranges and to the worked Sunbelt example; (b) which foundational signals are missing and which strategy-specific signals do the diagnostic questions—particularly the capital-structure question—surface; (c) what is wrong with the cadence, the integration plan, and the revision plan, and what would you specify instead for each; and (d) which of the three mindset commitments is this operator most at risk of violating, and why.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The distribution is 22 / 6 / 3 against target ranges of 6–12 Layer 1, 8–12 Layer 2, and 6–10 Layer 3—badly top-heavy at Layer 1 and starved at Layer 3. The lesson names this exact shape—“twenty Layer 1 signals and three Layer 3 signals”—as the trigger to ask whether signals are misclassified or a layer is under-attended. Here both apply: property-level rent comps for eight owned assets are not submarket signals at all (Lesson 2.1.2 warned against reading individual properties as Layer 1), and Layer 3 is half its minimum. Compare the worked example: a three-metro operator legitimately ran 19 Layer 1 signals because five foundational signals scale per market; a single-metro operator should sit near the bottom of the Layer 1 range, not far above the top of it. (b) Layer 3 is missing the 10-Year Treasury, the yield curve spread, core CPI, and headline GDP, and the S&amp;P 500 is not a foundational signal; the lesson’s six should replace the three. Layer 2 should be checked against the six foundational signals—particularly Flow of Funds and wage growth. The capital-structure diagnostic is decisive here: 70% leverage with four maturities inside 24 months means the lesson says this operator must add lending terms and spreads and lender appetite for stabilized core-plus refinancing as strategy-specific Layer 2 signals, and the 10-Year Treasury becomes the single most decision-relevant signal on the board. The geographic-concentration question also surfaces whatever employer or regulatory dependency defines this one metro, and the “last bad decision” question should be worked explicitly. (c) Cadence: weekly review of all 31 signals is the aspirational-cadence failure; step it down one notch—Layer 3 and Layer 2 monthly with a quarterly deep-dive, Layer 1 bi-weekly or monthly given passive stabilized ownership, and daily nothing. Integration: presenting the dashboard once a year at a retreat is a dashboard that exists separately from decisions, which the lesson says produces nothing. Specify the four integration points—a standing Layer 2/Layer 3 review on any acquisition agenda, Layer 3 as the opening item of strategic planning, and above all a capital-structure review on a fixed cadence that sequences the four refinancings against Layer 3 rate windows and Layer 2 capital-flow dynamics, plus Layer 1 in quarterly operational reviews. Revision: “whenever something big happens” is Stage Six skipped. Specify quarterly micro-adjustments in the deep-dive, an annual structural review on a set month, and named Layer 3 triggers for a cycle-transition review—yield curve inversion, a sustained inflation regime change, or a Fed policy regime shift. (d) The commitment most at risk is maintaining v1.0 for eighteen months: an operator who has designed an unsustainable weekly cadence and an ad hoc revision plan will hit early frustration in the first ninety days and either redesign impulsively or abandon the tool—the pattern the lesson says usually reflects impatience rather than informed refinement. The fix is a v1.0 they can actually sustain, so the compounding has a chance to begin.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>The lesson closes with three mindset commitments. Which of the following correctly states them?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Rebuild the dashboard whenever it feels stale; ignore it in quarters when it is unsurprising; expect full advantage in the first year.</button><button class='opt' data-k='B'><span class='k'>B</span>Commit to maintaining v1.0 for at least eighteen months, resisting the urge to redesign in the first ninety days; use the dashboard even when its signals feel unsurprising, because the sparse quarters when it surfaces something you would not have seen justify all the others; and trust that the architecture compounds—year one feels like work, year five feels like edge.</button><button class='opt' data-k='C'><span class='k'>C</span>Outsource dashboard maintenance to an analyst; review it only at cycle transitions; add complexity as fast as possible.</button><button class='opt' data-k='D'><span class='k'>D</span>Keep the dashboard private from the team; update it daily; treat confirmation of existing intuition as a failure.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The three mindset commitments are: maintain v1.0 for at least eighteen months—the temptation to redesign will be strongest in the first ninety days as small flaws surface, but most early frustrations resolve through familiarity and major first-year changes usually reflect impatience; use the dashboard even when its signals feel unsurprising, because confirmation of your developed intuition is not failure, and the sparse quarters when the dashboard surfaces something you would not otherwise have seen justify all the quarters of maintenance; and trust that the architecture compounds—modest advantage in year one, meaningful in year three, unmatched by year five and ten. Option A inverts all three. Options C and D contradict the lesson’s emphasis on personal ownership, sustained cadence, and treating confirmation as a healthy outcome.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the design process. Proceed to Lesson 2.3.2 with confidence—and with your own v1.0 drafted. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review Stages Three through Six of Lesson 2.3.1 before proceeding. Focus especially on target signal distribution, the one-notch-slower cadence rule, the four integration points, and the three revision practices—these are where drafts most often fail in practice.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 2.3.1 in full and work the six stages against your own operation, producing each stage’s written design output. The rest of Part Three assumes a v1.0 dashboard exists; without one, the discipline it teaches has nothing to attach to.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>The architecture is built. The principles are established. The design is complete. What remains is the practice. If the answer key revealed gaps in your design, closing them now—in your own v1.0—is the highest-leverage investment you can make before Lesson 2.3.2.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='part-three.html'>&larr; Previous<span>The Cignal Dashboard</span></a><a href='2-3-2.html' style='text-align:right'>Next &rarr;<span>The Cignal Threshold</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; 2.3.1 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='2.3.1', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.1.1 · Why Three Layers &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Lesson 2.1.1</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
+  <p class="eyebrow">Lesson 2.1.1</p>
+  <h1>Why Three Layers</h1>
+  <p class='deck'>The structural case for the Onion Framework</p>
+  <div class="leadmeta"><span><b>2,420</b> words</span><span><b>11</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><div class='epi'><p><em>“Make everything as simple as possible, but not simpler.” — Often attributed to Albert Einstein</em></p></div>
+<p>Earlier, you learned that markets cycle. In the introduction to this Part, you learned that signals organize into three concentric layers. But before we examine each layer individually in the next few Lessons, we need to answer a question that most cycle frameworks skip entirely:</p>
+<p>Why <strong>three?</strong></p>
+<p>Not five. Not seven. Not two. Not a flat list of fifteen unranked indicators. Not a sophisticated quantitative model with twenty-three variables and weighted coefficients. Three.</p>
+<p>This question matters more than it might first appear. The number of layers in your analytical framework is not a stylistic choice. It is a structural one. Get the number wrong and the framework either oversimplifies—creating analytical blind spots—or overcomplicates—creating decision paralysis. Get the number right and the framework becomes a durable thinking infrastructure that scales across cycles, markets, and decisions.</p>
+<p>This lesson explains why three layers is the structurally correct answer for multifamily cycle intelligence—and why every alternative has predictable failure modes.</p>
+<h2>The Case for Segmentation</h2>
+<p>The introduction to Part One made the case for layered analysis in broad strokes. Before we dive into why three specifically, let’s compress the foundational argument into its essential form.</p>
+<p>Without segmentation, market intelligence behaves like an undifferentiated stream. Every signal arrives with equal apparent weight. The Federal Reserve raises rates and a local apartment community reports declining absorption—and to the operator processing both as undifferentiated information, neither carries more analytical weight than the other. Both are signals. Both seem to matter.</p>
+<div class='callout'><p><em>They don’t matter in the same way, on the same time horizon, or for the same decisions.</em></p></div>
+<p>Segmentation imposes structure on chaos. It tells you which signals matter for which decisions, when, and why. The question is not whether to segment—every operator who outperforms across cycles segments somehow, even if only intuitively. The question is what segmentation structure produces the most reliable analytical clarity.</p>
+<p>That structure has to do three things well.</p>
+<h3>IT HAS TO SEPARATE DISTINCT INTELLIGENCE DOMAINS</h3>
+<p>Macroeconomic forces operate on different mechanics than industry capital flows, which operate on different mechanics than submarket supply-demand dynamics. A good framework respects these distinct domains rather than forcing them into a single analytical bucket.</p>
+<h3>IT HAS TO ALIGN WITH DECISION TIME HORIZONS</h3>
+<p>Strategic decisions—acquisitions, market entries, capital structure architecture—require long-horizon thinking. Tactical decisions—pacing, capital deployment timing, refinance windows—require medium-horizon thinking. Operational decisions—rent push, retention investment, expense management—require short-horizon thinking. A good framework matches signal layer to decision horizon.</p>
+<h3>IT HAS TO REMAIN COGNITIVELY MANAGEABLE</h3>
+<p>A framework with too few layers oversimplifies and creates blind spots. A framework with too many layers becomes unusable in practice—operators stop maintaining it, stop trusting it, stop using it. A good framework maximizes analytical clarity while remaining genuinely usable in real operating conditions.</p>
+<p>These three requirements—domain separation, time horizon alignment, and cognitive manageability—set up the structural argument for three layers specifically.</p>
+<h2>Why Not Two Layers</h2>
+<p>The simplest segmentation possible is two layers: macro and micro, or national and local, or external and internal. Many cycle frameworks default to this binary split because it’s intuitive and easy to communicate.</p>
+<p>It also fails. Predictably. In the same way every time.</p>
+<p>Two-layer frameworks force a structural compromise that creates analytical blind spots. Consider what happens when you have only “macro” and “local” as your two layers. Where does national multifamily transaction volume go? It’s not macro—it’s industry-specific. It’s not local—it’s national. So you either jam it into “macro” (where it gets lumped with Federal Reserve policy and GDP, two indicators that operate on completely different mechanics) or jam it into “local” (where it confuses national capital flow patterns with submarket-specific supply dynamics).</p>
+<p>Either choice produces error.</p>
+<p>The same problem applies to building permits at the national level, wage growth, employment diffusion, capital fundraising activity, and roughly half a dozen other indicators that are critical for multifamily cycle analysis. None of them fit cleanly into either “macro” or “local.” They occupy a structurally distinct middle ground—the multifamily industry as a whole, operating between the broad macroeconomic environment and the specific submarket reality.</p>
+<p>Two-layer frameworks can’t accommodate this middle layer without distorting it. The result is that operators using two-layer frameworks consistently make one of two mistakes: they either miss tactical industry signals by lumping them with macro forces (and treating them as too distant to act on), or they miss broader pattern recognition by lumping them with local data (and treating national patterns as if they were submarket-specific).</p>
+<div class='callout'><p><em>Two layers is too few. The middle ground demands its own structural place.</em></p></div>
+<h2>Why Not Four or More Layers</h2>
+<p>If two layers is too few, the natural instinct is to ask: would more be better? Why not four layers? Five? Seven? More layers should produce more analytical precision, right?</p>
+<p>In practice, no. More layers produces less usable analysis, not more.</p>
+<p>This is a counterintuitive point worth dwelling on, because the instinct toward more granularity is strong. Operators sophisticated enough to understand that two layers oversimplifies often jump to the conclusion that the solution is just more layers. They imagine a five-layer or seven-layer framework with finer-grained distinctions producing sharper analytical insight.</p>
+<p>What actually happens with four-or-more-layer frameworks is a series of predictable failure modes.</p>
+<h3>BOUNDARY DISPUTES CONSUME ANALYTICAL ENERGY</h3>
+<p>With three layers, the boundaries between layers are clean and obvious—submarket signals belong to submarkets, industry signals belong to the industry, macro signals belong to the macro environment. With five or seven layers, the boundaries become contested. Is a regional employment trend a “macro-regional” signal or a “metro-cluster” signal? Is a sub-asset-class capital flow a “national multifamily” signal or a “national multifamily Class A” signal? Operators spend more time arguing about layer boundaries than analyzing what’s inside them.</p>
+<h3>MAINTENANCE BURDEN GROWS NON-LINEARLY</h3>
+<p>A three-layer dashboard is genuinely maintainable—operators can update it monthly without it becoming a chore. A seven-layer dashboard requires meaningful weekly maintenance time. The maintenance burden grows faster than the analytical benefit. After several months, operators stop maintaining their multi-layer dashboards. Frameworks that don’t get maintained don’t produce intelligence.</p>
+<h3>FALSE PRECISION CREATES FALSE CONFIDENCE</h3>
+<p>More layers feel more sophisticated. They create the impression of analytical rigor. But more layers don’t produce more accuracy—they produce more granular categorization of the same underlying uncertainty. An operator using a seven-layer framework can make the same wrong cycle call as an operator using a three-layer framework, but with greater apparent confidence because the framework felt more sophisticated. False precision is worse than admitted uncertainty because it produces overconfidence in flawed conclusions.</p>
+<h3>DECISION TIME HORIZONS COLLAPSE INTO NOISE</h3>
+<p>The strategic value of a layered framework comes from matching signal layer to decision time horizon. Three layers map cleanly to three meaningful decision horizons: short-term operational (3–6 months), medium-term tactical (6–12 months), and long-term strategic (12–24+ months). Seven layers don’t map to seven meaningfully distinct decision horizons—they map to the same three horizons with arbitrary subdivisions that don’t change what decisions get made or when.</p>
+<div class='callout'><p><em>Sophistication without usability is theater. The best framework is the one operators actually maintain and act on.</em></p></div>
+<h2>Why These Specific Three Layers</h2>
+<p>The argument so far has established that three layers is the right number—neither too few to capture the structural reality nor too many to remain cognitively manageable. But why these specific three layers? Why submarket, industry, and macro rather than some other partitioning of three?</p>
+<p>The answer is that the three layers reflect three genuinely distinct intelligence domains in multifamily cycle analysis. They aren’t arbitrary divisions—they correspond to the actual structural separation of how multifamily cycles operate.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Layer 1: Submarket Signals</span><p><em>Ground-level operational reality — Where decisions actually get made</em></p></div></div></div>
+<p>This is where multifamily decisions actually get made. An operator buys a specific asset in a specific submarket, leases it to specific residents, manages it against specific local competitors, and exits it into a specific local buyer pool. The submarket is the fundamental unit of multifamily decision-making. Any framework that doesn’t include submarket-level intelligence misses the level at which actions actually occur.</p>
+<p>Submarket intelligence has its own data sources (CoStar submarket reports, local permit data, MSA-level employment, local concession activity), its own update frequency (weekly to monthly for the most actionable signals), and its own analytical posture (current operational reality, with 3–6 months lead time on the next operational shifts). These characteristics are genuinely distinct from the other two layers—submarket data isn’t just smaller-scale industry data, it’s structurally different in how it’s gathered, what it shows, and how it’s used.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Layer 2: Industry Signals</span><p><em>Multifamily-specific national dynamics — What’s coming before submarkets reflect it</em></p></div></div></div>
+<p>The multifamily industry has its own cycle dynamics that operate distinctly from both the broader macroeconomic environment and any specific submarket. National capital flows into multifamily, national construction pipeline data, national absorption trends, national cap rate movements—these operate at the industry level and have predictive value that neither macro signals nor submarket signals provide.</p>
+<p>Industry intelligence has its own data sources (CoStar national, Yardi Matrix, RealPage, MSCI Real Capital Analytics, NAA reports, NMHC research), its own update frequency (monthly to quarterly), and its own analytical posture (medium-term tactical, with 6–12 months lead time on submarket reality). Industry signals tell you what’s coming for multifamily before submarkets reflect it—and they tell you about multifamily specifically rather than about the broader economy. This middle layer is what two-layer frameworks miss entirely.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Layer 3: Macroeconomic Signals</span><p><em>The structural environment — The rules of the game for the next 12–24+ months</em></p></div></div></div>
+<p>The Federal Reserve, the yield curve, inflation trajectories, GDP composition, broad capital allocation dynamics—these macroeconomic forces shape the environment within which multifamily operates without being multifamily-specific themselves. They affect every asset class, every industry, every market.</p>
+<p>Macro intelligence has its own data sources (Federal Reserve releases, BLS, BEA, Treasury data, broad economic research), its own update frequency (weekly for some indicators, quarterly for others), and its own analytical posture (long-term strategic, with 12–24+ months lead time on operational reality). Macro signals tell you about the structural environment—what the rules of the game look like over the next year and beyond—and they operate at a horizon where strategic decisions get made.</p>
+<div class='callout'><p><em>Each of these three layers represents a genuinely distinct intelligence domain with distinct data sources, distinct mechanics, distinct time horizons, and distinct decision implications. The three layers aren’t arbitrary. They reflect how multifamily intelligence actually structures itself.</em></p></div>
+<h2>The Time-Horizon Argument</h2>
+<p>There’s one additional reason three layers is structurally correct that’s worth examining separately: the layers map cleanly to decision time horizons in a way that no other layer count does.</p>
+<p>Multifamily decisions fall into three meaningfully distinct time horizons.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Decision Type</strong></th><th><strong>Time Horizon</strong></th><th><strong>Signal Layer</strong></th><th><strong>Examples</strong></th></tr></thead><tbody><tr><td>Strategic</td><td>12–24+ months</td><td>Layer 3 — Macro</td><td>Market entry/exit, capital structure, portfolio positioning</td></tr><tr><td>Tactical</td><td>6–12 months</td><td>Layer 2 — Industry</td><td>Acquisition pacing, refinance windows, capital deployment timing</td></tr><tr><td>Operational</td><td>3–6 months</td><td>Layer 1 — Submarket</td><td>Rent strategy, retention investment, concession management</td></tr></tbody></table></div>
+<p>Three decision horizons. Three signal layers. The mapping is one-to-one—not by accident, but because the structural separation of decision time horizons in multifamily reflects the structural separation of how forces propagate through the cycle.</p>
+<p>A two-layer framework forces strategic and tactical decisions to share a layer, or tactical and operational decisions to share one. A four-or-more-layer framework subdivides one of the three meaningful horizons into artificial sub-horizons that don’t correspond to real decision categories. Three layers maps to three decisions in a way that produces operational clarity at every level.</p>
+<h2>The Triangulation Principle</h2>
+<p>The deepest argument for three layers is one we’ll develop fully across the upcoming Lessons, but it’s worth introducing here: three layers is the minimum number that supports genuine triangulation.</p>
+<p>With one signal source, you have a reading. With two signal sources, you have either confirmation or conflict—but no way to decide which signal to trust if they disagree. With three signal sources operating on different horizons and from different domains, you have triangulation. When all three layers point in the same direction, conviction is high. When two of three agree and one disagrees, the disagreement itself carries information—typically, the disagreement reflects either noise in the dissenting layer or an emerging shift that hasn’t yet propagated to the other layers.</p>
+<p>Two-layer frameworks can’t triangulate. They can only confirm or conflict, and conflicts have no third source to break the tie. Multi-layer frameworks technically support triangulation but introduce so much analytical noise that the triangulation signal gets lost in the cross-layer disagreement.</p>
+<div class='callout'><p><em>Three layers is the minimum number for triangulation. It’s also the maximum number that keeps triangulation cognitively clean. The framework’s number of layers isn’t just structurally correct for what it shows—it’s structurally correct for what it allows operators to do analytically.</em></p></div>
+<h2>What This Means for the Lessons Ahead</h2>
+<p>We’ve now established that three layers is the structurally correct number for multifamily cycle intelligence. Two layers oversimplifies. Four or more overcomplicates. The specific three layers—submarket, industry, and macro—reflect genuinely distinct intelligence domains with distinct data sources, distinct time horizons, and distinct decision implications. The three layers map cleanly to three decision horizons, and they represent the minimum number required for analytical triangulation.</p>
+<p>With the architectural justification in place, the remaining lessons of Part One examine each layer individually.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Layer 1: Submarket Signals</span><p>What ground-level operational intelligence looks like. Which submarket indicators belong in this layer and why. How to read absorption momentum, days on market, local concession activity, and submarket-specific supply-demand balance. How Layer 1 signals inform near-term operational decisions on 3–6 month horizons.</p></div></div></div>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Layer 2: Industry Signals</span><p>What multifamily-specific national intelligence looks like. Which industry indicators belong in this layer and why. How to read building permits, capital flow data, transaction volume, employment dynamics, and population trends. How Layer 2 signals inform tactical decisions on 6–12 month horizons.</p></div></div></div>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Layer 3: Macroeconomic Signals</span><p>What structural macro intelligence looks like. Which macro indicators belong in this layer and why. How to read the yield curve, Federal Reserve policy, inflation trajectories, and broad capital allocation dynamics. How Layer 3 signals inform strategic decisions on 12–24+ month horizons.</p></div></div></div>
+<p>By the end of Part One, you will have the complete architecture. The three layers will not be abstract concepts—they will be working analytical infrastructure with specific indicators, specific data sources, specific time horizons, and specific decision applications.</p>
+<div class='callout'><p><em>Three layers. Three intelligence domains. Three time horizons. Three decision categories. The framework is structural because the reality it describes is structural. Three is not a marketing choice. It’s the answer to what the architecture of multifamily intelligence actually looks like.</em></p></div>
+<p>Let’s begin with the layer closest to where decisions actually get made.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>The lesson states that a segmentation structure for market intelligence has to do three things well. Which of the following correctly identifies those three requirements?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Maximize the number of indicators tracked, update daily, and weight every signal by statistical significance.</button><button class='opt' data-k='B'><span class='k'>B</span>Separate national from local data, prioritize trailing indicators, and eliminate all subjective judgment.</button><button class='opt' data-k='C'><span class='k'>C</span>Separate distinct intelligence domains, align with decision time horizons, and remain cognitively manageable in real operating conditions.</button><button class='opt' data-k='D'><span class='k'>D</span>Match Federal Reserve policy, match institutional research methodology, and match the operator’s asset class.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson compresses the case for segmentation into three requirements: it has to separate distinct intelligence domains (macro forces, industry capital flows, and submarket supply-demand operate on different mechanics), it has to align with decision time horizons (strategic, tactical, and operational decisions require long-, medium-, and short-horizon thinking respectively), and it has to remain cognitively manageable (too few layers oversimplifies; too many becomes unusable and stops being maintained). These three requirements—domain separation, time horizon alignment, and cognitive manageability—set up the structural argument for three layers specifically. Option A describes the over-engineered quantitative model the lesson explicitly rejects; options B and D are not requirements the lesson names.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>According to the lesson, why do two-layer frameworks (macro and local) fail “predictably, in the same way every time”?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Two layers require too much maintenance time, so operators abandon them within a few months.</button><button class='opt' data-k='B'><span class='k'>B</span>A structurally distinct middle ground—national multifamily transaction volume, national building permits, wage growth, employment diffusion, capital fundraising—fits cleanly into neither layer, so it gets jammed into “macro” or “local” and either choice produces error.</button><button class='opt' data-k='C'><span class='k'>C</span>Macro signals are irrelevant to multifamily, so any framework that includes them is compromised.</button><button class='opt' data-k='D'><span class='k'>D</span>Local data is too unreliable to serve as an analytical layer on its own.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson’s central objection to two-layer frameworks is the missing middle. Where does national multifamily transaction volume go? It is not macro—it is industry-specific. It is not local—it is national. The same problem applies to national building permits, wage growth, employment diffusion, and capital fundraising activity—roughly half a dozen indicators critical to multifamily cycle analysis. Forced into “macro,” they get lumped with Federal Reserve policy and GDP and treated as too distant to act on; forced into “local,” national capital-flow patterns get confused with submarket-specific supply dynamics. Either choice produces error. As the lesson puts it: two layers is too few—the middle ground demands its own structural place. Option A describes the failure mode of too many layers, not too few.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 3</span><p class='qs'>The lesson identifies several predictable failure modes of four-or-more-layer frameworks. Which of the following is NOT one of them?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Boundary disputes consume analytical energy as operators argue about which layer a signal belongs in.</button><button class='opt' data-k='B'><span class='k'>B</span>Maintenance burden grows faster than analytical benefit, and unmaintained frameworks stop producing intelligence.</button><button class='opt' data-k='C'><span class='k'>C</span>False precision creates false confidence—the same wrong cycle call is made with greater apparent conviction.</button><button class='opt' data-k='D'><span class='k'>D</span>The framework oversimplifies the market and creates analytical blind spots by lumping distinct domains together.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Option D describes the failure mode of two-layer frameworks—oversimplification and blind spots—not the failure mode of four-or-more-layer frameworks. The lesson names four predictable failure modes for over-segmented frameworks: boundary disputes consume analytical energy (is a regional employment trend “macro-regional” or “metro-cluster”?); maintenance burden grows non-linearly until operators stop maintaining the dashboard; false precision creates false confidence (more layers produce more granular categorization of the same underlying uncertainty, not more accuracy); and decision time horizons collapse into noise (seven layers do not map to seven meaningfully distinct decision horizons—they map to the same three with arbitrary subdivisions). Recognizing that too few and too many layers fail for opposite reasons is the core of the structural argument.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 4</span><p class='qs'>The lesson maps the three signal layers one-to-one to three decision time horizons. Which pairing is correct?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Layer 1 Submarket → Strategic decisions (12–24+ months), such as market entry and capital structure.</button><button class='opt' data-k='B'><span class='k'>B</span>Layer 2 Industry → Tactical decisions (6–12 months), such as acquisition pacing, refinance windows, and capital deployment timing.</button><button class='opt' data-k='C'><span class='k'>C</span>Layer 3 Macro → Operational decisions (3–6 months), such as rent strategy and concession management.</button><button class='opt' data-k='D'><span class='k'>D</span>All three layers map to the same 6–12 month horizon; the distinction is in data source, not timing.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson’s time-horizon table maps the layers one-to-one: Strategic decisions (12–24+ months) draw on Layer 3 Macro—market entry and exit, capital structure, portfolio positioning. Tactical decisions (6–12 months) draw on Layer 2 Industry—acquisition pacing, refinance windows, capital deployment timing. Operational decisions (3–6 months) draw on Layer 1 Submarket—rent strategy, retention investment, concession management. Options A and C invert the mapping, and option D contradicts the lesson’s point that the mapping is one-to-one “not by accident, but because the structural separation of decision time horizons in multifamily reflects the structural separation of how forces propagate through the cycle.” A two-layer framework forces two of these horizons to share a layer; a four-plus-layer framework subdivides a real horizon into artificial ones.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson calls the Triangulation Principle “the deepest argument for three layers.” In 2–3 sentences, explain (a) why three signal sources is the minimum number that supports genuine triangulation, and (b) why the lesson also describes three as the maximum number that keeps triangulation cognitively clean.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) With one signal source you have a reading. With two, you have either confirmation or conflict—but when the two disagree there is no way to decide which to trust, because there is no third source to break the tie. Three sources operating on different horizons and from different domains is the minimum that produces genuine triangulation: when all three agree, conviction is high, and when two of three agree, the dissent itself carries information—typically either noise in the dissenting layer or an emerging shift that has not yet propagated to the others. (b) Three is also the maximum that keeps triangulation clean because multi-layer frameworks, while they technically support triangulation, introduce so much cross-layer disagreement and analytical noise that the triangulation signal gets lost. The layer count is therefore structurally correct not only for what the framework shows, but for what it allows operators to do analytically.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator runs a two-layer dashboard: “Macro” (Federal Reserve policy, GDP, inflation) and “Local” (their submarkets’ occupancy, rent growth, concessions). Over the past two quarters the Fed has held rates steady and their submarkets are running 96% occupancy with modest rent growth—so the dashboard reads “stable.” Meanwhile, national multifamily transaction volume has fallen sharply, national capital fundraising for multifamily has slowed, and national permit activity is decelerating. Using the lesson’s framework, explain (a) where those three national multifamily signals would land in the operator’s two-layer dashboard and what analytical error that produces, (b) how a three-layer framework would change the reading, and (c) which decision time horizon and which category of decisions the operator should now be reconsidering.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) In a two-layer dashboard, national multifamily transaction volume, national multifamily capital fundraising, and national permit velocity have no structural home. They are not Federal Reserve policy or GDP, and they are not the operator’s submarket occupancy. The operator either jams them into “Macro”—where they get lumped with rates and GDP and treated as too distant to act on—or into “Local”—where national capital-flow and supply patterns get misread as if they were submarket-specific. In practice, because the Fed is steady and the submarket is at 96%, the most likely outcome is that these signals are discounted or never tracked, and the dashboard reads “stable” when the industry layer is already shifting. That is the two-layer blind spot the lesson describes. (b) A three-layer framework gives those signals their own structural place—Layer 2, Industry—with its own data sources (CoStar national, Yardi Matrix, RealPage, MSCI RCA, NAA/NMHC), its own monthly-to-quarterly update rhythm, and its own analytical posture: what is coming for multifamily before submarkets reflect it, with 6–12 months of lead time. Read this way, the pattern is not “stable.” It is a Layer 3 that has not moved, a Layer 1 that has not moved yet, and a Layer 2 that has moved—which, under the Triangulation Principle, is a two-versus-one disagreement where the dissenting layer likely reflects an emerging shift that has not yet propagated downstream. (c) Layer 2 maps to the tactical horizon—6–12 months—so the decisions the operator should be reconsidering are acquisition pacing, refinance windows, and capital deployment timing: slowing or re-underwriting acquisitions in the pipeline, evaluating whether to pull a refinance forward while the capital-markets window is still open, and holding deployable capital rather than committing it on the assumption that current submarket strength persists. Operational decisions can stay steady for now; strategic decisions do not yet have a Layer 3 trigger.</em></em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 7</span><p class='qs'>The lesson argues the three layers are not arbitrary because each is a genuinely distinct intelligence domain with its own data sources, update frequency, and analytical posture. Which of the following correctly describes Layer 2—Industry Signals?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Sources such as CoStar national, Yardi Matrix, RealPage, MSCI Real Capital Analytics, NAA, and NMHC; updated monthly to quarterly; medium-term tactical posture with 6–12 months of lead time on submarket reality.</button><button class='opt' data-k='B'><span class='k'>B</span>Sources such as Federal Reserve releases, BLS, BEA, and Treasury data; updated weekly to quarterly; long-term strategic posture with 12–24+ months of lead time.</button><button class='opt' data-k='C'><span class='k'>C</span>Sources such as CoStar submarket reports, local permit data, MSA-level employment, and local concession activity; updated weekly to monthly; current operational reality with 3–6 months of lead time.</button><button class='opt' data-k='D'><span class='k'>D</span>Sources drawn exclusively from an operator’s own property management software; updated daily; a purely trailing posture that confirms what has already happened.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Layer 2—Industry Signals—is the multifamily industry as a whole, operating between the broad macroeconomic environment and the specific submarket. Its data sources are national multifamily research and transaction data: CoStar national, Yardi Matrix, RealPage, MSCI Real Capital Analytics, NAA reports, NMHC research. Its update frequency is monthly to quarterly, and its analytical posture is medium-term tactical, with 6–12 months of lead time on submarket reality. Industry signals tell you what is coming for multifamily before submarkets reflect it—and they tell you about multifamily specifically rather than the broader economy. Option B describes Layer 3 Macro (Federal Reserve, BLS, BEA, Treasury; 12–24+ months, strategic). Option C describes Layer 1 Submarket (CoStar submarket reports, local permits, MSA employment, local concessions; 3–6 months, operational). Option D describes trailing internal data and is not one of the three layers. This middle layer is precisely what two-layer frameworks miss entirely.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong grasp of the structural argument. Proceed to Lesson 2.1.2 (Layer 1: Submarket Signals) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the “Why Not Two Layers” and “Why Not Four or More Layers” sections of Lesson 2.1.1 before proceeding. Focus especially on the missing middle ground that two-layer frameworks cannot accommodate and the one-to-one mapping between signal layers and decision time horizons.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 2.1.1 in full. The architectural justification for three layers—domain separation, time-horizon alignment, cognitive manageability, and the Triangulation Principle—is the foundation every layer-specific lesson in Part One builds on. The layers will not hold together analytically without it.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Three layers is not a marketing choice. It is the answer to what the architecture of multifamily intelligence actually looks like. If the answer key revealed gaps in why the number is three—rather than simply that it is—closing those gaps now is the highest-leverage investment you can make before Lesson 2.1.2.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='part-one.html'>&larr; Previous<span>The Onion Framework</span></a><a href='2-1-2.html' style='text-align:right'>Next &rarr;<span>Layer 1 — Submarket Signals</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; 2.1.1 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='2.1.1', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

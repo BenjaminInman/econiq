@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.3.2 · The Cignal Threshold &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Lesson 2.3.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 2.3.2</p>
+  <h1>The Cignal Threshold</h1>
+  <p class='deck'>Knowing when signals justify strategic adjustment</p>
+  <div class="leadmeta"><span><b>3,764</b> words</span><span><b>17</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><div class='epi'><p><em>“Conviction is built on confirmation, not on certainty. The discipline is knowing when you have enough.”</em></p></div>
+<p>You’ve built the framework (Part One). You’ve designed the dashboard. You’re now tracking signals across three layers, watching them move week to week, month to month. Eventually you’ll see something that looks like a directional shift. Days on market lengthening. Capital flows softening. The yield curve flattening.</p>
+<p>Then comes the question that determines whether the framework actually produces operational advantage.</p>
+<div class='callout'><p><em>At what point do these signals justify adjusting your investment strategy?</em></p></div>
+<p>Too early and you’re acting on noise. Reactive operators who adjust strategy on the first hint of a directional shift produce constant strategic volatility, eroding the discipline they were trying to build. Too late and you’re acting on conditions that have already been priced in. Patient operators who wait for unambiguous certainty find themselves making strategic adjustments after the optimal response window has closed.</p>
+<p>Between these two failures sits the analytical sweet spot—the point at which accumulated signal evidence is strong enough to justify action but early enough that action still produces advantage. This lesson is about identifying that point.</p>
+<p>We call this principle The Cignal Threshold in formal methodology references—the trifecta in conversational shorthand. The name reflects what the principle establishes: a defensible standard for how much confirming signal evidence justifies strategic adjustment, how that standard differs across decision types, and how to apply the discipline without falling into either reactive or paralyzed extremes.</p>
+<p>By the end of this lesson, you will know what the basic threshold is and why it’s structured the way it is, how the threshold calibrates to different decision types, when single-layer concentration is appropriate versus when cross-layer distribution is required, what to do when signals diverge rather than confirm, what mistakes operators consistently make, and how to apply the threshold to actual decisions through worked examples.</p>
+<h2>A Note on What This Lesson Can and Cannot Claim</h2>
+<p>Before establishing the threshold, a moment of honesty about what this principle is and isn’t.</p>
+<p>There is no peer-reviewed academic research that has empirically validated a specific number of confirming signals as the optimal threshold for multifamily strategy adjustment. If a methodology claims otherwise, it is overstating what evidence actually shows. The Cignal Threshold is not an empirical claim that research has proven correct.</p>
+<p>What it is, instead, is a structural principle derived from defensible reasoning across multiple disciplines.</p>
+<ul class='blist'>
+<li><strong></strong>Triangulation logic from intelligence analysis — multiple sources reduce error rate</li>
+<li><strong></strong>Wisdom-of-crowds research from forecasting science — combined indicators outperform single indicators, with diminishing returns beyond a certain number</li>
+<li><strong></strong>Cognitive research on working memory — the practical limits of how many factors operators can integrate when making decisions</li>
+<li><strong></strong>Practitioner heuristics from adjacent investment fields — technical analysis, capital markets research, institutional asset allocation</li>
+</ul>
+<p>These foundations support the structure of the threshold without proving any specific number is empirically optimal. The principle is defensible. It is not certified.</p>
+<p>This honest framing matters because operators who adopt the methodology need to understand what they’re adopting. The Cignal Threshold provides a working standard that protects against common failure modes—acting on too little evidence, waiting for impossible certainty, treating all signals as equivalent weight. It does not provide a mathematically optimized solution to a problem that lacks a mathematically optimized solution. Used with that understanding, the principle produces real analytical advantage. Used as if it were a precise empirical formula, it produces false confidence.</p>
+<div class='callout'><p><em>The Cignal Threshold is a discipline, not a calculation. The number isn’t magic—the discipline is.</em></p></div>
+<h2>The Basic Threshold</h2>
+<p>The Cignal Threshold establishes two specific points along the spectrum of accumulated signal evidence.</p>
+<h3>THE MINIMUM THRESHOLD: THREE CONFIRMING SIGNALS</h3>
+<p>Before three signals point in the same direction, accumulated evidence is insufficient to justify strategic adjustment. Two confirming signals can confirm or conflict with no way to break ties. Three is the minimum number that establishes meaningful directional confirmation. Below the minimum threshold, the appropriate posture is attention without action—note the directional pattern, increase monitoring intensity, but defer strategic adjustment until additional confirmation arrives.</p>
+<h3>THE HIGH-CONFIDENCE THRESHOLD: FIVE CONFIRMING SIGNALS</h3>
+<p>Once five signals point in the same direction, accumulated evidence is strong enough to justify acting with conviction. Five signals provide redundant confirmation that protects against any single signal being noisy or revised. Five also represents the practical upper bound where additional confirmation rarely changes the analytical conclusion—beyond five, the marginal value of additional confirming signals approaches zero.</p>
+<h3>THE ZONE BETWEEN THREE AND FIVE: ACTIVE PREPARATION</h3>
+<p>When accumulated evidence sits between the minimum and high-confidence thresholds, the appropriate posture is preparation without full execution. Begin positioning capital structure, cultivating relationships with capital partners aligned with the projected shift, sketching alternative scenarios for the strategic adjustment. But defer full execution until the high-confidence threshold is reached or until additional analysis reveals genuine conviction-building factors beyond signal confirmation alone.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Signal Count</strong></th><th><strong>Posture</strong></th><th><strong>Action</strong></th></tr></thead><tbody><tr><td>Below 3 signals</td><td>Watch closely</td><td>Monitor, increase intensity, do not act</td></tr><tr><td>3–4 signals</td><td>Prepare actively</td><td>Begin positioning, defer full execution</td></tr><tr><td>5+ signals</td><td>Act with conviction</td><td>Execute the strategic adjustment</td></tr></tbody></table></div>
+<p>This three-tier structure reflects that strategic adjustment is not a binary decision. It’s a continuum from watching to preparing to executing. The threshold provides discipline at each transition point—when watching becomes preparing, when preparing becomes executing.</p>
+<p>For most operators, the simple version of The Cignal Threshold is exactly this: three minimum to prepare, five to execute. This is the formal structure of the principle, the conversational shorthand of the trifecta, the named methodology component you’ll reference in practical contexts. But the simple version is a starting point. As we’ll see in the next section, the threshold actually varies by decision type—and operators who apply the simple version uniformly across all decisions will sometimes apply it incorrectly.</p>
+<h2>Why Three Is the Minimum and Five Is the High-Confidence Point</h2>
+<p>The numbers aren’t arbitrary, but they aren’t empirically validated either. They reflect structural reasoning across several dimensions worth examining briefly.</p>
+<h3>WHY THREE IS THE MINIMUM</h3>
+<p>Three is the smallest number that breaks ties between conflicting signals. With one signal, you have a reading. With two signals, you have either confirmation or conflict, but no way to decide which signal to trust if they disagree. With three signals, the majority view has structural meaning—even if one of the three is noisy or revised, two-out-of-three confirmation still represents directional evidence. Three is also the number of layers in the Onion Framework, which means three signals can theoretically span all three layers—connecting the minimum threshold directly to the framework’s architecture.</p>
+<h3>WHY FIVE IS THE HIGH-CONFIDENCE POINT</h3>
+<p>Five extends the redundancy that protects against signal noise. With five confirming signals, even if two turn out to be unreliable, three remain—meeting the minimum threshold. Five also approximates the practical limit of cognitive integration; operators can hold and reason about five confirming factors while making decisions, but ten or fifteen becomes harder to integrate without analytical apparatus that most operators don’t deploy. Across forecasting research, the marginal value of additional confirming indicators tends to diminish meaningfully beyond five—additional confirmation rarely changes the conclusion enough to justify the additional analytical effort.</p>
+<h3>WHY NOT HIGHER NUMBERS</h3>
+<p>Some operators will be tempted to demand seven, ten, or fifteen confirming signals before strategic adjustment, in pursuit of higher confidence. The temptation is structurally counterproductive. Higher thresholds produce later action—by the time fifteen signals confirm a directional shift, the optimal response window has typically closed. Higher thresholds also produce false precision—implying analytical certainty that the underlying signals can’t actually support. The 3/5 structure is calibrated to balance confirmation against timeliness; higher thresholds shift the balance toward confirmation at the expense of operational advantage.</p>
+<h3>WHY NOT LOWER NUMBERS</h3>
+<p>Some operators will be tempted to act on two confirming signals, or even one, in pursuit of earlier action. The temptation is also counterproductive. Two signals can both reflect the same underlying noise. One signal is insufficient by definition. Strategic adjustments based on one or two signals produce constant strategic volatility—operators who adjust on every accumulating evidence report find themselves changing direction so frequently that no strategy gets sustained long enough to produce results.</p>
+<p>The 3/5 structure represents the analytical sweet spot between these failure modes. Three is enough to break ties without being so many that timeliness is lost. Five is enough to produce conviction without being so many that the response window closes.</p>
+<h2>The Decision-Calibrated Refinement</h2>
+<p>The simple 3/5 threshold works well for many operators much of the time. But applying it uniformly across all decision types misses an important refinement: different decisions require different types of evidence, not just different amounts.</p>
+<p>A purely operational decision (rent strategy adjustment) doesn’t require macroeconomic confirmation—Layer 1 evidence alone can justify the operational response. A purely strategic decision (multi-year market entry) doesn’t require operational confirmation—Layer 3 macroeconomic context matters most. Tactical decisions (acquisition pacing) sit in the middle and require evidence that propagation is occurring across layers.</p>
+<p>This is where the threshold calibrates to decision type. Three categories of decisions warrant different threshold structures.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Operational Decisions</span><p><em>Layer 1 Dominant  •  Consequences play out over the next 3–6 months</em></p></div></div></div>
+<p>Decisions in this category include rent strategy, concession deployment, retention investment, expense management, and leasing pace adjustments. These decisions can be supported entirely by Layer 1 confirmation.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Threshold Component</strong></th><th><strong>Specification</strong></th></tr></thead><tbody><tr><td>Minimum threshold</td><td>3 confirming Layer 1 signals</td></tr><tr><td>High-confidence threshold</td><td>4–5 confirming Layer 1 signals</td></tr><tr><td>Cross-layer requirement</td><td>None required</td></tr></tbody></table></div>
+<p>The reasoning: operational decisions only require operational evidence. Demanding macroeconomic confirmation before adjusting concession strategy would create unnecessary friction and delay obvious operational responses. When Days on Market in your submarkets is rising, absorption is decelerating, and concessions are emerging in the local competitive set, you have three Layer 1 signals confirming a directional shift—you don’t need yield curve confirmation to act on it.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Tactical Decisions</span><p><em>Cross-Layer Required  •  Consequences play out over the next 6–12 months</em></p></div></div></div>
+<p>Decisions in this category include acquisition pacing, capital deployment timing, refinance windows, portfolio composition rebalancing, and geographic diversification choices. These decisions require evidence that a shift is propagating across layers, not just appearing within one.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Threshold Component</strong></th><th><strong>Specification</strong></th></tr></thead><tbody><tr><td>Minimum threshold</td><td>3 total signals, with at least 1 from Layer 2 and 1 from Layer 1</td></tr><tr><td>High-confidence threshold</td><td>4–5 total signals across at least 2 layers, Layer 2 and Layer 1 both represented</td></tr><tr><td>Cross-layer requirement</td><td>Required</td></tr></tbody></table></div>
+<p>The reasoning: tactical decisions sit in the middle of the framework’s propagation chain. Pure Layer 1 confirmation is insufficient because submarket signals might reflect local noise rather than industry-wide shifts. Pure Layer 2 confirmation is insufficient because national patterns might not yet be propagating to specific markets. Cross-layer confirmation reveals genuine propagation—the structural mechanic that makes tactical adjustments justified.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Strategic Decisions</span><p><em>Layer 3 Anchor Required  •  Consequences play out over multi-year horizons</em></p></div></div></div>
+<p>Decisions in this category include market entry and exit, capital structure architecture, long-term hold strategy, capital partner selection, and portfolio composition strategy. These decisions require evidence that the structural environment is shifting at the macroeconomic level.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Threshold Component</strong></th><th><strong>Specification</strong></th></tr></thead><tbody><tr><td>Minimum threshold</td><td>3 signals total, with at least 2 from Layer 3 and 1 from Layer 2</td></tr><tr><td>High-confidence threshold</td><td>4–5 signals total, with at least 2–3 from Layer 3 and 1–2 from Layer 2</td></tr><tr><td>Cross-layer requirement</td><td>Layer 3 anchor required; Layer 2 corroboration required; Layer 1 not required</td></tr></tbody></table></div>
+<p>The reasoning: strategic decisions operate on time horizons where Layer 1 operational reality is too immediate to be informative. The relevant question for strategic positioning is whether macroeconomic conditions are shifting structurally, not whether your submarkets are showing this quarter’s operational variation. Layer 2 corroboration confirms that the macroeconomic shift is beginning to translate to multifamily-specific dynamics, validating that the Layer 3 signal isn’t just macroeconomic noise.</p>
+<p>The decision-calibrated structure adds sophistication to the simple threshold without abandoning it. The simple threshold (3 minimum / 5 high-confidence) remains the basic frame. The decision-calibrated specifications add the cross-layer requirements appropriate to each decision type. Operators applying the methodology lead with the simple frame and refine into the decision-calibrated specifications when the decision type makes the refinement meaningful.</p>
+<div class='callout'><p><em>Three confirming signals is the rule. Where those signals come from depends on what you’re deciding.</em></p></div>
+<h2>The Cross-Layer Principle</h2>
+<p>The decision-calibrated thresholds reveal an important methodological pattern: the appropriate distribution of confirming signals across the three Onion Framework layers depends on what kind of decision is being made.</p>
+<p>Three signals all from Layer 1 are not analytically equivalent to three signals distributed one-per-layer across Layer 1, Layer 2, and Layer 3.</p>
+<p>Three concentrated Layer 1 signals tell you about operational reality with high confidence. They confirm what’s happening in your submarkets and appropriately justify operational adjustments.</p>
+<p>Three cross-layer signals tell you about structural propagation. They confirm that a shift is moving through the framework’s architecture—appearing at the macroeconomic level, propagating to industry dynamics, manifesting at the operational level. This pattern justifies tactical or strategic adjustments because it confirms the underlying mechanism that those adjustments are responding to.</p>
+<p>The cross-layer principle has two specific applications worth understanding.</p>
+<h3>WHEN CONCENTRATION IS APPROPRIATE</h3>
+<p>Single-layer concentration is appropriate when the decision under consideration is itself layer-specific. Operational decisions (rent strategy, concession deployment) belong with Layer 1 concentration. Strategic decisions about long-term positioning may concentrate Layer 3 evidence with Layer 2 corroboration. The match between decision type and signal layer concentration is what makes concentration analytically valid.</p>
+<h3>WHEN CROSS-LAYER DISTRIBUTION IS REQUIRED</h3>
+<p>Cross-layer distribution is required when the decision’s consequences span multiple time horizons or require evidence of structural propagation rather than within-layer variation. Tactical decisions almost always require cross-layer confirmation because they sit in the middle of the propagation chain. Decisions whose consequences span both operational and strategic horizons require evidence at both ends.</p>
+<div class='callout'><p><em>A useful working test: ask whether the decision under consideration could be reversed quickly if conditions don’t develop as expected. If yes (most operational decisions can be), single-layer concentration is sufficient. If no (most tactical and strategic decisions can’t easily be reversed), cross-layer confirmation is required to justify acting.</em></p></div>
+<h2>What to Do When Signals Diverge</h2>
+<p>Reading signals well isn’t only about recognizing when they confirm each other. The harder analytical work happens when signals diverge—when some indicators point one direction while others point the opposite direction.</p>
+<p>Divergence is information, not noise. Three patterns of divergence carry distinct meanings.</p>
+<h3>LAYER-3-LEADS-LAYER-1 DIVERGENCE: PROPAGATION IN PROGRESS</h3>
+<p>Layer 3 macroeconomic signals point one direction (often deteriorating), but Layer 1 operational signals haven’t yet reflected the shift. This is the most common and most analytically valuable divergence pattern. It typically means structural conditions are shifting and propagation is in progress—Layer 1 will eventually catch up, but the shift hasn’t reached the operational level yet. Strategic adjustments should begin even though Layer 1 hasn’t confirmed. Operational adjustments should wait for Layer 1 confirmation.</p>
+<h3>LAYER-1-LEADS-LAYER-3 DIVERGENCE: LOCAL CONDITIONS DIVERGING</h3>
+<p>Layer 1 signals show shifts that aren’t yet visible at Layer 2 or Layer 3. This typically means submarket-specific dynamics are affecting your specific markets without representing broader patterns. Operational adjustments are warranted at Layer 1, but tactical or strategic adjustments should wait—the absence of Layer 2 or Layer 3 confirmation suggests the shift may be local rather than structural.</p>
+<h3>WITHIN-LAYER DIVERGENCE: MIXED SIGNALS AT THE SAME HORIZON</h3>
+<p>Within a single layer, some indicators point one direction while others point the opposite direction. This typically means the signal at that horizon is genuinely ambiguous—neither directional confirmation nor disconfirmation has been established. The appropriate response is increased monitoring with deferred action. The within-layer divergence often resolves within one or two reporting cycles as additional data clarifies the direction.</p>
+<div class='callout'><p><em>The discipline is to treat divergence as information that refines analytical conclusions rather than as noise that should be dismissed. When signals confirm, conviction grows. When signals diverge, the divergence pattern reveals where in the propagation chain the shift currently sits. Both confirmation and divergence are analytically useful—the framework requires reading both with discipline.</em></p></div>
+<h2>Common Mistakes at the Cignal Threshold</h2>
+<p>Operators consistently make four predictable mistakes when applying The Cignal Threshold. Each one represents a failure mode the principle is specifically designed to prevent.</p>
+<h3>ACTING ON TOO FEW SIGNALS</h3>
+<p>Some operators adjust strategy on one or two confirming signals because they want to be early. The pursuit of early action is understandable—the operators who outperform across cycles are often those who repositioned before others recognized the shift. But early action without sufficient confirmation isn’t strategic positioning—it’s reactive volatility. The discipline is to act when accumulated evidence justifies it, not when accumulated evidence becomes impatient. Three is the minimum for a reason.</p>
+<h3>WAITING FOR IMPOSSIBLE CERTAINTY</h3>
+<p>The mirror failure. Some operators wait for unambiguous confirmation before acting—looking for fifteen signals to align, every layer to confirm with high confidence, every potential dissenting indicator to be resolved. Unambiguous certainty rarely exists in cycle analysis. Operators who wait for it find themselves making strategic adjustments after the optimal response window has closed. Five is the high-confidence threshold for a reason; demanding more typically means demanding too much.</p>
+<h3>TREATING ALL SIGNALS AS EQUIVALENT WEIGHT</h3>
+<p>Three signals all from the same source aren’t really three independent signals—they’re one source viewed from slightly different angles. Three signals all at Layer 1 might all be reading the same submarket reality, which provides less analytical confirmation than three signals distributed across the layers. The threshold structure works only when the signals counted toward the threshold are genuinely independent. Counting redundant signals as equivalent to independent signals produces false confidence.</p>
+<h3>APPLYING UNIFORM THRESHOLDS ACROSS DECISION TYPES</h3>
+<p>The simple 3/5 threshold is correct for operational decisions and provides a useful starting frame. But applying it uniformly to all decisions ignores that strategic decisions require Layer 3 anchor with Layer 2 corroboration, that tactical decisions require cross-layer distribution, and that operational decisions don’t require macroeconomic confirmation. Operators who apply the simple threshold uniformly will sometimes demand evidence they don’t need (for operational decisions) and sometimes accept evidence that’s insufficient (for strategic decisions).</p>
+<div class='callout'><p><em>The four mistakes share a common theme: failure to apply the threshold with appropriate sophistication. Mechanical application of the simple threshold without judgment produces analytical errors. Disciplined application with judgment produces durable advantage.</em></p></div>
+<h2>Worked Examples</h2>
+<p>Three brief examples illustrate how the threshold applies to different decision types.</p>
+<h3>EXAMPLE 1 — OPERATIONAL DECISION: ADJUSTING CONCESSION STRATEGY</h3>
+<p>The operator manages a 200-unit asset in Phoenix. Layer 1 signals over the past two months show:</p>
+<p><strong>1.  Days on Market in the submarket has risen from 28 to 41 days – </strong>(Signal 1)</p>
+<p><strong>2.  Absorption rate has decelerated from 14 units/month to 6 units/month – </strong>(Signal 2)</p>
+<p><strong>3.  Local concession activity has expanded—competitive set offering up to 8 weeks free vs. previous 4 weeks – </strong>(Signal 3)</p>
+<p><strong>4.  Submarket vacancy direction is rising for the third consecutive month – </strong>(Signal 4)</p>
+<p>Four confirming Layer 1 signals. The decision under consideration is operational (concession deployment). The threshold for operational decisions is 3 minimum / 4–5 high-confidence with no cross-layer requirement.</p>
+<div class='callout'><p><em>The high-confidence threshold has been met. Operational adjustment is justified—deploy concessions to defend occupancy, increase marketing spend, accelerate retention investment. Layer 2 and Layer 3 confirmation is not required for this decision type.</em></p></div>
+<h3>EXAMPLE 2 — TACTICAL DECISION: PAUSING NEW ACQUISITIONS</h3>
+<p>The same operator is considering whether to slow acquisition pacing across their portfolio. Current signals:</p>
+<ul class='blist'>
+<li><strong></strong>Layer 1: Days on Market rising (1), Absorption decelerating (2), Concessions expanding (3)</li>
+<li><strong></strong>Layer 2: National multifamily transaction volume declining for two quarters (4), Fed Flow of Funds showing capital pulling back from multifamily (5)</li>
+<li><strong></strong>Layer 3: No clear directional signal yet</li>
+</ul>
+<p>Five total signals, with three at Layer 1 and two at Layer 2. The decision is tactical (acquisition pacing). The threshold for tactical decisions is 3 minimum with at least one Layer 2 and one Layer 1 signal, or 4–5 high-confidence across at least two layers.</p>
+<div class='callout'><p><em>The high-confidence threshold has been met with cross-layer distribution. Tactical adjustment is justified—slow acquisition pacing, prioritize selectivity over volume, prepare capital for opportunistic deployment if conditions deepen. Layer 3 confirmation would strengthen conviction but is not required for this decision type.</em></p></div>
+<h3>EXAMPLE 3 — STRATEGIC DECISION: MAJOR MARKET EXIT</h3>
+<p>The operator is considering exiting the Phoenix market entirely as a long-term strategic decision. Current signals:</p>
+<ul class='blist'>
+<li><strong></strong>Layer 1: Three Phoenix submarket signals showing operational deterioration</li>
+<li><strong></strong>Layer 2: Two industry signals showing capital pulling back from multifamily</li>
+<li><strong></strong>Layer 3: Yield curve flattening but not yet inverted; no other clear Layer 3 signals</li>
+</ul>
+<p>Five total signals, but only one at Layer 3—and that one is ambiguous. The decision is strategic (multi-year market exit). The threshold for strategic decisions requires at least 2 confirming Layer 3 signals plus 1 Layer 2 corroboration.</p>
+<div class='callout'><p><em>The threshold has not been met for strategic action. Strategic adjustment is not yet justified. The appropriate posture is active preparation—develop exit scenarios, cultivate buyer relationships, sketch alternative deployment opportunities for freed capital—but defer the actual strategic decision until Layer 3 evidence strengthens.</em></p></div>
+<p>The three examples show how the same accumulated signal evidence justifies different decisions depending on decision type. Four Layer 1 signals justify operational adjustment but don’t justify strategic exit. Five cross-layer signals justify tactical pacing adjustment but don’t justify strategic exit. Strategic adjustment requires its own threshold pattern—Layer 3 anchor with Layer 2 corroboration—that operational and tactical evidence cannot substitute for.</p>
+<h2>What Comes Next</h2>
+<p>The Cignal Threshold establishes when accumulated signal evidence justifies strategic adjustment. The principle is simple at its core (3 minimum / 5 high-confidence) and refines into decision-calibrated specifications that adjust based on what kind of decision is being made.</p>
+<p>Examining how the threshold integrates into ongoing decision-making rhythms, how operators communicate threshold-based decisions to their teams and capital partners, how the methodology handles cases where signals reverse direction unexpectedly, and how cycle-aware operators turn threshold discipline into compounding analytical advantage over multiple cycles.</p>
+<p>For now, what matters is internalizing the principle. The Cignal Threshold is the discipline that connects dashboard maintenance to actual strategic decision-making. Without it, the dashboard becomes data collection that informs nothing. With it, the dashboard becomes a structured input into a disciplined decision process that protects against both reactive adjustment and paralyzed waiting.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Decision Type</strong></th><th><strong>Minimum Threshold</strong></th><th><strong>High-Confidence</strong></th><th><strong>Cross-Layer Requirement</strong></th></tr></thead><tbody><tr><td>Operational</td><td>3 Layer 1 signals</td><td>4–5 Layer 1 signals</td><td>None required</td></tr><tr><td>Tactical</td><td>3 signals (L2 + L1 required)</td><td>4–5 signals across 2+ layers</td><td>Required</td></tr><tr><td>Strategic</td><td>3 signals (2 L3 + 1 L2 required)</td><td>4–5 signals (2–3 L3 + 1–2 L2)</td><td>L3 anchor + L2 corroboration</td></tr></tbody></table></div>
+<p>The discipline is the trifecta—three signals confirming each other, in the right places, for the right decisions. The framework gave you the architecture. The dashboard gave you the working infrastructure. The Cignal Threshold gives you the decision discipline that makes both produce analytical advantage.</p>
+<div class='callout'><p><em>Without the threshold, the dashboard is data. With it, the dashboard is intelligence.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>The Cignal Threshold defines three postures along the spectrum of accumulated signal evidence. Which of the following correctly matches signal count to posture and action?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Below 3 signals: act with conviction; 3–4 signals: watch closely; 5+ signals: prepare actively.</button><button class='opt' data-k='B'><span class='k'>B</span>Below 3 signals: watch closely—monitor and increase intensity but do not act; 3–4 signals: prepare actively—begin positioning but defer full execution; 5+ signals: act with conviction—execute the strategic adjustment.</button><button class='opt' data-k='C'><span class='k'>C</span>Below 5 signals: do nothing; 5–9 signals: prepare; 10+ signals: act.</button><button class='opt' data-k='D'><span class='k'>D</span>Any single confirming signal justifies preparation; any two justify execution.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The Cignal Threshold establishes two points along the evidence spectrum and three postures between them. Below three confirming signals, evidence is insufficient—two signals can confirm or conflict with no way to break ties—so the posture is attention without action: monitor, increase intensity, do not act. Between three and five, the posture is active preparation: begin positioning capital structure, cultivate aligned capital partners, sketch alternative scenarios, but defer full execution. At five or more, redundant confirmation protects against any single signal being noisy or revised, and additional confirmation rarely changes the conclusion, so the posture is to act with conviction. The three-tier structure reflects that strategic adjustment is a continuum from watching to preparing to executing, with the threshold providing discipline at each transition. The conversational shorthand—three minimum to prepare, five to execute—is the trifecta.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>The lesson opens with “a note on what this lesson can and cannot claim.” Which of the following correctly states the lesson’s position on the evidentiary basis of the 3/5 threshold?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The threshold has been empirically validated by peer-reviewed research as the optimal number of confirming signals for multifamily strategy adjustment.</button><button class='opt' data-k='B'><span class='k'>B</span>The threshold is arbitrary and operators should feel free to substitute any numbers they prefer.</button><button class='opt' data-k='C'><span class='k'>C</span>The threshold is a structural principle derived from defensible reasoning across several disciplines—triangulation logic, wisdom-of-crowds forecasting research, cognitive limits on working memory, and practitioner heuristics—that supports the structure without proving any specific number is empirically optimal; it is defensible but not certified, and treating it as a precise formula produces false confidence.</button><button class='opt' data-k='D'><span class='k'>D</span>The threshold was derived from a regression on historical multifamily cycle data and is accurate to within one signal.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is deliberately honest: there is no peer-reviewed research that has empirically validated a specific number of confirming signals as optimal for multifamily strategy adjustment, and any methodology claiming otherwise is overstating the evidence. The Cignal Threshold is a structural principle derived from defensible reasoning across disciplines—triangulation logic from intelligence analysis (multiple sources reduce error), wisdom-of-crowds research (combined indicators outperform single ones, with diminishing returns beyond a certain number), cognitive research on working memory (practical limits on how many factors operators can integrate), and practitioner heuristics from adjacent investment fields. These support the structure without certifying the number. Used as a discipline, the principle produces real advantage; used as a precise empirical formula, it produces false confidence. As the lesson puts it: the number isn’t magic—the discipline is. Option B misreads honesty about evidence as license to abandon the structure.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>Why does the lesson say higher thresholds—seven, ten, or fifteen confirming signals—are “structurally counterproductive”?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because most dashboards do not contain fifteen signals.</button><button class='opt' data-k='B'><span class='k'>B</span>Because higher thresholds produce later action (by the time fifteen signals confirm, the optimal response window has typically closed) and false precision (implying certainty the underlying signals cannot support); the 3/5 structure is calibrated to balance confirmation against timeliness.</button><button class='opt' data-k='C'><span class='k'>C</span>Because signals beyond five are always redundant with the first five.</button><button class='opt' data-k='D'><span class='k'>D</span>Because the Onion Framework has only three layers, so no more than three signals can ever be independent.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson names two costs of higher thresholds. First, later action: by the time seven, ten, or fifteen signals confirm a directional shift, the optimal response window has typically closed—the mirror of the waiting-for-impossible-certainty mistake. Second, false precision: demanding fifteen signals implies an analytical certainty the underlying signals cannot actually support. The 3/5 structure is calibrated to balance confirmation against timeliness; higher thresholds shift the balance toward confirmation at the expense of operational advantage. The lesson makes the symmetric case against lower numbers: one signal is insufficient by definition, two can reflect the same underlying noise, and adjusting on one or two produces constant strategic volatility in which no strategy is sustained long enough to produce results. Option D confuses the number of layers with the number of independent signals available.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>Which of the following correctly states the decision-calibrated threshold for a strategic decision such as a multi-year market exit?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>3 confirming Layer 1 signals minimum, 4–5 for high confidence, no cross-layer requirement.</button><button class='opt' data-k='B'><span class='k'>B</span>3 total signals with at least 1 from Layer 2 and 1 from Layer 1; 4–5 across at least two layers for high confidence.</button><button class='opt' data-k='C'><span class='k'>C</span>3 signals total with at least 2 from Layer 3 and 1 from Layer 2; 4–5 for high confidence with 2–3 from Layer 3 and 1–2 from Layer 2; Layer 3 anchor and Layer 2 corroboration required, Layer 1 not required.</button><button class='opt' data-k='D'><span class='k'>D</span>5 signals from any layer, since strategic decisions always require the high-confidence threshold.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Strategic decisions—market entry and exit, capital structure architecture, long-term hold strategy, capital partner selection, portfolio composition strategy—require evidence that the structural environment is shifting at the macroeconomic level. The minimum is three signals total with at least two from Layer 3 and one from Layer 2; high confidence is four to five with two to three from Layer 3 and one to two from Layer 2. A Layer 3 anchor is required because strategic horizons are too long for Layer 1 operational variation to be informative; Layer 2 corroboration is required because it confirms the macro shift is beginning to translate into multifamily-specific dynamics rather than being macroeconomic noise. Layer 1 is not required. Option A is the operational threshold, option B is the tactical threshold, and option D ignores the cross-layer requirement entirely—the lesson’s Example 3 shows five signals failing the strategic threshold precisely because only one, and an ambiguous one, sat at Layer 3.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says “divergence is information, not noise” and describes three divergence patterns. In 2–3 sentences, name the three patterns, state what each typically means, and state which type of adjustment (operational, tactical, strategic) is warranted—or should wait—under each.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Layer-3-leads-Layer-1 divergence—macro signals shifting (often deteriorating) while operational signals have not yet reflected it—is the most common and most valuable pattern and typically means propagation is in progress; strategic adjustments should begin even without Layer 1 confirmation, while operational adjustments should wait for Layer 1 to confirm. Layer-1-leads-Layer-3 divergence—submarket signals shifting with nothing yet visible at Layer 2 or 3—typically means local, submarket-specific dynamics rather than a broader pattern; operational adjustments are warranted, but tactical and strategic adjustments should wait for deeper-layer confirmation that the shift is structural. Within-layer divergence—mixed indicators at the same horizon—means the signal at that horizon is genuinely ambiguous; the response is increased monitoring with deferred action, since it usually resolves within one or two reporting cycles.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator’s quarterly deep-dive produces the following dashboard reading. Layer 3: the 10-Year minus 2-Year spread inverted six weeks ago; the Fed has raised rates 250 basis points over twelve months and signaled more; core CPI remains above target. Layer 2: national multifamily transaction volume has declined for two consecutive quarters; Fed Flow of Funds shows institutional capital reducing CRE allocations; national permits are flat. Layer 1 (their two submarkets): days on market, absorption, concessions, and vacancy direction are all stable in both markets. The operator is weighing three decisions: (1) begin offering concessions at their assets to get ahead of expected softening, (2) slow acquisition pacing and prepare capital for opportunistic deployment, and (3) shift the firm’s long-term capital structure toward longer-duration fixed-rate debt and begin winding down a planned expansion into a fourth submarket. For each decision, (a) classify the decision type and state the applicable threshold, (b) count the confirming signals by layer and determine whether the minimum or high-confidence threshold is met, and (c) state the posture the lesson prescribes. Then (d) identify the divergence pattern this reading represents and (e) name the common mistake the operator would be making if they executed decision (1) now.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Decision (1) is operational—concession deployment—so the threshold is three confirming Layer 1 signals minimum, four to five for high confidence, with no cross-layer requirement. The Layer 1 count is zero: days on market, absorption, concessions, and vacancy direction are all stable in both submarkets. The threshold is not met, and the prescribed posture is to watch closely—monitor and increase intensity, but do not act. Decision (2) is tactical—acquisition pacing and capital deployment timing—requiring three signals with at least one from Layer 2 and one from Layer 1 at minimum, or four to five across two or more layers for high confidence. Layer 2 supplies two confirming signals (transaction volume declining two quarters; institutional capital reducing CRE allocations; flat permits are not directional), and Layer 3 supplies three (inversion, tightening cycle, elevated core CPI), for five total across two layers. But the lesson’s tactical specification requires Layer 1 to be represented, and Layer 1 supplies none—so the strict tactical threshold is not met. The posture is active preparation: sharpen selectivity, sketch scenarios, and line up capital for opportunistic deployment while deferring a full pacing change until a Layer 1 signal confirms propagation has reached the submarkets. Decision (3) is strategic—capital structure architecture and market expansion—requiring at least two Layer 3 signals plus one Layer 2 signal at minimum, and two to three Layer 3 plus one to two Layer 2 for high confidence. Layer 3 supplies three and Layer 2 supplies two, for five total in exactly the required distribution; Layer 1 is not required. The high-confidence threshold is met and the posture is to act with conviction: extend duration and lock fixed-rate debt while the window is open, and wind down the fourth-submarket expansion. (d) This reading is Layer-3-leads-Layer-1 divergence—propagation in progress. Structural conditions have shifted, Layer 2 is beginning to reflect them, and Layer 1 has not yet caught up, which is exactly why strategic action is justified now while operational action should wait. (e) Executing decision (1) now would be acting on too few signals—zero Layer 1 signals for an operational decision—in pursuit of being early. It would also reflect applying evidence from the wrong layers to the wrong decision type: macro and industry confirmation cannot substitute for operational evidence when the decision is operational, just as operational evidence could not have substituted for a Layer 3 anchor in Example 3.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>The lesson offers a “useful working test” for deciding whether single-layer concentration is sufficient or cross-layer confirmation is required. What is the test?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Ask whether the decision involves more than $10 million of capital; if so, require cross-layer confirmation.</button><button class='opt' data-k='B'><span class='k'>B</span>Ask whether the decision could be reversed quickly if conditions do not develop as expected—if yes (most operational decisions), single-layer concentration is sufficient; if no (most tactical and strategic decisions), cross-layer confirmation is required.</button><button class='opt' data-k='C'><span class='k'>C</span>Ask whether the signals come from paid data sources; if so, single-layer concentration is sufficient.</button><button class='opt' data-k='D'><span class='k'>D</span>Ask whether the acquisition committee is unanimous; if not, require cross-layer confirmation.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The reversibility test asks whether the decision under consideration could be reversed quickly if conditions do not develop as expected. Most operational decisions can be—concessions can be withdrawn, rent strategy can be re-set next quarter—so single-layer concentration at Layer 1 is sufficient. Most tactical and strategic decisions cannot be easily reversed—an acquisition closed, a market exited, a capital structure locked—so cross-layer confirmation of genuine structural propagation is required before acting. This connects the cross-layer principle to the underlying reason it exists: three concentrated Layer 1 signals tell you about operational reality with high confidence, while three cross-layer signals tell you a shift is moving through the framework’s architecture, and only the latter justifies commitments that cannot be unwound. Options A, C, and D substitute deal size, data cost, or committee politics for the analytical question.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of threshold discipline. Proceed to Lesson 2.3.3 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Decision-Calibrated Refinement” and “What to Do When Signals Diverge” in Lesson 2.3.2 before proceeding. Focus especially on the cross-layer requirements for each decision type and on why the same five signals can justify one decision and not another.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 2.3.2 in full. The Cignal Threshold is the discipline that connects the dashboard you built in Lesson 2.3.1 to actual decisions. Without it, the dashboard is data collection that informs nothing.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>The discipline is the trifecta—three signals confirming each other, in the right places, for the right decisions. Without the threshold, the dashboard is data. With it, the dashboard is intelligence. If the answer key revealed gaps, closing them now is the highest-leverage investment you can make before Lesson 2.3.3.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='2-3-1.html'>&larr; Previous<span>Building Your Cignal Dashboard</span></a><a href='bonus-rule-of-6.html' style='text-align:right'>Next &rarr;<span>The Rule of 6 Summary</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; 2.3.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='2.3.2', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

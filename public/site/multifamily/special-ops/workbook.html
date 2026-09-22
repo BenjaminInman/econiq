@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Capstone Workbook &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.wb{width:min(760px,92vw);margin:0 auto;padding:8px 0 40px}
+.wb h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;margin:46px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+.wb p{font-family:var(--ed);font-size:1.06rem;line-height:1.72;margin:0 0 20px}
+.wb .em{font-family:var(--ed);font-style:italic;color:var(--soft);font-size:1.06rem;margin:0 0 22px}
+.wb li{font-family:var(--ed);font-size:1.03rem;line-height:1.7;margin:0 0 12px;list-style:none;padding-left:20px;position:relative}
+.wb li:before{content:"";position:absolute;left:0;top:14px;width:8px;height:1px;background:var(--amber)}
+.partmark{background:var(--deep);color:#D9B25E;font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+ text-transform:uppercase;padding:9px 16px;border-radius:3px;display:inline-block;margin:56px 0 4px}
+.ex{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:34px 0 4px;background:var(--panel)}
+.ex-h{display:grid;grid-template-columns:56px 1fr;align-items:center;background:var(--well);border-bottom:1px solid var(--line)}
+.ex-h .n{font-family:var(--mono);font-size:15px;color:var(--amber);text-align:center;padding:18px 0}
+.ex-h .t{padding:16px 20px 16px 0}
+.ex-h .t b{font-family:var(--disp);font-weight:600;font-size:1.06rem;display:block}
+.ex-h .t span{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);display:block;margin-top:5px}
+.box{background:var(--well);border-left:2px solid var(--olive);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:22px 0}
+.box em,.box{font-family:var(--ed);font-size:1rem;line-height:1.68;color:var(--ink)}
+.prompt{font-family:var(--disp);font-weight:500;font-size:.99rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.fieldwrap{position:relative;margin:0 0 8px}
+.fieldwrap textarea{width:100%;min-height:120px;background:var(--paper);border:1px solid var(--dim);
+ border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;
+ color:var(--ink);resize:vertical}
+.fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+.fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;
+ letter-spacing:.1em;color:var(--dim);pointer-events:none}
+.wbtable{width:100%;border-collapse:collapse;margin:24px 0;font-size:.93rem}
+.wbtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:500}
+.wbtable td{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--soft);vertical-align:top}
+.wbbar{position:sticky;top:47px;z-index:55;background:rgba(242,240,235,.96);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--line)}
+.wbbar-in{width:min(760px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:16px;padding:11px 0;flex-wrap:wrap}
+.wbstat{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.wbstat b{color:var(--amber)}
+.wbacts{display:flex;gap:8px}
+.wbbtn{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;
+ border-radius:var(--r);border:1px solid var(--dim);background:var(--paper);color:var(--soft);cursor:pointer}
+.wbbtn:hover{border-color:var(--amber);color:var(--ink)}
+.wbbtn.pri{background:var(--amber);border-color:var(--amber);color:var(--amber-txt)}
+@media print{.rbar,.wbbar,.lnav,.cpanel{display:none}.fieldwrap textarea{border:1px solid #999;min-height:0}}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+
+.wb .callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:22px 26px;margin:30px 0}
+.wb .callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.wb .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+.wb .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+.wb .box p:last-child{margin-bottom:0}
+.wb table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+.wb table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.wb table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+.wb table.tbl tr:nth-child(even) td{background:var(--panel)}
+.tblwrap{overflow-x:auto}
+.wb ul.blist{margin:0 0 22px;padding:0}
+.wb h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:36px 0 12px}
+</style></head>
+<body class="no-rail">
+<header class="rbar"><div class="rbar-in">
+  <a class="rmark" href="index.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+  <span class="rmeta">Special Ops &middot; Capstone</span>
+  <a class="rexit" href="index.html">All lessons</a>
+</div><div class="rprog"><i id="pg"></i></div></header>
+
+<section class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+    <span class="partchip">Capstone</span>
+    <p class="eyebrow">End of course &middot; ECCA certification</p>
+    <h1>The Special Ops Workbook</h1>
+    <p class="deck">Synthesis, application, and the Capstone Signal Thesis.</p>
+    <div class="leadmeta"><span><b>5</b> parts</span><span><b>16</b> exercises</span><span><b>81</b> responses</span><span><b>4&ndash;8</b> hrs</span></div>
+  </div>
+</section>
+
+<div class="wbbar"><div class="wbbar-in">
+  <span class="wbstat"><b id="wbDone">0</b> of 81 answered &middot; <b id="wbWords">0</b> words</span>
+  <span class="wbacts">
+    <button class="wbbtn" id="wbSave">Saved automatically</button>
+    <button class="wbbtn" id="wbExport">Export</button>
+    <button class="wbbtn pri" id="wbPrint">Print / PDF</button>
+  </span>
+</div></div>
+
+<div class="wb">
+<h2><strong>The Special Ops Workbook</strong></h2>
+<p class='em'><em><em>Synthesis, Application, and the Capstone Signal Thesis</em></em></p>
+<p class='em'><em><em>“Without the threshold, the dashboard is data. With it, the dashboard is intelligence. This Workbook is where you prove you can turn one into the other.”</em></em></p>
+<h2>Welcome to the Workbook</h2>
+<p>You have completed the eight lessons of Special Ops Tier 2. You have learned why multifamily intelligence has exactly three layers and what each layer contains; how to read submarket, industry, and macroeconomic signals with discipline; how to distinguish leading from trailing indicators and correlation from causation; how charting converts scattered data into visible structure; how to design a Cignal Dashboard you will actually maintain; and how the Cignal Threshold—the trifecta—determines when accumulated evidence justifies strategic adjustment.</p>
+<p>This Workbook is the culminating instrument of Special Ops. It does work that no individual lesson Knowledge Check could do: it tests your ability to integrate concepts across the full curriculum, apply the three-layer reading and threshold discipline to realistic multifamily scenarios, and produce a capstone signal thesis that demonstrates the analytical capability a cycle-aware operator needs.</p>
+<p>The Workbook is also the second substantial artifact you will produce in Special Ops. Your v1.0 Cignal Dashboard, designed in Lesson 2.3.1, is the infrastructure. The completed Workbook demonstrates the reading and decision discipline that infrastructure exists to support. Together, these two artifacts serve as visible evidence—in your own writing—that the methodology has produced operational capability.</p>
+<h2>How to Engage With the Workbook</h2>
+<p>The Workbook requires 4–8 hours of focused work, ideally completed across two or three sessions rather than in a single sitting. Engagement principles that will produce the strongest outcomes:</p>
+<ul class='blist'>
+<li><strong></strong>Complete sections in order. The Workbook builds from framework synthesis through analytical rigor practice through dashboard application to the capstone scenario. Earlier sections develop the analytical muscle that later sections require.</li>
+<li><strong></strong>Write substantively, not minimally. The answer spaces are sized for genuine analytical engagement. Brief one-line responses produce thin Workbook completions that do not reflect synthesis capability. Operators who treat the Workbook seriously produce documents that become reference material for years.</li>
+<li><strong></strong>Reference back to lesson materials. The Workbook tests integration, not memorization. If you find yourself uncertain about an indicator’s classification, a lead time, or a threshold specification while completing an exercise, return to the relevant lesson rather than guessing.</li>
+<li><strong></strong>Keep your v1.0 dashboard beside you. Part 3 works directly on the dashboard you designed in Lesson 2.3.1, and Part 4 asks you to design one for a specific operator. The exercises are strongest when they sharpen an artifact you will actually use.</li>
+<li><strong></strong>Engage with the capstone scenario seriously. Part 4—the Capstone Scenario—produces the most substantial deliverable in the Workbook. Plan to spend 1.5–2.5 hours on this section alone.</li>
+</ul>
+<p>The Workbook does not have a passing score in the conventional sense. It produces a deliverable that demonstrates your analytical capability. Operators who engage seriously produce strong deliverables. The Workbook reflects what you put into it.</p>
+<div class='callout'><p><em>This is the proof artifact. The depth of your engagement determines what it proves.</em></p></div>
+<h2>Workbook Structure at a Glance</h2>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Part</strong></th><th><strong>Title</strong></th><th><strong>Exercises</strong></th><th><strong>Est. Time</strong></th></tr></thead><tbody><tr><td>Part 1</td><td>Framework Synthesis</td><td>1–4</td><td>45–60 min</td></tr><tr><td>Part 2</td><td>Analytical Rigor Practice</td><td>5–7</td><td>60–90 min</td></tr><tr><td>Part 3</td><td>Dashboard Application</td><td>8–12</td><td>60–90 min</td></tr><tr><td>Part 4</td><td>The Capstone Scenario</td><td>Sections 1–8</td><td>90–150 min</td></tr><tr><td>Part 5</td><td>Personal Reflection</td><td>13–16</td><td>30–45 min</td></tr></tbody></table></div>
+<div class='partmark'>PART 1 OF 5</div>
+<h2><strong>Framework Synthesis</strong></h2>
+<p class='em'><em><em>Integrating Concepts From Lessons 2.1.1 Through 2.1.4</em></em></p>
+<p>Part 1 verifies your ability to integrate the Onion Framework across its four lessons. The exercises require synthesis across layers rather than isolated recall of any single lesson’s content—the framework only produces intelligence when the layers are read together.</p>
+<div class='ex'><div class='ex-h'><div class='n'>1</div><div class='t'><b>The Three-Layer Architecture Synthesis</b><span>Lesson 2.1.1 • Why Three Layers</span></div></div></div>
+<p>Lesson 2.1.1 argued that three is the structurally correct number of layers—not two, not four or more. In your own words, reconstruct the argument. Then explain the Triangulation Principle and why it connects directly to the Cignal Threshold you learned in Lesson 2.3.2.</p>
+<p class='prompt'><strong>The three requirements</strong> — What must any segmentation structure for market intelligence do well, and how does each requirement constrain the number of layers?</p>
+<div class='fieldwrap'><textarea id='f1' data-f='f1' placeholder='Your answer…'></textarea><span class='wc' id='wc-f1'>0 words</span></div>
+<p class='prompt'><strong>Why not two</strong> — What specific indicators have no home in a macro/local framework, and what error results from forcing them into either layer?</p>
+<div class='fieldwrap'><textarea id='f2' data-f='f2' placeholder='Your answer…'></textarea><span class='wc' id='wc-f2'>0 words</span></div>
+<p class='prompt'><strong>Why not four or more</strong> — Name the failure modes of over-segmented frameworks and explain why they fail for the opposite reason two-layer frameworks fail.</p>
+<div class='fieldwrap'><textarea id='f3' data-f='f3' placeholder='Your answer…'></textarea><span class='wc' id='wc-f3'>0 words</span></div>
+<p class='prompt'><strong>The Triangulation Principle and the trifecta</strong> — Why is three both the minimum that supports triangulation and the maximum that keeps it clean—and how does that same reasoning reappear as the minimum threshold in Lesson 2.3.2?</p>
+<div class='fieldwrap'><textarea id='f4' data-f='f4' placeholder='Your answer…'></textarea><span class='wc' id='wc-f4'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>2</div><div class='t'><b>Indicator Classification Across Layers</b><span>Lesson 2.1.2 • Lesson 2.1.3 • Lesson 2.1.4</span></div></div></div>
+<p>For each indicator below, identify (i) the layer it belongs to, (ii) whether it is leading, coincident, or trailing for multifamily, (iii) its approximate lead time, and (iv) the single most important interpretive caution the lessons attach to it. Write compactly—four lines per indicator is sufficient.</p>
+<p class='prompt'><strong>(a) Local Concession Activity</strong></p>
+<div class='fieldwrap'><textarea id='f5' data-f='f5' placeholder='Your answer…'></textarea><span class='wc' id='wc-f5'>0 words</span></div>
+<p class='prompt'><strong>(b) National Multifamily Building Permits</strong></p>
+<div class='fieldwrap'><textarea id='f6' data-f='f6' placeholder='Your answer…'></textarea><span class='wc' id='wc-f6'>0 words</span></div>
+<p class='prompt'><strong>(c) Submarket Vacancy Direction</strong></p>
+<div class='fieldwrap'><textarea id='f7' data-f='f7' placeholder='Your answer…'></textarea><span class='wc' id='wc-f7'>0 words</span></div>
+<p class='prompt'><strong>(d) Employment Dynamics (unemployment rate, wage growth, diffusion)</strong> — Note that this indicator has a dual nature—address both readings.</p>
+<div class='fieldwrap'><textarea id='f8' data-f='f8' placeholder='Your answer…'></textarea><span class='wc' id='wc-f8'>0 words</span></div>
+<p class='prompt'><strong>(e) The 10-Year minus 2-Year Treasury Spread</strong></p>
+<div class='fieldwrap'><textarea id='f9' data-f='f9' placeholder='Your answer…'></textarea><span class='wc' id='wc-f9'>0 words</span></div>
+<p class='prompt'><strong>(f) Foreclosures</strong></p>
+<div class='fieldwrap'><textarea id='f10' data-f='f10' placeholder='Your answer…'></textarea><span class='wc' id='wc-f10'>0 words</span></div>
+<p class='prompt'><strong>(g) Consumer Spending Composition (PCE)</strong></p>
+<div class='fieldwrap'><textarea id='f11' data-f='f11' placeholder='Your answer…'></textarea><span class='wc' id='wc-f11'>0 words</span></div>
+<p class='prompt'><strong>(h) Stock Market Behavior</strong></p>
+<div class='fieldwrap'><textarea id='f12' data-f='f12' placeholder='Your answer…'></textarea><span class='wc' id='wc-f12'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>3</div><div class='t'><b>Tracing the Propagation Chain</b><span>Lesson 2.1.3 • Lesson 2.1.4 • Layer 3 → Layer 2 → Layer 1</span></div></div></div>
+<p>The framework’s predictive power depends on a structural propagation chain. Starting from a single Layer 3 event—the Federal Reserve begins a sustained tightening cycle after a long period of low rates—trace how the shift propagates through the architecture. Be specific about which indicators move at each layer, in what order, and over what time horizons.</p>
+<p class='prompt'><strong>Layer 3 → Layer 2</strong> — Which industry indicators respond first, which respond later, and what is the typical 6–18 month sequence? Distinguish capital-side from operating-side responses.</p>
+<div class='fieldwrap'><textarea id='f13' data-f='f13' placeholder='Your answer…'></textarea><span class='wc' id='wc-f13'>0 words</span></div>
+<p class='prompt'><strong>Layer 2 → Layer 1</strong> — Which submarket indicators move first, and in what order do the rest follow over 6–12 months? Where does supply pressure from the permit cycle enter, and why does it arrive last?</p>
+<div class='fieldwrap'><textarea id='f14' data-f='f14' placeholder='Your answer…'></textarea><span class='wc' id='wc-f14'>0 words</span></div>
+<p class='prompt'><strong>The full chain and its decision horizons</strong> — State the total Layer 3 → Layer 1 propagation time, and map which decision category—strategic, tactical, operational—becomes actionable at each point in the chain.</p>
+<div class='fieldwrap'><textarea id='f15' data-f='f15' placeholder='Your answer…'></textarea><span class='wc' id='wc-f15'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>4</div><div class='t'><b>Diagnosing the Common Mistakes</b><span>Lesson 2.1.2 • Lesson 2.1.3 • Lesson 2.1.4 • Twelve named failure modes</span></div></div></div>
+<p>Each layer lesson named four common mistakes operators make at that layer. For each vignette below, identify which layer’s mistake is being made, name it as the lesson did, and state the disciplined alternative.</p>
+<div class='box'><p><em>(a) An operator whose two stabilized assets are 96% occupied with no concessions concludes the submarket is healthy and raises renewal rents 5%, without reviewing days on market, absorption, or concessions across the competitive set.</em></p></div>
+<p class='prompt'><strong>Layer, mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f16' data-f='f16' placeholder='Your answer…'></textarea><span class='wc' id='wc-f16'>0 words</span></div>
+<div class='box'><p><em>(b) National multifamily transaction volume has declined for three quarters and Flow of Funds shows institutional capital retreating from CRE. An operator in three tight Southeast submarkets dismisses both because “our markets don’t look like that.”</em></p></div>
+<p class='prompt'><strong>Layer, mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f17' data-f='f17' placeholder='Your answer…'></textarea><span class='wc' id='wc-f17'>0 words</span></div>
+<div class='box'><p><em>(c) The Federal Reserve raises rates 50 basis points. That week an operator halts all acquisitions in progress and instructs the acquisitions team to stop underwriting new deals.</em></p></div>
+<p class='prompt'><strong>Layer, mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f18' data-f='f18' placeholder='Your answer…'></textarea><span class='wc' id='wc-f18'>0 words</span></div>
+<div class='box'><p><em>(d) An analyst reports that the yield curve inverted eleven months ago and tells the investment committee that the recession will begin in exactly one month, so dispositions should close before then.</em></p></div>
+<p class='prompt'><strong>Layer, mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f19' data-f='f19' placeholder='Your answer…'></textarea><span class='wc' id='wc-f19'>0 words</span></div>
+<div class='box'><p><em>(e) An operator’s dashboard shows national permits up 25% year over year, national transaction volume falling, and institutional capital retreating. The operator concludes that “the industry is slowing” but cannot say whether the pressure is coming from the capital side or the operating side, and does not adjust the read accordingly.</em></p></div>
+<p class='prompt'><strong>Layer, mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f20' data-f='f20' placeholder='Your answer…'></textarea><span class='wc' id='wc-f20'>0 words</span></div>
+<div class='partmark'>PART 2 OF 5</div>
+<h2><strong>Analytical Rigor Practice</strong></h2>
+<p class='em'><em><em>Leading vs Trailing, Correlation vs Causation, and Charting</em></em></p>
+<p>Part 2 develops the interpretive discipline from Lessons 2.2.1 and 2.2.2. The three exercises test whether you can separate signal from confirmation, mechanism from coincidence, and structure from noise—the habits that determine whether the Onion Framework is read early or late.</p>
+<div class='ex'><div class='ex-h'><div class='n'>5</div><div class='t'><b>Auditing an Underwriting Memo</b><span>Lesson 2.2.1 • Leading vs trailing • Correlation vs causation • The two traps</span></div></div></div>
+<p>Read the excerpt below from an acquisition memo. Then complete the four audits that follow.</p>
+<div class='box'><p><em>“We recommend proceeding at the asking price. Occupancy in the submarket is 95.8% and trailing twelve-month rent growth is 7.1%. Cap rates have compressed every year that metro transaction volume has risen, and volume set a record last year. Rents have grown every year that the metro added population, and the population forecast is strong. The Fed held rates steady at its last meeting. We are roughly six years into the current business cycle against an eight-year historical average. Our 5.5% annual rent growth assumption is therefore conservative. Two brokers mentioned that lenders are ‘asking more questions,’ and one lease-up nearby is offering eight weeks free, but occupancy tells the real story.”</em></p></div>
+<p class='prompt'><strong>Trailing indicator audit</strong> — Identify every trailing indicator the memo relies on. Explain why building a five-year assumption on these represents the data-only trap, and what the memo would look like if it used leading indicators to prepare and trailing indicators to confirm.</p>
+<div class='fieldwrap'><textarea id='f21' data-f='f21' placeholder='Your answer…'></textarea><span class='wc' id='wc-f21'>0 words</span></div>
+<p class='prompt'><strong>Correlation-as-causation audit</strong> — Identify each statement that treats correlation as causation. For each, name the causal driver the lesson says should replace it and explain why the correlation is likely to break at a turning point.</p>
+<div class='fieldwrap'><textarea id='f22' data-f='f22' placeholder='Your answer…'></textarea><span class='wc' id='wc-f22'>0 words</span></div>
+<p class='prompt'><strong>Signal category audit</strong> — Classify each piece of evidence in the memo as an observational clue, quantitative data, or a cycle pattern. Which category is the memo under-weighting, and what does the lesson say about how the three should be weighted?</p>
+<div class='fieldwrap'><textarea id='f23' data-f='f23' placeholder='Your answer…'></textarea><span class='wc' id='wc-f23'>0 words</span></div>
+<p class='prompt'><strong>The revised recommendation</strong> — Rewrite the memo’s conclusion in 4–6 sentences as a cycle-aware analyst would—same facts, disciplined interpretation.</p>
+<div class='fieldwrap'><textarea id='f24' data-f='f24' placeholder='Your answer…'></textarea><span class='wc' id='wc-f24'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>6</div><div class='t'><b>Reading the Slopes</b><span>Lesson 2.2.2 • Charting • Inflection points • National vs local</span></div></div></div>
+<p>The table below gives eight quarters of data for a single submarket alongside the corresponding national series. Chart the four series on the grid provided (or on your own paper) and complete the analysis that follows. Focus on year-over-year slopes—direction and velocity—rather than levels.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Quarter</strong></th><th><strong>Submarket Rent Growth (YoY)</strong></th><th><strong>Submarket Absorption (units/qtr)</strong></th><th><strong>National MF Transaction Volume (YoY)</strong></th><th><strong>National Job Growth (YoY)</strong></th></tr></thead><tbody><tr><td>Q1</td><td>+8.4%</td><td>410</td><td>+22%</td><td>+2.9%</td></tr><tr><td>Q2</td><td>+8.1%</td><td>425</td><td>+18%</td><td>+2.8%</td></tr><tr><td>Q3</td><td>+7.9%</td><td>405</td><td>+9%</td><td>+2.6%</td></tr><tr><td>Q4</td><td>+7.6%</td><td>360</td><td>+2%</td><td>+2.3%</td></tr><tr><td>Q5</td><td>+7.2%</td><td>300</td><td>−6%</td><td>+1.9%</td></tr><tr><td>Q6</td><td>+6.5%</td><td>235</td><td>−14%</td><td>+1.5%</td></tr><tr><td>Q7</td><td>+5.4%</td><td>170</td><td>−21%</td><td>+1.1%</td></tr><tr><td>Q8</td><td>+3.9%</td><td>110</td><td>−26%</td><td>+0.8%</td></tr></tbody></table></div>
+<p class='prompt'><strong>Chart the four series</strong> — Use the grid below. Plot direction and velocity; label the quarter at which each series inflects.</p>
+<div class='fieldwrap'><textarea id='f25' data-f='f25' placeholder='Your answer…'></textarea><span class='wc' id='wc-f25'>0 words</span></div>
+<p class='prompt'><strong>Inflection and velocity</strong> — In which quarter does each series inflect? Which series decelerate first and which last? What does the ordering tell you about the propagation chain?</p>
+<div class='fieldwrap'><textarea id='f26' data-f='f26' placeholder='Your answer…'></textarea><span class='wc' id='wc-f26'>0 words</span></div>
+<p class='prompt'><strong>Levels versus slopes</strong> — In Q5 the submarket still reports +7.2% rent growth and 300 units of positive absorption. Explain what an operator reading levels would conclude, what an operator reading slopes would conclude, and which of the lesson’s biases the level-reader is exhibiting.</p>
+<div class='fieldwrap'><textarea id='f27' data-f='f27' placeholder='Your answer…'></textarea><span class='wc' id='wc-f27'>0 words</span></div>
+<p class='prompt'><strong>National versus local</strong> — Are the national and local cycles aligned or disconnected in this data? What specific error from Lesson 2.2.2 does this chart protect an operator from making?</p>
+<div class='fieldwrap'><textarea id='f28' data-f='f28' placeholder='Your answer…'></textarea><span class='wc' id='wc-f28'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>7</div><div class='t'><b>Observation Before Numbers</b><span>Lesson 2.2.1 • Observational clues • Behavior first, numbers second</span></div></div></div>
+<p>Lesson 2.2.1 says markets move on behavior first and numbers second, and that observational clues originate in human behavior, business decisions, and operational friction. This exercise tests whether you can identify what you should already be observing in your own practice.</p>
+<p class='prompt'><strong>Your observational clue inventory</strong> — List eight observational clues you could realistically monitor in your own operation—across leasing, lenders, brokers, developers, employers, and tenants. For each, state what quantitative indicator it precedes and by roughly how long.</p>
+<div class='fieldwrap'><textarea id='f29' data-f='f29' placeholder='Your answer…'></textarea><span class='wc' id='wc-f29'>0 words</span></div>
+<p class='prompt'><strong>The clue you have historically ignored</strong> — Identify the observational clue you have most consistently dismissed or failed to record in your career. What quantitative confirmation arrived later, and what did the delay cost?</p>
+<div class='fieldwrap'><textarea id='f30' data-f='f30' placeholder='Your answer…'></textarea><span class='wc' id='wc-f30'>0 words</span></div>
+<p class='prompt'><strong>Weighting rule</strong> — Write a one-paragraph rule for how you will weight observational clues against quantitative data and historic cycle timing going forward, consistent with the lesson.</p>
+<div class='fieldwrap'><textarea id='f31' data-f='f31' placeholder='Your answer…'></textarea><span class='wc' id='wc-f31'>0 words</span></div>
+<div class='partmark'>PART 3 OF 5</div>
+<h2><strong>Dashboard Application</strong></h2>
+<p class='em'><em><em>Stress-Testing Your v1.0 Cignal Dashboard</em></em></p>
+<p>Part 3 works directly on the v1.0 Cignal Dashboard you designed in Lesson 2.3.1. Each exercise revisits one or more of the six design stages and asks you to defend, refine, or extend your design against the standards the lesson established.</p>
+<p>These exercises test the discipline that defines Part Three: a dashboard is not a list of indicators—it is a decision system with a signal architecture, a sustainable cadence, defined integration points, a revision practice, and a threshold that connects it to action. Your responses should reflect your actual v1.0, not an idealized version of it.</p>
+<div class='ex'><div class='ex-h'><div class='n'>8</div><div class='t'><b>Strategy Profile and Diagnostic Questions</b><span>Lesson 2.3.1 • Stage One • Stage Two</span></div></div></div>
+<p class='prompt'><strong>Your strategy profile</strong> — Restate your Stage One profile in one paragraph: asset class and vintage, geographic concentration, capital structure and maturities, decision horizon, and the decisions this dashboard must inform.</p>
+<div class='fieldwrap'><textarea id='f32' data-f='f32' placeholder='Your answer…'></textarea><span class='wc' id='wc-f32'>0 words</span></div>
+<p class='prompt'><strong>The five diagnostic questions</strong> — Work the Stage Two diagnostic questions explicitly: the decision that hurt most and the signal that would have caught it; the concentration risk that keeps you up at night; the capital-structure exposure; the strategy-specific signals your foundational set misses; and the signals you already watch informally that deserve formal tracking.</p>
+<div class='fieldwrap'><textarea id='f33' data-f='f33' placeholder='Your answer…'></textarea><span class='wc' id='wc-f33'>0 words</span></div>
+<p class='prompt'><strong>Strategy-specific additions</strong> — List the signals the diagnostic questions surfaced that are not in the foundational set. For each, name the layer, the source, and the decision it informs.</p>
+<div class='fieldwrap'><textarea id='f34' data-f='f34' placeholder='Your answer…'></textarea><span class='wc' id='wc-f34'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>9</div><div class='t'><b>Signal Architecture and Distribution</b><span>Lesson 2.3.1 • Stage Three • Lesson 2.3.2 • Signal independence</span></div></div></div>
+<p class='prompt'><strong>Your v1.0 signal set by layer</strong> — List every signal in your v1.0, organized by layer, with each classified as leading, coincident, or trailing. Give the count per layer.</p>
+<div class='fieldwrap'><textarea id='f35' data-f='f35' placeholder='Your answer…'></textarea><span class='wc' id='wc-f35'>0 words</span></div>
+<p class='prompt'><strong>Distribution check</strong> — Compare your counts to the target ranges (6–10 Layer 3, 8–12 Layer 2, 6–12 Layer 1 scaling with geographic concentration). If a layer is out of range, is it because signals are misclassified or because the layer is under-attended? What will you change?</p>
+<div class='fieldwrap'><textarea id='f36' data-f='f36' placeholder='Your answer…'></textarea><span class='wc' id='wc-f36'>0 words</span></div>
+<p class='prompt'><strong>Independence check</strong> — Lesson 2.3.2 warns that three signals from one source are one source viewed from three angles. Identify any signals in your set that are not genuinely independent of one another, and state how you will count them toward the threshold.</p>
+<div class='fieldwrap'><textarea id='f37' data-f='f37' placeholder='Your answer…'></textarea><span class='wc' id='wc-f37'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>10</div><div class='t'><b>Cadence Design</b><span>Lesson 2.3.1 • Stage Four • The one-notch-slower rule</span></div></div></div>
+<p class='prompt'><strong>Your cadence by layer</strong> — State your review cadence for each layer, for the quarterly deep-dive, and for any fast-moving signals you review more frequently. Then apply the calibration rule: for each cadence, is one notch slower more realistic?</p>
+<div class='fieldwrap'><textarea id='f38' data-f='f38' placeholder='Your answer…'></textarea><span class='wc' id='wc-f38'>0 words</span></div>
+<p class='prompt'><strong>The maintenance reality test</strong> — Describe honestly what happened to the last analytical routine you set for yourself—a model, a report, a tracker. What made it survive or die? What does that history say about the cadence you have set here?</p>
+<div class='fieldwrap'><textarea id='f39' data-f='f39' placeholder='Your answer…'></textarea><span class='wc' id='wc-f39'>0 words</span></div>
+<p class='prompt'><strong>Team structure</strong> — If you have a team, who is responsible for data collection, and how does your review cadence stay independent of theirs so the analytical work is not delegated away?</p>
+<div class='fieldwrap'><textarea id='f40' data-f='f40' placeholder='Your answer…'></textarea><span class='wc' id='wc-f40'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>11</div><div class='t'><b>Decision Integration</b><span>Lesson 2.3.1 • Stage Five • The four integration points</span></div></div></div>
+<p class='prompt'><strong>Acquisition decisions</strong> — Where in your acquisition process does the dashboard enter as a standing input, and which Layer 2 and Layer 3 signals must be reviewed before any deal is approved? Be specific about the meeting and the agenda item.</p>
+<div class='fieldwrap'><textarea id='f41' data-f='f41' placeholder='Your answer…'></textarea><span class='wc' id='wc-f41'>0 words</span></div>
+<p class='prompt'><strong>Operational decisions</strong> — Where do Layer 1 signals enter your quarterly operational reviews, and which operational decisions do they explicitly trigger or veto?</p>
+<div class='fieldwrap'><textarea id='f42' data-f='f42' placeholder='Your answer…'></textarea><span class='wc' id='wc-f42'>0 words</span></div>
+<p class='prompt'><strong>Strategic planning</strong> — How does Layer 3 open your annual strategic planning, and what would have to be on the board before a market entry, exit, or hold-strategy change could be proposed?</p>
+<div class='fieldwrap'><textarea id='f43' data-f='f43' placeholder='Your answer…'></textarea><span class='wc' id='wc-f43'>0 words</span></div>
+<p class='prompt'><strong>Capital structure decisions</strong> — State the cadence and content of your capital-structure review. Which Layer 3 rate signals and Layer 2 capital-flow signals govern refinance timing and duration decisions, and how do they map to your actual maturities?</p>
+<div class='fieldwrap'><textarea id='f44' data-f='f44' placeholder='Your answer…'></textarea><span class='wc' id='wc-f44'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>12</div><div class='t'><b>Revision Practice and Threshold Connection</b><span>Lesson 2.3.1 • Stage Six • Lesson 2.3.2 • Decision-calibrated thresholds</span></div></div></div>
+<p class='prompt'><strong>Your revision plan</strong> — Specify your quarterly micro-adjustment questions, the month of your annual structural review, and the named Layer 3 triggers that will initiate a cycle-transition review.</p>
+<div class='fieldwrap'><textarea id='f45' data-f='f45' placeholder='Your answer…'></textarea><span class='wc' id='wc-f45'>0 words</span></div>
+<p class='prompt'><strong>Threshold specification for your decisions</strong> — For each decision your dashboard informs, classify it as operational, tactical, or strategic, and write out the applicable minimum and high-confidence thresholds—including the cross-layer requirement—in your own words.</p>
+<div class='fieldwrap'><textarea id='f46' data-f='f46' placeholder='Your answer…'></textarea><span class='wc' id='wc-f46'>0 words</span></div>
+<p class='prompt'><strong>The reversibility test applied</strong> — Take the two most consequential decisions on your list and apply the reversibility test. Does the test change how you classified either one?</p>
+<div class='fieldwrap'><textarea id='f47' data-f='f47' placeholder='Your answer…'></textarea><span class='wc' id='wc-f47'>0 words</span></div>
+<p class='prompt'><strong>First-ninety-days commitment</strong> — Lesson 2.3.1 says the urge to redesign will be strongest in the first ninety days. What specific frustrations do you anticipate, and what will you do with them instead of redesigning?</p>
+<div class='fieldwrap'><textarea id='f48' data-f='f48' placeholder='Your answer…'></textarea><span class='wc' id='wc-f48'>0 words</span></div>
+<div class='partmark'>PART 4 OF 5</div>
+<h2><strong>The Capstone Scenario</strong></h2>
+<p class='em'><em><em>Develop a Complete Cycle-Aware Signal Thesis</em></em></p>
+<p>Part 4 is the culminating exercise of the Special Ops Workbook. You will develop a complete signal thesis for a detailed operator scenario—reading all three layers, classifying and counting the signals, applying the Cignal Threshold across operational, tactical, and strategic decisions, designing the operator’s dashboard, projecting the propagation chain, and producing a 24-month monitoring and action sequence with named threshold triggers.</p>
+<p>This exercise produces the most substantial deliverable in the Workbook. Plan to spend 1.5–2.5 hours on this section. Engage with the seriousness you would bring to an actual investment committee decision affecting your portfolio.</p>
+<div class='callout'><p><em>This is where Special Ops comes together. The thesis you develop here is the most concrete demonstration of signal mastery you can produce.</em></p></div>
+<h2>The Operator Profile</h2>
+<p>Read the full operator profile and current signal constellation before beginning any of the eight thesis sections. The constellation is designed to require every lesson in the curriculum—it cannot be read correctly from any single layer.</p>
+<p class='prompt'><strong>Background</strong></p>
+<div class='box'><p><em>You are the principal of a multifamily investment firm with 3,800 units across four submarkets in two Southeast metros—two submarkets in Metro A, two in Metro B. Your strategy is core-plus and light value-add on 1990s–2010s vintage garden and mid-rise product. The portfolio is 68% leveraged; five loans totaling $210 million mature within the next 30 months, three of them floating-rate with caps expiring inside 12 months. You have $55 million of committed but undeployed LP capital, a base of 80 active investors, relationships with three primary lenders, and an acquisitions pipeline with two deals under LOI in Metro A. You built a v1.0 Cignal Dashboard eight months ago and have maintained it on a monthly cadence with two quarterly deep-dives completed.</em></p></div>
+<p class='prompt'><strong>Current Signal Constellation — Layer 3 (Macroeconomic)</strong></p>
+<div class='box'><p><em>The Federal Reserve has raised the federal funds rate 275 basis points over fourteen months and, at its most recent meeting, held while signaling a “higher for longer” posture. The 10-Year Treasury yield has risen 190 basis points and sits at its highest level in over a decade. The 10-Year minus 2-Year spread inverted five months ago and remains inverted. Headline CPI has moderated but core CPI remains materially above target; PPI has begun to decelerate for two consecutive months. Headline GDP growth is positive at roughly 2%, but composition has shifted toward goods and government spending and away from services. Consumer confidence has declined for three consecutive months. Equities are 11% below their high with elevated two-way volatility. Foreclosure filings are flat at low levels.</em></p></div>
+<p class='prompt'><strong>Current Signal Constellation — Layer 2 (Industry)</strong></p>
+<div class='box'><p><em>National multifamily transaction volume has declined for three consecutive quarters and is down roughly 40% from peak. Fed Flow of Funds shows institutional capital reducing CRE allocations for two quarters. National multifamily fundraising is down meaningfully year over year. National multifamily permits peaked four quarters ago and have since declined 18%, but the national construction pipeline of units under construction remains near a multi-decade high with deliveries scheduled to run heavy for the next 18–24 months. National employment growth remains positive but has decelerated for five consecutive months; employment diffusion has narrowed; national wage growth has slowed to roughly the pace of shelter inflation. PCE composition has shifted from discretionary toward essential categories while headline spending is flat in real terms. Weekly initial unemployment claims have drifted upward from cycle lows. Population trends in both metros remain positive.</em></p></div>
+<p class='prompt'><strong>Current Signal Constellation — Layer 1 (Submarkets)</strong></p>
+<div class='box'><p><em>Metro A, Submarket A1: days on market has lengthened from 19 to 34 days over four months; absorption has decelerated for three consecutive months though still positive; three lease-up properties totaling 1,100 units are offering six to eight weeks free; late-stage pipeline shows 900 additional units delivering within two quarters; vacancy is unchanged; your two assets are 95% occupied. Metro A, Submarket A2: days on market stable at 22 days; absorption flat; concessions stable at two weeks; late-stage pipeline of 300 units; vacancy stable. Metro B, Submarket B1: days on market stable; absorption modestly accelerating; no meaningful concession activity; no late-stage pipeline; vacancy declining. Metro B, Submarket B2: days on market stable; absorption stable; concessions stable; a single 240-unit delivery scheduled next quarter; the metro’s largest employer announced a hiring pause two weeks ago and a broker reports two comparable owners have quietly approached him about selling. Local job growth remains positive in both metros but has decelerated more in Metro A than Metro B.</em></p></div>
+<p class='prompt'><strong>Strategic Question</strong></p>
+<div class='box'><p><em>Your investment committee meets in 21 days to decide on the two Metro A deals under LOI, on the refinancing sequence for the five maturing loans, and on whether to expand into a fifth submarket in Metro B that an LP has been advocating. Your operations team is asking whether to change rent and concession strategy for the upcoming leasing season. Your LP base wants a written view of where the cycle sits and what you intend to do about it. The signal thesis you develop will inform every one of those decisions.</em></p></div>
+<h2>Section 1 — The Three-Layer Reading</h2>
+<p><em>Lessons 2.1.2–2.1.4 • Read each layer on its own terms, then read them together</em></p>
+<p class='prompt'><strong>Layer 3 reading</strong> — What structural environment do the macroeconomic signals describe? Which signals triangulate, which carry noise, and how far are they saying the structural shift will propagate?</p>
+<div class='fieldwrap'><textarea id='f49' data-f='f49' placeholder='Your answer…'></textarea><span class='wc' id='wc-f49'>0 words</span></div>
+<p class='prompt'><strong>Layer 2 reading</strong> — Separate the capital-side signals from the operating-side signals. Which cycle signature does their relationship produce? What is the permit-versus-pipeline pattern telling you about supply over the next 24 months?</p>
+<div class='fieldwrap'><textarea id='f50' data-f='f50' placeholder='Your answer…'></textarea><span class='wc' id='wc-f50'>0 words</span></div>
+<p class='prompt'><strong>Layer 1 reading, submarket by submarket</strong> — Read A1, A2, B1, and B2 separately. Which leading indicators triangulate in each? Where is vacancy silent but the leading signals loud? Which observational clues in B2 precede quantitative data, and by how long?</p>
+<div class='fieldwrap'><textarea id='f51' data-f='f51' placeholder='Your answer…'></textarea><span class='wc' id='wc-f51'>0 words</span></div>
+<p class='prompt'><strong>Divergence pattern and propagation position</strong> — Which of Lesson 2.3.2’s three divergence patterns describes the whole constellation, and which describes the four submarkets relative to one another? Where in the propagation chain does the shift currently sit?</p>
+<div class='fieldwrap'><textarea id='f52' data-f='f52' placeholder='Your answer…'></textarea><span class='wc' id='wc-f52'>0 words</span></div>
+<h2>Section 2 — Signal Classification and Count</h2>
+<p><em>Lesson 2.2.1 • Lesson 2.3.2 • Independence, leading vs trailing, correlation vs causation</em></p>
+<p class='prompt'><strong>Independent confirming signals by layer</strong> — List the genuinely independent signals confirming a directional shift at each layer. Exclude redundant readings of the same underlying source and exclude signals that are stable or ambiguous. Give the count per layer and in total.</p>
+<div class='fieldwrap'><textarea id='f53' data-f='f53' placeholder='Your answer…'></textarea><span class='wc' id='wc-f53'>0 words</span></div>
+<p class='prompt'><strong>Leading versus trailing</strong> — Of the signals you counted, which are leading, which coincident, and which trailing? What does the balance tell you about how early or late this reading is?</p>
+<div class='fieldwrap'><textarea id='f54' data-f='f54' placeholder='Your answer…'></textarea><span class='wc' id='wc-f54'>0 words</span></div>
+<p class='prompt'><strong>Correlation traps</strong> — Identify two relationships in this scenario that an undisciplined analyst would treat as causal but that are correlations—and name the causal drivers that should replace them.</p>
+<div class='fieldwrap'><textarea id='f55' data-f='f55' placeholder='Your answer…'></textarea><span class='wc' id='wc-f55'>0 words</span></div>
+<h2>Section 3 — Applying the Cignal Threshold by Decision Type</h2>
+<p><em>Lesson 2.3.2 • Operational, tactical, and strategic thresholds • Postures</em></p>
+<p class='prompt'><strong>Operational decision — leasing season rent and concession strategy</strong> — Classify the decision and state the applicable threshold. Count the confirming Layer 1 signals in each submarket. In which submarkets is the threshold met, and what posture does the lesson prescribe in each?</p>
+<div class='fieldwrap'><textarea id='f56' data-f='f56' placeholder='Your answer…'></textarea><span class='wc' id='wc-f56'>0 words</span></div>
+<p class='prompt'><strong>Tactical decision — the two Metro A deals under LOI and acquisition pacing</strong> — Classify the decision and state the threshold, including the cross-layer requirement. Count the confirming signals with Layer 2 and Layer 1 represented. Is the minimum or the high-confidence threshold met? What posture follows, and what does it mean for each LOI?</p>
+<div class='fieldwrap'><textarea id='f57' data-f='f57' placeholder='Your answer…'></textarea><span class='wc' id='wc-f57'>0 words</span></div>
+<p class='prompt'><strong>Strategic decision — the five-loan refinancing sequence and the fifth-submarket expansion</strong> — Classify each decision and state the threshold, including the Layer 3 anchor and Layer 2 corroboration requirement. Count the qualifying signals. Is the high-confidence threshold met? What posture follows for the refinancings and for the expansion?</p>
+<div class='fieldwrap'><textarea id='f58' data-f='f58' placeholder='Your answer…'></textarea><span class='wc' id='wc-f58'>0 words</span></div>
+<p class='prompt'><strong>The same evidence, three verdicts</strong> — In one paragraph, explain why this single constellation justifies different postures for the three decision types, and name the common mistake an operator would make by applying a uniform 3/5 threshold to all of them.</p>
+<div class='fieldwrap'><textarea id='f59' data-f='f59' placeholder='Your answer…'></textarea><span class='wc' id='wc-f59'>0 words</span></div>
+<h2>Section 4 — Dashboard Design for This Operator</h2>
+<p><em>Lesson 2.3.1 • Stages One through Four applied to the scenario</em></p>
+<p class='prompt'><strong>Strategy-specific signals</strong> — Beyond the foundational set, which signals do the Stage Two diagnostic questions surface for this operator—given 68% leverage, three expiring rate caps, five maturities inside 30 months, two-metro concentration, and a single dominant employer in B2? Name layer and source for each.</p>
+<div class='fieldwrap'><textarea id='f60' data-f='f60' placeholder='Your answer…'></textarea><span class='wc' id='wc-f60'>0 words</span></div>
+<p class='prompt'><strong>Signal architecture and distribution</strong> — Specify the operator’s Layer 3, Layer 2, and Layer 1 signal counts against the target ranges, noting how the Layer 1 count scales across four submarkets and which signals in A1 and B2 warrant elevated attention.</p>
+<div class='fieldwrap'><textarea id='f61' data-f='f61' placeholder='Your answer…'></textarea><span class='wc' id='wc-f61'>0 words</span></div>
+<p class='prompt'><strong>Cadence adjustment for a transition</strong> — The operator has been on a monthly cadence. Which signals should move to weekly during this window, which stay monthly, and why does the one-notch-slower rule still apply to everything else?</p>
+<div class='fieldwrap'><textarea id='f62' data-f='f62' placeholder='Your answer…'></textarea><span class='wc' id='wc-f62'>0 words</span></div>
+<h2>Section 5 — Propagation Expectations and Charting</h2>
+<p><em>Lesson 2.1.3 • Lesson 2.1.4 • Lesson 2.2.2 • What should happen next, and what would refute it</em></p>
+<p class='prompt'><strong>Layer 2 in 6–12 months</strong> — If the Layer 3 reading is correct, which industry indicators should move next, in what direction, and roughly when? Which are already moving, confirming propagation is underway?</p>
+<div class='fieldwrap'><textarea id='f63' data-f='f63' placeholder='Your answer…'></textarea><span class='wc' id='wc-f63'>0 words</span></div>
+<p class='prompt'><strong>Layer 1 in 6–18 months, by submarket</strong> — Project the sequence of submarket indicator movements in A1, A2, B1, and B2. Where does the supply wave land and when? Where does employment-driven demand softening land first?</p>
+<div class='fieldwrap'><textarea id='f64' data-f='f64' placeholder='Your answer…'></textarea><span class='wc' id='wc-f64'>0 words</span></div>
+<p class='prompt'><strong>Charting priorities</strong> — Name the four series you would chart on a single timeline for the investment committee, and state what slope pattern would confirm your thesis and what pattern would refute it.</p>
+<div class='fieldwrap'><textarea id='f65' data-f='f65' placeholder='Your answer…'></textarea><span class='wc' id='wc-f65'>0 words</span></div>
+<p class='prompt'><strong>What would change your mind</strong> — Specify the signal changes at each layer that would lead you to conclude the shift is not propagating—or is propagating faster than expected.</p>
+<div class='fieldwrap'><textarea id='f66' data-f='f66' placeholder='Your answer…'></textarea><span class='wc' id='wc-f66'>0 words</span></div>
+<h2>Section 6 — The Decision Program</h2>
+<p><em>Act • Prepare • Watch — mapped to decisions</em></p>
+<p class='prompt'><strong>Act with conviction</strong> — Which decisions have met their high-confidence threshold and should be executed now? Specify the action, not just the category.</p>
+<div class='fieldwrap'><textarea id='f67' data-f='f67' placeholder='Your answer…'></textarea><span class='wc' id='wc-f67'>0 words</span></div>
+<p class='prompt'><strong>Prepare actively</strong> — Which decisions sit between minimum and high-confidence thresholds? What specific positioning—capital structure, capital partner cultivation, scenario development, deal restructuring—should begin now while execution is deferred?</p>
+<div class='fieldwrap'><textarea id='f68' data-f='f68' placeholder='Your answer…'></textarea><span class='wc' id='wc-f68'>0 words</span></div>
+<p class='prompt'><strong>Watch closely</strong> — Which decisions have not met their minimum threshold? What monitoring intensity applies, and which specific signal would move each of them into preparation?</p>
+<div class='fieldwrap'><textarea id='f69' data-f='f69' placeholder='Your answer…'></textarea><span class='wc' id='wc-f69'>0 words</span></div>
+<p class='prompt'><strong>Communication</strong> — In 4–6 sentences, draft how you would explain to the LP advocating the fifth-submarket expansion why the evidence supports strategic defensive positioning but not expansion—using the threshold, not opinion.</p>
+<div class='fieldwrap'><textarea id='f70' data-f='f70' placeholder='Your answer…'></textarea><span class='wc' id='wc-f70'>0 words</span></div>
+<h2>Section 7 — The 24-Month Monitoring and Action Sequence</h2>
+<p><em>Threshold triggers at every transition</em></p>
+<p class='prompt'><strong>Months 1–6</strong> — Actions taken, refinancings executed, LOIs resolved, dashboard cadence changes, and the named Cignal Thresholds you will be watching for in each layer.</p>
+<div class='fieldwrap'><textarea id='f71' data-f='f71' placeholder='Your answer…'></textarea><span class='wc' id='wc-f71'>0 words</span></div>
+<p class='prompt'><strong>Months 7–12</strong> — How the program evolves as Layer 2 propagation matures and Layer 1 begins to reflect it. Which decisions move from prepare to act, and on which signal triggers?</p>
+<div class='fieldwrap'><textarea id='f72' data-f='f72' placeholder='Your answer…'></textarea><span class='wc' id='wc-f72'>0 words</span></div>
+<p class='prompt'><strong>Months 13–18</strong> — The supply wave and employment softening should be visible at Layer 1 by now. What operational and tactical actions follow? What early-Recovery signals—capital cautious while fundamentals stabilize—would you begin watching for?</p>
+<div class='fieldwrap'><textarea id='f73' data-f='f73' placeholder='Your answer…'></textarea><span class='wc' id='wc-f73'>0 words</span></div>
+<p class='prompt'><strong>Months 19–24</strong> — What positioning will you have achieved? How does the portfolio, capital structure, and deployable capital look different from the starting point—and what threshold pattern would tell you the window for opportunistic deployment has opened?</p>
+<div class='fieldwrap'><textarea id='f74' data-f='f74' placeholder='Your answer…'></textarea><span class='wc' id='wc-f74'>0 words</span></div>
+<h2>Section 8 — Thesis Summary</h2>
+<p><em>Your Cycle-Aware Signal Thesis</em></p>
+<p class='prompt'><strong>Synthesize your complete signal thesis in approximately 300–500 words</strong> — This summary should be readable as a coherent strategic statement you could share with your investment committee, LP base, or lenders: where the cycle sits by layer, how many independent signals confirm it, which thresholds are met for which decisions, what you will do now, what you are preparing for, and what would change your mind.</p>
+<div class='fieldwrap'><textarea id='f75' data-f='f75' placeholder='Your answer…'></textarea><span class='wc' id='wc-f75'>0 words</span></div>
+<div class='partmark'>PART 5 OF 5</div>
+<h2><strong>Personal Reflection</strong></h2>
+<p class='em'><em><em>Connecting the Workbook to Your Own Practice</em></em></p>
+<p>Part 5 connects the Workbook’s analytical work back to your own multifamily practice. These reflection prompts are open-ended—there are no “correct” answers. The work is to articulate what you have learned, what has changed in how you will read the market going forward, and what you will commit to as a signal-disciplined operator.</p>
+<p>These reflections, combined with your v1.0 Cignal Dashboard from Lesson 2.3.1, become the operational document set you will reference as you apply the Onion Framework and the Cignal Threshold to your actual portfolio.</p>
+<div class='ex'><div class='ex-h'><div class='n'>13</div><div class='t'><b>What Has Changed in How You Read the Market</b><span>200–400 words • Your complete perspective shift</span></div></div></div>
+<p class='prompt'>Describe how completing Special Ops has changed how you read multifamily markets. What do you see now that you did not see before? Which layer were you effectively blind to? What assumptions about “following the market” have you discarded? What capabilities do you now have that you did not have when you began?</p>
+<div class='fieldwrap'><textarea id='f76' data-f='f76' placeholder='Your answer…'></textarea><span class='wc' id='wc-f76'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>14</div><div class='t'><b>Your Greatest Analytical Gap</b><span>Your single most consequential interpretive error</span></div></div></div>
+<p class='prompt'>Reflect on your prior practice. Identify the single greatest analytical gap Special Ops has revealed—the layer you under-weighted, the trailing indicator you mistook for a leading one, the correlation you treated as causation, or the threshold you never had. What specifically did Special Ops teach you about that gap, and what decision in your history would have gone differently?</p>
+<div class='fieldwrap'><textarea id='f77' data-f='f77' placeholder='Your answer…'></textarea><span class='wc' id='wc-f77'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>15</div><div class='t'><b>Your Signal Discipline Commitments</b><span>Three operational commitments that will change how you actually behave</span></div></div></div>
+<p>Articulate three specific commitments you are making as a result of completing Special Ops. These should be operational—things that will change how you actually behave, not abstract intentions. At least one should concern your dashboard cadence and at least one should concern how the Cignal Threshold enters a specific recurring decision. For each, identify what will be different and how you will hold yourself accountable.</p>
+<p class='prompt'><strong>Commitment 1:</strong></p>
+<div class='fieldwrap'><textarea id='f78' data-f='f78' placeholder='Your answer…'></textarea><span class='wc' id='wc-f78'>0 words</span></div>
+<p class='prompt'><strong>Commitment 2:</strong></p>
+<div class='fieldwrap'><textarea id='f79' data-f='f79' placeholder='Your answer…'></textarea><span class='wc' id='wc-f79'>0 words</span></div>
+<p class='prompt'><strong>Commitment 3:</strong></p>
+<div class='fieldwrap'><textarea id='f80' data-f='f80' placeholder='Your answer…'></textarea><span class='wc' id='wc-f80'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>16</div><div class='t'><b>Where Special Ops Has Taken You</b><span>A final reflection on capability earned</span></div></div></div>
+<p class='prompt'>In a final reflection, describe where Special Ops has taken you. What can you now read that operators without a three-layer architecture and a threshold discipline simply cannot access? How will you continue developing that capability through the eighteen-month v1.0 commitment and the cycles ahead? And what role will Commander play in that development if you choose to continue into the next tier—where reading the cycle becomes executing it?</p>
+<div class='fieldwrap'><textarea id='f81' data-f='f81' placeholder='Your answer…'></textarea><span class='wc' id='wc-f81'>0 words</span></div>
+<h2>Workbook Completion</h2>
+<p>You have completed the Special Ops Workbook. Combined with your v1.0 Cignal Dashboard from Lesson 2.3.1, you now hold two substantial artifacts that demonstrate your signal mastery—one the working infrastructure that gathers intelligence across three layers, the other the demonstration that you can read that intelligence with discipline and connect it to decisions through the Cignal Threshold.</p>
+<p>These two artifacts are operational documents, not certificates. Their value is not in completion alone—their value is in what they demonstrate about your capability and what they will provide as reference material for the quarterly deep-dives, capital-structure reviews, and investment committee decisions ahead.</p>
+<div class='callout'><p><em>The work you have done across Special Ops is genuine. The architecture is real, the dashboard is built, and the discipline is yours. Year one will feel like work. Year five will feel like edge.</em></p></div>
+<h2>ECCA Certification</h2>
+<p>Your completion of Special Ops—including the eight lessons, eight Knowledge Checks, the v1.0 Cignal Dashboard, and this Workbook—qualifies you for the Econiq Certified Cycle Analyst (ECCA) certification. ECCA certification recognizes your demonstrated capability in signal mastery and operational cycle discipline: the ability to read the multifamily cycle across three layers and to know, with a defensible standard, when the evidence justifies action.</p>
+<p>Operators who continue into Commander Tier 3 will build on the ECCA foundation toward execution and mastery, ultimately earning the Certified Market Cycle Strategist (CMCS) certification at the conclusion of Commander training.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Credential</strong></th><th><strong>Training Completed</strong></th><th><strong>Recognition</strong></th></tr></thead><tbody><tr><td>ECF — Econiq Cycle Fundamentals</td><td>Recon Tier 1: 6 modules, 6 KCs, Bridge Document, Workbook</td><td>Cycle-aware operator at foundational level</td></tr><tr><td>ECCA — Econiq Certified Cycle Analyst</td><td>Special Ops Tier 2: Onion Framework, Analytical Rigor, Cignal Dashboard, Cignal Threshold, Workbook</td><td>Signal mastery and operational cycle discipline</td></tr><tr><td>CMCS — Certified Market Cycle Strategist</td><td>Commander Tier 3: Full Cycle Acquisitions, 30x Operations, Portfolio Architect</td><td>Execution and mastery across the full cycle</td></tr></tbody></table></div>
+<h2>What Comes Next</h2>
+<p>Some operators will complete Special Ops and stop, satisfied that they can now read the cycle with a three-layer architecture and act on it with threshold discipline. This is a legitimate choice. A maintained v1.0 dashboard and the reading discipline you have built will produce durable, compounding analytical advantage on their own.</p>
+<p>Other operators will continue into Commander, where reading the cycle becomes executing it. Recon taught you to understand the cycle. Special Ops taught you to read it. Commander teaches you to act on it—through Full Cycle Acquisitions, where cycle-aware buying discipline and capital rotation are applied to acquisitions; 30x Operations, where the same discipline is applied to managing what you own; and Portfolio Architect, where When &gt; How logic is applied at portfolio scale. The signal thesis you produced in Part 4 is exactly the kind of reading Commander will teach you to convert into a full-cycle strategy.</p>
+<p>Whichever path you choose, the capability you have built in Special Ops is yours. The dashboard is working infrastructure. The threshold is a discipline you can defend to any committee, partner, or lender. The methodology has produced what it was designed to produce—an operator who reads the multifamily cycle through three layers and knows when the evidence is enough.</p>
+<div class='callout'><p><em>Welcome to the end of Special Ops. You have done the work. The signal is yours to read.</em></p></div></div>
+
+<nav class="lnav">
+  <a href="bonus-rule-of-6.html">&larr; Previous<span>The Rule of 6 Summary</span></a>
+  <a href="index.html" style="text-align:right">Finish &rarr;<span>All lessons</span></a>
+</nav>
+
+<footer class="lfoot"><div class="lfoot-in">
+  <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+  <span>The Econiq Method &middot; Special Ops Capstone Workbook &middot; v1.0</span>
+</div></footer>
+
+<script>
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+ pg.style.width=(m>0?h.scrollTop/m*100:0)+'%';},{passive:true});
+
+var KEY='econiq-special-ops-workbook', N=81;
+function load(){ try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};} }
+function save(d){ try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){} }
+var data=load();
+var areas=[].slice.call(document.querySelectorAll('textarea[data-f]'));
+function words(s){ s=(s||'').trim(); return s?s.split(/\s+/).length:0; }
+function stats(){
+  var done=0,w=0;
+  areas.forEach(function(a){ var v=a.value.trim(); if(v){done++;} w+=words(v); });
+  document.getElementById('wbDone').textContent=done;
+  document.getElementById('wbWords').textContent=w.toLocaleString();
+}
+areas.forEach(function(a){
+  var id=a.dataset.f;
+  if(data[id]) a.value=data[id];
+  var wc=document.getElementById('wc-'+id);
+  function upd(){ wc.textContent=words(a.value)+' words'; }
+  upd();
+  a.addEventListener('input',function(){
+    data[id]=a.value; save(data); upd(); stats();
+    var b=document.getElementById('wbSave'); b.textContent='Saved'; clearTimeout(b._t);
+    b._t=setTimeout(function(){b.textContent='Saved automatically';},1200);
+  });
+  a.addEventListener('input',function(){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; });
+  if(a.value){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; }
+});
+stats();
+
+document.getElementById('wbPrint').onclick=function(){ window.print(); };
+document.getElementById('wbExport').onclick=function(){
+  var out='THE SPECIAL OPS CAPSTONE WORKBOOK\nThe Econiq Method\n\n';
+  document.querySelectorAll('.wb > *').forEach(function(el){
+    if(el.classList.contains('partmark')) out+='\n\n=== '+el.textContent+' ===\n';
+    else if(el.tagName==='H2') out+='\n## '+el.textContent+'\n';
+    else if(el.classList.contains('ex')) out+='\n--- '+el.textContent.trim().replace(/\s+/g,' ')+'\n';
+    else if(el.classList.contains('prompt')) out+='\n'+el.textContent.trim()+'\n';
+    else if(el.classList.contains('fieldwrap')){
+      var t=el.querySelector('textarea'); out+=(t.value.trim()||'[not answered]')+'\n';
+    }
+  });
+  var blob=new Blob([out],{type:'text/plain'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='special-ops-capstone-workbook.txt'; a.click();
+};
+</script>
+</body></html>

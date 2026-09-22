@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Part Two · Analytical Rigor &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Part Two</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Two</span>
+  <p class="eyebrow">Part Two &amp;middot; Introduction</p>
+  <h1>Analytical Rigor</h1>
+  <p class='deck'>Part Two introduction — Reading with rigor: why interpretation determines the outcome</p>
+  <div class="leadmeta"><span><b>1,761</b> words</span><span><b>8</b> min read</span></div>
+  </div>
+</div>
+
+<article><p><em>Why Interpretation Determines the Outcome</em></p>
+<div class='epi'><p><em>“The difference between the strategic investor and the reactive one is not intelligence. It is interpretation.”</em></p></div>
+<p>In Part One, you built the architecture. You learned why market intelligence has exactly three layers, what belongs in each, how far ahead of operational reality each layer speaks, and how a shift propagates from the structural depth of Layer 3 through the industry dynamics of Layer 2 to the submarket reality of Layer 1. You now know where to look, and you know what each indicator is for.</p>
+<p>That is necessary. It is not sufficient.</p>
+<p>Two operators can maintain identical three-layer signal sets—the same permits, the same transaction volume, the same yield curve, the same days on market—and reach opposite conclusions about the same market at the same moment. One enters late in Expansion, feeling safe, and exits late in Contraction, feeling relieved. The other positions early, defends before the softening arrives, and deploys into the recovery while the first is still waiting for confirmation. They are reading the same signals. They are not reading them the same way.</p>
+<p>The framework tells you what to read. It does not tell you how. An operator who cannot distinguish a leading indicator from a trailing one will read every layer late. An operator who cannot distinguish causation from correlation will build a thesis on relationships that dissolve at exactly the turning point where the money is made or lost. An operator who reads levels instead of slopes will see a healthy market in data that is already decelerating beneath the surface.</p>
+<div class='callout'><p><em>Cycle mastery is not about predicting the future. It is about correctly diagnosing the present.</em></p></div>
+<p>This Part installs the interpretive discipline the framework depends on. It is shorter than Part One—two lessons rather than four—because the ideas are few. But they are the ideas that determine whether every indicator you learned in Part One is read early or late, understood or misunderstood, seen or missed.</p>
+<h2>The Two Traps</h2>
+<p>Most investors fall into one of two interpretive traps, and neither is a failure of intelligence or effort.</p>
+<h3>THE DATA-ONLY INVESTOR</h3>
+<p>The data-only investor waits for confirmation. Occupancy, reported rent growth, quarterly cap rate surveys—these are the evidence they trust, and they will not act until the numbers agree. The posture feels responsible. It is also structurally late. Reported data describes what has already happened; by the time it confirms a trend, pricing has adjusted, competition has arrived, and margins have compressed. The data-only investor tends to enter late in Expansion and exit late in Contraction, buying high and selling low while believing themselves disciplined.</p>
+<h3>THE GUT-ONLY INVESTOR</h3>
+<p>The gut-only investor acts on instinct and anecdote—a broker’s mood, a headline, a feeling that the market has turned. Sometimes the instinct is right, and early. But without validation it is indistinguishable from noise, and the gut-only investor exposes themselves to false signals, premature moves, and unnecessary risk. They are early as often as they are wrong, and they cannot tell which is which until it is too late to matter.</p>
+<div class='callout'><p><em>The layered approach resolves both traps: observation to anticipate, data to confirm. Neither alone is enough. Together they are the whole discipline.</em></p></div>
+<h2>Three Questions Every Signal Must Answer</h2>
+<p>Analytical rigor reduces to three questions, asked of every indicator in every layer, every time you read it. Part Two is organized around them.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>When does it arrive?</span><p><em>Leading vs Trailing • Prepare with what leads, confirm with what trails</em></p></div></div></div>
+<p>Every indicator sits somewhere on the timeline of a market shift. Leading indicators—concessions appearing before rents decline, lenders tightening in conversation before term sheets change, permits filed before deliveries arrive—reveal what is coming. Trailing indicators—reported occupancy, published rent growth, closed transaction volume—confirm what has already occurred. Both matter. But they are used for different things, and confusing them is the single most expensive interpretive error in the industry.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Why does it move?</span><p><em>Correlation vs Causation • Attention follows correlation; decisions follow causation</em></p></div></div></div>
+<p>Two variables that move together are not the same as one variable driving another. Rents have risen while population grew; cap rates have compressed while transaction volume rose. These are correlations, and they feel convincing on a chart. But correlation answers what is happening together, not why—and it breaks down at turning points. Causation—job creation driving household formation, wage growth setting the ceiling on rents, supply growth pressuring pricing, credit availability moving capital—is what you underwrite to. If you cannot explain why a trend exists, you should not bet on it continuing.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Which way is it going, and how fast?</span><p><em>Charting • Levels describe now; slopes reveal next</em></p></div></div></div>
+<p>A current level cannot distinguish a strengthening market from a weakening one. Two submarkets can report identical absorption this quarter while one accelerates and the other decelerates. Only direction and velocity—the slope—tell you which is which, and slopes are visible only when signals are plotted over time rather than consumed as isolated data points. Charting is not presentation. It is the mechanism by which inflection points, acceleration, divergence between leading and lagging indicators, and misalignment between national and local cycles become visible before they become obvious.</p>
+<h2>Why Rigor Is Not Optional</h2>
+<p>Operators who skip this discipline and rely on the framework alone make four predictable mistakes.</p>
+<h3>MISTAKE 1: READING TRAILING INDICATORS AS IF THEY LED</h3>
+<p>The operator builds a five-year rent assumption on trailing twelve-month rent growth and current occupancy, treats the strength of confirmed data as evidence of runway, and does not notice that the signals which actually lead—concessions, lender posture, employer behavior—have already turned. This is the data-only trap in its most common form, and it is why so many investors who believe they are data-driven buy at the top.</p>
+<h3>MISTAKE 2: BETTING ON CORRELATIONS THAT BREAK AT THE TURN</h3>
+<p>The operator observes that two things have moved together for years and assumes they will continue to. Population and rents; volume and cap rates; low rates and compressing yields. The relationship holds until it does not—and it stops holding precisely at the cycle transition, when a third force (credit, employment, supply) reasserts itself. A thesis built on correlation is a thesis built to fail at the moment it is tested.</p>
+<h3>MISTAKE 3: READING LEVELS INSTEAD OF SLOPES</h3>
+<p>The operator sees 96% occupancy, positive absorption, and 7% rent growth and concludes the market is healthy—without noticing that all three have decelerated for four consecutive quarters. The level is the answer to the wrong question. Direction and velocity are the answer to the right one, and they are invisible to anyone who has never plotted the series.</p>
+<h3>MISTAKE 4: TREATING HISTORIC TIMING AS A CALENDAR</h3>
+<p>The operator notes that the business cycle averages eight years, that seven have elapsed, and concludes there is a year of runway. But no cycle keeps a calendar. Turning points arrive years early and years late, and the historical average is context for where the environment may sit—never precision about when it will move. Timing informs; observation and data decide.</p>
+<div class='callout'><p><em>Prepare with leading indicators. Confirm with trailing ones. Underwrite to causation. Read slopes, not levels. Treat history as a range, not a schedule.</em></p></div>
+<p>Each of these mistakes is made by intelligent, experienced operators every cycle. None of them is a failure of information. All of them are failures of interpretation—which is exactly what this Part corrects.</p>
+<h2>How Rigor Completes the Framework</h2>
+<p>The Onion Framework and the discipline of this Part are not separate tools. They are two halves of a single analytical system.</p>
+<h3>THE LAYERS TELL YOU WHERE TO LOOK</h3>
+<p>Part One organized signals by scope and lead time so that the right indicators inform the right decisions on the right horizon. Without the layers, rigor has nothing to work on.</p>
+<h3>RIGOR TELLS YOU WHAT YOU ARE SEEING</h3>
+<p>The propagation chain—Layer 3 to Layer 2 to Layer 1 over twelve to twenty-four months—is only visible to an operator who knows which indicators at each layer lead and which trail, and who can separate the causal driver from the coincidental companion. Read without rigor, the chain looks like noise. Read with it, the chain is the earliest warning the market offers.</p>
+<h3>CHARTING MAKES BOTH VISIBLE</h3>
+<p>Layered signals read with rigor still have to be seen. Plotting each layer over time, on the same timeline as the others, is how divergence between layers, deceleration beneath strong levels, and misalignment between national and local cycles become something you can act on rather than something you reconstruct after the fact.</p>
+<div class='callout'><p><em>Part One gave you the architecture. This Part gives you the reading discipline. Part Three will give you the infrastructure that holds both—the Cignal Dashboard and the Cignal Threshold that turns a disciplined reading into a decision.</em></p></div>
+<h2>What This Part Covers</h2>
+<p>Part Two is organized into two lessons. The first establishes the interpretive distinctions; the second establishes the visual discipline that makes them usable.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Leading vs Trailing, and Correlation vs Causation</span><p>The two investor traps and the layered approach that resolves them. The three signal categories—observational clues, quantitative data, and cycle patterns—and how to weight them. Why trailing indicators feel safe but arrive late, and which causation-based drivers should replace the correlations most investors underwrite to. Why historic cycle timing provides context rather than precision.</p></div></div></div>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Charting — How to See the Cycle</span><p>Why charting is foundational rather than optional in a cycle-driven strategy. What plotted signals reveal that isolated data points cannot: inflection points, acceleration and deceleration, divergence between leading and lagging indicators, alignment or disconnection between national and local cycles. The psychological advantage of visual data, and the Cycle Dashboard cadence—record and review monthly, analyze quarterly, and compare year-over-year slopes above all.</p></div></div></div>
+<h2>By the Time You Complete This Part</h2>
+<p>By the time you complete this Part, you will know how to:</p>
+<ul class='blist'>
+<li><strong></strong>Classify any indicator in any layer as leading, coincident, or trailing—and use each for its proper purpose</li>
+<li><strong></strong>Distinguish the correlations that guide attention from the causal drivers that should guide decisions</li>
+<li><strong></strong>Weight observational clues, quantitative data, and historic cycle patterns appropriately, and recognize which trap you are drifting toward</li>
+<li><strong></strong>Read direction and velocity rather than levels, and identify inflection points as they form</li>
+<li><strong></strong>Chart national and local signals on a shared timeline and recognize when the two cycles are aligned or disconnected</li>
+<li><strong></strong>Bring a disciplined, defensible reading to the dashboard you will build in Part Three</li>
+</ul>
+<div class='callout'><p><em>Most investors read reports. Cycle architects plot them, question them, and act before the numbers confirm what behavior already showed. The difference is not intelligence. It is structure.</em></p></div>
+<p>Let’s begin with the distinction that determines whether you are early or late.</p></article>
+
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='2-1-4.html'>&larr; Previous<span>Layer 3 — Macroeconomic Signals</span></a><a href='2-2-1.html' style='text-align:right'>Next &rarr;<span>Leading vs Trailing, and Correlation vs Causation</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; Analytical Rigor &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='P2', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

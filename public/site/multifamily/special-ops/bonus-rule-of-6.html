@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bonus · The Rule of 6 Summary &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Bonus</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Bonus</span>
+  <p class="eyebrow">Bonus</p>
+  <h1>The Rule of 6 Summary</h1>
+  <p class='deck'>From reading the cycle to acting on it — a preview of the framework that governs acquisitions and operations in Commander</p>
+  <div class="leadmeta"><span><b>2,700</b> words</span><span><b>12</b> min read</span><span><b>No</b> knowledge check</span></div>
+  </div>
+</div>
+
+<article><p><em>A Preview of the Framework That Governs Acquisitions and Operations in Commander</em></p>
+<div class='epi'><p><em>“Those who master cycles build portfolios. Those who master partnerships across cycles build durability. Those who master both build legacies.”</em></p></div>
+<p>Everything in Special Ops has been about reading. You built the three-layer architecture, installed the interpretive discipline that keeps each layer from being read late or read wrong, designed the dashboard that gathers the signals, and learned the threshold that tells you when accumulated evidence justifies a strategic adjustment. When the trifecta says act, you know the market has told you enough.</p>
+<p>What it has not yet told you is what, specifically, to do.</p>
+<p>That is the work of Commander, and its backbone is the Rule of 6. This bonus lesson is a summary of that framework—enough to show you how a phase reading becomes a set of decisions, why the same six questions govern both buying and operating, and where the full training will take you. It is deliberately a preview. The phase-by-phase playbooks, the capital structure selection logic, the strategy transition triggers, and the worked cases belong to Commander, where reading the cycle becomes executing it.</p>
+<div class='callout'><p><em>Recon taught you to understand the cycle. Special Ops taught you to read it. Commander teaches you to act on it. The Rule of 6 is how.</em></p></div>
+<h2>Why Six Questions</h2>
+<p>Every multifamily decision—acquire or pass, hold or sell, push rents or defend them, refinance now or wait—resolves into the same six questions. Who is doing this with you? What are you buying or managing? When in the cycle are you doing it? Where is it located? Why does this decision make sense right now? And how is it executed?</p>
+<p>Most operators answer these questions once, early in their careers, and then carry the answers forward as identity. “I’m a Class B investor.” “We work with this lender.” “Our strategy is heavy value-add.” The Rule of 6 rejects that fixity. Its central claim is that the correct answer to each of the six questions changes with the phase of the cycle—and that the most common way capable operators fail is by carrying a Recovery-phase answer into Peak, or an Expansion-phase answer into Contraction.</p>
+<p>The framework is industry-agnostic in structure and multifamily-specific in application. In Commander it is applied twice: to acquisitions, in Full Cycle Acquisitions, where the six questions are asked before a deal exists; and to operations, in 30x Operations, where the same six questions are asked continuously across the hold period—because you will spend roughly thirty times longer operating an asset than buying it.</p>
+<div class='callout'><p><em>The mistake is not choosing the wrong answer. The mistake is assuming the answer is permanent.</em></p></div>
+<h2>The Six Questions, Two Ways</h2>
+<p>Each question below is stated once, then shown as it applies to acquisitions and to operations. Notice that the question does not change. The object it is asked about does.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>WHO</span><p><em>Partners, equity, lenders, property management, asset management</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Is this the right partner, equity source, and lender for where the cycle is right now—not for where it was when the relationship began?</p>
+<p><strong>In operations:  </strong>Is the team managing this asset aligned to the phase we are operating in—and who provides the cycle-aware oversight when property management does not think in cycles?</p>
+<p>The Rule of 6 begins with WHO because every other decision is only as strong as the team assembled to execute it. Equity is never passive: every dollar carries expectations about timing, liquidity, and risk that stay invisible in Expansion and become decisive in Contraction. Debt is a binding agreement between your business plan and the future state of the market. Property management is a dynamic discipline, not a fixed skill. And when property management cannot read the terrain ahead, asset management becomes the cycle control layer. The non-negotiable trait across all four is the same: a cycle-first mindset.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>WHAT</span><p><em>Asset class as a risk-behavior profile, not a physical description</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Which class offers the best risk-adjusted entry in this phase—and when does the cycle allow you to buy up in quality that you could not justify at any other time?</p>
+<p><strong>In operations:  </strong>What does managing this class correctly look like in this phase—when the same asset demands rent growth in Expansion, rent integrity in Peak, and collections discipline in Contraction?</p>
+<p>Class A is capital-sensitive and sentiment-driven. Class B is the cycle chameleon—adaptable across the widest range of conditions. Class C is cash-flow driven and economically exposed, and far less contraction-proof than its affordability suggests. The framework’s most valuable insight here is that Recovery quietly reprices quality: institutional buyers pause, financing tightens, and higher-quality assets trade at discounts that let disciplined operators upgrade—then monetize that quality to a higher-caliber buyer in Expansion. Recovery is when you upgrade quality. Expansion is when you monetize it. Peak is when you protect it. Contraction is when quality protects you.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>WHEN</span><p><em>Timing your strategy to the phase, not your identity</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Does the strategy you prefer fit this phase—or is your ideal Expansion-phase playbook about to be forced onto a market that will not support it?</p>
+<p><strong>In operations:  </strong>Is the operating strategy calibrated to current conditions—pushing when the phase rewards execution, protecting when it rewards restraint, preserving when it rewards survival?</p>
+<p>Recovery is for positioning. Expansion is for execution. Peak is for protection. Contraction is for preservation. Every strategy embeds assumptions about rent growth, capital availability, exit liquidity, and margin for error, and those assumptions hold in one phase and fail in another. Most operators do not fail because they chose a bad strategy. They fail because they did not change strategies when the cycle changed—and transitions are where they struggle most, because a transition requires releasing what recently worked before the losses are visible.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>WHERE</span><p><em>Location as a direction, not a fixed point</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Is this submarket in the path of progress—where demand, capital, and infrastructure are moving toward it—or on the wrong side of the tracks, where no renovation budget can overcome a location moving in the wrong direction?</p>
+<p><strong>In operations:  </strong>Does the asset’s submarket give us defensive insulation in Peak and durable fundamentals in Contraction—or are we managing against the directional force of a corridor that demand has moved past?</p>
+<p>Two assets five miles apart can experience opposite outcomes in the same economy. The difference is rarely the building; it is whether capital and demand are moving toward or away from the location. In Recovery, location selection matters most and mistakes are most expensive. In Expansion, marginal locations hide in plain sight because rising markets mask structural weakness. In Peak, location becomes a defensive filter—survivability, not upside. In Contraction, quality location buys time, and time is the operator’s most valuable resource.</p>
+<div class='numlist'><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>WHY</span><p><em>The foundation of intentionality</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Why this deal, this market, this location, this partner, this equity, this lender—for this business plan, at this point in the cycle?</p>
+<p><strong>In operations:  </strong>Why this business plan for this asset right now—and what specific conditions would signal that it should be adapted rather than defended?</p>
+<p>Deals fail when alignment fails, and alignment fails when purpose is unclear. In favorable conditions, momentum substitutes for clarity and the absence of a defined why is invisible. When conditions tighten, it surfaces—not as a philosophical problem but as a practical one, as partners interpret the same facts through different lenses and decision-making slows precisely when unified judgment matters most. The strongest why is cycle-aware: it provides direction without demanding certainty and lets you adapt tactics without abandoning intent.</p>
+<div class='numlist'><div class='numrow'><div class='n'>6</div><div class='c'><span class='term'>HOW</span><p><em>Execution as a cycle-first process, not a set of tactics</em></p></div></div></div>
+<p><strong>In acquisitions:  </strong>Knowing how to buy in each phase—acting without validation in Recovery, exercising discipline in Expansion, knowing when not to force a deal in Peak, and choosing precision over volume in Contraction.</p>
+<p><strong>In operations:  </strong>Knowing how to operate in each phase—adjusting leasing, capital programs, debt decisions, and investor communication on leading indicators rather than waiting for trailing data to confirm what should have changed months earlier.</p>
+<p>The industry is flooded with how-to education that teaches acquisition and operations as if they existed in a vacuum. Knowing how to buy or manage a property without understanding the cycle is like knowing how to drive without understanding weather, traffic, or road conditions. The Rule of 6 closes that gap: HOW is the question that turns the first five answers into action, and it is the question that Special Ops has already prepared you for—because the leading indicators that drive a cycle-first process are exactly the signals your dashboard now tracks.</p>
+<h2>The Rule of 6 Across the Four Phases</h2>
+<p>The six questions are the columns. The four phases are the rows. Commander fills in every cell of that grid for both acquisitions and operations. This summary gives you the posture that governs each row.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Phase</strong></th><th><strong>Acquisitions Posture</strong></th><th><strong>Operations Posture</strong></th></tr></thead><tbody><tr><td><strong>Recovery</strong></td><td>Position, not perfection. Buy quality at depressed pricing with conviction-driven equity, relationship-driven debt, and conservative assumptions—while others wait for validation.</td><td>Rebuild the foundation. Resident quality over headline occupancy, tightened screening, deferred maintenance addressed strategically, controls built for the Expansion ahead.</td></tr><tr><td><strong>Expansion</strong></td><td>Execute the growth strategy with discipline. Scale, refinance, monetize quality to a higher-caliber buyer—and recalibrate assumptions as the phase matures rather than extrapolating them.</td><td>Govern momentum. Capture rent growth deliberately, execute capital programs while costs are manageable, keep expense growth below revenue growth, and evaluate exit timing against cycle signals.</td></tr><tr><td><strong>Peak (Hypersupply)</strong></td><td>Know when not to force a deal. Wider margins of safety, lower leverage, fixed-rate debt with longer maturities, and the willingness to walk away from deals that looked acceptable a year earlier.</td><td>Protect, don’t optimize. Rent integrity over occupancy optics, targeted concessions, aggressive expense control, refinance into stable structures while the window is open, pause programs that need premium rents to pencil.</td></tr><tr><td><strong>Contraction</strong></td><td>Precision over volume. Fewer deals, stronger locations, survivability confirmed before upside is pursued—and opportunistic entry only with adequate liquidity and a long view.</td><td>Preserve and stabilize. Cash flow and collections as the overriding priority, proactive lender communication, consistency under pressure, and positioning for the Recovery that follows.</td></tr></tbody></table></div>
+<div class='callout'><p><em>Contraction does not create problems. It reveals the weakest links in the chain—and every one of them was a Rule of 6 question answered for the wrong phase.</em></p></div>
+<h2>The Same Framework, Applied Twice</h2>
+<h3>FULL CYCLE ACQUISITIONS — THE SIX QUESTIONS BEFORE THE DEAL EXISTS</h3>
+<p>On the acquisition side, the Rule of 6 is a pre-deal discipline. Strategy is defined before the property is found, so the operator never retrofits a story to justify an asset they already like. Market and location are chosen as strategic decisions, not conveniences. Partners, equity, and debt are selected for how they will behave when the cycle turns, not for how attractive their terms are today. And the acquisition itself is executed with a phase-appropriate posture—which in Peak often means the discipline not to execute at all.</p>
+<h3>30X OPERATIONS — THE SIX QUESTIONS ACROSS THE HOLD</h3>
+<p>On the operations side, the same six questions are asked continuously, because a hold period of five to ten years will cross at least one phase transition and often two. The team that was right at acquisition may need to change. The operating strategy that produced strong NOI in Expansion may destroy it in Peak. The business plan’s why must be re-examined against what the signals now show. Most property management companies are reaction specialists—they manage tasks, not timing—so the burden of cycle awareness moves upstream to the asset manager, who becomes the connective tissue between macro signals and on-site decisions.</p>
+<div class='callout'><p><em>If property management is the engine, asset management is the navigation system. When management cannot read the terrain ahead, navigation is the difference between staying on course and driving straight into trouble.</em></p></div>
+<p>This is why the Rule of 6 sits above both courses in Commander rather than inside either one. It is framework IP—the structure is the same whether you are buying or operating, and the discipline of re-asking the six questions at every phase transition is what makes an operator cycle-first rather than cycle-blind.</p>
+<h2>Where Your Dashboard Meets the Rule of 6</h2>
+<p>The connection between Special Ops and Commander is direct. Your Cignal Dashboard produces a phase reading across three layers. The Cignal Threshold tells you when that reading has enough confirmation to justify adjustment—and calibrates the requirement to whether the decision is operational, tactical, or strategic. The Rule of 6 is what you adjust.</p>
+<ul class='blist'>
+<li><strong></strong>A Layer 3 anchor plus Layer 2 corroboration that clears the strategic threshold is the trigger to re-ask WHO and WHY at the portfolio level—capital structure, capital partners, market entry and exit.</li>
+<li><strong></strong>A tactical-threshold reading across Layers 2 and 1 is the trigger to re-ask WHAT, WHEN, and WHERE for the acquisition pipeline and the capital deployment plan.</li>
+<li><strong></strong>A concentrated Layer 1 reading that clears the operational threshold is the trigger to re-ask HOW for this quarter’s leasing, concession, retention, and expense decisions.</li>
+</ul>
+<p>Without the dashboard and the threshold, the Rule of 6 is answered on instinct and defended on ego. Without the Rule of 6, the dashboard produces a reading that informs nothing. Together they are the full chain: read the signals, know when they are enough, and know what to do.</p>
+<h2>Where This Summary Stops—and Commander Begins</h2>
+<p>This bonus has given you the structure of the Rule of 6, the logic behind it, the posture it prescribes in each phase, and the way it connects to the reading discipline you have already built. That is real, usable value: you can begin re-asking the six questions of your own portfolio today, and you will see misalignments you have been carrying.</p>
+<p>What it has not given you—by design—is the execution layer. Commander delivers, for each of the six questions and for both acquisitions and operations:</p>
+<ul class='blist'>
+<li><strong></strong>Phase-by-phase playbooks: the specific partner profiles, equity sources, debt structures, asset class targets, location filters, and operating priorities that fit each phase</li>
+<li><strong></strong>The transition triggers—the dashboard readings that tell you a Rule of 6 answer has expired and must change</li>
+<li><strong></strong>Capital rotation through 2XX2, the framework for doubling equity twice within a single cycle by timing acquisitions and dispositions to phase transitions</li>
+<li><strong></strong>The 30x operating cadence that keeps the six questions live across the hold rather than answered once at closing</li>
+<li><strong></strong>Worked cases showing how the same asset is bought, operated, and exited differently depending on the phase in which each decision is made</li>
+</ul>
+<div class='callout'><p><em>Reading the cycle is what Special Ops has made you capable of. Acting on it with a framework that governs every decision is what Commander makes you capable of. The Rule of 6 is the bridge between them.</em></p></div>
+<p>Understanding how the four phases apply to the who, what, when, where, why, and how of your acquisition and operating strategy is what keeps you from becoming a foreclosure statistic—and positions you to succeed across cycles. You now know the questions. Commander is where you learn the answers.</p>
+<h2>Apply It to Your Portfolio</h2>
+<p>There is no Knowledge Check for this bonus—by design. The Rule of 6 is not something to verify here; it is something to begin noticing. Before you move to the Workbook, take fifteen minutes with the three questions below. There are no answer keys and no scores. What you are looking for is the gap between the phase you are in and the phase your current answers were chosen for.</p>
+<p class='prompt'><strong>1.  Which of your six answers have you held constant across more than one phase? Your asset class, your preferred strategy, your target submarkets, your lender—name the ones that have not changed since you first chose them, and the phase the cycle was in when you chose them.</strong></p>
+<div class='fieldwrap'><textarea id='f1' data-f='f1' placeholder='Your answer…'></textarea><span class='wc' id='wc-f1'>0 words</span></div>
+<p class='prompt'><strong>2.  Which partner, equity source, lender, or management company in your current portfolio was selected for a phase that has since changed? What would a cycle-first version of that relationship look like today?</strong></p>
+<div class='fieldwrap'><textarea id='f2' data-f='f2' placeholder='Your answer…'></textarea><span class='wc' id='wc-f2'>0 words</span></div>
+<p class='prompt'><strong>3.  Which reading on your Cignal Dashboard—at which threshold—would cause you to re-ask WHO and WHY at the portfolio level? Write the trigger down. If you cannot, the Rule of 6 is still being answered on instinct.</strong></p>
+<div class='fieldwrap'><textarea id='f3' data-f='f3' placeholder='Your answer…'></textarea><span class='wc' id='wc-f3'>0 words</span></div>
+<div class='callout'><p><em>If these three questions were uncomfortable to answer, the Rule of 6 is already doing its work. Commander is where the discomfort turns into a playbook.</em></p></div></article>
+
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='2-3-2.html'>&larr; Previous<span>The Cignal Threshold</span></a><a href='workbook.html' style='text-align:right'>Next &rarr;<span>The Special Ops Workbook</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; The Rule of 6 Summary &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='BONUS', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// reflection fields (autosaved)
+(function(){var K='econiq-special-ops-bonus-rule-of-6';var d={};try{d=JSON.parse(localStorage.getItem(K)||'{}');}catch(e){}
+[].slice.call(document.querySelectorAll('article textarea[data-f]')).forEach(function(a){var id=a.dataset.f;if(d[id])a.value=d[id];
+var wc=document.getElementById('wc-'+id);function u(){var s=a.value.trim();wc.textContent=(s?s.split(/\s+/).length:0)+' words';a.style.height='auto';a.style.height=Math.max(130,a.scrollHeight)+'px';}u();
+a.addEventListener('input',function(){d[id]=a.value;try{localStorage.setItem(K,JSON.stringify(d));}catch(e){}u();});});})();
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

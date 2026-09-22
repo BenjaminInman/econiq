@@ -5,6 +5,13 @@ const PAGES = [
 ];
 
 const nextConfig = {
+  async redirects() {
+    return [
+      // curriculum moved under the /multifamily/ vertical namespace (2026-09)
+      { source: '/recon/:path*', destination: '/multifamily/recon/:path*', permanent: true },
+      { source: '/site/recon/:path*', destination: '/multifamily/recon/:path*', permanent: true },
+    ];
+  },
   async rewrites() {
     return {
       beforeFiles: [
@@ -12,7 +19,7 @@ const nextConfig = {
         { source: `/:page(${PAGES.join('|')}).html`, destination: '/site/:page.html' },
         { source: `/:page(${PAGES.join('|')})`, destination: '/site/:page.html' },
         { source: '/assets/:path*', destination: '/site/assets/:path*' },
-        { source: '/recon/:page*', destination: '/site/recon/:page*' },
+        { source: '/multifamily/:path*', destination: '/site/multifamily/:path*' },
       ],
     };
   },

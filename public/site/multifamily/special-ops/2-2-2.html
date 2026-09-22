@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2.2.2 · Charting &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Special Ops &middot; Lesson 2.2.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Two</span>
+  <p class="eyebrow">Lesson 2.2.2</p>
+  <h1>Charting</h1>
+  <p class='deck'>Seeing the cycle by turning data into cycle intelligence</p>
+  <div class="leadmeta"><span><b>2,203</b> words</span><span><b>10</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><p><em>Seeing the Cycle by Turning Data into Cycle Intelligence</em></p>
+<p>Multifamily real estate does not reward opinions; <strong>it rewards pattern recognition,</strong> and every phase of the multifamily market cycle leaves fingerprints—in employment reports, rent growth trends, construction pipelines, lending spreads, cap rate movements, stock market behavior, and capital flows. Yet most investors consume this information passively. They read headlines that are three to six months behind the signal, listen to commentary, and react emotionally. Very few chart the signals, and that is where the separation occurs.</p>
+<p>Charting transforms scattered data into visible structure and allows investors to “see” the economy. It converts noise into narrative. It allows you to see phase transitions forming before they become obvious. For investors committed to mastering the four-phase framework, charting signals is not optional. It is foundational.</p>
+<p>This lesson is short by design. It is the hinge between the two halves of Part Two. Lesson 2.2.1 gave you the interpretive distinctions—leading versus trailing, correlation versus causation. This lesson gives you the visual discipline that makes those distinctions usable. Part Three will turn that discipline into the Cignal Dashboard you maintain. Here, the job is simply to learn what a chart can tell you that a number cannot.</p>
+<h2>Why Charting Matters in a Cycle-Driven Strategy</h2>
+<p>The multifamily market cycle is not random. It follows historic patterns and moves in sequences driven by capital behavior, supply response, and economic momentum. However, these shifts rarely announce themselves clearly. Instead, transitions appear first as subtle divergences in data trends—and a divergence in a data table is nearly invisible. On a chart, it is the first thing you see.</p>
+<p>Charting allows you to:</p>
+<ul class='blist'>
+<li>Detect inflection points before they show up in headline levels</li>
+<li>Identify acceleration or deceleration in a trend that is still moving the same direction</li>
+<li>Recognize divergences between leading and trailing indicators</li>
+<li>Confirm whether the three layers of the Onion Framework are aligned or disconnected</li>
+<li>Remove emotion from decision-making by anchoring judgment to a plotted line rather than a felt mood</li>
+</ul>
+<div class='callout'><p><em>When signals are plotted over time — rather than viewed as isolated data points — patterns emerge that cannot be seen otherwise.</em></p></div>
+<h2>What a Chart Actually Shows You: Level, Direction, Velocity</h2>
+<p>Every indicator can be read three ways, and a headline gives you only the first.</p>
+<p><strong>Level</strong> is the number itself: rent growth is 4 percent, the 10-year Treasury is 4.3 percent, absorption was 900 units last quarter. Level is what the report states, what the podcast repeats, and what most investors react to.</p>
+<p><strong>Direction</strong> is the slope of the line: is the indicator rising or falling? Two submarkets can both post 4 percent rent growth, but one arrived there rising from 1 percent and the other falling from 8 percent. Same level, opposite meaning. This is the “read momentum, not levels” discipline from Part One made visible.</p>
+<p><strong>Velocity</strong> is the change in the slope: is the trend accelerating, holding, or decelerating? Rent growth that is still positive but decelerating for three consecutive quarters is telling you something the level cannot—that the Expansion phase is maturing. Velocity is where cycle transitions first become visible, and it is almost impossible to see without plotting the data.</p>
+<p>The practical tool for all three is the <strong>year-over-year slope.</strong> Plot the year-over-year change of an indicator, not just its raw value, and you strip out seasonality while making direction and velocity obvious. When the year-over-year line crosses from rising to flat to falling, you are watching a cycle turn.</p>
+<h2>Charting the Three Layers — Three Clocks, One Cycle</h2>
+<p>Part One organized your signals into three layers by scope and lead time. Charting respects that structure. You are not building one chart of “the market.” You are building three chart sets that run on three different clocks, and then reading them against each other.</p>
+<p>Layer 3 charts move first and move slowly—they set the structural conditions twelve to twenty-four months out. Layer 2 charts translate those conditions into multifamily-specific implications six to twelve months out. Layer 1 charts confirm or contradict what the deeper layers predicted, three to six months out, at the level where your decisions are actually executed. When the three chart sets tell the same story, you have alignment. When they do not, you have either a transition forming or a submarket diverging from the national cycle—and both are worth knowing about early.</p>
+<div class='cards'><div class='card'><p class='ch'>LAYER 1  •  SUBMARKET</p><p><em>3–6 month lead time</em></p><p><em>Operational decisions: rent strategy, concessions, renewals, lease-up pacing</em></p><p><em>Chart weekly to monthly</em></p></div><div class='card'><p class='ch'>LAYER 1 SIGNALS TO CHART</p><p>Days on Market</p><p>Absorption Rates and Absorption Momentum</p><p>Multifamily Deliveries (submarket)</p><p>Construction Pipeline (late-stage, submarket)</p><p>Local Concession Activity</p><p>Local Job Growth</p><p>Submarket Vacancy Direction</p></div></div>
+<div class='cards'><div class='card'><p class='ch'>LAYER 2  •  INDUSTRY</p><p><em>6–12 month lead time</em></p><p><em>Tactical decisions: acquisition pacing, capital deployment, disposition timing</em></p><p><em>Chart monthly to quarterly</em></p></div><div class='card'><p class='ch'>LAYER 2 SIGNALS TO CHART</p><p>Building Permits (national)</p><p>Construction Pipeline (national, early to mid-stage)</p><p>Capital Flows (Flow of Funds)</p><p>National Multifamily Transaction Volume</p><p>Employment Dynamics (multifamily-leading)</p><p>Real Consumer Spending (PCE) composition</p><p>Consumer Confidence</p><p>Population and Migration Trends</p></div></div>
+<div class='cards'><div class='card'><p class='ch'>LAYER 3  •  MACROECONOMIC</p><p><em>12–24+ month lead time</em></p><p><em>Strategic decisions: market entry and exit, capital structure, hold strategy</em></p><p><em>Chart monthly; review quarterly</em></p></div><div class='card'><p class='ch'>LAYER 3 SIGNALS TO CHART</p><p>Interest Rates (Federal Funds Rate, 10-Year Treasury)</p><p>Yield Curve (10-year minus 2-year spread)</p><p>Inflation (CPI and PPI)</p><p>GDP and Economic Growth</p><p>Stock Market (S&amp;P 500)</p><p>Foreclosures</p><p>Long-Term Demographic and Structural Forces</p></div></div>
+<p>These are the same indicators you met in Lessons 2.1.2 through 2.1.4. Nothing new is being added to your watch list. What is new is the instruction to plot each of them over time, on a consistent scale, with at least two full years of history behind the current reading—because a line with no history has no slope, and a line with no slope tells you nothing.</p>
+<h2>Overlaying Layers — Where Divergence Becomes Visible</h2>
+<p>The single most valuable chart you will build is not a chart of one indicator. It is an overlay of two indicators from adjacent layers, placed on the same timeline, so you can watch one lead the other.</p>
+<p>Overlay national building permits (Layer 2) against submarket deliveries (Layer 1) and you will see the permit line turn twelve to twenty-four months before the delivery line follows—because a permit today is a delivery later. Overlay the yield curve (Layer 3) against national transaction volume (Layer 2) and you will see capital retreat months after the curve inverts and return months after it re-steepens. These are not coincidences. They are propagation chains, and the overlay makes the chain visible.</p>
+<p>When the leading line has turned and the trailing line has not yet followed, you are looking at a <strong>divergence.</strong> That gap is the transition window—the period when a cycle-aware investor can act before the market confirms. When both lines are moving together, you are looking at <strong>alignment,</strong> which is confirmation that the phase you believe you are in is the phase you are actually in.</p>
+<p>This is also where Lesson 2.2.1 does its work. A divergence you can explain—permits lead deliveries because construction takes time—is causation, and you can act on it. A divergence you cannot explain is either correlation or noise, and you should not. Charting shows you the gap; analytical rigor tells you whether the gap means anything. If you cannot say why one line should lead the other, you should not be trading on the fact that it did.</p>
+<h2>The Psychological Advantage of Visual Data</h2>
+<p>Charts remove <strong>narrative bias.</strong> When markets feel euphoric, charts reveal whether rent growth is decelerating, and when markets feel catastrophic, charts reveal whether stabilization has begun. Visual trend analysis protects investors from emotional overreaction, recency bias, herd mentality, and anchoring to peak values.</p>
+<p>There is a second, quieter advantage. A chart you have maintained for two years is a record of your own reading of the cycle. You can look back and see where the lines turned and where you noticed—and where you did not. That record is how interpretive discipline improves. A memory of what you thought the market was doing eighteen months ago is unreliable. A chart is not.</p>
+<div class='callout'><p><em>In a cyclical industry, charting strengthens discipline.</em></p></div>
+<figure><img src='../../assets/so-fig-1.png' alt='Chart: inflation vs interest rates, 2008–2025'></figure>
+<p>The chart above plots two Layer 3 signals—inflation and the federal funds rate—from 2008 through 2025. Read it for direction and velocity rather than level. Notice the 2021 gap, where the inflation line rose sharply while the policy rate held near zero, and the way the rate line then climbed to close the gap through 2022 and 2023. That gap was a divergence between a moving signal and a not-yet-moving response, and every multifamily investor who charted it had roughly a year of warning about the cost of capital before it arrived in their term sheets.</p>
+<p>The style of graph used by market analysts varies—bar charts, column charts, area charts, line charts. Although it is ultimately the accuracy of the information that matters most, my personal favorite is the simple line graph, because slope and velocity are easiest to see on it. My recommendation is that you find a chart type that is appealing to you and use it consistently, so that your eye learns what a turn looks like in your own format.</p>
+<h2>What Phase Transitions Look Like on a Chart</h2>
+<p>The four phases each leave a visible signature when the layers are plotted together. These are patterns to recognize, not formulas to apply—every cycle draws them differently.</p>
+<h3>CONTRACTION INTO RECOVERY</h3>
+<p>Layer 3 turns first: the yield curve re-steepens and the policy rate stops rising or begins to fall. Layer 2 follows: transaction volume stops declining and the permit line, already low, flattens. Layer 1 is still ugly—concessions high, days on market long—but the year-over-year lines have stopped getting worse. Recovery on a chart is not lines going up. It is lines that have stopped going down while sentiment still says they are falling.</p>
+<h3>RECOVERY INTO EXPANSION</h3>
+<p>Layer 1 confirms what the deeper layers predicted: absorption momentum turns positive, days on market shortens, concessions burn off. Layer 2 shows capital flows and transaction volume accelerating. The year-over-year rent growth line crosses from flat to rising and its velocity increases. This is the phase where all three layers align and the overlays run parallel.</p>
+<h3>EXPANSION INTO PEAK (HYPERSUPPLY)</h3>
+<p>The most important transition to see early, and the hardest, because levels still look excellent. Watch velocity, not direction. Rent growth is still positive but decelerating quarter after quarter. Layer 2 permits and early-stage pipeline are at or past their highs while Layer 1 deliveries are still climbing—the supply that was permitted two years ago is now arriving. Concession activity begins to tick up at the submarket level while national headlines remain strong. On the overlay, the leading line has rolled over and the trailing line has not.</p>
+<h3>PEAK INTO CONTRACTION</h3>
+<p>Layer 3 leads again, in the other direction: the curve inverts or the policy rate rises faster than income growth can absorb. Layer 2 transaction volume falls and capital flows retreat. Layer 1 vacancy direction turns up and absorption momentum goes negative. The year-over-year rent line crosses below zero. Contraction on a chart is the only phase where all three layers point down together—and by the time they do, the investor who charted the Peak has already adjusted.</p>
+<h2>A Charting Discipline That Holds Up</h2>
+<p>For serious multifamily investors, charting should not be occasional. It should be systematic. A few rules keep it honest:</p>
+<ul class='blist'>
+<li>Record monthly, analyze quarterly, and always compare year-over-year slopes—direction and velocity, not level</li>
+<li>Keep the scale and the time window consistent so that the same movement looks the same every time you see it</li>
+<li>Plot at least twenty-four months of history behind the current reading; a line with no history has no slope</li>
+<li>Build one chart per indicator and one overlay per adjacent layer pair, and annotate the propagation you expect to see</li>
+<li>Note your reading on the chart itself each quarter, so the chart becomes a record of your judgment as well as the data</li>
+</ul>
+<p>With this approach you are identifying both the direction of a trend and the velocity of that direction, which is what allows forecasting with any precision at all. Without charts, acquisition, operation, and disposition decisions become reactive. <strong>With charts, they become proactive.</strong></p>
+<p>What this lesson deliberately does not do is tell you which of these charts belong on your dashboard, how many signals you need before you act, or how to organize the whole thing into a system you will maintain. That is the work of Part Three. Building Your Cignal Dashboard takes the charts you now know how to read and turns them into the instrument you will actually use, and the Cignal Threshold tells you when what the instrument shows justifies a decision.</p>
+<h3>FINAL PERSPECTIVE: FROM DATA CONSUMER TO CYCLE ARCHITECT</h3>
+<p>Most investors read reports, while those with the four-phase framework plot them. <strong>The difference is not intelligence. It is structure.</strong></p>
+<div class='callout'><p><em>Charting signals transforms information into insight; Insight into timing; Timing into strategy; and strategy into outcome.</em></p></div>
+<p>The four-phase framework provides the map, the three layers tell you which instruments to watch, and charting the signals tells you where you are on that map right now. Because in multifamily real estate, knowing where you are in the cycle is the foundation for knowing what to do next.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>The lesson says most investors consume market information passively and that “very few chart the signals, and that is where the separation occurs.” According to the lesson, what does charting fundamentally do?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It replaces the need to read employment reports, rent growth data, and construction pipelines.</button><button class='opt' data-k='B'><span class='k'>B</span>It transforms scattered data into visible structure—converting noise into narrative—so that phase transitions can be seen forming before they become obvious.</button><button class='opt' data-k='C'><span class='k'>C</span>It predicts the exact month a phase transition will occur.</button><button class='opt' data-k='D'><span class='k'>D</span>It substitutes for the four-phase framework as a standalone timing system.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson’s core claim is that multifamily does not reward opinions—it rewards pattern recognition—and every phase leaves fingerprints in employment reports, rent growth, construction pipelines, lending spreads, cap rates, stock market behavior, and capital flows. Most investors consume that information passively, reading headlines that run 3–6 months behind the signal trends and reacting emotionally. Charting transforms scattered data into visible structure and converts noise into narrative, which is what allows an investor to “see” the economy and to see transitions forming before they are obvious. It does not replace the indicators (option A), it does not deliver exact dates (option C), and it does not replace the framework—the lesson closes by saying the framework provides the map and charting tells you where you are on it (option D).</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>Which of the following is NOT one of the five things the lesson says charting allows you to do?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Detect inflection points and identify acceleration or deceleration.</button><button class='opt' data-k='B'><span class='k'>B</span>Recognize divergences between leading and lagging indicators.</button><button class='opt' data-k='C'><span class='k'>C</span>Confirm whether national and local cycles are aligned or disconnected.</button><button class='opt' data-k='D'><span class='k'>D</span>Guarantee that trailing indicators will confirm a trend before capital is committed.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The five capabilities the lesson lists are: detect inflection points; identify acceleration or deceleration; recognize divergences between leading and lagging indicators; confirm whether national and local cycles are aligned or disconnected; and remove emotion from decision-making. Option D contradicts both this lesson and Lesson 2.2.1—charting exists precisely so that investors can see turning points forming in leading signals before trailing indicators confirm them. Waiting for trailing confirmation before committing capital is the data-only trap, not a benefit of charting. The lesson’s summary line is that when signals are plotted over time rather than viewed as isolated data points, patterns emerge that cannot be seen otherwise.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>The lesson describes “the psychological advantage of visual data.” Which of the following best captures that argument?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Charts are more persuasive to investors and lenders than tables, so they help close deals.</button><button class='opt' data-k='B'><span class='k'>B</span>Charts remove narrative bias—when markets feel euphoric they reveal whether rent growth is decelerating, and when markets feel catastrophic they reveal whether stabilization has begun—protecting investors from emotional overreaction, recency bias, herd mentality, and anchoring to peak values.</button><button class='opt' data-k='C'><span class='k'>C</span>Charts make market analysis faster because they compress many data points into one image.</button><button class='opt' data-k='D'><span class='k'>D</span>Charts eliminate the need to distinguish correlation from causation.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The psychological advantage is that charts remove narrative bias. The lesson gives the two mirror-image cases: when markets feel euphoric, charts reveal whether rent growth is actually decelerating beneath the mood; when markets feel catastrophic, charts reveal whether stabilization has already begun. Visual trend analysis protects against four named failure modes—emotional overreaction, recency bias, herd mentality, and anchoring to peak values—and the lesson concludes that in a cyclical industry, charting strengthens discipline. Options A and C describe incidental benefits, not the argument the lesson makes, and option D is false: charting shows you what is moving together, but the correlation-versus-causation test from Lesson 2.2.1 still has to be applied to what the chart shows.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>The lesson says one of the most critical applications of charting is comparing national economic trends with local supply-demand trends on the same timeline. What specific error does the lesson say investors who ignore local charting tend to make?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>They sell performing assets too early because national headlines feel weak.</button><button class='opt' data-k='B'><span class='k'>B</span>They over-diversify across too many metros.</button><button class='opt' data-k='C'><span class='k'>C</span>They buy into oversupplied submarkets while national headlines still feel strong.</button><button class='opt' data-k='D'><span class='k'>D</span>They wait for national data to confirm a local recovery that has already run its course.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is specific: investors who ignore local charting often buy into oversupplied submarkets while national headlines still feel strong. This is the national-versus-local divergence problem—two cycles are at work, and the national economic trend and the local supply-demand trend can be aligned or disconnected. Charting both layers simultaneously is how you determine which. The disciplined investor charts both; the undisciplined investor lets the strength of the national narrative stand in for a local supply-demand reading that was never made. Options A, B, and D describe plausible errors, but they are not the one the lesson names.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson prescribes a specific cadence for the Cycle Dashboard and singles out one comparison as “most importantly.” In 2–3 sentences, state the cadence for recording, reviewing, and analyzing the indicators, identify the comparison the lesson emphasizes above the rest, and explain what that comparison gives you that a single reading of the current level cannot.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>The lesson says to record and review the dashboard indicators monthly, analyze them quarterly, and—most importantly—compare the year-over-year data slopes. The slope comparison is emphasized because it gives you both the direction of each indicator and the velocity of that direction—whether a trend is accelerating or decelerating—rather than a single snapshot of where the level sits today. A current level can look identical in a strengthening and a weakening market; the year-over-year slope tells you which one you are in, and that is what produces more precise forecasting and turns acquisition, operation, and disposition decisions from reactive to proactive.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An investor tells you they “follow the market closely”: they read the national economic headlines each morning, watch the Fed meetings, and keep a spreadsheet of their own portfolio’s occupancy and rent roll. They are considering a value-add acquisition in a suburban submarket where their existing property is 97% occupied and rents feel strong. Their memo cites national headlines describing a robust economy and a booming apartment sector. They have never plotted a national signal or a local signal over time. Using the lesson’s framework, explain (a) why this investor is a “data consumer” rather than a “cycle architect” and what specific separation the lesson says charting produces, (b) which national and which local signals from the Cycle Dashboard you would chart before approving this deal, (c) what a national-versus-local comparison could reveal that the headlines and the investor’s own occupancy cannot, and (d) what cadence and comparison you would set up so that the decision becomes proactive rather than reactive.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The investor is a data consumer: they read reports and headlines and react to them, but they have never plotted a signal over time. The lesson says the separation between investors occurs at exactly this point—most read reports, those with the framework plot them—and that the difference is structure, not intelligence. Headlines run 3–6 months behind signal trends, and a spreadsheet of one’s own occupancy is a set of isolated data points, not a chart of a market. Without plotted signals, this investor cannot detect inflection points, see acceleration or deceleration, recognize leading-versus-lagging divergence, or tell whether national and local cycles are aligned. (b) From the national column I would chart, at minimum, interest rates and the yield curve, inflation (CPI and PPI), unemployment and wage growth, real consumer spending, flow of funds, and consumer confidence. From the local column I would chart job growth for this metro, population trends, the construction pipeline and building permits, multifamily deliveries, absorption rates, and days on market for the submarket—the supply-demand picture the investor has never looked at. (c) Plotting national and local on the same timeline could reveal the precise error the lesson warns about: national headlines feeling strong while the submarket is quietly oversupplied. The investor’s 97% occupancy describes their one asset today; the local charts describe whether 1,500 units are in the pipeline, whether absorption is decelerating, whether days on market is lengthening, and whether job growth in the metro is slowing—none of which the headlines or the rent roll can show, and any of which could mean the submarket is a phase ahead of the nation. (d) I would set the dashboard to be recorded and reviewed monthly and analyzed quarterly, and I would compare year-over-year slopes for each indicator so the decision rests on direction and velocity rather than levels. If the local supply signals are accelerating while absorption and job growth are decelerating, the deal is priced for a national narrative rather than a local reality, and the chart—not the mood—should decide.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>The lesson discusses chart types and offers a recommendation. Which of the following correctly reflects it?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Only line graphs are analytically valid; other chart types distort cycle data.</button><button class='opt' data-k='B'><span class='k'>B</span>Market analysts use a mix of chart types, and while the author favors the simple line graph, the accuracy of the information matters most—so the recommendation is to find a visual chart type you find appealing and use it regularly to chart the important indicators.</button><button class='opt' data-k='C'><span class='k'>C</span>Chart type should change with each phase of the cycle to match the phase’s volatility.</button><button class='opt' data-k='D'><span class='k'>D</span>Charting should be reserved for quarterly presentations to investors rather than ongoing analysis.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson notes that the chart styles used by market analysts are mixed—bar, column, pie, area, and line charts—and that the author’s personal favorite is the simple line graph, illustrated by the interest-rate-versus-inflation example. But it is explicit that the accuracy of the information is ultimately what matters most, and the recommendation is to find a visual chart type you find appealing and use it regularly to chart the important indicators. The emphasis is on consistency of practice, not on a mandated format. Option A overstates the line-graph preference into a rule, option C invents a rule the lesson does not give, and option D contradicts the lesson’s insistence that charting should be systematic rather than occasional.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong grasp of charting discipline. Proceed to Lesson 2.2.3 with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “Why Charting Matters in a Cycle-Driven Strategy” and “Building a Cycle Dashboard” in Lesson 2.2.2 before proceeding. Focus especially on the national-versus-local comparison and on the monthly-quarterly-year-over-year cadence.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 2.2.2 in full. Charting is how the indicators from the Onion Framework and the signal categories from Lesson 2.2.1 become something you can act on. Without it, every indicator you have learned remains a headline you react to rather than a trend you anticipate.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Charting signals transforms information into insight, insight into timing, timing into strategy, and strategy into outcome. The framework provides the map; charting tells you where you are on it. If the answer key revealed gaps, closing them now is the highest-leverage investment you can make before Lesson 2.2.3.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 8 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='2-2-1.html'>&larr; Previous<span>Leading vs Trailing, and Correlation vs Causation</span></a><a href='part-three.html' style='text-align:right'>Next &rarr;<span>The Cignal Dashboard</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Special Ops &middot; 2.2.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='2.2.2', KEY='econiq-special-ops-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/8*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>
