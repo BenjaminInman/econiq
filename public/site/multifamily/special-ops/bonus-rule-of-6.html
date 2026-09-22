@@ -366,7 +366,7 @@ addEventListener('scroll',function(){
 })();
 
 // reflection fields (autosaved)
-(function(){var K='econiq-special-ops-bonus-rule-of-6';var d={};try{d=JSON.parse(localStorage.getItem(K)||'{}');}catch(e){}
+(function(){var K='econiq-special-ops-progress-bonus-rule-of-6';var d={};try{d=JSON.parse(localStorage.getItem(K)||'{}');}catch(e){}
 [].slice.call(document.querySelectorAll('article textarea[data-f]')).forEach(function(a){var id=a.dataset.f;if(d[id])a.value=d[id];
 var wc=document.getElementById('wc-'+id);function u(){var s=a.value.trim();wc.textContent=(s?s.split(/\s+/).length:0)+' words';a.style.height='auto';a.style.height=Math.max(130,a.scrollHeight)+'px';}u();
 a.addEventListener('input',function(){d[id]=a.value;try{localStorage.setItem(K,JSON.stringify(d));}catch(e){}u();});});})();
