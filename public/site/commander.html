@@ -206,6 +206,16 @@ footer{padding:46px 0;border-top:1px solid var(--line)}
 .srail a:hover svg{fill:var(--amber)}
 body.no-rail .srail{display:none}
 @media(max-width:1180px){.srail{display:none}}
+
+/* course overview video slot */
+.vslot{margin-top:28px;position:relative;aspect-ratio:16/9;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:
+ radial-gradient(120% 90% at 20% 0%,rgba(224,169,59,.10),transparent 55%),linear-gradient(180deg,#121E10,#0B130A)}
+.vslot iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vslot .vph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px}
+.vslot .vph .play{width:64px;height:64px;border-radius:50%;border:1px solid rgba(224,169,59,.55);display:grid;place-items:center;color:var(--amber)}
+.vslot .vph .play svg{width:22px;height:22px;margin-left:3px}
+.vslot .vph p{margin:0;font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted)}
+.vslot .vph b{display:block;font-family:'Space Grotesk',sans-serif;font-weight:500;font-size:1.05rem;letter-spacing:0;text-transform:none;color:var(--ink,#DFE1DB);margin-bottom:6px}
 </style>
 </head>
 <body>
@@ -237,6 +247,9 @@ body.no-rail .srail{display:none}
         <div class="ms"><b>20</b><small>Lessons</small></div>
         <div class="ms"><b>140</b><small>Questions</small></div>
         <div class="ms"><b>CMCS</b><small>Certification</small></div>
+      </div>
+      <div class="vslot" data-video="" aria-label="Commander course overview video">
+        <div class="vph"><span class="play"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span><p><b>Commander in three minutes</b>Course overview &middot; coming soon</p></div>
       </div>
     </div>
     <div>
@@ -407,5 +420,11 @@ body.no-rail .srail{display:none}
     <nav><a href="index.html">Home</a><a href="books.html">Books</a><a href="courses.html">Courses</a><a href="recon.html">Recon</a><a href="special-ops.html">Special Ops</a><a href="commander.html">Commander</a><a href="cycle-score.html">Cycle Score</a><a href="signals.html">Signals</a><a href="terms.html">Terms</a><a href="privacy.html">Privacy</a><a href="disclaimer.html">Disclaimer</a><a href="terms.html#refunds">Refunds</a></nav>
   </div>
 </footer>
+<script>
+// Course overview video: set data-video to a YouTube ID (or a full embed URL) to activate the slot.
+(function(){var s=document.querySelector('.vslot');if(!s)return;var v=s.getAttribute('data-video');if(!v)return;
+ var src=/^https?:/.test(v)?v:'https://www.youtube-nocookie.com/embed/'+v+'?rel=0&modestbranding=1';
+ s.innerHTML='<iframe src="'+src+'" title="Course overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>';})();
+</script>
 </body>
 </html>
