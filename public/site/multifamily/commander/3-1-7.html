@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1.7 · 2XX2 — The Capital Rotation Framework &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.1.7</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
+  <p class="eyebrow">Lesson 3.1.7</p>
+  <h1>2XX2 — The Capital Rotation Framework</h1>
+  <p class='deck'>Doubling Equity Twice Inside a Single Market Cycle</p>
+  <div class="leadmeta"><span><b>3,761</b> words</span><span><b>17</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><p>Every lesson in Part One has asked a version of the same question: given where the cycle sits, what is the right decision right now? Who you partner with, what you buy, when you buy it, where you buy it, why the thesis holds, and how you execute. Each answer was calibrated to a single phase.</p>
+<p>This lesson asks a larger question. If you can make the right decision in each phase, what happens when you connect those decisions across the entire cycle?</p>
+<p>The answer is 2XX2 — the Capital Rotation Framework. It is the discipline of moving equity through the four phases deliberately, entering and exiting on the cycle’s schedule rather than on a broker’s, so that the same dollar of capital compounds through multiple timed positions instead of sitting in one.</p>
+<div class='epi'><p><em>The Rule of 6 decides whether a deal is right. 2XX2 decides what happens to the equity after the deal has done its job.</em></p></div>
+<h2>From the Jumping Bull to 2XX2</h2>
+<p class='secdeck'><em><em>Where the framework came from and what the name means</em></em></p>
+<p>Before it had a name, this framework had a nickname: the Jumping Bull Theory. The idea was simple. Every market cycle contains a Bull — the Expansion phase, when rent growth is broad, capital is abundant, and buyers compete aggressively for quality assets. Most investors ride one Bull and then ride it straight into Oversupply and Contraction, giving back a meaningful share of what the Bull delivered.</p>
+<p>The Jumping Bull Theory asked a different question: what if you did not ride one Bull to exhaustion? What if you sold into the Bull while it was still running strong, and then jumped — to a new position positioned for the next Bull, whether that meant a longer hold on better terms, a second timed move inside the same Expansion, or an entirely different market whose own Bull was just getting started?</p>
+<p>As the framework matured, the name changed to describe the outcome rather than the image. 2XX2 stands for the goal: doubling equity two times inside a single market cycle. Two moves. Each one targeting at least a 2x return on equity. Compounded together, a 4x outcome on the original capital before the next cycle begins.</p>
+<div class='card solo'><p class='ch'>THE NAME, DECODED</p><p>2XX2 = 2X, twice. A 2x return on equity, achieved two times within one four-phase cycle.</p><p>You will see the Jumping Bull Theory referenced throughout Econiq materials. It is the same framework under its original name — and the image still holds: the goal is to jump from one Bull to the next rather than ride a single Bull into the ground.</p></div>
+<h2>The Math of Doubling Twice</h2>
+<p class='secdeck'><em><em>Why 2x is the floor, and why the second doubling matters more than the first</em></em></p>
+<p>The arithmetic of 2XX2 is deliberately simple, because the discipline is not in the math. It is in the timing.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>MOVE</strong></th><th><strong>STARTING EQUITY</strong></th><th><strong>TARGET</strong></th><th><strong>ENDING EQUITY</strong></th></tr></thead><tbody><tr><td>Move One</td><td>$1,000,000</td><td>2x</td><td>$2,000,000</td></tr><tr><td>Move Two</td><td>$2,000,000</td><td>2x</td><td>$4,000,000</td></tr><tr><td>Full cycle</td><td>$1,000,000</td><td>4x</td><td>$4,000,000</td></tr></tbody></table></div>
+<p>The figures above are hypothetical and illustrative only. They exclude transaction costs, taxes, fees, and the time value of capital, all of which are real and all of which must be underwritten into every actual move. They are not a projection of any investment’s performance.</p>
+<p>Two principles govern the math.</p>
+<h3>2X IS THE FLOOR, NOT THE CEILING</h3>
+<p>A 2x return on equity is the minimum each move should be underwritten to achieve. Well-timed moves — particularly those entered in early Recovery at distressed basis — can produce 3x or more. But the framework is built on 2x as the benchmark, because a framework that requires exceptional outcomes to work is not a framework. It is a hope. If a prospective move cannot credibly underwrite to 2x under conservative assumptions, it does not qualify as a 2XX2 move.</p>
+<h3>THE SECOND DOUBLING IS WHERE THE WEALTH IS</h3>
+<p>The first doubling turns $1 million into $2 million. The second turns $2 million into $4 million. The second move creates twice the dollars of the first with the same percentage return — which is why the second move deserves more discipline, not less. It is also the move most investors never make, because after the first win they either stop moving or stop being careful.</p>
+<div class='callout'><p><em>Anyone can double once in a rising market. Doubling twice requires knowing where the cycle is when the first win arrives.</em></p></div>
+<h2>Where the 2x Comes From</h2>
+<p class='secdeck'><em><em>The return drivers that make a doubling possible</em></em></p>
+<p>A 2x equity multiple inside a partial cycle does not come from operations alone. It comes from stacking several return drivers that the cycle itself provides — and every one of them depends on entry timing. This is When &gt; How in its most concentrated form.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Basis</span></div></div></div>
+<p>Buying in Recovery, when sellers are motivated and competition is thin, sets a cost basis that later phases will not offer. Basis is the one return driver that is locked on the day you close.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Forced appreciation</span></div></div></div>
+<p>Operational improvement and value-add execution raise NOI. This is the driver you control, and the one the 30x Operations lessons in Part Two address.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Market appreciation and cap rate compression</span></div></div></div>
+<p>As a market moves from Recovery into Expansion, rents rise broadly and cap rates compress as capital returns. The same NOI becomes worth more simply because the cycle advanced.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Leverage</span></div></div></div>
+<p>Debt magnifies the equity return on every driver above — in both directions. This is why 2XX2 demands the conservative, cycle-aware lending discipline from Lesson 3.1.1, not maximum proceeds.</p>
+<p>When all four drivers align, a 2x equity multiple over a two-to-four-year hold is achievable without heroic assumptions. When entry timing is wrong, the third driver runs in reverse, the fourth magnifies the damage, and no amount of forced appreciation closes the gap.</p>
+<h2>The Three Paths</h2>
+<p class='secdeck'><em><em>Three ways to rotate capital through one cycle</em></em></p>
+<p>2XX2 is not a single playbook. It is a goal with three primary paths to reach it. Each path shares the same first move — enter in Recovery, exit in Expansion — and then diverges in what the capital does next. The right path depends on your objective, your capacity to hold, your access to markets, and where the cycle actually sits when the first move completes.</p>
+<h3>PATH A — ROTATE, LOCK, AND HOLD</h3>
+<p><strong>The sequence:</strong> buy in Recovery, sell in early Expansion, redeploy at locked low rates, hold through the downturn, sell in the next Recovery.</p>
+<p>Path A is the patient path. The first move captures the Recovery-to-Expansion repricing. The proceeds are then redeployed into a longer-duration position — typically a stabilized, well-located asset — financed with long-term fixed-rate debt locked while rates and credit terms are still favorable in early Expansion.</p>
+<p>The asset is then held through Oversupply and Contraction. Distributions continue through the downturn because the debt cannot reprice against you, the leverage was set conservatively, and the asset was chosen for durability rather than upside. The second doubling is realized when the position is sold into the next Recovery, as capital returns and buyers once again compete for quality.</p>
+<ul class='blist'>
+<li><strong>Where the second 2x comes from:</strong> cash flow through the downturn, loan amortization, low fixed-rate debt that keeps the position solvent when others are forced to sell, and the value recovery realized on exit.</li>
+<li><strong>Best fit:</strong> investors with an income or preservation objective, patient equity, and the balance sheet to hold through a full downturn without needing liquidity.</li>
+<li><strong>Key risk:</strong> debt structure. Path A only works if the redeployment debt is long-term, fixed, and sized to survive Contraction. Short-term or floating-rate debt turns the hold into a forced sale.</li>
+</ul>
+<h3>PATH B — ROTATE TWICE, THEN WAIT</h3>
+<p><strong>The sequence:</strong> buy early Recovery, sell early Expansion, recycle and sell near the peak, sit on cash, deploy into distress at the bottom.</p>
+<p>Path B is the active path. The first move captures the Recovery-to-Expansion repricing. The proceeds are immediately recycled into a second value-add position with a business plan short enough to complete inside the remaining Expansion. That second position is sold near the peak — into late Expansion or early Oversupply, while buyers are still paying for momentum.</p>
+<p>Then Path B does the hardest thing in real estate: nothing. The capital sits in cash through Oversupply and into Contraction, while peers are still buying and the market still looks healthy. When distress surfaces at the bottom of the cycle, that dry powder is deployed into discounted assets — which becomes the first move of the next cycle’s rotation.</p>
+<ul class='blist'>
+<li><strong>Where the two doublings come from:</strong> the Recovery-to-Expansion repricing on the first move, and value-add execution plus late-Expansion pricing on the second.</li>
+<li><strong>Best fit:</strong> growth objectives, experienced operators with deal flow and execution capacity, and equity partners who accept that capital will sit idle by design.</li>
+<li><strong>Key risk:</strong> timing the second exit. Path B depends on selling near the peak — not at it. The discipline is exiting while exit liquidity is still deep, accepting that the last increment of appreciation belongs to someone else.</li>
+</ul>
+<div class='callout'><p><em>Sitting on cash in late Expansion will feel like underperformance. It is the position that funds the best acquisitions of the next decade.</em></p></div>
+<h3>PATH C — ROTATE ACROSS MARKETS</h3>
+<p><strong>The sequence:</strong> buy in Recovery, sell in Expansion, then recycle the capital into another emerging market — one where Recovery may just be starting, or one where Expansion is expected to continue for verified reasons.</p>
+<p>Path C is the purest form of the Jumping Bull. It recognizes something the Onion Framework made clear in Special Ops: markets do not move in lockstep. While one metro is late in its Expansion, another may be just emerging from Contraction, and a third may have structural drivers that extend its Expansion well beyond the national cycle.</p>
+<p>Path C exploits that divergence. Rather than waiting for the national cycle to reset, the capital jumps to a market whose own cycle offers a fresh Recovery entry — or a verified extended runway — so the second doubling begins immediately instead of after a downturn.</p>
+<p>The destinations fall into two categories:</p>
+<ul class='blist'>
+<li><strong>Emerging Recovery markets:</strong> markets where the local cycle lags the national one and Recovery conditions — motivated sellers, stabilizing occupancy, improving leading indicators — are just beginning to form.</li>
+<li><strong>Verified extended Expansion markets:</strong> markets where Expansion is expected to continue because of specific, verifiable drivers rather than momentum — the distinction between the two is the difference between a thesis and a hope.</li>
+<li><strong>Where the second 2x comes from:</strong> a second Recovery-to-Expansion repricing in a different market, or continued growth supported by verified structural drivers.</li>
+<li><strong>Best fit:</strong> investors and operators with multi-market capability — or the right local partners — and the analytical discipline to verify a new market rather than assume it.</li>
+<li><strong>Key risk:</strong> the unfamiliar market. Path C adds geographic risk to timing risk. Every lesson in Part One applies again at full strength in the new market: the right partners, the right asset class, the right location within the market, and a thesis built on evidence.</li>
+</ul>
+<div class='card solo'><p class='ch'>WHAT QUALIFIES AS AN EMERGING MARKET</p><p>An emerging market is not a market that is cheap. It is a market where the drivers of future demand are measurable today. Contributing factors include:</p><p>Job growth — new employers, expanding industries, and employment gains that lead household formation.</p><p>Limited supply — a thin construction pipeline, barriers to new development, or deliveries that trail demand.</p><p>Opportunity Zones — designated areas where tax incentives may attract capital and redevelopment.</p><p>Census tract trends — tract-level movement in population, income, and household formation that reveals where demand is moving within a metro.</p><p>Infrastructure and the path of progress — committed public and private investment that pulls demand in a specific direction.</p></div>
+<h2>Choosing Your Path</h2>
+<p class='secdeck'><em><em>Matching the path to the investor and to the cycle</em></em></p>
+<p>The three paths are not ranked. Each one fits a different combination of objective, capacity, and market access — and the same investor may use different paths in different cycles.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th></th><th><strong>PATH A</strong></th><th><strong>PATH B</strong></th><th><strong>PATH C</strong></th></tr></thead><tbody><tr><td>Sequence</td><td>Rotate, lock, and hold</td><td>Rotate twice, then wait</td><td>Rotate across markets</td></tr><tr><td>Second 2x from</td><td>Cash flow, amortization, and recovery on exit</td><td>Value-add plus late-Expansion pricing</td><td>A second Recovery or verified Expansion elsewhere</td></tr><tr><td>Best fit</td><td>Income and preservation objectives; patient equity</td><td>Growth objectives; experienced operators</td><td>Multi-market capability; strong local partners</td></tr><tr><td>Capital idle?</td><td>No — held and distributing</td><td>Yes — by design, through Oversupply</td><td>Minimal — redeployed immediately</td></tr><tr><td>Key risk</td><td>Debt structure through the downturn</td><td>Timing the second exit</td><td>Unfamiliar-market execution</td></tr></tbody></table></div>
+<p>Three questions usually decide it. First, what does your objective require — income now, or growth toward a number? Second, what can your balance sheet and your equity partners tolerate — a long hold through a downturn, or capital sitting idle by design? Third, what is your realistic market access — one market you know deeply, or several you can underwrite and operate with confidence?</p>
+<h2>The Market Opportunity Scanner</h2>
+<p class='secdeck'><em><em>A structured search for where the next jump should land</em></em></p>
+<p>Every path eventually faces the same question: when the first move completes, where does the capital go? Path A needs a durable asset to hold. Path B needs a second value-add opportunity and, later, a distressed one. Path C needs an entirely new market. Answering that question by instinct, or by whoever calls first, is exactly how the rotation breaks.</p>
+<p>The Market Opportunity Scanner is the concept that replaces instinct with structure. It is a disciplined screen of candidate markets — and submarkets within them — that answers two questions side by side: where is each market in its own cycle, and what verifiable drivers support its future demand?</p>
+<h3>WHAT THE SCANNER READS</h3>
+<p>The scanner combines two kinds of evidence you already know how to gather.</p>
+<ul class='blist'>
+<li><strong>Phase position:</strong> each market’s current phase and direction, read through the three layers of the Onion Framework and confirmed with leading indicators from your Cignal dashboard — not trailing headlines.</li>
+<li><strong>Contributing factors:</strong> the emerging-market drivers — job growth, supply pipeline, Opportunity Zones, census tract trends, infrastructure, and the path of progress — that determine whether a market’s future demand is verified or merely hoped for.</li>
+</ul>
+<h3>WHAT THE SCANNER PRODUCES</h3>
+<p>The output is not a single answer. It is a short list of markets sorted into categories that map directly to the three paths:</p>
+<ul class='blist'>
+<li><strong>Emerging Recovery candidates:</strong> markets entering Recovery ahead of the national cycle. Primary destinations for Path C, and for Path B’s distressed deployment.</li>
+<li><strong>Verified extended Expansion candidates:</strong> markets with documented drivers supporting continued growth. Secondary destinations for Path C, with a higher bar for evidence.</li>
+<li><strong>Durable hold candidates:</strong> established markets with deep demand and limited supply, suited to Path A’s long-duration redeployment.</li>
+<li><strong>Avoid:</strong> markets late in their cycle, heavy with supply, or relying on momentum rather than verifiable drivers.</li>
+</ul>
+<p>The scanner should be run before the first move is exited, not after. The timing of the exit and the identity of the next destination are one decision. Selling well into a strong market and then holding cash for a year while you search for the next opportunity forfeits the compounding that makes 2XX2 work.</p>
+<h3>RUNNING THE SCANNER ON CIGNAL SYSTEM</h3>
+<p>Almost everything the scanner requires is available somewhere. Employment data, supply pipelines, Opportunity Zone designations, census tract trends, infrastructure commitments, and cycle indicators are published by dozens of public and private sources. The problem is not access. It is the time it takes to gather, reconcile, and compare that information market by market — time that competes directly with the execution work of the rotation itself.</p>
+<p>This is the work Market Maps on the Cignal System is built to do. It scores and ranks multifamily fundamentals across U.S. metros and puts you in the driver’s seat: you choose what matters for your goals and your path, and the platform does the gathering, reconciling, and ranking. Each part of the scanner has a direct counterpart on the page.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>SCANNER NEED</strong></th><th><strong>WHERE IT LIVES IN MARKET MAPS</strong></th></tr></thead><tbody><tr><td>Rank markets on your own criteria</td><td>Build Your Own Ranking — choose from job growth, wage growth, rent growth, vacancy, unemployment, affordability, investment index, time on market, and supply pressure, weight each by importance, and rank every eligible U.S. metro by national percentile. Leading signals are flagged, and every rank is traceable to its source.</td></tr><tr><td>Separate verified drivers from hype</td><td>Top Market Consensus — a dozen published “top markets” lists combined into one ranking weighted toward institutional research, with each market’s live Cignal score beside it. A market high on the crowd’s list but low on score is the gap most lists never show.</td></tr><tr><td>Find emerging Recovery candidates</td><td>Top 10 Emerging Markets — smaller metros outperforming on employment, supply discipline, occupancy, and investment momentum, where the next cycle is forming before it shows up in headline data.</td></tr><tr><td>Verify where demand is moving</td><td>Migration Intelligence — renter versus higher-income household migration from IRS tax-return data, plus U-Haul and PODS moving trends, each showing whether a market’s inflow is strengthening or fading.</td></tr><tr><td>Test the employment base</td><td>Industry Exposure Screen — which markets depend on a given industry, and whether that industry is actually growing there, measured locally rather than inferred from the national trend.</td></tr><tr><td>Read the rent trend</td><td>Rent Growth tracking — live year-over-year rent gainers and decliners by metro and region, and tracked-market snapshots of rent growth, employment, vacancy, and unemployment.</td></tr><tr><td>Drill into a single ZIP code</td><td>Market Lookup — enter any ZIP or city for a full submarket report: rent level and direction, lease economics (effective rent, concession load, days on market), local industry growth and concentration with fragile sectors flagged, Opportunity Zone eligibility and overlapping LIHTC Qualified Census Tracts tract by tract, credit access, renter demographics and rent burden, metro job and wage signals, and IRS migration showing the income of households moving in. Each indicator is labeled leading, coincident, or trailing, with a bull, bear, or neutral read.</td></tr></tbody></table></div>
+<p>The discipline does not change. You still read phase position through all three layers, you still verify contributing factors rather than assuming them, and you still apply the Rule of 6 to every destination the scanner surfaces. What changes is how much of your time goes to finding the information versus deciding what it means.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/market-maps</p><p>Open Build Your Own Ranking and weight the signals that match your path — employment and supply pressure for Path C, vacancy and affordability for a Path A hold. Compare your top results against the Top Market Consensus and the Top 10 Emerging Markets; the markets that rank well on your criteria but not on the crowd’s lists are where your scanner short list begins. Then run Market Lookup on the ZIP codes you would actually buy in, and confirm the submarket tells the same story as the metro.</p></div>
+<p>One caution on Opportunity Zones: the Market Lookup report identifies tracts eligible under the current Opportunity Zone criteria, not final designations, and designation confers tax treatment rather than an assured return. Confirm official status and tax implications with qualified counsel before an Opportunity Zone thesis drives a decision.</p>
+<div class='callout'><p><em>The exit and the next entry are one decision. Make them together or you will make the second one under pressure.</em></p></div>
+<h2>What Breaks the Rotation</h2>
+<p class='secdeck'><em><em>The failure points every path must plan around</em></em></p>
+<p>2XX2 is a high-discipline framework, and it fails in predictable ways. Every one of them is a timing or alignment failure — which means every one of them can be planned for before the first acquisition closes.</p>
+<h3>HOLDING FOR THE LAST DOLLAR</h3>
+<p>The most common failure is refusing to sell the first position because it is still appreciating. Expansion always looks like it will continue. The discipline is exiting while buyers are deep and financing is available, not after the trailing data confirms the peak.</p>
+<h3>IDLE CAPITAL WITHOUT A PLAN</h3>
+<p>Capital sitting in cash by design, as in Path B, is a strategy. Capital sitting in cash because no destination was identified is a leak. Every month without a qualified redeployment erodes the second doubling.</p>
+<h3>MISALIGNED EQUITY</h3>
+<p>A rotation requires equity partners who understand the plan from the start: that positions will be sold early, that proceeds may sit idle by design, or that capital will move to a new market. Equity that expects to hold indefinitely — or that demands immediate redeployment — will break the rotation at the moment it matters most. This is the equity alignment discipline from Lesson 3.1.1 applied across a full cycle.</p>
+<h3>DEBT THAT CANNOT SURVIVE THE DOWNTURN</h3>
+<p>Path A in particular depends entirely on the redeployment debt. Short-term, floating-rate, or high-leverage financing converts a planned hold into a forced sale at the worst possible moment.</p>
+<h3>COSTS AND TAXES</h3>
+<p>Each rotation incurs transaction costs, and each profitable sale may create a tax liability. Strategies such as a 1031 exchange may allow gains to be deferred when proceeds are reinvested into qualifying property, but they carry strict identification and closing timelines and specific qualification requirements that must be planned before the sale, not after. Tax treatment depends entirely on your circumstances. Consult a qualified tax advisor before structuring any rotation.</p>
+<h2>How 2XX2 Completes Part One</h2>
+<p class='secdeck'><em><em>The Rule of 6, extended across a full cycle</em></em></p>
+<p>The six lessons before this one taught you to make each acquisition decision correctly for the phase in front of you. 2XX2 connects those decisions into a sequence. The Rule of 6 still governs every individual move — the WHO, WHAT, WHEN, WHERE, WHY, and HOW of each entry and exit. 2XX2 governs the sequence itself: which move comes next, when it should happen, and where the capital goes when it does.</p>
+<ul class='blist'>
+<li><strong>WHO:</strong> equity and lending partners aligned with the full rotation, not just the first deal.</li>
+<li><strong>WHAT:</strong> asset classes chosen for each move’s role — repositioning upside in the first, durability or value-add in the second.</li>
+<li><strong>WHEN:</strong> entry in Recovery and exit in Expansion, confirmed by leading indicators rather than headlines.</li>
+<li><strong>WHERE:</strong> destinations identified by the Market Opportunity Scanner, run on Market Maps, before the exit closes.</li>
+<li><strong>WHY:</strong> a thesis for the full rotation, not just the individual asset.</li>
+<li><strong>HOW:</strong> execution calibrated to each path — debt structure for Path A, exit discipline for Path B, and new-market diligence for Path C.</li>
+</ul>
+<p>Part Two turns to the other side of the equation: what happens during the months and years you hold each position. Every doubling in 2XX2 depends on operating the asset well while you own it, which is exactly what 30x Operations is built to teach.</p>
+<div class='callout'><p><em>Most investors measure success one deal at a time. 2XX2 measures it across a full cycle — and asks how many times the same dollar was put to work at the right moment.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>What does the name 2XX2 stand for?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Two acquisitions per year for two years.</button><button class='opt' data-k='B'><span class='k'>B</span>A 2x return on equity, achieved two times within a single four-phase cycle.</button><button class='opt' data-k='C'><span class='k'>C</span>Two markets, two asset classes.</button><button class='opt' data-k='D'><span class='k'>D</span>Doubling unit count twice before selling.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>2XX2 means 2X, twice: two moves, each targeting at least a 2x return on equity, compounding to a 4x outcome on the original capital before the next cycle begins. It was previously called the Jumping Bull Theory—the idea of jumping from one Bull to the next rather than riding a single Bull into the ground.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>Why does the lesson treat 2x as the floor for each move rather than the target ceiling?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because every move reliably produces at least 3x.</button><button class='opt' data-k='B'><span class='k'>B</span>Because lenders require a 2x projection before funding.</button><button class='opt' data-k='C'><span class='k'>C</span>Because 2x is the maximum a multifamily asset can produce.</button><button class='opt' data-k='D'><span class='k'>D</span>Because a framework that requires exceptional outcomes to work is a hope, not a framework—if a move cannot credibly underwrite to 2x under conservative assumptions, it does not qualify.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Well-timed moves can produce 3x or more, but the framework is built on 2x as the benchmark so that it does not depend on exceptional results. The lesson also notes that the second doubling creates twice the dollars of the first at the same percentage return, which is why it deserves more discipline, not less.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 3</span><p class='qs'>Which sequence describes Path B?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Buy in early Recovery, sell in early Expansion, recycle into a second deal and sell near the peak, sit on cash through Oversupply, and deploy into distress at the bottom.</button><button class='opt' data-k='B'><span class='k'>B</span>Buy in Recovery, sell in early Expansion, redeploy at locked low rates, hold through the downturn, and sell in the next Recovery.</button><button class='opt' data-k='C'><span class='k'>C</span>Buy in Recovery, sell in Expansion, and recycle into another market whose Recovery is just starting.</button><button class='opt' data-k='D'><span class='k'>D</span>Buy in Oversupply, hold through Contraction, and sell in Recovery.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Path B is the active path: two doublings inside the cycle, then the hardest thing in real estate—doing nothing. The capital sits in cash while peers keep buying, and the distressed deployment at the bottom becomes the first move of the next cycle’s rotation. Option B is Path A, and Option C is Path C.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>In Path C, where does the lesson say the capital should jump after the first move?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Into the same submarket, to take advantage of local knowledge.</button><button class='opt' data-k='B'><span class='k'>B</span>Into cash, to wait out the national cycle.</button><button class='opt' data-k='C'><span class='k'>C</span>Into another emerging market—either one where Recovery is just starting, or one where Expansion is expected to continue for specific, verifiable reasons.</button><button class='opt' data-k='D'><span class='k'>D</span>Into whichever market has the highest recent rent growth.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Path C exploits the fact that markets do not move in lockstep. The destinations are emerging Recovery markets and verified extended Expansion markets—verified by drivers such as job growth, limited supply, Opportunity Zones, census tract trends, and infrastructure. Option D is momentum, which the lesson distinguishes from a verified thesis.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says “the exit and the next entry are one decision.” In 2–3 sentences, explain what this means and when the Market Opportunity Scanner should be run.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Selling well into a strong market and then holding cash for months while searching for the next opportunity forfeits the compounding that makes 2XX2 work, and a destination chosen under time pressure is chosen badly. The timing of the exit and the identity of the next destination therefore have to be decided together. That is why the scanner should be run before the first move is exited—ideally before the exit is under contract—not after.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>Three years ago, an investor bought a well-located Class B property in early Recovery. After a value-add program, the equity has roughly doubled. The home market is now in early-to-mid Expansion, but the construction pipeline is growing. The investor’s equity partners are patient and income-focused. The investor also has trusted operating partners in two other metros. Using the lesson’s framework, explain (a) whether the first move is complete and why timing the exit matters now, (b) how each of the three paths fits this investor, (c) how the investor should use the Market Opportunity Scanner and Market Maps before selling, and (d) which failure points the plan must address.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) With equity roughly doubled after a Recovery entry, the first move has done its job. The risk now is holding for the last dollar: Expansion always looks like it will continue, and a growing pipeline signals that exit liquidity will not stay this deep. Selling while buyers are deep and financing is available is the discipline. (b) Path A fits the patient, income-focused equity: redeploy into a durable, well-located asset with long-term fixed-rate debt locked while terms are favorable, and hold through the downturn on distributions. Path B requires tolerance for capital sitting idle by design, which income-focused partners may resist unless the plan is agreed in advance. Path C fits the investor’s operating relationships in two other metros, provided those markets are verified as emerging Recovery or extended Expansion markets rather than momentum plays. (c) Before listing the property, the investor should run the scanner: read each candidate market’s phase position through the three layers and leading indicators, and verify contributing factors. On Market Maps, that means weighting Build Your Own Ranking for the chosen path, comparing results against the Top Market Consensus and Top 10 Emerging Markets, and running Market Lookup on the actual ZIP codes—confirming job growth, supply, migration, industry exposure, and any Opportunity Zone eligibility at the submarket level. (d) The plan must address holding for the last dollar, idle capital without a plan, equity alignment (partners must understand the rotation before it starts), debt that can survive a downturn (critical for Path A), and costs and taxes, including whether a 1031 exchange is appropriate—planned with a qualified tax advisor before the sale, not after.</em></em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 7</span><p class='qs'>Which set of return drivers does the lesson say must stack to produce a 2x equity multiple—every one of which depends on entry timing?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Basis, forced appreciation, market appreciation and cap rate compression, and leverage.</button><button class='opt' data-k='B'><span class='k'>B</span>Rent growth, expense cuts, tax credits, and refinancing fees.</button><button class='opt' data-k='C'><span class='k'>C</span>Occupancy, amenities, marketing, and resident events.</button><button class='opt' data-k='D'><span class='k'>D</span>Unit count, location, vintage, and parking ratio.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson names four drivers: basis, which is locked on the day you close; forced appreciation through operations; market appreciation and cap rate compression as the cycle advances; and leverage, which magnifies every other driver in both directions. When entry timing is wrong, market appreciation runs in reverse and leverage magnifies the damage—this is When &gt; How in its most concentrated form.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of capital rotation across the cycle. Part One is complete—proceed to Lesson 3.2.1 (The WHO: Assembling the Right Team) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Three Paths” and “The Market Opportunity Scanner” in Lesson 3.1.7 before proceeding. Focus especially on how the paths differ after the first move and why the exit and the next entry must be decided together.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.1.7 in full. 2XX2 connects every Part One lesson into a sequence, and the discipline of rotating capital on the cycle’s schedule is what turns individual good decisions into compounding results.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Most investors measure success one deal at a time. 2XX2 measures it across a full cycle. If the answer key revealed gaps, close them now before beginning Part Two.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-1-6.html'>&larr; Previous<span>The HOW — Why Most Investors Learn “How”</span></a><a href='part-two.html' style='text-align:right'>Next &rarr;<span>30x Operations</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.1.7 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.1.7', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

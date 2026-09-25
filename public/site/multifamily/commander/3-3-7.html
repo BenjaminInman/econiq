@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.7 · Building Your Blueprint &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.7</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.7</p>
+  <h1>Building Your Blueprint</h1>
+  <p class='deck'>From Six Inputs and Five Axes to a Single Page</p>
+  <div class="leadmeta"><span><b>3,854</b> words</span><span><b>18</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>The Seven-Step Blueprint</h2>
+<p class='secdeck'><em><em>Assembling everything into one page</em></em></p>
+<div class='epi'><p><em>If it does not fit on a single page, you will not use it. If you do not use it, it is not a blueprint.</em></p></div>
+<p>Everything to this point has been input. This section is assembly. Seven steps, performed in order, producing one document that governs every subsequent portfolio decision.</p>
+<p>Work through it with your actual numbers. The exercise takes two to four hours the first time and roughly an hour on each annual repeat.</p>
+<h3>STEP ONE — STATE THE OBJECTIVE</h3>
+<p>One sentence describing what this portfolio is supposed to accomplish and by when, drawn from Input One in Lesson 3.3.2. Then the weights across Income, Growth, Preservation, and Legacy. If two conflicting objectives both weight high, define your sleeves here and treat everything downstream as two separate blueprints.</p>
+<h3>STEP TWO — SET THE CONSTRAINTS</h3>
+<p>From Inputs Two, Three, and Four in Lessons 3.3.2 and 3.3.3. Horizon in years. The four capacity numbers. The reserve floor, which is untouchable. Maximum single-position share of liquidity. Aggregate guarantee ceiling. Target operator-versus-allocator split.</p>
+<p>These are boundaries, not goals. Everything that follows must fit inside them. When a compelling opportunity does not fit, the opportunity is what changes.</p>
+<h3>STEP THREE — MAP THE CURRENT STATE</h3>
+<p>Every position, tabulated across all five axes: entry phase and dependency phase, market, strategy, vintage, and counterparty. Weighted by equity invested.</p>
+<p>This is the most tedious step and the one that generates the most surprise. Investors routinely discover concentration on an axis they had never measured — usually vintage or counterparty, occasionally dependency phase. If nothing surprises you here, check whether you weighted by equity rather than by asset value.</p>
+<h3>STEP FOUR — SET THE TARGET DISTRIBUTION</h3>
+<p>For each of the five axes, write a target range and a hard ceiling.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>AXIS</strong></th><th><strong>WHAT TO SPECIFY</strong></th></tr></thead><tbody><tr><td>Phase</td><td>Maximum share of equity dependent on any single phase persisting. Minimum share that is phase-independent ballast.</td></tr><tr><td>Market</td><td>Maximum share in any single market, justified by your leverage and role configuration.</td></tr><tr><td>Strategy</td><td>Ceiling on combined development plus opportunistic. Floor on core ballast. Target mix across the spectrum.</td></tr><tr><td>Vintage</td><td>Maximum share committed in any twelve-month window, with the phase-based override rule stated.</td></tr><tr><td>Counterparty</td><td>Maximum share touched by any single sponsor, equity partner, lender, or management company.</td></tr></tbody></table></div>
+<p>Set these numbers now, while nothing is at stake. That is the entire mechanism. A ceiling set in advance is a decision you have already made; a ceiling set in the presence of a specific opportunity is a rationalization with a percentage attached.</p>
+<h3>STEP FIVE — IDENTIFY THE GAPS</h3>
+<p>Compare Step Three against Step Four. Every difference is a gap. Rank them by severity, which is a function of how far outside the ceiling you sit and how much damage the excess would do under a phase shift.</p>
+<p>Expect several gaps. A first-time blueprint that shows a portfolio already inside every target usually means the targets were set to describe the portfolio rather than to constrain it.</p>
+<h3>STEP SIX — ASSIGN LEVERS AND TIMEFRAMES</h3>
+<p>For each gap, name the lever from Lesson 3.3.6 — deployment, capital structure, disposition, or operations — and the timeframe for closing it. Default to deployment. Reserve disposition for gaps that deployment cannot close within your horizon, and for anything in the solvency category.</p>
+<p>The output is a sequenced plan rather than a list of concerns. A gap without an assigned lever and date is an observation, and observations do not correct portfolios.</p>
+<h3>STEP SEVEN — DEFINE THE REVIEW</h3>
+<p>Set the annual review date. Write the four triggers from Lesson 3.3.6. Name the single metric you will check most often — for most investors this is either phase-dependency share or the twelve-month maturity concentration — and decide how frequently you will check it.</p>
+<div class='card solo'><p class='ch'>THE ONE-PAGE TEST</p><p>Can you state your blueprint out loud in ninety seconds?</p><p>Objective. Horizon. Reserve floor. Five ceilings. Largest current gap and the lever that closes it. Review date.</p><p>If you cannot recite it, it is documentation rather than a blueprint — and documentation does not intercept a decision made under time pressure with a broker on the phone.</p></div>
+<p>The Commander Workbook contains the full worksheet in a form you can complete directly. Do it on paper before you do it in software, for a simple reason: you will never fully trust an output you cannot reproduce.</p>
+<h2>Two Worked Blueprints</h2>
+<p class='secdeck'><em><em>The same architecture, two very different investors</em></em></p>
+<div class='callout'><p><em>Illustrations, not recommendations. The numbers below are constructed to demonstrate the method, not to prescribe an allocation for anyone.</em></p></div>
+<p>Two composite examples follow. Neither describes a real person, and neither is a recommendation. Their purpose is to show how the same seven steps produce genuinely different structures when the intake differs.</p>
+<h3>BLUEPRINT ONE — THE OWNER-OPERATOR</h3>
+<div class='card solo'><p class='ch'>THE INTAKE</p><p>Forty-four years old. Operates roughly 900 units across two markets, both entered during the same Expansion window. Deployable capital of approximately $4 million, plus reasonable confidence in raising $10–12 million from an existing investor base. Sustainable capacity of roughly thirty hours per week on the portfolio. Genuine ground-level knowledge in two markets, familiarity in a third. Meaningful recourse exposure across three loans.</p><p>Objective: Growth weighted 55%, Income 25%, Legacy 20%. Horizon: twelve to fifteen years. Living expense is roughly 40% funded by portfolio distributions.</p></div>
+<p class='prompt'><strong>What the current-state map revealed</strong></p>
+<ul class='blist'>
+<li><strong>Vintage:</strong> roughly 80% of equity deployed inside a twenty-six-month window. The dominant finding, and one the operator had never measured.</li>
+<li><strong>Dependency phase:</strong> approximately 70% of equity in positions requiring continued Expansion to hit plan. Almost no phase-independent ballast.</li>
+<li><strong>Market:</strong> two markets, 60/40 split — but both share the same primary demand driver and the same permissive supply response. Functionally one market.</li>
+<li><strong>Counterparty:</strong> a single lender across four of six loans; a single management company across every asset.</li>
+<li><strong>Maturity:</strong> three maturities and two cap expirations inside a fourteen-month window beginning nineteen months out.</li>
+</ul>
+<p><strong>The gaps, sequenced.</strong> The maturity cluster went first, and it went into the solvency category rather than the structural one. It gets addressed immediately through the capital structure lever — extensions and staggered refinancing purchased while lenders are transacting, accepting worse terms as the cost of removing a forced simultaneous decision.</p>
+<p>The dependency-phase concentration is structural and gets corrected through deployment over three to four years: the next several acquisitions weighted toward phase-independent ballast even at a lower projected return, plus one selective disposition of the position with the deepest business plan and the highest basis.</p>
+<p>The market concentration gets corrected not by entering a third operating market — capacity does not support it — but by allocating passively into a market with a different demand driver alongside a local operator. This is the role shift described in Input Four in Lesson 3.3.3: expanding market exposure without expanding operational load.</p>
+<p>The counterparty concentration gets corrected cheaply: a second lender relationship established on the next transaction regardless of terms, and a second management company brought in on one asset to create an alternative that exists before it is needed.</p>
+<h3>BLUEPRINT TWO — THE PASSIVE ALLOCATOR</h3>
+<div class='card solo'><p class='ch'>THE INTAKE</p><p>Fifty-eight years old. Nine LP positions across four sponsors, all committed within a three-year window. Approximately $2.5 million invested, roughly $1.5 million uncommitted. No operational involvement and no desire for any. No recourse exposure.</p><p>Objective: Income weighted 45%, Preservation 40%, Legacy 15%. Horizon: fifteen-plus years, with income needs beginning in roughly four years. Living expense currently 15% funded by portfolio distributions, projected to rise toward 50%.</p></div>
+<p class='prompt'><strong>What the current-state map revealed</strong></p>
+<ul class='blist'>
+<li><strong>Strategy:</strong> eight of nine positions classified as value-add by the sponsors — but by structure and cash flow profile, three were heavy repositioning with minimal current income and one was effectively a merchant-build development.</li>
+<li><strong>Objective conflict:</strong> the stated objective weights Income and Preservation at 85%, while the actual portfolio was constructed almost entirely for Growth. The intake and the holdings described two different investors.</li>
+<li><strong>Vintage:</strong> all nine positions inside thirty-four months, all during the same phase.</li>
+<li><strong>Market:</strong> six markets, but five sharing a nearly identical in-migration narrative and supply profile.</li>
+<li><strong>Counterparty:</strong> one sponsor holding 38% of invested equity.</li>
+</ul>
+<p><strong>The gaps, sequenced.</strong> The objective mismatch is the finding that matters. Everything else is downstream of it. A portfolio built for growth cannot be converted into an income portfolio by intention; it converts as positions complete and proceeds are redeployed. That is a four-to-six-year process, which happens to align with when income is actually needed — but only if the redeployment is planned rather than improvised.</p>
+<p>The uncommitted capital becomes the primary instrument. It gets deployed deliberately toward stabilized, income-producing, moderate-leverage positions with long fixed debt — accepting a lower projected return as the explicit price of matching the objective. Pacing is set at a fixed annual commitment rather than following sponsor deal flow.</p>
+<p>Counterparty concentration is addressed by declining the next deal from the largest sponsor regardless of quality, which is uncomfortable and correct. Market correlation is addressed by adding exposure with a different demand driver, which for this investor means seeking a sponsor operating in a market type they do not currently touch at all.</p>
+<div class='callout'><p><em>In both cases the blueprint changed almost nothing about what was already owned. It changed everything about what came next.</em></p></div>
+<h3>THE COMMON PATTERN</h3>
+<p>Two very different investors, and the same three findings.</p>
+<p>First, vintage concentration in both, unmeasured in both, and the largest single risk in both. Second, a gap between stated objective and actual portfolio construction — in the operator’s case a stated preference for durability alongside a portfolio built for one specific phase; in the allocator’s case a stated need for income alongside a portfolio built for appreciation. Third, counterparty concentration built entirely through good experiences.</p>
+<p>These three findings recur with enough regularity that you should expect to find them in your own blueprint. Look for them first.</p>
+<h2>Stress-Testing the Blueprint</h2>
+<p class='secdeck'><em><em>What breaks, and at what point</em></em></p>
+<div class='callout'><p><em>A blueprint that has not been tested against a phase it did not anticipate is a description of the present with a plan attached.</em></p></div>
+<p>The blueprint is not finished when it is written. It is finished when it has been run against conditions you did not design it for and you know precisely where it fails.</p>
+<p>Every structure fails somewhere. The purpose of stress testing is not to build one that does not — that structure does not exist and pursuing it produces portfolios so defensive they cannot earn. The purpose is to know the failure point in advance, so that you recognize it approaching rather than discovering it on arrival.</p>
+<h3>THE FOUR TESTS</h3>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>The phase-shift test</span></div></div></div>
+<p>Move every market you own in one full phase forward. Recompute distributions, cash flow, and covenant headroom. Which positions become phase-dependent that were not? Which maturities now land in a worse environment? What is the aggregate distribution reduction, and does it breach your income capacity?</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>The maturity-pileup test</span></div></div></div>
+<p>Assume the two nearest triggers both resolve unfavorably: no refinancing available on acceptable terms, extension conditions not met, cap renewal at a materially higher cost. Total the capital required. Compare against liquidity capacity. If the requirement exceeds capacity, you have found the failure point, and it is a date rather than a scenario.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>The counterparty-failure test</span></div></div></div>
+<p>Assume your largest counterparty becomes unable to perform — the sponsor is consumed by distress elsewhere, the lender exits the sector, the management company loses its regional capability. What share of the portfolio is affected simultaneously, and what is your alternative? "We would find someone" is not an answer; name them.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>The liquidity-need test</span></div></div></div>
+<p>Assume you need a defined sum in ninety days for reasons unrelated to the portfolio. What could you actually sell in that window, at what discount, and what does selling it do to the remaining structure? This test almost always reveals that the only genuinely liquid position is the best one.</p>
+<h3>READING THE RESULTS</h3>
+<p>Stress tests do not produce pass or fail. They produce a failure point and a distance to it. Three responses are available.</p>
+<ul class='blist'>
+<li><strong>Accept it.</strong> The failure requires a scenario you judge sufficiently unlikely, and the cost of defending against it exceeds the expected benefit. This is a legitimate answer when made explicitly. It is not legitimate when arrived at by not running the test.</li>
+<li><strong>Reduce it.</strong> Apply a lever from Lesson 3.3.6 to move the failure point further out. Usually capital structure work, usually expensive, usually worth it.</li>
+<li><strong>Prepare for it.</strong> Leave the exposure but pre-arrange the response — the alternative lender, the standby capital, the partner who could take a position — so that the response exists before the trigger.</li>
+</ul>
+<div class='card solo'><p class='ch'>THE MOST COMMON FINDING</p><p>Across the portfolios I have walked through this exercise with, the failure point is almost never operational. It is almost always a date on the maturity ladder, arriving in a phase the portfolio was not built for, requiring capital that was allocated to something else.</p><p>Which means most portfolio failure in this business is a scheduling problem wearing the costume of a market problem.</p></div>
+<h3>TESTING ON A CADENCE</h3>
+<p>Run the phase-shift test at every annual review and at every confirmed phase transition. Run the maturity-pileup test quarterly — it takes fifteen minutes and it is the test that catches the failures that actually happen. Run the counterparty and liquidity tests annually.</p>
+<p>The cadence matters more than the sophistication. A simple test run four times a year outperforms an elaborate one run once and then filed.</p>
+<div class='callout'><p><em>You are not trying to build a portfolio that cannot fail. You are trying to know exactly where yours does.</em></p></div>
+<h2>The Portfolio Architect</h2>
+<p class='secdeck'><em><em>Operationalizing the blueprint inside the Cignal System</em></em></p>
+<div class='callout'><p><em>Everything in Portfolio Architect can be done on paper. Very little of it gets done twice on paper.</em></p></div>
+<p>There is a predictable arc to this work. The first blueprint gets built with real care. The annual review happens the first year. By the second year the spreadsheet has diverged from the portfolio, one market read is stale, three maturities have been extended without the ladder being updated, and the blueprint has quietly become a historical document.</p>
+<p>This is not a discipline problem. It is a maintenance problem. The inputs change continuously — phases shift, positions close, loans get refinanced, capital gets committed — and a static document cannot track a moving portfolio against a moving market.</p>
+<p>We built the Portfolio Architect to close that gap.</p>
+<h3>WHAT IT DOES</h3>
+<p>The Portfolio Architect lives inside the Cignal System, alongside the indicators, market maps, and cycle positioning that the platform tracks. It takes the same six inputs from Lessons 3.3.2 and 3.3.3, applies the same five axes from Lesson 3.3.4, and holds your stated blueprint against live conditions.</p>
+<ul class='blist'>
+<li><strong>Intake.</strong> The six inputs, captured once and revisable. Objective weights, horizon, capacity numbers, role split, geographic strategy, and capital structure posture — the same intake you completed on paper, stored as the standard your portfolio gets measured against.</li>
+<li><strong>Position mapping.</strong> Every holding entered once, then automatically distributed across all five axes. The distributions that took an afternoon to tabulate by hand are computed continuously and re-weighted as values and equity change.</li>
+<li><strong>Live phase overlay.</strong> Your market exposures mapped against current cycle positioning from the Cignal System. When a market you own in moves, your dependency distribution moves with it — without you noticing it manually, which is the whole point.</li>
+<li><strong>Gap and drift reporting.</strong> Your stated ceilings compared against actual exposure, with breaches surfaced when they occur rather than at the annual review. Drift becomes visible while it is still correctable through the cheap levers.</li>
+<li><strong>The maturity ladder.</strong> Every loan, cap, and covenant date on a single timeline, with cluster warnings and the aggregate capital requirement of the nearest triggers.</li>
+<li><strong>Scenario testing.</strong> The four stress tests described earlier in this lesson, executable in a few clicks rather than a few hours — which is the difference between running them quarterly and running them once.</li>
+</ul>
+<h3>TWO WAYS TO START</h3>
+<p>You can build a blueprint from scratch inside the tool, working through the same seven steps described earlier in this lesson with the arithmetic handled for you. Or you can enter what you currently own and let the tool produce the current-state map first — which is the faster path for anyone who already holds positions, because seeing the actual distributions is usually what motivates the rest of the work.</p>
+<p>Both paths converge on the same output: a stated blueprint, a measured portfolio, and a visible gap between them.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/architect</p><p>Create an account on the Cignal System to access the Portfolio Architect along with the indicator dashboard, market maps, and cycle positioning that feed it. If you have not yet established your baseline, begin with the Cignal Score — it establishes where your current cycle-reading capability sits and identifies your dominant behavioral blind spot before you start designing around it.</p></div>
+<h3>A WARNING ABOUT TOOLS</h3>
+<p>One caution, offered sincerely by someone who built the thing being cautioned about.</p>
+<p>A tool that computes distributions and flags breaches makes the mechanics effortless. It does not make the judgment effortless, and there is a failure mode where the presence of a dashboard substitutes for the thinking the dashboard was meant to support. The tool can tell you that 68% of your equity depends on a single phase persisting. It cannot tell you whether that is acceptable given your objective, your capacity, and your read on how much runway that phase has left. That decision is yours and it does not get delegated.</p>
+<p>Build the blueprint by hand once. Understand every number in it. Then let the software carry the maintenance, which is the part that otherwise does not happen.</p>
+<div class='callout'><p><em>The tool maintains the discipline. It cannot supply it.</em></p></div>
+<h3>THE ONLINE TOOL AND ITS REPORT</h3>
+<p>The Portfolio Architect on the Cignal System applies live phase and market indicators to your portfolio and makes the results available as a downloadable report. The report carries every part of this lesson: the intake, your positions, the axis dashboard, ceilings calibrated by phase, the blueprint with each ceiling against actual, the maturity ladder, the gap plan, and the four stress tests. Its blueprint sets seven limits drawn from the five axes and your capital structure: single-phase dependency, a phase-independent ballast floor, single market, development and opportunistic exposure, single vintage year, single counterparty, and portfolio loan-to-value.</p>
+<p>The report is a snapshot. It holds what was true on the day it was produced; it does not know when a market moves phase, a loan is extended, or a value changes. Treat it as the document you bring to an investment committee, a lender, or a partner meeting—and return to the online tool at every review date and every phase transition to produce a current one.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/portfolio</p><p>Produce your first blueprint in the Portfolio Architect and download the report. Before you file it, recite the one-page version out loud in ninety seconds. If you cannot, the blueprint is not finished.</p></div>
+<h2>The Architect’s Standard</h2>
+<p class='secdeck'><em><em>What changes when you start designing the collection</em></em></p>
+<div class='callout'><p><em>The operator who thinks in deals will always be busier than the operator who thinks in portfolios. That is not evidence of anything.</em></p></div>
+<p>I want to close with the thing Portfolio Architect is actually about, which is not allocation percentages.</p>
+<p>Most of us entered this business through a deal. Someone showed us a property, the numbers worked, we found the capital, and it went well enough to do again. The deal is the unit of entry into real estate, and for most people it stays the unit of thinking for their entire career. Success gets defined as more deals, larger deals, better deals.</p>
+<p>There is nothing wrong with that until conditions change. And when conditions change, the deal-thinker discovers something uncomfortable: they were never managing a portfolio at all. They were managing a sequence of individually defensible decisions that, added together, constituted a single undiversified position they never chose to take.</p>
+<p>I know this because I did it. My own record includes assets acquired at exactly the wrong point in a cycle, financed on terms that made sense in the environment where they were signed, in markets I understood well, with partners I respected, executed competently. Several of those positions failed anyway, and none of them failed because of how they were operated. They failed because of when they were entered and how the portfolio around them was shaped. That is the origin of When &gt; How, and it is also the origin of Portfolio Architect — because the second half of the lesson took me considerably longer to learn than the first.</p>
+<div class='callout'><p><em>Timing determines the ceiling on a deal. Architecture determines whether the portfolio survives the deals whose ceilings were set too low.</em></p></div>
+<h3>WHAT ACTUALLY CHANGES</h3>
+<p>When you start thinking at the portfolio level, four things change, and none of them look like an improvement at first.</p>
+<p>You decline more. A blueprint gives you the ability to say no to a good deal because it is the wrong addition, which is a sentence most investors have never had a framework to say. It will feel like leaving money on the table, and sometimes it will have been.</p>
+<p>You are less busy in the phases when everyone is busiest. Late Expansion is loud, and a disciplined portfolio is quiet during it. You will watch peers transact at volume while you accumulate capital and harvest positions, and you will wonder — genuinely wonder — whether you have become too cautious. That doubt is not a malfunction. It is the correct experience of holding a position that the current phase does not reward.</p>
+<p>You are more active in the phases when everyone is frozen. This is where the discipline pays, and where the paying is compressed into a short window. The capital preserved across the quiet years gets deployed into a market with few competitors, and it is deployed by someone who decided in advance what to buy and why.</p>
+<p>And you stop mistaking motion for progress. This is the deepest change. A pile grows through activity. A portfolio grows through decisions, most of which are decisions not to act. Learning to tell the difference is the entire discipline.</p>
+<h3>THE STANDARD</h3>
+<p>Here is the standard I would ask you to hold yourself to. It is one question, and it should be answerable at any moment about any position you own or are considering.</p>
+<div class='card solo'><p class='ch'>THE ARCHITECT’S QUESTION</p><p>What role does this position play in the structure?</p><p>Not "is this a good deal." Not "does the underwriting work." Those questions matter and they come second.</p><p>First: what does this position do for the collection that the collection does not already have? If the answer is "more of what I already own," you have found a duplicate, and duplicates are how piles are built one excellent decision at a time.</p></div>
+<p>That question does not require software, a subscription, or a certification. It requires that you have a blueprint to hold the answer against. Build it, on paper, this month. Then measure what you own against it and start closing the gap with what you buy next.</p>
+<p>The market will do what it does. Your job is to have already decided what you will do about it.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>What does the lesson’s one-page test ask?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Whether the blueprint has been reviewed by an attorney.</button><button class='opt' data-k='B'><span class='k'>B</span>Whether the blueprint includes pro formas for every property.</button><button class='opt' data-k='C'><span class='k'>C</span>Whether you can state your blueprint out loud in ninety seconds—objective, horizon, reserve floor, five ceilings, the largest current gap and the lever that closes it, and the review date.</button><button class='opt' data-k='D'><span class='k'>D</span>Whether the blueprint is longer than ten pages.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson’s standard is that if it does not fit on a single page, you will not use it—and if you do not use it, it is not a blueprint. If you cannot recite it, you have not internalized it.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 2</span><p class='qs'>In both worked blueprints, what does the lesson say the blueprint changed?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It forced both investors to sell most of what they owned.</button><button class='opt' data-k='B'><span class='k'>B</span>It changed almost nothing about what was already owned and everything about what came next.</button><button class='opt' data-k='C'><span class='k'>C</span>It increased both portfolios’ leverage.</button><button class='opt' data-k='D'><span class='k'>D</span>It moved both investors into development.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Both the owner-operator and the passive allocator started with piles: concentrated vintages, correlated markets, and counterparty concentration. The corrections were sequenced mainly through what came next rather than through selling what was already owned—consistent with the rule that most portfolios are corrected forward, not backward.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 3</span><p class='qs'>Which of the four stress tests assumes you need a defined sum in ninety days for reasons unrelated to the portfolio?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The liquidity-need test.</button><button class='opt' data-k='B'><span class='k'>B</span>The phase-shift test.</button><button class='opt' data-k='C'><span class='k'>C</span>The maturity-pileup test.</button><button class='opt' data-k='D'><span class='k'>D</span>The counterparty-failure test.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The liquidity-need test asks what you could actually sell in that window, at what discount, and what selling it would do to the remaining portfolio. The other three tests move every market one phase forward, assume the two nearest triggers resolve unfavorably, and assume your largest counterparty fails.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 4</span><p class='qs'>According to the lesson, what is the most common finding when portfolios are stress-tested?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The failure point is almost always operational.</button><button class='opt' data-k='B'><span class='k'>B</span>Most portfolios pass every test.</button><button class='opt' data-k='C'><span class='k'>C</span>The failure point is almost always a single tenant.</button><button class='opt' data-k='D'><span class='k'>D</span>The failure point is almost always a date on the maturity ladder, arriving in a phase the portfolio did not plan for.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Across the portfolios walked through the exercise, the failure point is almost never operational. It is almost always a date—a maturity, a cap expiration, or a covenant test—landing in a phase the portfolio did not anticipate. That is why capital structure work is so often the most valuable lever.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>When a stress test reveals a failure point, the lesson gives three legitimate responses. In 2–3 sentences, name them and explain when “accept it” is and is not legitimate.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>The three responses are to accept it, reduce it, or prepare for it. Reducing it means applying a rebalancing lever—usually capital structure work—to move the failure point further out, and preparing for it means pre-arranging the response, such as an alternative lender or standby capital, before the trigger arrives. Accepting it is legitimate only when made explicitly, because the failure requires a scenario you judge sufficiently unlikely and the cost of defending against it exceeds the expected benefit; it is not legitimate when you arrive there by not running the test.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>A 58-year-old passive allocator holds nine LP positions across four sponsors, all committed within a 34-month window, with about $2.5 million invested and $1.5 million uncommitted. Their stated objective weights Income and Preservation at 85%. By structure, three positions are heavy repositioning deals with minimal current income and one is effectively a development deal; five of the six markets share a nearly identical in-migration and supply profile; and one sponsor holds 38% of invested equity. Using the lesson’s framework, explain (a) the most important gaps the current-state map reveals, (b) how Steps Four through Six of the blueprint should address them, (c) which stress tests matter most for this investor, and (d) the Architect’s Question the investor should ask before every future commitment.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The central gap is objective conflict: the intake describes an Income and Preservation investor, but the portfolio was built for Growth—the intake and the holdings describe two different investors. Compounding that are concentrated vintage (all nine positions inside 34 months), strategy misclassification (repositioning and development sold as value-add), market correlation (five markets that are functionally one), and counterparty concentration (one sponsor at 38%). (b) Step Four sets target distributions for all five axes: a phase-dependency ceiling and ballast floor, a market ceiling, strategy ceilings and floors aligned with an income objective, an annual deployment cap, and a single-sponsor ceiling. Step Five identifies the gaps between the current state and those targets. Step Six assigns levers and timeframes—mostly deployment of the $1.5 million uncommitted capital into genuinely income-producing, core or credit positions, with sponsors and markets that reduce concentration, paced across years rather than in a burst, with dispositions considered only where they are necessary and well priced. (c) The counterparty-failure test matters because one sponsor controls 38% of equity; the phase-shift test matters because five markets share one fate; and the liquidity-need test matters because the investor’s horizon and income needs make ninety-day liquidity important. (d) Before every future commitment, the investor should ask the Architect’s Question: what role does this position play in the structure? Not whether it is a good deal or whether the underwriting works—those questions come second.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>What does the lesson say about the Portfolio Architect tool on the Cignal System?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It replaces the need for a written blueprint and judgment.</button><button class='opt' data-k='B'><span class='k'>B</span>It maintains the discipline—computing distributions continuously, overlaying live phase positioning, flagging drift and maturity clusters, and running the stress tests—but it cannot supply the discipline.</button><button class='opt' data-k='C'><span class='k'>C</span>It guarantees that a portfolio will pass every stress test.</button><button class='opt' data-k='D'><span class='k'>D</span>It is only useful for operators with more than 1,000 units.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson says everything in Portfolio Architect can be done on paper, but very little of it gets done twice on paper. The tool keeps the work current, including the intake, position mapping, gap and drift reporting, the maturity ladder, and scenario testing. The warning is equally clear: the tool maintains the discipline; it cannot supply it.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of blueprint construction and testing. Part Three is complete—proceed to the Commander Capstone and CMCS certification with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Seven-Step Blueprint,” “Two Worked Blueprints,” and “Stress-Testing the Blueprint” in Lesson 3.3.7 before proceeding. Build your own one-page blueprint if you have not already.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.7 in full. The blueprint is where every part of Commander—acquisitions, operations, and architecture—comes together into one page you can hold your portfolio against.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Timing determines the ceiling on a deal. Architecture determines whether the portfolio survives the deals whose ceilings were set too low. If the answer key revealed gaps, close them now before the Commander Capstone.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-3-6.html'>&larr; Previous<span>The Rebalancing Protocol</span></a><a href='workbook.html' style='text-align:right'>Next &rarr;<span>The Commander Workbook</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.7 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.7', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

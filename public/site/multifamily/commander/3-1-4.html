@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1.4 · The WHERE — Location-Based Strategy &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.1.4</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
+  <p class="eyebrow">Lesson 3.1.4</p>
+  <h1>The WHERE — Location-Based Strategy</h1>
+  <p class='deck'>Across the Real Estate Market Cycle</p>
+  <div class="leadmeta"><span><b>1,215</b> words</span><span><b>6</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><p>Real estate investors love to repeat the phrase “location, location, location.” But what most never stop to consider is that location itself is not fixed. Neighborhoods change, demand shifts, and capital flows redirect growth. What can feel like the “right” area of a market in one phase of the cycle can quietly become the wrong place to be in the next.</p>
+<p>Sophisticated investors do not just ask what to buy or when to buy. Instead, they ask <strong>where demand, capital, and progress are moving next.</strong></p>
+<h2>Why “Where” Matters More Than Investors Realize</h2>
+<p>Every market contains multiple sub-markets. And every sub-market behaves differently across the cycle. Some areas recover faster, some attract capital earlier, some absorb supply better, and some never truly recover at all.</p>
+<div class='epi'><p><em>Two properties located five miles apart can experience completely different outcomes in the same economic environment. The difference is rarely the building. It is almost always the direction of demand and investment—the Path of Progress.</em></p></div>
+<h2>Recovery Phase: Buying Where the Market Will Heal First</h2>
+<p>Recovery is the phase where <strong>location selection matters most—and where mistakes are most costly.</strong> During recovery, demand is fragile, capital is cautious, not every neighborhood rebounds equally—some areas recover early, while others stagnate for years.</p>
+<p>In recovery, the right “where” is not the cheapest part of town. It is the area most likely to benefit from early-stage reinvestment. Cycle-aware investors focus on sub-markets that show:</p>
+<ul class='blist'>
+<li><strong></strong>Early employment stabilization</li>
+<li><strong></strong>Limited new construction</li>
+<li><strong></strong>Proximity to established demand drivers</li>
+<li><strong></strong>Evidence of reinvestment, not abandonment</li>
+</ul>
+<p>Buying along the path of progress during the recovery phase allows investors to acquire assets at depressed pricing while positioning themselves in areas that will attract future demand. Buying on the wrong side of the tracks during the recovery phase often leads to prolonged stagnation, management challenges, and limited exit options—no matter how good the purchase price looks.</p>
+<h2>Expansion Phase: Following Demand, Not Chasing Price</h2>
+<p>Expansion is the phase where location mistakes often hide in plain sight. As demand rises across the market, rents increase, occupancy improves, and investors begin to believe that “everything works.” In this environment, buying in marginal locations can feel justified because growth masks weakness.</p>
+<p>But expansion does not lift all areas equally. The right “where” during the expansion phase is where <strong>population growth is accelerating, infrastructure investment is visible, retail and services are expanding, and capital is flowing intentionally, not speculatively.</strong></p>
+<p>Path-of-progress awareness during the expansion phase allows investors to stay aligned with long-term growth rather than short-term momentum. Buying outside that path may still produce temporary gains, but those gains often evaporate when conditions tighten.</p>
+<h2>Oversupply Phase: Location as a Defensive Filter</h2>
+<p>The Oversupply phase is where location becomes a shield—or a liability. As developers deliver new units, competition intensifies, rent growth slows, and concessions reappear. Assets located in strong locations defend occupancy and pricing better than those in fringe or declining areas.</p>
+<div class='callout'><p><em>In this phase, buying “cheap” in the wrong location is often far more dangerous than buying “expensive” in the right one.</em></p></div>
+<p>Cycle-first investors narrow their geographic focus. They avoid areas that rely solely on price competition and instead prioritize locations with:</p>
+<ul class='blist'>
+<li><strong></strong>Established desirability</li>
+<li><strong></strong>Strong school districts or employment access</li>
+<li><strong></strong>Barriers to new supply</li>
+<li><strong></strong>Proven renter demand</li>
+</ul>
+<p>Path-of-progress awareness in this phase is less about upside and more about survivability.</p>
+<h2>Contraction Phase: Quality Location Buys Time</h2>
+<p>The Contraction phase exposes location risk brutally. During this phase, unit demand contracts, tenants consolidate and find roommates or move in with family members, and capital retreats. In this environment, assets in marginal locations suffer first and recover last.</p>
+<p>The right “where” in contraction is not the most distressed neighborhood. It is the area with <strong>durable fundamentals that is temporarily out of favor.</strong></p>
+<p>Buying in the path of progress during contraction allows investors to acquire assets at discounts, attract stable tenant profiles, and preserve optionality for refinancing or exit. However, buying on the wrong side of the tracks in contraction often locks investors into operationally intensive assets with limited demand elasticity and few exit options.</p>
+<h2>Running the WHERE on Market Maps</h2>
+<p>The path of progress is not a feeling about a neighborhood. It is a set of measurable signals—employment, supply, migration, reinvestment—read at the submarket level, which is exactly what Layer 1 of your Cignal Dashboard was built to capture.</p>
+<p>Market Maps on the Cignal System brings those signals together so the WHERE can be answered with evidence rather than impressions. Build Your Own Ranking lets you weight the signals that matter for your strategy and rank metros by them. Market Lookup then takes you to the ZIP code you would actually buy in: the direction of rents, lease economics, local industry growth and concentration, migration and the income of households moving in, and Opportunity Zone eligibility tract by tract. Each indicator is labeled leading, coincident, or trailing.</p>
+<p>Use it the way this lesson reads location by phase. In Recovery, look for submarkets where leading indicators are improving before the headline data does. In Expansion, confirm that growth is supported by durable drivers rather than momentum. In Oversupply, check supply pressure and whether the submarket’s demand can defend rents. In Contraction, separate a submarket that is temporarily out of favor from one whose drivers are leaving.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/market-maps</p><p>Choose a submarket where you own or intend to buy. Run Market Lookup on its ZIP code and write down which indicators say demand and capital are moving toward it, which say they are moving away, and what phase the evidence supports.</p></div>
+<h2>Why “The Wrong Side of the Tracks” Is a Timing Problem</h2>
+<p>Investing on the wrong side of the tracks is not just a social or aesthetic issue—it is a cycle problem. In strong markets, these areas may appear to improve. In weaker markets, they often collapse faster and recover slower.</p>
+<p>What makes an area “wrong” is not just income levels or age of housing. It is whether capital and demand are moving toward it or away from it. Cycle-first investors avoid areas where:</p>
+<ul class='blist'>
+<li><strong></strong>Infrastructure is deteriorating</li>
+<li><strong></strong>Retail is retreating</li>
+<li><strong></strong>Population is stagnant or declining</li>
+<li><strong></strong>Investment is reactive rather than intentional</li>
+</ul>
+<div class='callout'><p><em>No amount of renovation can overcome a location moving in the wrong direction.</em></p></div>
+<p>Your ideal investing strategy should influence where you buy—but it must also adapt to the cycle. A value-add strategy may focus closer to the path of progress during recovery and expansion, a cash-flow strategy may favor established demand nodes during contraction, and a development-adjacent strategy may avoid oversupply zones late in the cycle.</p>
+<p>The mistake is treating location as static while strategy evolves, or vice versa. The best investors adjust both.</p>
+<h2>Buy in the Direction of Demand, Not Against It</h2>
+<p>The market cycle determines when opportunity appears, strategy determines how you capture it, and location determines whether it lasts. Buying in the right area amplifies good decisions. Buying in the wrong area neutralizes them.</p>
+<p>Path-of-progress awareness is not about speculation—it is about respecting how markets evolve over time. Investors who ignore location timing often blame management, financing, or bad luck, while investors who master location timing rarely need excuses.</p>
+<div class='callout'><p><em>In real estate, you do not just invest in buildings—you invest in where the future is headed. And when you align where you buy with where the market is going, the cycle begins working for you, not against you.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>According to the lesson, what is the right “where” during the Recovery phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The cheapest part of town, since pricing offers the largest margin of safety.</button><button class='opt' data-k='B'><span class='k'>B</span>Wherever the investor already owns property, to concentrate management attention.</button><button class='opt' data-k='C'><span class='k'>C</span>The area most likely to benefit from early-stage reinvestment—showing early employment stabilization, limited new construction, proximity to established demand drivers, and evidence of reinvestment rather than abandonment.</button><button class='opt' data-k='D'><span class='k'>D</span>The submarket with the highest current rents.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson says Recovery is where location selection matters most and where mistakes are most costly. The right “where” is not the cheapest location; it is the one positioned along the path of progress. Buying on the wrong side of the tracks in Recovery often leads to prolonged stagnation and limited exit options no matter how good the purchase price looks.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 2</span><p class='qs'>Why does the lesson say location mistakes often “hide in plain sight” during Expansion?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Because rising demand across the market lifts rents and occupancy broadly, so growth masks weakness in marginal locations.</button><button class='opt' data-k='B'><span class='k'>B</span>Because data is unavailable during Expansion.</button><button class='opt' data-k='C'><span class='k'>C</span>Because lenders refuse to finance fringe locations during Expansion.</button><button class='opt' data-k='D'><span class='k'>D</span>Because every location performs identically during Expansion.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>In Expansion, investors begin to believe that “everything works.” Growth makes marginal locations feel justified—but Expansion does not lift all areas equally, and gains in locations outside the path of progress often evaporate when conditions tighten.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 3</span><p class='qs'>What does the lesson say about location during the Oversupply phase?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Location matters less, because every property is competing on concessions.</button><button class='opt' data-k='B'><span class='k'>B</span>Investors should expand their geographic focus to find bargains.</button><button class='opt' data-k='C'><span class='k'>C</span>Fringe locations outperform because their lower rents attract renters away from new supply.</button><button class='opt' data-k='D'><span class='k'>D</span>Location becomes a defensive filter—buying “cheap” in the wrong location is often far more dangerous than buying “expensive” in the right one.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>As new deliveries intensify competition, assets in strong locations defend occupancy and pricing better than those in fringe or declining areas. Cycle-first investors narrow their focus to established desirability, strong schools or employment access, barriers to new supply, and proven renter demand. In this phase, location is less about upside and more about survivability.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 4</span><p class='qs'>What does the lesson say actually makes an area the “wrong side of the tracks”?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Its income levels and the age of its housing stock.</button><button class='opt' data-k='B'><span class='k'>B</span>Whether capital and demand are moving toward it or away from it—signaled by deteriorating infrastructure, retreating retail, stagnant or declining population, and reactive rather than intentional investment.</button><button class='opt' data-k='C'><span class='k'>C</span>Its distance from the downtown core.</button><button class='opt' data-k='D'><span class='k'>D</span>The share of renters versus owners.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson reframes the “wrong side of the tracks” as a cycle and timing problem, not a social or aesthetic one. In strong markets these areas may appear to improve; in weaker markets they collapse faster and recover slower. What makes an area wrong is its direction, not its current profile.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says the right “where” in Contraction is not the most distressed neighborhood, but an area with durable fundamentals that is temporarily out of favor. In 2–3 sentences, explain the difference and why it matters.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>The most distressed neighborhood looks cheapest, but its weakness is often structural—demand and capital are leaving, so assets there suffer first, recover last, and lock owners into operationally intensive properties with few exit options. An area with durable fundamentals is out of favor because of the cycle, not because its drivers are gone, so buying there at a discount attracts more stable tenants and preserves the option to refinance or exit when conditions improve. The distinction is between a temporary discount and a permanent decline, and only the first one rewards a Contraction buyer.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>The market is in early Recovery. An investor is choosing between two 150-unit properties five miles apart. Property X is priced 20% below Property Y. Its submarket has seen retail closures, a flat population for five years, deferred road and utility maintenance, and new investment that consists mostly of distressed buyers. Property Y sits near a hospital system that just announced an expansion, a committed transit extension, visible private reinvestment, and a limited construction pipeline. Using the lesson’s framework, explain (a) which property is aligned with the path of progress and why, (b) the risks of Property X despite its price, (c) how Property Y is positioned for the phases that follow, and (d) how the investor’s strategy should interact with the location choice.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) Property Y is aligned with the path of progress. Its submarket shows the Recovery markers the lesson describes: proximity to an established and growing demand driver, committed infrastructure, intentional reinvestment, and limited new supply. (b) Property X shows the signs of a location moving in the wrong direction—retreating retail, stagnant population, deteriorating infrastructure, and reactive investment. Buying there in Recovery risks prolonged stagnation, management challenges, and limited exit options, and no amount of renovation can overcome that direction. The 20% discount may simply be the price of a permanent decline. (c) Property Y should benefit as Expansion arrives: population and employment growth, infrastructure investment, and expanding services pull demand toward it, which supports leasing, tenant quality, and a deeper buyer pool at exit. In Oversupply its established desirability and supply barriers help it defend rents, and in Contraction its durable fundamentals buy time. (d) The lesson says location and strategy must adjust together. A value-add strategy fits closer to the path of progress in Recovery and Expansion, so Property Y is where a repositioning plan has room to work. Treating location as static while strategy evolves, or vice versa, is the mistake.</em></em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>How does the lesson summarize the relationship between the cycle, strategy, and location?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Location determines when opportunity appears, strategy determines whether it lasts, and the cycle determines how you capture it.</button><button class='opt' data-k='B'><span class='k'>B</span>The three are independent, and location only matters at exit.</button><button class='opt' data-k='C'><span class='k'>C</span>The cycle determines when opportunity appears, strategy determines how you capture it, and location determines whether it lasts.</button><button class='opt' data-k='D'><span class='k'>D</span>Strategy determines everything; the cycle and location are secondary.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson closes with this sequence: the cycle determines when opportunity appears, strategy determines how you capture it, and location determines whether it lasts. Buying in the right area amplifies good decisions; buying in the wrong one neutralizes them.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of location strategy across the cycle. Proceed to Lesson 3.1.5 (The WHY: The Foundation That Holds) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the four phase sections and “Why ‘The Wrong Side of the Tracks’ Is a Timing Problem” in Lesson 3.1.4 before proceeding. Focus especially on the markers of the path of progress and how location’s role shifts from opportunity to defense.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.1.4 in full. The WHERE is where the three-layer analysis you built in Special Ops becomes concrete, down to the submarket. Learning to read the direction of demand, not just the price of a location, is the discipline this lesson builds.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>You do not just invest in buildings—you invest in where the future is headed. If the answer key revealed gaps, close them now before Lesson 3.1.5.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-1-3.html'>&larr; Previous<span>The WHEN — Timing Your Ideal Multifamily Strategy</span></a><a href='3-1-5.html' style='text-align:right'>Next &rarr;<span>The WHY — The Foundation That Holds</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.1.4 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.1.4', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

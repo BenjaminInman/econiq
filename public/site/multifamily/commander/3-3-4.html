@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.4 · The Five Axes of Balance &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.4</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.4</p>
+  <h1>The Five Axes of Balance</h1>
+  <p class='deck'>A Real Estate Portfolio Can Be Balanced Along Five Dimensions</p>
+  <div class="leadmeta"><span><b>4,813</b> words</span><span><b>22</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>Axis One — Phase</h2>
+<p class='secdeck'><em><em>The dimension almost nobody measures</em></em></p>
+<div class='epi'><p><em>You can compute your portfolio’s position in the cycle the same way you compute its weighted average cost of capital. Very few people ever have.</em></p></div>
+<p>The first and most important axis is phase exposure: what share of your portfolio is positioned for, and dependent upon, each phase of the cycle.</p>
+<p>This requires two separate measurements that are easy to confuse. The first is where each position entered the cycle. The second is what phase each position now requires in order to succeed. They are not the same, and the gap between them is where most portfolio risk actually lives.</p>
+<h3>THE FOUR PHASES, BRIEFLY</h3>
+<p>A quick reference, carried over from Recon. Each phase carries a characteristic animal and a characteristic behavioral state — the collective psychology that dominates while the phase is underway.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>PHASE</strong></th><th><strong>ANIMAL</strong></th><th><strong>BEHAVIORAL STATE</strong></th><th><strong>WHAT THE MARKET FEELS LIKE</strong></th></tr></thead><tbody><tr><td>Recovery</td><td>Cheetah</td><td>Irrational Desperation</td><td>Occupancy is stabilizing but nobody believes it yet. Capital is scarce, sellers are motivated, and the consensus view is that it is too early. Speed and conviction are rewarded.</td></tr><tr><td>Expansion</td><td>Bull</td><td>Irrational Exuberance</td><td>Rent growth is broad, capital is abundant, competition for assets is intense. Every projection extends the present indefinitely. Discipline is punished in the short run and rewarded in the long one.</td></tr><tr><td>Oversupply</td><td>Gorilla</td><td>Irrational Denial</td><td>Deliveries arrive into softening demand. Concessions appear and get explained away as seasonal. The data has turned but the narrative has not. Weight and defensive positioning matter more than speed.</td></tr><tr><td>Contraction</td><td>Bear</td><td>Irrational Fear</td><td>Values reset, credit withdraws, distress surfaces. Consensus holds that recovery is distant. Survival is the first objective; positioning is the second.</td></tr></tbody></table></div>
+<p>The animals are teaching devices, not decoration. They encode the posture each phase demands: the Cheetah’s burst of speed when the window opens, the Bull’s momentum and its tendency to run past the point of sense, the Gorilla’s immovable weight when the market wants you to move, and the Bear’s patience through a season nothing grows in.</p>
+<h3>COMPUTING YOUR PORTFOLIO PHASE POSITION</h3>
+<p>The calculation is straightforward. For each position, record two numbers.</p>
+<ul class='blist'>
+<li><strong>Entry phase.</strong> The phase the market occupied when you acquired. Use the local market’s phase, not the national one — this is a property-level fact and properties sit in submarkets.</li>
+<li><strong>Dependency phase.</strong> The phase that must prevail for this position to achieve its plan. A stabilized asset with long fixed debt and modest projections depends on nothing in particular. A heavy value-add with a three-year exit assumption at a compressed cap rate depends on Expansion continuing.</li>
+</ul>
+<p>Weight each by equity invested rather than by asset value or unit count, because equity is what you can lose. Then tabulate. The result is a distribution — the share of your capital entered in each phase, and the share dependent upon each phase.</p>
+<div class='card solo'><p class='ch'>READING THE OUTPUT</p><p>The entry distribution tells you about your basis. Concentration in late-Expansion entries means high basis across the portfolio, which compresses your margin for error everywhere at once.</p><p>The dependency distribution tells you about your fragility, and it is the more important of the two. A portfolio where seventy percent of equity requires continued Expansion to hit plan is a portfolio with one point of failure, regardless of how many properties, markets, or partners it contains.</p></div>
+<h3>THE TARGET DISTRIBUTION</h3>
+<p>What should the distribution look like? The answer depends on your objective and horizon, but one principle holds universally: no more than a defined share of equity should be dependent on any single phase continuing.</p>
+<p>Set the number yourself. Fifty percent is a defensible ceiling for most investors; more aggressive investors run higher and should know they are doing it deliberately. What matters is not the specific threshold but that a threshold exists, is written down, and gets checked before each new commitment.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>PROFILE</strong></th><th><strong>WHAT IT MEANS</strong></th><th><strong>DESIGN RESPONSE</strong></th></tr></thead><tbody><tr><td>Phase-independent</td><td>Position performs adequately across all four phases. Stabilized, moderate leverage, long fixed debt, conservative underwriting.</td><td>This is portfolio ballast. Every portfolio needs a meaningful share of it, and it is hardest to acquire in the phases when you most want to own it.</td></tr><tr><td>Phase-tolerant</td><td>Position needs the current phase to persist for roughly the next twelve to twenty-four months, then becomes independent.</td><td>Manageable. Track the runway explicitly and know the date by which independence is achieved.</td></tr><tr><td>Phase-dependent</td><td>Position requires a specific phase to persist through its full business plan, typically three or more years.</td><td>Size these deliberately. They are where returns are made and where portfolios are lost.</td></tr><tr><td>Phase-contingent</td><td>Position requires a phase transition to occur — an improvement from current conditions — to work at all.</td><td>This is a forecast expressed as a purchase. It can be correct. It must be sized as a forecast, not as a holding.</td></tr></tbody></table></div>
+<h3>BUILDING BALLAST</h3>
+<p>The uncomfortable truth about phase-independent positions is that they are least available exactly when you most want them. In Recovery and early Expansion, when you could acquire a stabilized asset at a reasonable basis with sensible leverage, everything in you wants to chase the higher return available in value-add. By late Expansion, when the desire for ballast becomes acute, ballast has been repriced out of reach.</p>
+<p>Which means ballast has to be acquired on a schedule rather than on an impulse. Decide what share of the portfolio should be phase-independent, and acquire toward that share during the phases when it is affordable, accepting a lower return on that slice as the cost of the whole structure holding together.</p>
+<div class='callout'><p><em>The boring position you bought three years too early is the reason the exciting ones survived.</em></p></div>
+<h3>WORKSHEET — AXIS ONE</h3>
+<p><strong>A1</strong>  Tabulate every position by entry phase and dependency phase, weighted by equity invested. Write the two distributions as percentages.</p>
+<p><strong>A2</strong>  What share of your equity is phase-dependent or phase-contingent? Set your ceiling and note whether you currently exceed it.</p>
+<p><strong>A3</strong>  Identify your ballast. If less than a quarter of equity is phase-independent, write the plan for building it.</p>
+<h2>Axis Two — Market</h2>
+<p class='secdeck'><em><em>Distribution that actually distributes risk</em></em></p>
+<div class='callout'><p><em>Lesson 3.3.3 asked which markets. This section asks how much in each, and on what basis the answer changes.</em></p></div>
+<p>The market axis is the one most investors believe they have handled. They own in several places, therefore they are diversified. Lesson 3.3.3 established why that reasoning fails. This section establishes what to do instead.</p>
+<h3>POSITION SIZING BY MARKET</h3>
+<p>Start with a ceiling. What is the maximum share of portfolio equity permitted in a single market? The answer depends on your role and your leverage, and the relationship between those three variables is worth stating explicitly.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>CONFIGURATION</strong></th><th><strong>REASONABLE MARKET CEILING</strong></th><th><strong>REASONING</strong></th></tr></thead><tbody><tr><td>Concentrated operator, low leverage</td><td>Up to 60–70% in the core market</td><td>Informational edge is real and low leverage means a market downturn is survivable without forced action. This is a legitimate strategy, not a failure of diversification.</td></tr><tr><td>Concentrated operator, high leverage</td><td>30–40% maximum</td><td>The combination of single-market exposure and high leverage is the configuration that produces total loss. If leverage is high, concentration must come down.</td></tr><tr><td>Distributed operator</td><td>25–35% per market</td><td>Enough scale in each market to justify infrastructure, capped so no single market can dominate outcomes.</td></tr><tr><td>Passive allocator</td><td>20–25% per market</td><td>No informational edge and no operational levers means concentration provides no compensating advantage. Spread wider.</td></tr></tbody></table></div>
+<p>Notice the interaction in the first two rows. Concentration and leverage are substitutes, not complements. You may have one at elevated levels. Having both is the single most reliable way to lose a portfolio, and it is a configuration people arrive at gradually, without ever deciding to.</p>
+<h3>PHASE DIVERGENCE AS THE OBJECTIVE</h3>
+<p>The purpose of market distribution is not to own in many places. It is to own in places that occupy different positions in the cycle — so that when one market is in Oversupply, another is in Recovery, and the portfolio has both a defensive position and an offensive one available simultaneously.</p>
+<p>This is what makes market allocation a cycle discipline rather than a geography exercise. The question you ask before entering a new market is not "is this a good market." It is "what does this market’s phase position add to a portfolio that currently looks like this."</p>
+<p>A market in Recovery adds acquisition opportunity and future upside. A market in late Expansion adds harvest opportunity — assets you can sell into strength. A market in Contraction adds nothing today and may add everything in eighteen months, which makes it a watch-list item rather than a deployment target. The portfolio wants a mix, because the mix is what guarantees you always have something to do.</p>
+<div class='card solo'><p class='ch'>THE ALWAYS-SOMETHING-TO-DO PRINCIPLE</p><p>A well-distributed portfolio always has a defensible action available. Something to buy, something to harvest, something to refinance, something to hold.</p><p>A concentrated portfolio has exactly one action available, determined by the phase of its single market. When that action is "wait," you wait — and waiting with fixed overhead and an ambitious team is how operators talk themselves into deals they know better than to do.</p></div>
+<h3>ENTERING AND EXITING MARKETS</h3>
+<p>Two decisions get made badly and constantly.</p>
+<p><strong>When to enter a new market.</strong> The wrong trigger is performance. By the time a market has appeared on enough lists to reach your attention as a top-performing market, its phase position has usually advanced past the point where entering is attractive. Chasing published performance systematically buys late.</p>
+<p>The right trigger is phase position combined with portfolio need. Enter a market when its cycle position is favorable relative to where you are deploying, when its demand drivers differ from what you already hold, and when you have either genuine local capability or a local partner who does. All three conditions, not two.</p>
+<p><strong>When to exit a market entirely.</strong> Harder, and rarer than it should be. The signals that justify a full market exit: your local capability has degraded, usually through a partner or a management relationship you can no longer rely on; the market’s structural demand driver has changed rather than merely cycled; supply response capability has increased permanently, which means the market’s future cycles will be shallower on the upside and deeper on the downside; or your position there is subscale and consuming attention disproportionate to its contribution.</p>
+<p>Note that "the market is in Oversupply" appears nowhere on that list. Phase is a reason to stop buying. It is rarely, by itself, a reason to exit — because you would be selling into the phase that prices your asset worst, and the phase that follows Oversupply eventually is Recovery.</p>
+<div class='callout'><p><em>Stop buying is a phase decision. Sell everything is a structural decision. Investors who confuse the two exit at the bottom and re-enter at the top.</em></p></div>
+<h3>WORKSHEET — AXIS TWO</h3>
+<p><strong>B1</strong>  Write your market ceiling as a percentage of portfolio equity, justified by your role and leverage configuration.</p>
+<p><strong>B2</strong>  List your markets with current phase reads. Identify whether your portfolio currently has a buy market, a harvest market, and a watch market available to it.</p>
+<p><strong>B3</strong>  Name any market you should exit for structural reasons, and any market you should enter to improve phase distribution.</p>
+<h2>Axis Three — Strategy</h2>
+<p class='secdeck'><em><em>Risk styles and where each one earns its keep</em></em></p>
+<div class='callout'><p><em>Every strategy works in some phase. No strategy works in all of them. The portfolio question is which mix you hold and when the mix shifts.</em></p></div>
+<p>The third axis is strategy: the type of return you are pursuing and the type of risk you accept to pursue it. Borrowing loosely from institutional convention, real estate strategies sort into a spectrum from stabilized income to speculative development, with credit positions sitting alongside as a distinct category.</p>
+<h3>THE STRATEGY SPECTRUM</h3>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Core / stabilized</span></div></div></div>
+<p>High-occupancy assets in established submarkets with modest leverage and minimal business plan. Return is predominantly current income. Low variance, low ceiling. This is portfolio ballast — the phase-independent position of Axis One — and its role is to make everything else survivable.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Value-add</span></div></div></div>
+<p>Assets with identifiable operational or physical upside: below-market rents, deferred maintenance, mismanagement, or unrenovated units. Return blends income and appreciation. Moderate to high variance depending on plan depth and leverage. This is where most active multifamily capital lives.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Opportunistic / distressed</span></div></div></div>
+<p>Assets requiring substantial repositioning, recapitalization, or acquired out of a distressed situation. Return is predominantly appreciation, current income may be nil. High variance, high ceiling, and highly phase-specific — the opportunity set exists mainly in Contraction and early Recovery.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Development</span></div></div></div>
+<p>Ground-up construction. Return is entirely dependent on delivering into a market that wants the product at completion, which is a bet on conditions two to four years forward. The highest variance available, and the most cycle-sensitive strategy in the entire spectrum.</p>
+<div class='numlist'><div class='numrow'><div class='n'>5</div><div class='c'><span class='term'>Credit</span></div></div></div>
+<p>Debt positions rather than ownership: preferred returns, mezzanine, bridge lending, note acquisition. Return is contractual and senior to equity. Variance depends on position in the stack. Its role in a portfolio is countercyclical — credit opportunity expands precisely when equity opportunity contracts.</p>
+<h3>STRATEGY BY PHASE</h3>
+<p>The core insight of this axis is that strategy attractiveness is not stable. It rotates with the cycle, and the rotation is fairly predictable in sequence even when it is unpredictable in timing.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>STRATEGY</strong></th><th><strong>RECOVERY</strong></th><th><strong>EXPANSION</strong></th><th><strong>OVERSUPPLY</strong></th><th><strong>CONTRACTION</strong></th></tr></thead><tbody><tr><td>Core / stabilized</td><td>Attractive basis</td><td>Fairly priced</td><td>Defensive value</td><td>Defensive value</td></tr><tr><td>Value-add</td><td>Strongest window</td><td>Good, then crowded</td><td>Compressing</td><td>Difficult</td></tr><tr><td>Opportunistic</td><td>Selective</td><td>Scarce</td><td>Emerging</td><td>Strongest window</td></tr><tr><td>Development</td><td>Best risk-adjusted start</td><td>Increasingly crowded</td><td>Dangerous</td><td>Only for delivery into Recovery</td></tr><tr><td>Credit</td><td>Moderate</td><td>Thin spreads</td><td>Widening</td><td>Strongest window</td></tr></tbody></table></div>
+<p>Read the development row carefully, because it contains the sharpest illustration of the When &gt; How thesis anywhere in Portfolio Architect. Development is most attractive to start when the market feels worst, because construction takes years and you are delivering into the phase that arrives after the one you are standing in. Development feels most attractive to start when the market is strongest — which is precisely when your delivery lands into Oversupply alongside everyone else who felt the same way. The industry’s supply cycle is, in essence, the aggregate of that error repeated at scale.</p>
+<div class='card solo'><p class='ch'>THE COUNTERCYCLICAL PAIR</p><p>Credit and opportunistic equity are the two strategies whose opportunity sets expand when everything else contracts.</p><p>Holding a portfolio with the capability to execute at least one of them — through your own capacity, an established partner, or a fund relationship built in advance — converts Contraction from a phase you survive into a phase you use. That capability has to be built before you need it, because it cannot be assembled in the moment it becomes valuable.</p></div>
+<h3>STRATEGY SIZING</h3>
+<p>Two rules govern the strategy axis.</p>
+<ul class='blist'>
+<li><strong>The high-variance strategies get a hard ceiling.</strong> Development and opportunistic positions together should be capped at a stated share of equity, set in advance. The reason is not that they are bad — they carry the highest returns available — but that their variance means a bad outcome is a total outcome, and total outcomes must be survivable at the portfolio level.</li>
+<li><strong>The ballast floor is non-negotiable.</strong> A minimum share in core or genuinely phase-independent positions, maintained even when the return differential makes it feel wasteful. It will feel wasteful for years and then justify itself entirely in eight months.</li>
+</ul>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Strategy diversification is easier for you than for an operator, because you are not building capability — you are selecting for it. You can hold value-add, credit, and opportunistic positions simultaneously through different sponsors without developing three separate competencies.</p>
+<p>The failure mode is subtler. Sponsors describe strategies in the language that raises capital, and in strong markets nearly everything is described as value-add regardless of what it actually is. A ground-up development with a merchant-build exit and a heavy-repositioning deal with negative cash flow for two years may both arrive in your inbox described the same way. Classify by structure and cash flow profile rather than by the label in the offering memorandum, and your strategy distribution will look different from what you assumed.</p>
+<div class='callout'><p><em>Classify what a position actually is, not what the deck calls it.</em></p></div>
+<h3>WORKSHEET — AXIS THREE</h3>
+<p><strong>C1</strong>  Classify every position by actual strategy — core, value-add, opportunistic, development, credit — using structure and cash flow profile rather than marketing language.</p>
+<p><strong>C2</strong>  Set your ceiling for combined development and opportunistic exposure, and your floor for core ballast.</p>
+<p><strong>C3</strong>  Do you currently have the capability to execute a countercyclical strategy — credit or distressed — if the opportunity opened in twelve months? If not, what would you need to build or arrange now?</p>
+<h2>Axis Four — Vintage</h2>
+<p class='secdeck'><em><em>Deployment pacing as a risk control</em></em></p>
+<div class='callout'><p><em>The most powerful diversification tool available to a real estate investor is also the least exciting: buying at different times on purpose.</em></p></div>
+<p>Vintage is the year, or more precisely the market condition, in which capital was deployed. It is the axis that separates a portfolio from a pile more reliably than any other, and it is the one investors most consistently ignore — because managing vintage means deliberately not buying during periods when buying is easy and everyone else is doing it.</p>
+<h3>WHY VINTAGE DOMINATES</h3>
+<p>Institutional investors have understood this for decades in private equity, where fund vintage year is treated as a primary risk factor and programs are constructed specifically to commit capital across vintages regardless of how any given year looks. The logic transfers to real estate directly and with more force, because our cycles are longer and our entry basis is more determinative of outcome.</p>
+<p>The mechanism is simple. Entry basis is fixed at purchase and cannot be revised. Every subsequent decision — every renovation, every lease, every refinancing — operates on top of a basis that was set once. If all of your basis was set in the same window, then all of your positions inherit the same starting condition, and the quality of that single window determines the quality of everything you own.</p>
+<div class='card solo'><p class='ch'>THE VINTAGE PRINCIPLE</p><p>Concentrated vintage is concentrated risk, even when nothing else is concentrated</p><p>A portfolio spread across six markets, four strategies, and three partners, all acquired within eighteen months, is diversified on three axes and completely concentrated on the one that matters most. Every position shares the same entry basis condition and the same capital-market environment. When that environment is revealed to have been a peak, all four axes of diversification prove decorative.</p></div>
+<h3>PACING DISCIPLINE</h3>
+<p>The practical implementation is a deployment schedule: a stated maximum share of available capital that may be committed in any twelve-month period, set in advance and adhered to regardless of how attractive the pipeline looks.</p>
+<p>This is harder than it sounds and it fails for a predictable reason. Deal flow is not evenly distributed. Opportunities cluster, and they cluster hardest in the phases when everyone is transacting — which is exactly when you should be pacing most carefully. The discipline is therefore tested precisely when it feels most costly, which is the defining characteristic of every discipline worth having.</p>
+<ul class='blist'>
+<li><strong>Set the annual cap as a percentage.</strong> A common structure limits any single twelve-month period to something in the range of a quarter to a third of deployable capital. Adjust to your circumstances, but adjust before you are in the market rather than during.</li>
+<li><strong>Allow phase-based override — in one direction only.</strong> The cap may be exceeded in Recovery and early Expansion, when basis is genuinely favorable and the opportunity set is real. It may never be exceeded in late Expansion or Oversupply. Asymmetric rules for asymmetric conditions.</li>
+<li><strong>Treat unspent capital as a position.</strong> Dry powder is not failure to deploy. It is an allocation to future optionality, and it is the only position in the portfolio whose value rises as conditions deteriorate.</li>
+</ul>
+<div class='card solo'><p class='ch'>THE DRY POWDER OBJECTION</p><p>The standard argument against holding capital is that it earns nothing and returns are made by being invested.</p><p>The counter-argument is arithmetic rather than philosophical. The return on dry powder is not the yield it earns while idle. It is the difference between the basis you can achieve when others are forced to transact and the basis you would have achieved by deploying early. Across a full cycle, that spread has historically dwarfed anything foregone by waiting — and it is available only to investors who arrive at the moment with capital in hand.</p></div>
+<h3>VINTAGE AND EXIT SEQUENCING</h3>
+<p>Vintage discipline applies at the exit as well, and this side gets even less attention. If all positions were acquired in the same window with the same hold period, they mature toward exit in the same window — and you find yourself trying to sell four assets into a single market condition.</p>
+<p>Stagger intended exits the way you stagger entries. When positions naturally cluster toward the same exit window, break the cluster deliberately: extend one, refinance and hold another, sell one earlier than optimal. Accepting a slightly worse outcome on one position to avoid a simultaneous four-asset liquidation into a soft market is straightforwardly good portfolio management, even though it looks like a suboptimal single-asset decision when viewed alone.</p>
+<div class='callout'><p><em>Judging every decision at the asset level guarantees a portfolio that was never decided at all.</em></p></div>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Vintage is the axis where you have the most control and typically exercise the least. Nothing prevents a passive investor from committing capital steadily across years rather than in bursts. What actually happens is that commitments follow sponsor deal flow, which follows market activity, which peaks in Expansion — so passive portfolios cluster in vintage even more tightly than operator portfolios do.</p>
+<p>The fix is mechanical: decide in advance how much you will commit per year, and hold to it. When your sponsors bring four deals in one year and none the next, that pattern is telling you something about the cycle. Read it as information rather than as opportunity.</p>
+<h3>WORKSHEET — AXIS FOUR</h3>
+<p><strong>D1</strong>  Plot every position by acquisition date on a timeline. Mark the heaviest eighteen-month window and calculate what share of equity it contains.</p>
+<p><strong>D2</strong>  Set your annual deployment cap as a percentage of deployable capital, with the phase-based override rule stated explicitly.</p>
+<p><strong>D3</strong>  Plot intended exits on the same timeline. Identify any clustering and name which position you would deliberately break out of the cluster.</p>
+<h2>Axis Five — Partner</h2>
+<p class='secdeck'><em><em>Counterparty concentration, for operators and allocators alike</em></em></p>
+<div class='callout'><p><em>The fifth axis is the one that turns a market problem into a total problem — because partners fail across every position they touch simultaneously.</em></p></div>
+<p>The final axis is who. For passive allocators this means sponsor concentration. For operators it means joint venture partners, equity partners, lenders, and management companies. In both cases the risk has the same shape: a counterparty failure is not contained to one position. It propagates across every position that counterparty touches, at the same moment, usually in the phase when you have the least capacity to absorb it.</p>
+<h3>FOUR COUNTERPARTY CATEGORIES</h3>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Sponsors and operating partners</span></div></div></div>
+<p>The party executing the business plan. Failure here can mean incompetence, but more often in practice it means overextension — a sponsor whose other deals are in distress and whose attention, liquidity, and credibility with lenders are consumed elsewhere. Their other portfolio is your risk, and you almost never see it.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Equity partners</span></div></div></div>
+<p>The parties funding alongside you, particularly institutional or joint-venture capital with governance rights. Failure looks like a partner who cannot fund a capital call, who has a fund-life constraint forcing a sale at the wrong moment, or whose internal mandate changes and converts a patient partner into an urgent seller.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Lenders</span></div></div></div>
+<p>Concentration with a single lender means a single institution’s credit posture governs your entire refinancing capability. When a lender pulls back from the sector — which happens abruptly and to entire lender categories at once — a borrower with all positions at that institution has no alternative relationship to fall back on.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Management companies</span></div></div></div>
+<p>For operators, a single management company across all assets creates correlated operational risk. Their staffing crisis, their systems failure, their loss of a regional leader becomes your portfolio-wide performance problem in the same quarter.</p>
+<h3>THE CONCENTRATION RULE</h3>
+<p>The rule is straightforward and widely ignored: no single counterparty should control positions representing more than a defined share of portfolio equity.</p>
+<p>The reason it is ignored is that counterparty concentration is a byproduct of relationship quality. You concentrate with a sponsor because they have performed. You concentrate with a lender because the process is easier the fourth time. You concentrate with a management company because they know your standards. Every step is rational and the aggregate is fragile.</p>
+<div class='card solo'><p class='ch'>THE PERFORMANCE PARADOX</p><p>Counterparty concentration is built by good outcomes, not bad ones. Nobody concentrates with a partner who disappointed them.</p><p>Which means the concentration is always maximal at the point when the relationship’s track record is strongest — and a track record built entirely during Expansion is a track record that has not yet been tested by the conditions where partner quality actually matters.</p></div>
+<h3>THE CYCLE TEST FOR COUNTERPARTIES</h3>
+<p>One diligence question outweighs the rest, for both operators and allocators: what did this counterparty do in the last downturn?</p>
+<p>Not what do they say about downturns. What did they do. Did they operate through one? Did they lose assets, and if so, how did they handle investor communication, lender negotiation, and the return of capital? Did they have the liquidity to defend positions or did they hand back keys? Did they buy anything at the bottom, which would indicate both survival and available capital at the critical moment?</p>
+<p>A counterparty whose entire operating history sits inside a single Expansion has a track record that describes conditions rather than capability. That is not disqualifying — everyone was new once, and the industry added an enormous number of participants during the last long Expansion. But it should be priced, sized, and named as what it is: an untested relationship, carrying untested-relationship risk, regardless of how impressive the returns look.</p>
+<h3>FOR THE OPERATOR</h3>
+<p>Two specific disciplines. First, maintain at least two active lender relationships at all times, even when one offers better terms consistently. The cost of the second relationship is a few basis points across a few deals. Its value is the existence of an alternative in the phase when your primary lender stops answering the sector.</p>
+<p>Second, examine your joint venture partners’ other exposure before you need to. A partner whose broader portfolio is concentrated in a market entering Oversupply is a partner whose behavior in your deal will be driven by pressures that have nothing to do with your deal.</p>
+<div class='callout'><p><em>You do not underwrite a partner’s deal. You underwrite their whole portfolio, because that is what determines how they will behave in yours.</em></p></div>
+<h3>WORKSHEET — AXIS FIVE</h3>
+<p><strong>E1</strong>  List every counterparty across the four categories with the share of portfolio equity each one touches. Mark anyone above your ceiling.</p>
+<p><strong>E2</strong>  For your three largest counterparty relationships, write what they specifically did in the last downturn. If you do not know, that is the answer — write "unknown" and note it as an open item.</p>
+<p><strong>E3</strong>  Operators: name your second lender relationship. Allocators: name the sponsor you would add specifically to reduce concentration, and what capability they would bring that your current sponsors lack.</p>
+<h2>Designing the Target With the Online Portfolio Architect</h2>
+<p>The five axes measure the portfolio you own. The Portfolio Architect on the Cignal System designs the portfolio you are building toward. They are two halves of the same discipline, and they are meant to be used together.</p>
+<p>In the Architect, you set your parameters: the market phase, where the market sits within that phase—early, mid, or late—your risk posture, your target total units and number of holdings, and a strategy mode. Single-Market Depth concentrates in one market and diversifies within it across quality, age, size, and submarket; Multifamily Spread distributes across markets. The phase reads live from your Cignal Dashboard, and you can override it to model any phase. The Architect then returns a target blueprint across four structural dimensions—strategy, asset class, vintage, and property size—tilted to the selected phase, along with suggested holdings and an acquisition ladder that staggers entries across years.</p>
+<p>Read those outputs through this lesson. The strategy mix is Axis Three expressed as a target. The vintage mix and the acquisition ladder are Axis Four—the ladder is pacing discipline, your version of dollar-cost averaging across the cycle. The strategy mode is Axis Two’s central choice between deliberate concentration and deliberate distribution. And the dimensions a target mix cannot show—how much of your equity depends on one phase, and how much runs through one counterparty—are exactly what the five-axis measurement adds.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/portfolio</p><p>Run the Portfolio Architect with the phase your dashboard shows today, your actual risk posture, and your real holding count. Compare its target strategy and vintage mix with the distributions you wrote on your Axis Three and Axis Four worksheets, and note the largest gap.</p></div>
+<div class='callout'><p><em>Design the target in the Architect. Measure the reality on the five axes. The gap between them is your work.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>To compute portfolio phase position, the lesson says to record two numbers for each position. What are they?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Purchase price and current value.</button><button class='opt' data-k='B'><span class='k'>B</span>Entry phase—the phase the local market occupied at acquisition—and dependency phase—the phase that must prevail for the position to achieve its plan—each weighted by equity invested.</button><button class='opt' data-k='C'><span class='k'>C</span>Unit count and average rent.</button><button class='opt' data-k='D'><span class='k'>D</span>Loan-to-value and debt yield.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The entry distribution tells you about basis; the dependency distribution tells you about vulnerability. The lesson weights by equity rather than asset value or unit count because equity is what you can lose.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>According to the lesson, how do concentration and leverage relate on the market axis?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>They are complements—more concentration justifies more leverage.</button><button class='opt' data-k='B'><span class='k'>B</span>They are unrelated.</button><button class='opt' data-k='C'><span class='k'>C</span>Leverage only matters in distributed portfolios.</button><button class='opt' data-k='D'><span class='k'>D</span>They are substitutes—you may have one at elevated levels, but having both is the single most reliable way to lose a portfolio.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>A concentrated operator with low leverage can survive a market downturn without forced action; a concentrated operator with high leverage cannot. That is why the market ceiling depends on your role and leverage configuration.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>Which strategy does the lesson use as the sharpest illustration of When &gt; How, because it is most attractive to start when the market feels worst?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Core / stabilized</button><button class='opt' data-k='B'><span class='k'>B</span>Credit</button><button class='opt' data-k='C'><span class='k'>C</span>Development</button><button class='opt' data-k='D'><span class='k'>D</span>Value-add</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Development returns depend entirely on delivering into a market that wants the product at completion—a bet on conditions two to four years forward. Starts made in Contraction deliver into Recovery, the correct delivery target, while starts made in late Expansion deliver into Oversupply. That is why the lesson caps development and opportunistic exposure together and calls credit and opportunistic equity the countercyclical pair.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>What does the lesson say about dry powder on the vintage axis?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Unspent capital is a position—an allocation to future optionality, and the only position whose value rises as conditions deteriorate.</button><button class='opt' data-k='B'><span class='k'>B</span>Unspent capital is a failure to deploy and should be minimized.</button><button class='opt' data-k='C'><span class='k'>C</span>Dry powder should be deployed as soon as any deal meets underwriting.</button><button class='opt' data-k='D'><span class='k'>D</span>Dry powder only matters for passive investors.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson recommends a stated annual deployment cap—often a quarter to a third of deployable capital—with a phase-based override in one direction only: it may be exceeded in Recovery and early Expansion, never in late Expansion or Oversupply. Unspent capital is treated as a position, not as a failure.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says “stop buying is a phase decision; sell everything is a structural decision.” In 2–3 sentences, explain the difference and why confusing them is costly.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>A market entering Oversupply is a reason to stop buying there, but it is rarely by itself a reason to exit, because selling into that phase prices the asset worst. A full market exit is justified by structural reasons—degraded local capability, a structural change in the market’s demand drivers, or a position size that exceeds the ceiling. Investors who confuse the two sell at the bottom and re-enter at the top.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An owner-operator runs 900 units across two markets. Roughly 80% of equity was deployed within a 26-month window, about 70% of equity sits in positions that need continued Expansion to hit plan, both markets share the same primary demand driver and a permissive supply response, one lender holds four of six loans, and one management company runs every asset. Using the lesson’s framework, evaluate the portfolio on (a) the phase and vintage axes, (b) the market axis, (c) the partner axis, and (d) what the operator should prioritize to build balance going forward.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) On the phase axis, 70% phase-dependent equity with almost no phase-independent ballast likely exceeds any reasonable ceiling—the lesson suggests 50% as a defensible ceiling for most investors—so a single phase transition could compromise the whole portfolio. On the vintage axis, 80% of equity inside 26 months means one entry window and one basis, with exits likely to cluster as well; this concentration is the dominant finding. (b) Two markets with the same demand driver and supply response are functionally one market. The operator cannot construct a scenario where they occupy different phases, so the portfolio has no phase divergence and only one action available at a time. (c) One lender across four of six loans means one institution’s credit posture governs most of the refinancing capability, and one management company creates correlated operational risk across every asset. The performance paradox applies: these concentrations were built by good outcomes and will be maximal when the relationships are tested. (d) The operator should prioritize building ballast on a schedule, setting and honoring an annual deployment cap to diversify vintage, adding exposure to a market with genuinely different drivers when its phase position is favorable, establishing a second lender relationship, and diversifying management—mostly through what is bought and financed next, since most imbalances are corrected forward.</em></em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>What single diligence question does the lesson say outweighs the rest when evaluating a counterparty?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>What is their projected IRR?</button><button class='opt' data-k='B'><span class='k'>B</span>How many units do they manage?</button><button class='opt' data-k='C'><span class='k'>C</span>What did this counterparty do in the last downturn?</button><button class='opt' data-k='D'><span class='k'>D</span>How fast can they close?</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Not what they say about downturns—what they did. A counterparty whose entire operating history sits inside a single Expansion has a track record that describes conditions rather than capability. That is not disqualifying, but it is a known quantity of a different kind and should be sized accordingly.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the five axes. Proceed to Lesson 3.3.5 (Allocation by Phase) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “Computing Your Portfolio Phase Position,” “Strategy by Phase,” and “Pacing Discipline” in Lesson 3.3.4 before proceeding, and complete the Worksheet prompts if you have not already.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.4 in full. The five axes are how you measure whether your portfolio is balanced; the allocation and rebalancing lessons that follow depend on those measurements.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>The boring position you bought three years too early is the reason the exciting ones survived. If the answer key revealed gaps, close them now before Lesson 3.3.5.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-3-3.html'>&larr; Previous<span>The Intake — Role, Geography, and Capital Structure</span></a><a href='3-3-5.html' style='text-align:right'>Next &rarr;<span>Allocation by Phase</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.4 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.4', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.5 · Allocation by Phase &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.5</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.5</p>
+  <h1>Allocation by Phase</h1>
+  <p class='deck'>The Same Objective, Expressed Four Different Ways</p>
+  <div class="leadmeta"><span><b>3,228</b> words</span><span><b>15</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>Recovery — The Cheetah Allocation</h2>
+<p class='secdeck'><em><em>Deploying while the consensus says it is early</em></em></p>
+<div class='epi'><p><em>The Cheetah does not run constantly. It waits, and then it commits completely for a short window. Recovery is that window.</em></p></div>
+<div class='card solo'><p class='ch'>CHEETAH  ·  IRRATIONAL DESPERATION</p><p>Recovery</p><p>Fundamentals have bottomed and begun to improve, but sentiment has not caught up. Capital is scarce, sellers are motivated by circumstance rather than opportunity, and the prevailing view among competent people is that it is too early. Basis available in this phase is the best in the cycle, and the window is narrower than it appears in hindsight.</p></div>
+<h3>WHAT THE PORTFOLIO SHOULD BE DOING</h3>
+<p>Recovery is a deployment phase, and it is the phase where deployment matters most, because the basis you establish here sets the ceiling on everything that follows. It is also the phase where deploying is hardest, because every signal available to the average participant still reads negative and every conversation with peers reinforces caution.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>LEVER</strong></th><th><strong>RECOVERY POSTURE</strong></th></tr></thead><tbody><tr><td>Deployment pace</td><td>Above baseline. This is the phase where exceeding your annual cap is justified — the only phase besides early Expansion where it is.</td></tr><tr><td>Leverage</td><td>Higher end of your range. Low basis compresses downside, which is precisely when leverage is appropriate. Note this is the opposite of what credit availability encourages.</td></tr><tr><td>Strategy mix</td><td>Value-add is at its strongest window. Core is available at attractive basis, which will not be true again for years. Development starts here deliver into Expansion.</td></tr><tr><td>Debt structure</td><td>Extend duration where possible. Locking long-term financing at Recovery-phase valuations is one of the highest-value actions available in the entire cycle.</td></tr><tr><td>Dispositions</td><td>Minimal. You are a buyer. Selling in Recovery converts the best basis in the cycle into cash at the worst moment to hold cash.</td></tr><tr><td>Reserves</td><td>Drawn down deliberately toward your floor — but never through it.</td></tr></tbody></table></div>
+<h3>THE PROBLEM WITH RECOVERY</h3>
+<p>Recovery is difficult for two reasons, and neither is analytical.</p>
+<p>The first is that trailing data still reads badly. Occupancy reports, rent growth figures, and transaction comparables all describe conditions from three to twelve months ago, which is to say the trough. An investor relying on trailing data will not recognize Recovery until it has become Expansion, at which point the basis advantage is gone. This is the single clearest illustration of why the leading-versus-trailing distinction is not an academic classification but an operational one.</p>
+<p>The second is that most investors arrive at Recovery without capital, because they deployed it during Expansion when deals were plentiful and confidence was high. This is the structural reason vintage pacing exists. The purpose of declining deals in Expansion is not that those deals were bad. It is that the capital declining them preserved becomes the capital available in Recovery, when it is worth several times more.</p>
+<div class='card solo'><p class='ch'>IRRATIONAL DESPERATION</p><p>The behavioral state of Recovery is desperation — sellers acting from necessity, lenders acting from fear of their existing book, and participants generalizing from the phase just ended into an indefinite future.</p><p>It is called irrational because the desperation persists after the conditions that justified it have begun to reverse. That gap between improving fundamentals and unimproved sentiment is where the entire Recovery opportunity lives. It closes without announcement.</p></div>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Recovery is when sponsor quality is easiest to assess and hardest to access. The operators still standing with capital to deploy have demonstrated something no Expansion track record can demonstrate. Meanwhile, capital raising is difficult industry-wide, which means a passive investor with committed capital has unusual negotiating position on terms, fees, and structure.</p>
+<p>The practical failure is that most passive investors are not in the market at all during Recovery, having been discouraged by the phase before. If you commit to a pacing discipline, commit to it in both directions: the years you underdeploy are what fund the years you overdeploy.</p>
+<div class='callout'><p><em>The capital you did not spend in Expansion is the only capital that exists in Recovery.</em></p></div>
+<h2>Expansion — The Bull Allocation</h2>
+<p class='secdeck'><em><em>Participating without becoming the herd</em></em></p>
+<div class='callout'><p><em>The Bull runs, and the running is real. The failure is not participating. It is failing to notice when the running stops being a market and starts being a stampede.</em></p></div>
+<div class='card solo'><p class='ch'>BULL  ·  IRRATIONAL EXUBERANCE</p><p>Expansion</p><p>Fundamentals are strong and broadly recognized. Rent growth is widespread, occupancy is high, capital is abundant, and competition for assets intensifies steadily. Early Expansion offers genuine opportunity at reasonable basis. Late Expansion offers the same assets at prices that assume conditions continue indefinitely.</p></div>
+<h3>THE TWO HALVES</h3>
+<p>Expansion is the only phase that must be divided to be usable, because early Expansion and late Expansion demand nearly opposite behavior while feeling almost identical from the inside.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>LEVER</strong></th><th><strong>EARLY EXPANSION</strong></th><th><strong>LATE EXPANSION</strong></th></tr></thead><tbody><tr><td>Deployment pace</td><td>At or above baseline; opportunity is still real</td><td>Below baseline; discipline over activity</td></tr><tr><td>Leverage</td><td>Middle of range</td><td>Lower end, actively reducing</td></tr><tr><td>Strategy mix</td><td>Value-add still strong; core fairly priced</td><td>Ballast building; avoid new development starts</td></tr><tr><td>Debt structure</td><td>Extend duration; lock long where available</td><td>Prioritize flexibility and extension optionality</td></tr><tr><td>Dispositions</td><td>Selective harvest of completed plans</td><td>Active harvest; this is the sell window</td></tr><tr><td>Reserves</td><td>Rebuilding toward target</td><td>Actively accumulating above target</td></tr></tbody></table></div>
+<p>Distinguishing the halves is one of the highest-value analytical skills in cycle work, and it is why the Cignal System exists — the transition from early to late Expansion is visible in leading indicators well before it is visible in operating fundamentals. The specific signals, their classifications, and their typical lead times are the substance of the Econiq curriculum and the dashboards behind them. What matters for portfolio purposes is the principle: the shift from early to late Expansion should change your portfolio behavior materially, and it will not announce itself in the numbers your property management reports produce.</p>
+<h3>THE HARVEST DISCIPLINE</h3>
+<p>Expansion is the phase in which selling is correct and nearly impossible to do.</p>
+<p>Every incentive argues against it. The asset is performing. Rent growth is continuing. Selling means paying taxes, redeploying into a market where everything is expensive, and explaining to partners why you exited a position that is still improving. Meanwhile the peers who hold on will, for some period, look right.</p>
+<p>The portfolio argument for harvesting anyway rests on three points. First, exit pricing in late Expansion is the best you will see for years, and the spread between selling into strength and selling into weakness routinely exceeds several years of operating returns. Second, the proceeds become the dry powder that funds the Recovery deployment described in the Recovery allocation earlier in this lesson. Third, harvesting reduces phase-dependency at the exact moment when phase-dependency is most dangerous.</p>
+<div class='card solo'><p class='ch'>SELLING EARLY VERSUS SELLING LATE</p><p>You will sell too early. Accept it in advance. An asset sold in late Expansion will frequently trade higher six months later, and you will hear about it.</p><p>Weigh that against the alternative distribution of outcomes. Selling early costs you the last increment of a run. Selling late costs you the ability to sell at all — because the buyer pool that existed in Expansion does not exist in Oversupply, and the bid that was there in March is not there in November.</p></div>
+<h3>THE BEHAVIORAL WATCH</h3>
+<p>Irrational Exuberance is the behavioral state of Expansion, and its late-phase markers are consistent across cycles. Historical constraints get described as no longer applicable. Underwriting assumptions extend recent growth rates through full hold periods as though they were structural. Negative leverage gets justified on the strength of projected growth. New entrants arrive in volume, without cycle experience, and are rewarded for aggression. Competent people say, in various phrasings, that this time is structurally different.</p>
+<p>These are not market indicators; they are behavioral ones. They tell you nothing about timing. What they tell you is where in the phase you are standing, which is what the portfolio needs to know.</p>
+<div class='callout'><p><em>Expansion rewards aggression right up until it settles the account. The bill arrives in a different phase than the reward did.</em></p></div>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Late Expansion is when your inbox is fullest and the average quality of what arrives is lowest. Deal volume peaks, sponsor competition for capital is intense, and the projections are uniformly attractive because they are extrapolations of a favorable present.</p>
+<p>Two disciplines carry most of the weight. Hold your pacing cap even as volume rises — a doubling of deal flow is a phase signal, not an opportunity signal. And scrutinize exit cap rate assumptions with particular care: an underwriting that exits at a cap rate at or below the entry cap rate is assuming that the most favorable pricing environment in the cycle will still be there at the end of the hold. That is a forecast, and it should be labeled as one.</p>
+<h2>Oversupply — The Gorilla Allocation</h2>
+<p class='secdeck'><em><em>Immovability as a strategy</em></em></p>
+<div class='callout'><p><em>The Gorilla does not run and does not panic. It occupies its position with a weight that makes the position unassailable. Oversupply rewards exactly that.</em></p></div>
+<div class='card solo'><p class='ch'>GORILLA  ·  IRRATIONAL DENIAL</p><p>Oversupply</p><p>The construction pipeline initiated during Expansion delivers into demand that has begun to moderate. Concessions appear and get attributed to seasonality. Absorption slows. Transaction volume thins as the gap between seller expectations and buyer willingness widens. The data has turned; the narrative has not.</p></div>
+<h3>WHAT THE PORTFOLIO SHOULD BE DOING</h3>
+<p>Oversupply is a defensive phase, and the defense is structural rather than operational. What you do to your properties matters less than what you have already done to your balance sheet.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>LEVER</strong></th><th><strong>OVERSUPPLY POSTURE</strong></th></tr></thead><tbody><tr><td>Deployment pace</td><td>Minimal. Pricing has not yet adjusted to conditions. Buying here means paying Expansion prices for Contraction fundamentals.</td></tr><tr><td>Leverage</td><td>Reducing. Any position that can be de-levered without destroying returns should be, before the option disappears.</td></tr><tr><td>Strategy mix</td><td>Ballast and defense. No new development starts. Credit and distressed capability should be arranged now for deployment later.</td></tr><tr><td>Debt structure</td><td>The central task. Extend, refinance, and buy time on anything maturing inside the next twenty-four months — while lenders are still transacting.</td></tr><tr><td>Dispositions</td><td>Selective and decisive. If a position must eventually be sold, this is meaningfully better than the phase that follows.</td></tr><tr><td>Reserves</td><td>At or above target. Reserves are the entire defense, and they cannot be assembled after the fact.</td></tr></tbody></table></div>
+<h3>BUYING TIME IS THE WHOLE GAME</h3>
+<p>If there is one action that separates portfolios that survive Contraction from those that do not, it is what was done to the debt schedule during Oversupply.</p>
+<p>In Oversupply, lenders are still lending, extensions are still available, refinancings still close, and rate caps can still be purchased. All of these become materially harder or impossible in Contraction. Every maturity you push beyond the trough is a forced decision you will not have to make at the worst possible moment.</p>
+<p>The cost is real. Extending in Oversupply usually means accepting terms worse than what you had. Refinancing may mean a paydown. Buying a cap costs more than it did. All of it feels like paying for insurance against a fire that has not started — which is the only time insurance can be purchased.</p>
+<div class='card solo'><p class='ch'>THE OVERSUPPLY QUESTION</p><p>What has to be decided in the next twenty-four months?</p><p>List every position with a maturity, a cap expiration, a covenant test, or a capital requirement inside twenty-four months. For each, answer: can I resolve this now, while the resolution is still available?</p><p>Anything you cannot resolve now becomes a position whose outcome will be decided by market conditions rather than by you.</p></div>
+<h3>IRRATIONAL DENIAL</h3>
+<p>The behavioral state of Oversupply is denial, and it has a specific texture worth recognizing because you will feel it yourself.</p>
+<p>Concessions are described as a seasonal adjustment. Slowing absorption is attributed to a temporary supply blip that will clear next year. Transaction volume declines and gets read as sellers holding firm rather than as buyers stepping away. Underwriting assumptions are adjusted downward slightly — never enough to change a decision, always enough to feel responsible.</p>
+<p>Denial is the most expensive of the four behavioral states, because it is the only one that occurs while action is still possible. Desperation in Recovery costs you an opportunity. Fear in Contraction costs you a bottom. Denial in Oversupply costs you the window in which the portfolio could still be defended.</p>
+<div class='callout'><p><em>Every action available in Oversupply is still available. That is what makes not taking them so expensive.</em></p></div>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Your levers in Oversupply are nearly nil on existing positions, which makes this the phase where your sponsor selection gets graded. What you can do is gather information: ask every sponsor, specifically, what their maturity schedule looks like across their whole portfolio, what extensions are available and on what conditions, and what a capital call scenario would look like.</p>
+<p>Sponsors who have addressed these questions will answer with dates and numbers. Sponsors who have not will answer with confidence about fundamentals. The distinction is the most useful diligence signal available in this phase, and it tells you where to expect capital calls before they arrive.</p>
+<h2>Contraction — The Bear Allocation</h2>
+<p class='secdeck'><em><em>Surviving first, positioning second</em></em></p>
+<div class='callout'><p><em>The Bear does not fight the season. It carries what it stored and waits with a patience that looks, from outside, like doing nothing.</em></p></div>
+<div class='card solo'><p class='ch'>BEAR  ·  IRRATIONAL FEAR</p><p>Contraction</p><p>Values reset, credit withdraws, distress surfaces, and transaction volume is composed disproportionately of sellers who have no choice. The consensus view is that recovery is distant and that anyone buying is early. The best basis of the entire cycle becomes available to whoever has capital, capability, and nerve at the same moment.</p></div>
+<h3>THE TWO JOBS</h3>
+<p>Contraction requires holding two objectives simultaneously, and they compete for the same resource.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Survive</span></div></div></div>
+<p>Ensure no position forces an outcome you cannot control. Defend what can be defended, and make clear-eyed decisions about what cannot. The failure mode here is defending everything until the reserves that would have funded the next phase have been consumed by positions that were never going to make it.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Position</span></div></div></div>
+<p>Deploy selectively into the best basis available in the cycle. The failure mode here is deploying early, into the first wave of apparent distress, before pricing has fully adjusted — and then having nothing left when real distress arrives.</p>
+<p>The tension between these two jobs is the defining difficulty of Contraction, and it is resolved in advance rather than in the moment. The reserve floor established in Lesson 3.3.2 exists precisely to prevent job one from consuming the capital required for job two.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>LEVER</strong></th><th><strong>CONTRACTION POSTURE</strong></th></tr></thead><tbody><tr><td>Deployment pace</td><td>Selective and patient. Early distress is rarely the best distress. The second and third waves price better than the first.</td></tr><tr><td>Leverage</td><td>Low on new acquisitions — not because opportunity is poor but because financing availability, not opportunity, is the binding constraint.</td></tr><tr><td>Strategy mix</td><td>Opportunistic and credit are at their strongest window. Development starts here deliver into Recovery, which is the correct delivery target.</td></tr><tr><td>Debt structure</td><td>Defensive. Whatever was not resolved in Oversupply now gets resolved on the lender’s terms rather than yours.</td></tr><tr><td>Dispositions</td><td>Only what must be sold. Selling into Contraction crystallizes the cycle’s worst pricing.</td></tr><tr><td>Reserves</td><td>The determining variable. Reserves are simultaneously the survival mechanism and the acquisition capacity.</td></tr></tbody></table></div>
+<h3>THE TRIAGE DISCIPLINE</h3>
+<p>Contraction requires a decision most investors avoid until it is made for them: which positions get defended and which do not.</p>
+<p>Sort every position into three categories. Defensible — capable of surviving with reserves you already hold, on a timeline you can sustain. Marginal — survivable only if conditions improve on a schedule you cannot control. Impaired — where additional capital is unlikely to change the outcome and would simply extend the loss.</p>
+<p>Then allocate reserves to the first category, decide consciously about the second, and stop funding the third. The word "consciously" carries the weight. Most portfolio failures in Contraction are not caused by owning impaired positions. They are caused by funding impaired positions with capital that the defensible positions needed.</p>
+<div class='card solo'><p class='ch'>THE HARDEST ARITHMETIC IN THE BUSINESS</p><p>Every additional dollar into a position that will not survive is a dollar unavailable to a position that would have.</p><p>This is straightforward on paper and extraordinarily difficult in practice, because the impaired position carries your reputation, your investors’ capital, and your own conviction. It is also where the discipline established in calm conditions does the most work, because the framework decides in advance what your loyalty will otherwise decide badly.</p></div>
+<h3>IRRATIONAL FEAR</h3>
+<p>The behavioral state of Contraction is fear, and its defining characteristic is that it persists past the point where conditions justify it. The same mechanism that produces Irrational Desperation in Recovery is already operating here — participants extrapolating current conditions indefinitely, at precisely the moment when the conditions have begun to change.</p>
+<p>Practically, this means the transition from Contraction into Recovery is nearly invisible while you are standing in it. There is no bell. The best acquisitions of the cycle are made in a period that feels indistinguishable from the worst of it, which is why the framework matters more than the feeling.</p>
+<div class='callout'><p><em>The bottom is not recognized. It is calculated, and then acted on before it feels reasonable.</em></p></div>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Contraction is where the passive investor’s structural position is at its most and least favorable simultaneously. Your existing positions are outside your control, capital calls may arrive, and there is nothing operational you can do. But your uncommitted capital has more purchasing power than at any other point in the cycle, and the sponsors seeking it are dramatically more willing to negotiate structure — preferred position, fee reduction, governance rights — than they were eighteen months earlier.</p>
+<p>Two things determine whether you can use that position. Whether you have uncommitted capital, which is decided by the pacing discipline you held in Expansion. And whether you have relationships with operators who can actually execute in this phase, which is decided by the counterparty work you did in Lesson 3.3.4. Both are established before Contraction arrives. Neither can be assembled during it.</p>
+<h2>Setting Capital Posture With the Portfolio Architect</h2>
+<p>Every allocation in this lesson turns the same three dials: leverage, liquidity, and the pace of deployment. The Portfolio Architect shows those dials directly. Its Capital Posture panel returns a target loan-to-value range, the share of capital held back as dry powder, and a deployment pace—and all three glide with the phase and with where the market sits within it.</p>
+<p>Use it to see the four allocations before you need them. Set the phase to match your Cignal Dashboard, then override it to model the next phase in the sequence. The late-Expansion posture of the Bull—leverage coming down, dry powder building—should be visible while the market still feels like early Expansion. Moving the phase position from early to mid to late shows how gradually the posture should shift: a glide, not a switch.</p>
+<p>The Architect’s downloadable report extends this with a Calibration sheet, where you set your own ceilings for each phase and record the signal that moves each one. That is where this lesson’s principle—the objective stays fixed while the allocation changes—becomes a written commitment: every ceiling has a number for every phase and a named trigger for when it changes.</p>
+<div class='card solo'><p class='ch'>START HERE</p><p>cignalsystem.com/portfolio</p><p>Set the Portfolio Architect to your current phase and phase position and record its capital posture. Then change the phase to the next one in the sequence and record the posture again. The difference between the two is the adjustment you should be preparing now.</p></div>
+<div class='callout'><p><em>Decide the posture for the next phase before you are in it. That is the only time the decision is cheap.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>In the Recovery (Cheetah) allocation, what does the lesson say about leverage?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It should be at the lowest end of your range.</button><button class='opt' data-k='B'><span class='k'>B</span>It should be at the higher end of your range, because low basis compresses downside—the opposite of what credit availability encourages.</button><button class='opt' data-k='C'><span class='k'>C</span>It should be eliminated entirely.</button><button class='opt' data-k='D'><span class='k'>D</span>It should match whatever lenders will provide.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Recovery is the phase where exceeding your annual deployment cap is justified, value-add is at its strongest window, and locking long-term financing at Recovery valuations is one of the highest-value actions available in the cycle. Leverage belongs at the higher end of your range because the basis already reflects distress.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>According to the lesson, what distinguishes late Expansion from early Expansion in the Bull allocation?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Late Expansion is the best time to start new development.</button><button class='opt' data-k='B'><span class='k'>B</span>Late Expansion calls for maximum leverage.</button><button class='opt' data-k='C'><span class='k'>C</span>Late Expansion calls for deployment below baseline, leverage actively reducing, ballast building, flexibility in debt structure, active harvest, and reserves accumulating above target.</button><button class='opt' data-k='D'><span class='k'>D</span>There is no difference; the posture is the same throughout Expansion.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson splits Expansion into two halves. Early Expansion still rewards deployment and value-add; late Expansion is the sell window, when discipline matters more than activity. The lesson also warns you will sell too early—and to accept it in advance.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 3</span><p class='qs'>What does the lesson describe as the central task of the Oversupply (Gorilla) allocation?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Accelerating new acquisitions before prices fall.</button><button class='opt' data-k='B'><span class='k'>B</span>Starting new development to deliver into the next Expansion.</button><button class='opt' data-k='C'><span class='k'>C</span>Increasing distributions to investors.</button><button class='opt' data-k='D'><span class='k'>D</span>Debt structure—extending, refinancing, and buying time on anything maturing in the next twenty-four months, while lenders are still transacting.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>In Oversupply, pricing has not yet adjusted, so buying means paying Expansion prices for Contraction fundamentals. The whole game is buying time. Every action available in Oversupply is still available—that is what makes not taking them so expensive.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>What are the two jobs of the Contraction (Bear) allocation, in order?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Survive, then position.</button><button class='opt' data-k='B'><span class='k'>B</span>Position, then survive.</button><button class='opt' data-k='C'><span class='k'>C</span>Sell everything, then wait.</button><button class='opt' data-k='D'><span class='k'>D</span>Maximize leverage, then acquire.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The first job is ensuring no position forces an outcome you cannot control. The second is deploying selectively into the best basis of the cycle—patiently, because early distress is rarely the best distress. Reserves are the determining variable, serving as both the survival mechanism and the acquisition capacity.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson describes “the hardest arithmetic in the business” in Contraction. In 2–3 sentences, explain it and what it demands of the owner.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Every additional dollar put into a position that will not survive is a dollar unavailable to a position that would have. On paper this is simple, but in practice it means deciding not to defend an asset you care about so that reserves can protect the positions that can be saved—and fund the best acquisitions of the cycle. The triage discipline demands clear-eyed decisions about what can be defended and what cannot, rather than defending everything until the reserves are gone.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>It is Oversupply. Concessions have appeared across the submarket and are being attributed to seasonality, absorption has slowed, and deliveries from Expansion-era permits are arriving. An investor holds six positions; two have loan maturities and one has a rate cap expiring within the next 20 months. The investor is considering a new acquisition that “pencils” at today’s pricing, plans to hold reserves slightly below target to fund it, and believes conditions will stabilize soon. Using the lesson’s framework, explain (a) the behavioral state at work and how it shows up here, (b) what the Gorilla allocation calls for on deployment, leverage, and reserves, (c) how the Oversupply Question should be applied to the three near-term triggers, and (d) what the investor should do about the proposed acquisition.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The behavioral state is Irrational Denial: concessions explained away as seasonality, slowing absorption treated as temporary, and a belief that conditions will stabilize soon. It shows up in the plan to keep buying and to draw reserves below target. (b) The Gorilla allocation calls for minimal deployment, because pricing has not yet adjusted—buying here means paying Expansion prices for Contraction fundamentals. Leverage should be reducing wherever it can be without destroying returns, strategy should shift to ballast and defense, and reserves should be at or above target because they are the entire defense and cannot be assembled after the fact. (c) The Oversupply Question asks what has to be decided in the next 24 months. The two maturities and the cap expiration fall inside that window, so for each the investor should decide now—while lenders are still transacting—whether to extend, refinance, buy time, or sell, rather than hoping conditions improve before the dates arrive. (d) The acquisition should almost certainly be passed on, or re-underwritten at Contraction assumptions. Funding it by drawing reserves below target spends the exact capital that protects the three near-term triggers and funds Recovery-phase opportunities. Every defensive action available now is still available; that is what makes not taking them so expensive.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>Which pairing of phase, animal, and behavioral state matches the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery—Bull—Irrational Exuberance.</button><button class='opt' data-k='B'><span class='k'>B</span>Expansion—Bull—Irrational Exuberance.</button><button class='opt' data-k='C'><span class='k'>C</span>Oversupply—Bear—Irrational Fear.</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction—Gorilla—Irrational Denial.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Recovery is the Cheetah (Irrational Desperation), Expansion is the Bull (Irrational Exuberance), Oversupply is the Gorilla (Irrational Denial), and Contraction is the Bear (Irrational Fear). The animals encode the posture each phase demands, and the behavioral states describe the collective psychology the allocation must be designed to resist.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of phase-based allocation. Proceed to Lesson 3.3.6 (The Rebalancing Protocol) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the posture tables for each of the four allocations in Lesson 3.3.5 before proceeding. Focus especially on the late-Expansion harvest discipline and the Oversupply debt-structure task.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.5 in full. The objective stays the same across the cycle; the allocation that serves it does not, and each phase’s behavioral state is designed to pull you the wrong way.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>The bottom is not recognized. It is calculated, and then acted on before it feels reasonable. If the answer key revealed gaps, close them now before Lesson 3.3.6.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-3-4.html'>&larr; Previous<span>The Five Axes of Balance</span></a><a href='3-3-6.html' style='text-align:right'>Next &rarr;<span>The Rebalancing Protocol</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.5 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.5', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

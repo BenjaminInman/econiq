@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.2 · The Intake — Objective, Horizon, and Risk Capacity &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.2</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.2</p>
+  <h1>The Intake — Objective, Horizon, and Risk Capacity</h1>
+  <p class='deck'>What Your Portfolio Must Accomplish — and What It Can Survive</p>
+  <div class="leadmeta"><span><b>2,632</b> words</span><span><b>12</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>Input One — The Objective</h2>
+<p class='secdeck'><em><em>What is this money actually for?</em></em></p>
+<div class='epi'><p><em>Every portfolio serves a purpose. Portfolios that fail usually served two contradictory ones.</em></p></div>
+<p>The first question in the intake is the one most real estate investors have never been asked out loud: what is this portfolio supposed to do?</p>
+<p>"Make money" is not an answer. Every portfolio is supposed to make money. The question is what kind of money, arriving when, in exchange for what risk, measured how.</p>
+<p>There are four legitimate primary objectives in real estate. Most investors are pursuing some blend of them, which is fine. What is not fine — and what quietly destroys portfolios — is pursuing two of them with the same dollar and expecting both to be satisfied.</p>
+<h3>THE FOUR OBJECTIVES</h3>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Income</span></div></div></div>
+<p>The portfolio exists to produce reliable, spendable cash flow now. Success is measured in distributions received, not in appreciation on paper. Income portfolios prize stabilized assets, moderate leverage, long fixed-rate debt, and markets with durable demand rather than explosive growth. They accept a lower ceiling in exchange for a higher floor.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Growth</span></div></div></div>
+<p>The portfolio exists to compound capital toward a future number. Current cash flow is secondary and may be zero or negative for periods. Growth portfolios accept more leverage, more business-plan risk, and longer illiquidity in exchange for a higher terminal value. The defining question is not "what does it pay me" but "what is it worth when I am done."</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Preservation</span></div></div></div>
+<p>The portfolio exists to protect purchasing power on capital already earned. The dominant risk is not underperformance; it is impairment. Preservation portfolios prize low leverage, unlevered debt-service coverage, assets that do not require the market’s cooperation, and above all, the absence of forced-sale scenarios.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Legacy</span></div></div></div>
+<p>The portfolio exists to transfer across generations or into a permanent structure. The horizon is effectively infinite, which changes the arithmetic considerably — it makes basis step-up, entity structure, debt permanence, and successor operational capability more important than any single cycle’s returns.</p>
+<h3>THE CONFLICTS</h3>
+<p>These objectives are not equally compatible with each other. Some pairs coexist naturally; others are in direct tension, and the tension shows up as an inability to make decisions.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>PAIRING</strong></th><th><strong>COMPATIBILITY</strong></th><th><strong>WHERE IT BREAKS</strong></th></tr></thead><tbody><tr><td>Income + Preservation</td><td>Natural fit</td><td>Almost none. These objectives want the same things: stabilized assets, moderate leverage, durable markets. The main risk is under-earning relative to inflation.</td></tr><tr><td>Growth + Legacy</td><td>Workable</td><td>Growth wants exits; legacy wants permanence and basis step-up. Resolve by designating which positions are permanent and which are compounding vehicles.</td></tr><tr><td>Income + Growth</td><td>High tension</td><td>Growth requires reinvesting the cash flow that income requires distributing. The same dollar cannot do both. Split the portfolio into sleeves or accept a diluted version of each.</td></tr><tr><td>Growth + Preservation</td><td>Direct conflict</td><td>The leverage and business-plan risk that growth requires is exactly what preservation prohibits. Attempting both usually produces a growth portfolio described in preservation language — the most dangerous self-deception in this business.</td></tr></tbody></table></div>
+<div class='card solo'><p class='ch'>THE SLEEVE SOLUTION</p><p>When you hold genuinely conflicting objectives — and many investors do, legitimately — do not average them. Split the portfolio into named sleeves with separate rules.</p><p>A preservation sleeve with a hard leverage cap and no development exposure. A growth sleeve with defined maximum size and an explicit understanding that any position in it can go to zero. Each sleeve gets its own allocation targets and its own rebalancing rules. What you must never do is let the growth sleeve borrow against the preservation sleeve, because that quietly converts the whole portfolio into a growth portfolio.</p></div>
+<h3>OBJECTIVE AND CYCLE PHASE INTERACT</h3>
+<p>Here is where the Econiq lens changes the standard advice. In conventional portfolio construction, your objective is set by your circumstances and stays fixed; the market is treated as weather. In cycle-aware construction, the objective stays fixed but the aggressiveness with which you pursue it varies by phase.</p>
+<p>A growth objective in Recovery means deploying capital into acquisitions at attractive basis. A growth objective in late Expansion means something almost opposite: accumulating dry powder, harvesting positions that have achieved their business plan, and accepting a period of low activity that will feel like underperformance while peers are still buying. The objective did not change. The behavior that serves it did.</p>
+<p>This is why Lesson 3.3.5 exists. Each phase demands a different expression of the same underlying goal, and investors who cannot make that translation end up believing that being disciplined means being inactive, or that being aggressive means being unbounded.</p>
+<div class='callout'><p><em>Your objective should be stable across the cycle. Your behavior in service of it should not be.</em></p></div>
+<h3>WORKSHEET — INPUT ONE</h3>
+<p><strong>A1</strong>  In one sentence, state what this portfolio is supposed to accomplish and by when. Write it as if explaining to someone who will hold you to it.</p>
+<p><strong>A2</strong>  Rank the four objectives — Income, Growth, Preservation, Legacy — from most to least important for this capital. Assign a rough percentage weight to each.</p>
+<p><strong>A3</strong>  Identify any conflicting pair in your top two. If Income and Growth, or Growth and Preservation, both appear high, describe how you will separate them into sleeves rather than averaging them.</p>
+<p><strong>A4</strong>  What specific number, on what specific date, would tell you this portfolio succeeded?</p>
+<h2>Input Two — The Horizon</h2>
+<p class='secdeck'><em><em>How long you have, versus how long the cycle takes</em></em></p>
+<div class='callout'><p><em>A five-year hold in a fifteen-year cycle is not a strategy. It is a coin flip with a business plan attached.</em></p></div>
+<p>The second input is time. Not "long-term investor," which is what everyone says, but a specific horizon expressed in years — and then an honest comparison of that horizon against the length of a full market cycle.</p>
+<p>This comparison is the single most clarifying exercise in the intake, and almost nobody performs it.</p>
+<h3>THE CYCLE-TO-HORIZON RATIO</h3>
+<p>A full multifamily cycle — Recovery through Expansion through Oversupply through Contraction and back — has historically run something on the order of a decade or more, with wide variance and no obligation to be regular. Some phases stretch. Some compress. External shocks reset the clock. The framework describes structure and sequence, not schedule.</p>
+<p>Now set your intended hold period against that. The ratio tells you something immediate about how much cycle risk you are carrying.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>HORIZON</strong></th><th><strong>RELATIONSHIP TO THE CYCLE</strong></th><th><strong>WHAT IT DEMANDS OF THE BLUEPRINT</strong></th></tr></thead><tbody><tr><td>3–5 years</td><td>Less than half a cycle. You will likely exit in a different phase than you entered, and which phase is largely outside your control.</td><td>Entry timing dominates everything. Exit assumptions must be stress-tested against a phase shift. Vintage diversification is essential because you cannot wait out a bad window.</td></tr><tr><td>7–10 years</td><td>Roughly one cycle. You will likely see a full transition and possibly a full turn.</td><td>Business plans must be able to extend. Debt duration must exceed the expected trough. The portfolio needs positions that can go quiet without dying.</td></tr><tr><td>15+ years</td><td>Multiple cycles. Entry timing on any one position matters less; sequencing and survivability matter more.</td><td>Leverage discipline becomes the dominant variable. The objective shifts from optimizing entries to guaranteeing you are never a forced seller.</td></tr><tr><td>Permanent</td><td>Cycle-agnostic in principle, cycle-vulnerable in practice through debt maturities.</td><td>The maturity ladder is the whole game. Structure, tax basis, and successor capability outrank return optimization.</td></tr></tbody></table></div>
+<p>Read the top row again, because it describes the majority of real estate capital deployed in this industry. A three-to-five-year hold means you are making a bet on entry and a bet on exit conditions, and you have meaningful control over only the first one. This is not an argument against short holds. It is an argument that short holds require dramatically more cycle discipline than long ones, which is the opposite of how most investors treat them.</p>
+<div class='card solo'><p class='ch'>THE HORIZON MISMATCH</p><p>The most common structural failure in syndicated real estate is a five-year business plan financed with three-year debt, underwritten with an exit assumption drawn from the phase in which it was purchased.</p><p>Three separate clocks — the business plan, the loan, and the cycle — all running at different speeds, with only one of them under the operator’s control. When the loan clock runs out before the business plan finishes and the cycle has moved against the exit assumption, no operational excellence available to anyone resolves it.</p></div>
+<h3>THE THREE CLOCKS</h3>
+<p>Every real estate position runs three clocks simultaneously. A well-designed portfolio keeps them in a deliberate relationship. A pile lets them fall wherever the market put them.</p>
+<ul class='blist'>
+<li><strong>The business plan clock.</strong> How long the value-creation strategy takes to execute — renovations, lease-up, expense repositioning, entitlement. This is the clock you control most directly.</li>
+<li><strong>The debt clock.</strong> How long until maturity, or until a rate cap expires, or until a covenant test binds. This clock is contractual and does not negotiate.</li>
+<li><strong>The cycle clock.</strong> How long until the market phase changes. This clock is unknowable in duration but knowable in sequence, which is the entire premise of signal-based analysis.</li>
+</ul>
+<p>The design rule is straightforward to state and difficult to honor: the debt clock should outlast the business plan clock by a meaningful margin, and the combined duration should be survivable across at least one phase transition. When you cannot satisfy both, you have identified either a position to pass on or a risk to size accordingly.</p>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Your horizon question has an additional wrinkle: you are inheriting someone else’s clocks. The sponsor sets the business plan duration and signs the debt. Your only decision is whether the clocks they have chosen fit the horizon you actually have.</p>
+<p>This is why "what is the hold period" is a weaker diligence question than it appears. The stronger questions are: what happens if the business plan takes fifty percent longer than projected, when does the debt mature relative to that extended timeline, what is the extension option and what does it cost, and what specifically would force a sale before the plan completes. An operator who has thought carefully about these will answer immediately. One who has not will answer with the base case again, more slowly.</p>
+<div class='callout'><p><em>You do not own a hold period. You own the shorter of the business plan and the debt — and the market decides which one that turns out to be.</em></p></div>
+<h3>WORKSHEET — INPUT TWO</h3>
+<p><strong>B1</strong>  State your intended horizon in years for the majority of this capital. Then state what would force you to liquidate earlier.</p>
+<p><strong>B2</strong>  For each position you currently hold, write the three clocks: business plan remaining, debt maturity, and your read on the market’s phase. Circle any position where the debt clock runs out first.</p>
+<p><strong>B3</strong>  What is the longest period you could go without a distribution or a liquidity event before it changes your behavior?</p>
+<h2>Input Three — Risk Capacity</h2>
+<p class='secdeck'><em><em>What you can survive, as distinct from what you can stomach</em></em></p>
+<div class='callout'><p><em>Risk tolerance is a feeling. Risk capacity is arithmetic. Confusing the two is how people who felt comfortable end up insolvent.</em></p></div>
+<p>The third input separates two things that get collapsed into one word.</p>
+<p>Risk tolerance is psychological. It is how much volatility, uncertainty, and paper loss you can experience without changing your behavior. It is real and it matters — an investor who cannot sleep will sell at the bottom, and the best-designed portfolio in the world does not survive its owner’s panic.</p>
+<p>Risk capacity is structural. It is how much loss your balance sheet, your income, your obligations, and your guarantees can absorb before something breaks that cannot be unbroken. It does not care how you feel about it.</p>
+<p>The dangerous investor is the one whose tolerance exceeds their capacity. They are comfortable, right up until they are finished.</p>
+<h3>MEASURING CAPACITY</h3>
+<p>Capacity in real estate is not a single number. It is four separate constraints, and your true capacity is the tightest one.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Liquidity capacity</span></div></div></div>
+<p>How much cash and immediately available credit can you deploy to defend positions without selling anything? This is the number that determines whether a capital call, a rate cap renewal, or a lender-required paydown is an inconvenience or a crisis. Count it honestly and separately from capital earmarked for new acquisitions.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Guarantee capacity</span></div></div></div>
+<p>What is your total exposure across recourse obligations, bad-boy carve-outs, completion guarantees, and personal guarantees? For operators this is frequently the binding constraint and frequently uncounted, because guarantees do not appear on a balance sheet until they are called.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Income capacity</span></div></div></div>
+<p>How much of your living expense depends on distributions from this portfolio? If the answer is most of it, then a portfolio-wide distribution suspension is not a portfolio event — it is a personal event, and it will drive decisions that the portfolio would not otherwise require.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Reputational and relational capacity</span></div></div></div>
+<p>For anyone operating with outside capital: how many investor relationships can absorb a loss and remain intact? This is a real constraint on real strategies, and operators who ignore it discover that their capacity to raise the next fund was part of their risk capacity all along.</p>
+<h3>THE CAPACITY TEST</h3>
+<p>There is a single question that reveals capacity faster than any worksheet. Ask it of your portfolio as it exists today.</p>
+<div class='card solo'><p class='ch'>THE TEST</p><p>Could you survive a phase you did not see coming?</p><p>Assume the market shifts one full phase against you within twelve months. Distributions across the portfolio go to zero. Values fall meaningfully. Two loans mature into a market with no appetite for refinancing them. No asset can be sold at a price you would accept.</p><p>Does anything break that cannot be repaired? If yes, your current risk exposure exceeds your capacity — regardless of how comfortable you feel today.</p></div>
+<p>Note carefully what this test does not ask. It does not ask whether that scenario is likely. Likelihood is the domain of signal analysis, and reasonable people will disagree. Capacity is the domain of structure, and structure has to hold under conditions you did not forecast. The entire point of designing to capacity rather than to forecast is that your forecast will eventually be wrong and the structure still has to stand.</p>
+<div class='card solo'><p class='ch'>WHY CAPACITY HAS TO BE SET IN CALM CONDITIONS</p><p>Risk capacity assessed during Expansion is systematically overstated. Values are high, so equity looks abundant. Distributions are flowing, so income capacity looks robust. Refinancing is available, so maturities look manageable. Every input to the calculation is measured at its cyclical peak.</p><p>Assess capacity using trough assumptions, or accept that you are measuring the wrong thing. The reason to write it down is so that the number set in a clear-headed moment governs decisions made in an excited one.</p></div>
+<h3>CAPACITY AS A PORTFOLIO CONSTRAINT</h3>
+<p>Once you have your capacity number, it becomes a hard boundary on the blueprint rather than a consideration within it. Three rules follow directly.</p>
+<ul class='blist'>
+<li><strong>No single position may consume more than a defined share of liquidity capacity.</strong> Set the share in advance. In practice, a position whose worst-case capital requirement exceeds a quarter of your available liquidity is a position that can dictate the portfolio’s behavior.</li>
+<li><strong>Aggregate guarantee exposure gets a stated ceiling.</strong> Written down, tracked, and treated as consumed capacity even when no guarantee has been called.</li>
+<li><strong>A minimum reserve is untouchable.</strong> Not "available if needed for the right deal." Untouchable. The reserve exists precisely to be available at the moment when every instinct says to deploy it.</li>
+</ul>
+<div class='callout'><p><em>Reserves are the only part of a portfolio that pay for themselves entirely in the phase you did not plan for.</em></p></div>
+<h3>WORKSHEET — INPUT THREE</h3>
+<p><strong>C1</strong>  Write your four capacity numbers: deployable liquidity, total guarantee exposure, percentage of living expense funded by distributions, and number of investor relationships that could absorb a loss.</p>
+<p><strong>C2</strong>  Run the Capacity Test above against your current holdings. Write down specifically what breaks first, and at what point.</p>
+<p><strong>C3</strong>  Set your three constraints: maximum single-position share of liquidity, aggregate guarantee ceiling, and minimum untouchable reserve.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>According to the lesson, what should you do when you hold genuinely conflicting objectives, such as Growth and Preservation?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Average them into a single blended target.</button><button class='opt' data-k='B'><span class='k'>B</span>Split the portfolio into named sleeves with separate rules—for example, a preservation sleeve with a hard leverage cap and a growth sleeve with a defined maximum size—and never let one sleeve borrow against the other.</button><button class='opt' data-k='C'><span class='k'>C</span>Abandon the lower-ranked objective entirely.</button><button class='opt' data-k='D'><span class='k'>D</span>Pursue whichever objective the current phase favors.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson says the thing that quietly destroys portfolios is pursuing two conflicting objectives with the same capital. The sleeve solution separates them explicitly. What you must never do is let the growth sleeve borrow against the preservation sleeve, which quietly converts the whole portfolio into a growth portfolio.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>The lesson says your objective should be stable across the cycle. What should change?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Your objective, which should be reset each phase.</button><button class='opt' data-k='B'><span class='k'>B</span>Nothing—both objective and behavior should stay fixed.</button><button class='opt' data-k='C'><span class='k'>C</span>Your horizon, which should shorten in every phase.</button><button class='opt' data-k='D'><span class='k'>D</span>Your behavior in service of the objective—for example, a growth objective means deploying at attractive basis in Recovery but accumulating dry powder and harvesting in late Expansion.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>In conventional portfolio construction, the market is treated as weather. In cycle-aware construction, each phase demands a different expression of the same goal. Investors who cannot make that translation end up believing discipline means inactivity, or that aggressiveness means being unbounded.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 3</span><p class='qs'>Which statement correctly describes the three clocks every position runs?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The business plan clock, which you control most directly; the debt clock, which is contractual and does not negotiate; and the cycle clock, which is unknowable in duration but knowable in sequence.</button><button class='opt' data-k='B'><span class='k'>B</span>The rent clock, the expense clock, and the tax clock.</button><button class='opt' data-k='C'><span class='k'>C</span>The acquisition clock, the renovation clock, and the marketing clock.</button><button class='opt' data-k='D'><span class='k'>D</span>The lender clock, the equity clock, and the broker clock.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>A well-designed portfolio keeps the three clocks in a deliberate relationship. The design rule is that the debt clock should outlast the business plan clock by a meaningful margin, and the combined duration should be survivable across at least one phase transition you did not predict.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 4</span><p class='qs'>What is the difference between risk tolerance and risk capacity, according to the lesson?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>They are the same thing measured two ways.</button><button class='opt' data-k='B'><span class='k'>B</span>Risk tolerance is structural; risk capacity is psychological.</button><button class='opt' data-k='C'><span class='k'>C</span>Risk tolerance is psychological—how much volatility you can experience without changing behavior; risk capacity is structural—how much loss your balance sheet, income, obligations, and guarantees can absorb before something breaks.</button><button class='opt' data-k='D'><span class='k'>D</span>Risk capacity only applies to passive investors.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The dangerous investor is the one whose tolerance exceeds their capacity: comfortable, right up until they are finished. Capacity is measured through four constraints—liquidity, guarantee, income, and reputational and relational capacity—and your true capacity is the tightest one.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says risk capacity has to be set in calm conditions. In 2–3 sentences, explain why capacity assessed during Expansion is systematically overstated.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>In Expansion, every input to the capacity calculation is measured at its cyclical peak: values are high, so equity looks abundant; distributions are flowing, so income capacity looks robust; and refinancing is available, so maturities look manageable. Those numbers describe the peak, not what the portfolio can survive. Capacity should therefore be assessed using trough assumptions—or you accept that the number you are working with describes conditions that will not last.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator has a five-year value-add business plan on a 200-unit property financed with a three-year floating-rate bridge loan and a two-year rate cap. The underwriting assumed an exit cap rate drawn from the Expansion phase in which it was purchased. The operator’s deployable liquidity is $1.2 million, their personal guarantees total $6 million across the portfolio, and 70% of their living expenses come from distributions. Using the lesson’s framework, explain (a) the horizon mismatch in this position, (b) how the operator’s risk capacity should be assessed, (c) how the Capacity Test applies, and (d) which capacity constraints the operator should set.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) This is the horizon mismatch the lesson calls the most common structural failure in syndicated real estate: a five-year business plan financed with three-year debt and a two-year cap, underwritten with an exit assumption drawn from the purchase phase. The debt clock and the cap run out before the business plan clock, so the operator does not really own a five-year hold—they own the shorter of the business plan and the debt, and the market decides which one that turns out to be. (b) Capacity is the tightest of four constraints. Here, liquidity capacity is limited relative to the risks carried, guarantee capacity is heavily consumed at $6 million, and income capacity is fragile because a distribution suspension would be a personal event, not just a portfolio event. It must be assessed using trough assumptions, not Expansion values. (c) The Capacity Test asks whether the operator could survive a full phase shift against them within twelve months: distributions to zero, values down, loans maturing into a market unwilling to refinance, and no acceptable sale. With a cap expiring, a bridge maturity, large guarantees, and dependence on distributions, something likely breaks that cannot be repaired—which means the current structure exceeds capacity regardless of how likely the scenario seems. (d) The operator should set a maximum share of liquidity any single position may consume in a worst case, a written ceiling on aggregate guarantee exposure treated as consumed capacity, and an untouchable minimum reserve—then begin addressing the debt and cap mismatch before the triggers arrive.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>According to the lesson, what is true of a portfolio’s minimum reserve?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It is available for the right deal when a great opportunity appears.</button><button class='opt' data-k='B'><span class='k'>B</span>It is untouchable—it exists precisely to be available at the moment when every instinct says to deploy it.</button><button class='opt' data-k='C'><span class='k'>C</span>It should be reduced in Oversupply to fund acquisitions.</button><button class='opt' data-k='D'><span class='k'>D</span>It is unnecessary if the portfolio has low leverage.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is direct: a minimum reserve is not “available if needed for the right deal.” It is untouchable. Reserves are the only part of a portfolio that pay for themselves entirely in the phase you did not plan for.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the first three intake inputs. Proceed to Lesson 3.3.3 (The Intake: Role, Geography, and Capital Structure) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Conflicts,” “The Three Clocks,” and “Measuring Capacity” in Lesson 3.3.2 before proceeding, and complete the Worksheet prompts if you have not already.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.2 in full. The intake is the foundation of the blueprint, and the Capacity Test in particular is what separates a portfolio that is comfortable from one that is survivable.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Reserves are the only part of a portfolio that pay for themselves entirely in the phase you did not plan for. If the answer key revealed gaps, close them now before Lesson 3.3.3.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-3-1.html'>&larr; Previous<span>The Architecture Problem</span></a><a href='3-3-3.html' style='text-align:right'>Next &rarr;<span>The Intake — Role, Geography, and Capital Structure</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.2 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.2', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

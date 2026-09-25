@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.1 · The Architecture Problem &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.1</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.1</p>
+  <h1>The Architecture Problem</h1>
+  <p class='deck'>Why Most Real Estate Holdings Are Accumulations Rather Than Portfolios</p>
+  <div class="leadmeta"><span><b>3,663</b> words</span><span><b>17</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>The Pile and the Portfolio</h2>
+<p class='secdeck'><em><em>How accumulation gets mistaken for allocation</em></em></p>
+<div class='epi'><p><em>“Show me your portfolio” and “show me what you own” are two different questions. Most investors can only answer the second one.</em></p></div>
+<p>There is a conversation I have had dozens of times, and it always goes the same way. An operator tells me about their portfolio. Two thousand units, say, across four markets. Good assets. Real cash flow. A track record they are rightly proud of.</p>
+<p>Then I ask a simple question: why those four markets?</p>
+<p>The answer is almost never a strategy. It is a history. The first market is where they live. The second is where a broker they trusted brought them a deal. The third is where a partner had relationships. The fourth is where the first three got too expensive. Each acquisition was defensible on its own terms. Every deal cleared underwriting. Nobody made a stupid purchase.</p>
+<p>And yet what they own is not a portfolio. It is a pile.</p>
+<h3>THE DIFFERENCE IS INTENT</h3>
+<p>A pile is what accumulates when every decision is made one deal at a time. A portfolio is what results when the collection itself is designed, and each individual deal is evaluated against what the collection needs.</p>
+<p>That distinction sounds academic until you watch it play out through a cycle turn. Here is what a pile looks like when the market moves against it: four assets, all acquired within a thirty-month window, all in markets that were attractive for the same reasons at the same time, all financed with similar structures because that is what lenders were offering in that window, all underwritten with similar exit assumptions because that is what everyone believed. On the way up, this looks like conviction. It looks like an operator who found a thesis and pressed it.</p>
+<p>On the way down, it is revealed as a single bet purchased four times.</p>
+<div class='card solo'><p class='ch'>THE CONCENTRATION NOBODY COUNTS</p><p>Most investors track concentration by market and by asset class. Two markets, one asset class — that reads as concentrated. Six markets, three asset classes — that reads as diversified.</p><p>But the concentration that does the most damage in real estate is rarely geographic. It is temporal. If everything you own was bought inside the same eighteen months, at the same point in the cycle, with the same capital structure and the same exit assumption, then you own one position with several addresses. Geography did not diversify you. It disguised you.</p></div>
+<h3>WHY REAL ESTATE PRODUCES PILES</h3>
+<p>This is not a character flaw in real estate investors. It is a structural feature of the asset class. Four forces push almost everyone toward accumulation and away from design.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Deals arrive; allocations do not</span></div></div></div>
+<p>Nobody sends you an allocation. They send you a deal. The entire industry — brokers, sponsors, capital markets desks, your own inbox — is organized around presenting individual opportunities. The unit of attention is the property. So the unit of decision becomes the property, and the portfolio becomes a residue of decisions rather than the thing driving them.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Capital is lumpy</span></div></div></div>
+<p>A stock investor can put four percent of a portfolio into a position. A real estate investor puts in whatever the deal requires, which is frequently a large share of everything available. Position sizing, the most basic tool of portfolio construction, is only partly under your control.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Exiting is slow and expensive</span></div></div></div>
+<p>Rebalancing a securities portfolio takes an afternoon. Rebalancing a real estate portfolio takes six to twelve months per position, costs several percent of gross value, and may trigger tax consequences that make the economically correct decision financially irrational. When rebalancing is this costly, most people simply stop rebalancing.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Operational gravity</span></div></div></div>
+<p>Every asset you own consumes attention. The more you own, the less capacity you have to think above the asset level. Portfolio design is the first casualty of operational load — which is precisely backward, because portfolio design is what determines whether operational excellence will be rewarded at all.</p>
+<p>These forces are real. This lesson does not pretend they can be wished away. What it argues is that they can be planned around — and that planning around them is a discipline, not a personality trait.</p>
+<h3>THE COST OF THE PILE</h3>
+<p>I want to be specific about what a pile costs, because the cost is invisible until it is enormous.</p>
+<p>A pile has correlated failure. When conditions shift, they shift against every position at once. There is no ballast — nothing in the collection that benefits, or even just holds steady, when the rest is under pressure.</p>
+<p>A pile has no dry powder by design. Because every deal was taken as it came, capital was deployed on the availability schedule of the market rather than on a schedule you set. The moment when the best acquisitions in a decade become available is precisely the moment when a pile has nothing left to deploy and is fielding calls from lenders.</p>
+<p>A pile has synchronized maturities. This is the quiet killer. Loans taken in the same window mature in the same window. If that window lands in Contraction, you are refinancing every position simultaneously into the worst available terms, at valuations set by the worst available comparables, with every other owner in your market doing the same thing at the same time.</p>
+<p>And a pile has no exit sequencing. When you need liquidity, you do not get to sell the asset you want to sell. You sell the one that will trade. In a stressed market that is your best asset, because it is the only one a buyer wants. The pile forces you to sell strength to defend weakness.</p>
+<div class='callout'><p><em>A portfolio decides what it sells. A pile is told what it sells.</em></p></div>
+<h3>WHAT A PORTFOLIO ACTUALLY IS</h3>
+<p>Strip away the jargon and a portfolio is a structure with four properties.</p>
+<ul class='blist'>
+<li><strong>It has a stated purpose.</strong> You can articulate, in a sentence, what this collection of assets is supposed to do for you and by when. If you cannot, you do not have a portfolio; you have holdings.</li>
+<li><strong>It has intentional composition.</strong> Each position exists because it plays a role. Some positions produce income. Some produce growth. Some exist to be liquid. Some exist to be boring. A position with no assigned role is a position you cannot evaluate.</li>
+<li><strong>It has known correlations.</strong> You know which positions move together and which do not, and you have deliberately limited how much moves together at once.</li>
+<li><strong>It has a rebalancing discipline.</strong> There is a defined process by which the portfolio gets adjusted back toward its design as conditions change — and a defined trigger for running that process.</li>
+</ul>
+<p>Notice that none of these four properties says anything about how many properties you own, how many units, or how many markets. Size is not structure. A four-hundred-unit portfolio can be beautifully architected. A four-thousand-unit portfolio can be a pile with better financials.</p>
+<h3>FOR THE ALLOCATOR</h3>
+<p>If you invest passively, do not read the preceding pages as a description of somebody else’s problem. The passive version of the pile is more common than the active version and considerably harder to see.</p>
+<p>It forms like this. You invest with a sponsor and it goes well. They bring you the next deal, and you invest again, because the relationship is proven and the diligence is faster the second time. Two years later you hold six positions with three sponsors, all acquired in the same market conditions, all in similar business plans, all with similar hold periods, all with floating-rate debt because that was the market convention when they closed.</p>
+<p>Every individual decision was rational. You backed people with track records. You spread across several sponsors. It felt diversified. It was six copies of one bet, and you did not sign a single loan document, which means you have almost no levers to pull when it turns.</p>
+<div class='card solo'><p class='ch'>THE ALLOCATOR’S HARDEST TRUTH</p><p>A passive investor cannot fix a bad position through operations, refinancing, or repositioning. You have exactly two decisions: what you fund, and when you fund it.</p><p>That is a narrower toolkit than the operator has — which is precisely why portfolio design matters more for you, not less. Design is nearly the entire game when execution is delegated.</p></div>
+<h3>THE WORK AHEAD</h3>
+<p>Turning a pile into a portfolio does not require selling everything and starting over. Almost nobody does that, and almost nobody should. It requires three things: a blueprint that states what the portfolio is supposed to be, an honest audit of the gap between that blueprint and what you actually own, and a deployment discipline that closes the gap with new capital and selective exits over time.</p>
+<p>Most portfolios are corrected forward, not corrected backward. What you buy next, and when, is where the architecture actually gets built.</p>
+<h2>What the Wealth Manager Knows</h2>
+<p class='secdeck'><em><em>Borrowing a discipline from an adjacent profession</em></em></p>
+<div class='callout'><p><em>The wealth management industry solved portfolio construction seventy years ago. Real estate never adopted the solution because our asset class made it inconvenient.</em></p></div>
+<p>Sit down with a competent wealth manager and watch what happens before a single security is discussed. They do not open with a recommendation. They open with an intake.</p>
+<p>How old are you. When do you want to stop working. What does your income look like now, and what will it look like then. What do you need this money to do — replace a paycheck, grow to a number, fund a specific obligation on a specific date, transfer to your children. How much can you lose without changing your life. How much can you lose without changing your mind, which is a different question. What are your tax circumstances. What do you already own that I need to work around.</p>
+<p>Only after all of that does an allocation appear. And when it appears, it is expressed as a structure — proportions across asset classes, geographies, and styles — rather than as a list of picks. The individual securities are the last thing chosen and the least important part of the conversation.</p>
+<p>Now compare that to how most real estate investors operate. The conversation starts with a deal. It ends with a yes or a no. The intake never happens, because there is no professional standing between the investor and the transaction whose job is to ask.</p>
+<div class='callout'><p><em>The wealth manager designs the structure and then finds securities that fit it. Real estate investors find deals and then describe whatever results as a structure.</em></p></div>
+<h3>THE FOUR THINGS THEY GET RIGHT</h3>
+<p>Setting aside everything about that industry that does not translate, four disciplines are worth taking wholesale.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Objective before instrument</span></div></div></div>
+<p>The purpose of the money is established before any consideration of what to buy. This single sequencing decision eliminates most bad allocation, because a deal that cannot be connected to a stated objective becomes visibly what it is: an opportunity in search of a justification.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Position sizing as a rule, not a feeling</span></div></div></div>
+<p>No single position is permitted to exceed a defined share of the whole. The rule is set in advance, when nothing is at stake, precisely because in the moment every great position argues for a larger allocation.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>Correlation as a first-class variable</span></div></div></div>
+<p>Two holdings that behave identically under stress count as one holding for risk purposes, regardless of how different they look on paper. The question is never how many things you own; it is how many distinct behaviors you own.</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>Scheduled rebalancing</span></div></div></div>
+<p>The portfolio is brought back toward its target composition on a defined cadence or trigger, which mechanically forces trimming of what has run and adding to what has lagged. The discipline exists specifically to override the emotional judgment of the person operating it.</p>
+<h3>THE FOUR THINGS THAT DO NOT TRANSLATE</h3>
+<p>Real estate is not equities with a roof. Four differences break the direct import, and understanding them precisely is what makes the adapted version work.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>CONSTRAINT</strong></th><th><strong>WHAT IT MEANS FOR PORTFOLIO DESIGN</strong></th></tr></thead><tbody><tr><td>Illiquidity</td><td>You cannot rebalance on a schedule. Adjustment happens through acquisition, disposition, and recapitalization — each measured in quarters, not days. The design must therefore anticipate conditions rather than react to them.</td></tr><tr><td>Lumpiness</td><td>You cannot size a position freely. A deal is the size it is. Position sizing must be managed through equity structure, partner participation, and pacing rather than through fractional allocation.</td></tr><tr><td>Leverage</td><td>Every position carries embedded, non-recallable, term-limited financing. Your maturity schedule is a second portfolio sitting underneath the first, with its own concentration risk.</td></tr><tr><td>Operational load</td><td>Each position consumes management capacity. There is a hard ceiling on how many distinct strategies and markets one team can execute well — a constraint that has no analogue in securities.</td></tr></tbody></table></div>
+<p>These four constraints do not invalidate portfolio thinking. They change where the leverage of good design sits. In securities, most of the value of portfolio construction is captured through ongoing rebalancing. In real estate, most of it is captured at the moment of acquisition and at the moment of financing — because those are the moments when you have full discretion and the terms get locked for years.</p>
+<div class='card solo'><p class='ch'>THE DESIGN PRINCIPLE THAT FOLLOWS</p><p>Because real estate rebalances slowly, the portfolio must be designed forward rather than corrected backward. You do not build balance by fixing what you own. You build it by controlling what you add, and when.</p><p>This is why cycle position is not one input among many. It is the input that determines whether your next addition improves the structure or compounds its flaw.</p></div>
+<h3>THE MISSING VARIABLE</h3>
+<p>There is one more difference, and it is the one this entire framework turns on.</p>
+<p>A wealth manager building a portfolio for a client does not typically make a call on where the equity market sits in its cycle. The prevailing discipline is explicitly agnostic about timing. Set the allocation according to the client’s objectives and risk capacity, rebalance mechanically, and let time do the work. Timing the market is, in that world, considered a fool’s errand — and given how efficiently public markets price information, the position is defensible.</p>
+<p>Real estate is not that market. Real estate cycles are long, slow, locally variable, and driven by a supply response that takes years to arrive. Capital is not efficiently priced across submarkets. Information is not evenly distributed. A property in a market entering Oversupply and an identical property in a market entering Recovery are not the same asset, and no amount of operational skill closes that gap.</p>
+<p>Which means the discipline that public-market investing rightly rejects is the discipline that real estate investing requires. In our asset class, when is not noise to be diversified away. It is the dominant variable.</p>
+<div class='callout'><p><em>Wealth managers ignore timing because their market punishes people who try. Real estate punishes people who don’t.</em></p></div>
+<h3>THE ADAPTED MODEL</h3>
+<p>So here is what we take, what we leave, and what we add.</p>
+<ul class='blist'>
+<li><strong>Take:</strong> the intake discipline, position-size rules, correlation as a first-class variable, and a defined rebalancing protocol.</li>
+<li><strong>Leave:</strong> the assumption of liquidity, the assumption of free position sizing, and the timing agnosticism.</li>
+<li><strong>Add:</strong> cycle phase as an explicit allocation variable at both the national and local level, a maturity ladder treated as a portfolio in its own right, and an operational capacity constraint that caps how much complexity the portfolio is permitted to contain.</li>
+</ul>
+<p>That adapted model is the Portfolio Architect. The remaining lessons of Part Three build it.</p>
+<h2>When &gt; How at the Portfolio Level</h2>
+<p class='secdeck'><em><em>The core thesis, applied to the collection rather than the deal</em></em></p>
+<div class='callout'><p><em>Operational excellence cannot fix a bad entry point. That is true of one asset. It is compounding when it is true of all of them at once.</em></p></div>
+<p>The founding thesis of the Econiq Method is three characters long: When &gt; How.</p>
+<p>It means that where you enter the cycle matters more to your outcome than how well you execute after entry. Not that execution is unimportant — execution is most of the daily work, and bad execution can destroy a well-timed entry. But the ceiling on your outcome is set at entry, and no amount of operational skill raises a ceiling that was set too low.</p>
+<p>Applied to a single asset, this is a sobering idea. Applied to a portfolio, it is an organizing principle — because a portfolio is not one entry point. It is a distribution of entry points, and that distribution is something you can design.</p>
+<div class='card solo'><p class='ch'>THE PORTFOLIO COROLLARY</p><p>When &gt; How, at scale</p><p>If entry timing determines the ceiling on any single asset, then the distribution of your entry timings determines the ceiling on your entire portfolio. A portfolio concentrated in one entry window inherits one ceiling. A portfolio distributed across entry windows inherits a blended one — and blended ceilings are survivable in a way that single ceilings are not.</p></div>
+<h3>THREE WAYS CYCLE POSITION ENTERS THE BLUEPRINT</h3>
+<p>Cycle position is not a single input applied once. It enters portfolio design at three distinct levels, and confusing them is the most common analytical error I see.</p>
+<p><strong>One: the national phase sets your posture.</strong> The national multifamily cycle determines your general stance toward risk, leverage, and pace. It answers questions like: should I be deploying aggressively or accumulating dry powder? Should I be extending duration on debt or preserving flexibility? Should I be a net buyer or a net seller this year? These are portfolio-wide settings, and they are set at the national level because capital markets, construction financing, and investor sentiment operate nationally.</p>
+<p><strong>Two: the local phase sets your targeting.</strong> Individual markets do not move in lockstep with the nation, and the divergence is frequently extreme. It is entirely normal for one metro to be absorbing a supply wave while another two hundred miles away has had no meaningful deliveries in three years. National phase tells you how hard to press. Local phase tells you where to press.</p>
+<p>This is the Onion Framework at work — Layer 1 submarket conditions, Layer 2 the multifamily industry, Layer 3 the macro environment. A portfolio blueprint requires reading all three layers separately and then holding them in view simultaneously. Blend them into one undifferentiated impression of "the market" and you will consistently mistake a national headwind for a local one, or worse, mistake a local tailwind for permission to ignore a national headwind.</p>
+<p><strong>Three: your portfolio’s own phase position.</strong> This is the level almost nobody computes, and it is the one Portfolio Architect adds. Your portfolio itself sits at a weighted-average position in the cycle, determined by when each of your positions was entered and what phase each of your markets currently occupies. You can calculate it. Most people never have.</p>
+<p>The number matters because it tells you what you are actually exposed to, as opposed to what you believe you are exposed to. An operator who describes themselves as conservative but whose entire portfolio was entered within a single late-Expansion window is not conservative. Their self-image is calibrated to their intentions; their portfolio is calibrated to their history.</p>
+<div class='card solo'><p class='ch'>THE DIAGNOSTIC QUESTION</p><p>If every market where you own a position moved one full phase forward tomorrow, would your portfolio be stronger or weaker?</p><p>If the honest answer is "uniformly weaker," you are not diversified across the cycle regardless of how many markets or asset types you hold. If the answer is "some stronger, some weaker," you have built something with internal ballast. That is the entire objective of the Five Axes of Balance in Lesson 3.3.4.</p></div>
+<h3>WHY BALANCE IS NOT THE SAME AS HEDGING</h3>
+<p>A caution, because this idea gets misapplied. Building a cycle-balanced portfolio does not mean deliberately buying into bad phases so that you own a little of everything. That is not balance; that is diversifying into loss on purpose.</p>
+<p>Cycle balance means something more specific: that the entry timing, maturity timing, exit timing, and business-plan duration of your positions are distributed such that no single phase transition can compromise the whole. You are not trying to own a Contraction-phase asset. You are trying to ensure that when Contraction arrives, some meaningful share of your portfolio is stabilized, unlevered enough to survive, or far enough into its business plan that it does not need the market’s cooperation.</p>
+<div class='callout'><p><em>Balance is not owning something in every phase. It is owning nothing that requires one specific phase to survive.</em></p></div>
+<h3>THE RULE OF 6 AND WHERE TIMING LIVES</h3>
+<p>Having worked through Parts One and Two, you know the Rule of 6 — the six questions that govern deal and partner selection: Who, What, When, Where, Why, and How. It is worth being precise about how the Rule of 6 relates to what we are doing here, because the two frameworks are frequently conflated.</p>
+<p>The Rule of 6 governs selection. It is the discipline you apply to a specific opportunity and a specific partner: is this the right party, the right asset, the right moment, the right location, the right reason, the right execution plan. It operates at the level of the decision in front of you.</p>
+<p>Portfolio Architect governs composition. It operates one level up, and it answers a question the Rule of 6 does not ask: given everything I already own, what does this collection now need? A deal can pass all six questions cleanly and still be the wrong addition, because it duplicates an exposure the portfolio already carries in excess.</p>
+<p>The two work in sequence. The blueprint tells you what to look for. The Rule of 6 tells you whether the thing you found is worth having. Skip the blueprint and the Rule of 6 will faithfully approve one excellent deal after another until you have a pile of excellent deals that fail together.</p>
+<h3>WHAT FOLLOWS</h3>
+<p>Lessons 3.3.2 and 3.3.3 run your intake. Six inputs, three per lesson, each ending with the specific worksheet entries you will carry forward into your blueprint. Answer them honestly rather than aspirationally — the blueprint is only as good as the intake beneath it, and there is no one to impress here.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>According to the lesson, what is the difference between a pile and a portfolio?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A portfolio contains more properties than a pile.</button><button class='opt' data-k='B'><span class='k'>B</span>A pile is what accumulates when every decision is made one deal at a time; a portfolio is what results when the collection itself is designed and each deal is evaluated against what the collection needs.</button><button class='opt' data-k='C'><span class='k'>C</span>A portfolio is always spread across more markets than a pile.</button><button class='opt' data-k='D'><span class='k'>D</span>A pile contains only Class C assets.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is explicit that the difference is intent, not size. A four-thousand-unit portfolio can be a pile with better financials. A portfolio has a stated purpose, intentional composition, known correlations, and a rebalancing discipline—none of which says anything about how many properties you own.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 2</span><p class='qs'>Which of the following is one of the four forces the lesson says pushes real estate investors toward accumulation rather than design?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Too much market data.</button><button class='opt' data-k='B'><span class='k'>B</span>Excessive regulation of acquisitions.</button><button class='opt' data-k='C'><span class='k'>C</span>Deals arrive; allocations do not—the industry presents opportunities one property at a time, so the property becomes the unit of decision.</button><button class='opt' data-k='D'><span class='k'>D</span>Lenders prefer diversified borrowers.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The four forces are: deals arrive while allocations do not, capital is lumpy, exiting is slow and expensive, and operational gravity—every asset consumes attention. These are structural features of the asset class, not character flaws, which is why the lesson treats them as problems to design around.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 3</span><p class='qs'>What does the lesson identify as the “missing variable” that the wealth management model ignores and that matters most in real estate?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Tax efficiency.</button><button class='opt' data-k='B'><span class='k'>B</span>Asset class labels.</button><button class='opt' data-k='C'><span class='k'>C</span>Property management quality.</button><button class='opt' data-k='D'><span class='k'>D</span>Cycle phase—in real estate, where the cycle sits is the dominant variable, not noise to be diversified away.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>A wealth manager can be largely agnostic about market timing because public markets price information quickly. Real estate cycles are long, slow, locally variable, and driven by supply that takes years to arrive. The lesson calls cycle phase the one variable Portfolio Architect adds to the adapted model.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>Which statement reflects the lesson’s distinction between the Rule of 6 and Portfolio Architect?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>The Rule of 6 governs selection—the right decision for a specific opportunity—while Portfolio Architect governs composition, asking what role a deal plays in what you already own.</button><button class='opt' data-k='B'><span class='k'>B</span>The Rule of 6 is only for acquisitions, while Portfolio Architect is only for operations.</button><button class='opt' data-k='C'><span class='k'>C</span>Portfolio Architect replaces the Rule of 6.</button><button class='opt' data-k='D'><span class='k'>D</span>They are the same framework under different names.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson says the two work in sequence: the blueprint tells you what to look for, and the Rule of 6 tells you whether the thing you found is worth having. Skip the blueprint and the Rule of 6 will approve one excellent deal after another until you have a pile of excellent deals that fail together.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson says balancing a portfolio across the cycle is not the same as hedging. In 2–3 sentences, explain the difference.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Hedging, as it is usually misapplied, means owning a little of everything—deliberately buying into bad phases so you have some of each—which is diversifying into loss on purpose. Cycle balance means arranging the timing, leverage, maturity, exit timing, and business-plan duration of your positions so that no single phase transition can compromise the whole. The goal is not to own something in every phase; it is to own nothing that requires one specific phase to survive.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An operator owns four stabilized properties totaling 1,100 units in three Sun Belt markets. All four were acquired within a 30-month window during Expansion, financed with similar three-year floating-rate loans from the same lender, underwritten with similar exit assumptions, and managed by one company. The operator considers the portfolio diversified because it spans three markets and has performed well. Using the lesson’s framework, explain (a) whether this is a portfolio or a pile and why, (b) the specific costs of the pile the operator is exposed to, (c) how the diagnostic question applies, and (d) what the operator should do first.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) It is a pile. Every acquisition was a rational decision on its own, but nobody designed the collection. Three markets do not create diversification when the positions share the same vintage, financing structure, lender, exit assumptions, and management—geography did not diversify the operator; it disguised a single bet. (b) The operator faces the costs the lesson describes: correlated failure (everything moves together when conditions shift), no dry powder (capital was deployed on the market’s schedule), synchronized maturities (three-year loans from the same window mature together, possibly into a Contraction), and no exit sequencing (the operator will not get to choose what to sell). (c) The diagnostic question asks what happens if every market moved one full phase forward tomorrow. For this portfolio the honest answer is likely “uniformly weaker,” which means it is not diversified across the cycle regardless of how many markets it holds. (d) The first step is the work ahead the lesson describes: a blueprint stating what the portfolio is supposed to be, an honest audit of what it currently is—beginning with the intake in Lessons 3.3.2 and 3.3.3—and a deployment discipline that closes the gap. Most portfolios are corrected forward, through what is bought next and when, rather than backward.</em></em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 7</span><p class='qs'>At the portfolio level, how does the lesson restate When &gt; How?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A portfolio’s performance depends mostly on how well each property is managed.</button><button class='opt' data-k='B'><span class='k'>B</span>Timing matters only for the first acquisition.</button><button class='opt' data-k='C'><span class='k'>C</span>Entry timing sets the ceiling on any single asset’s outcome; a portfolio is not one entry point but a distribution of entry points, and that distribution is something you can design.</button><button class='opt' data-k='D'><span class='k'>D</span>A portfolio should always be fully invested to capture every phase.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Applied to one asset, When &gt; How is a sobering idea. Applied to a portfolio, it becomes an organizing principle: a portfolio concentrated in one entry window inherits one ceiling, while a portfolio distributed across entry windows inherits a blended ceiling—and blended ceilings are survivable in a way single ceilings are not.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the architecture problem. Proceed to Lesson 3.3.2 (The Intake: Objective, Horizon, and Risk Capacity) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Difference Is Intent,” “Why Real Estate Produces Piles,” and “The Missing Variable” in Lesson 3.3.1 before proceeding. Focus especially on the four properties of a portfolio and why cycle phase is the dominant variable.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.1 in full. Every tool in Part Three assumes you can see the difference between a pile and a portfolio in your own holdings; that recognition is where the architecture begins.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Most portfolios are corrected forward, not backward. If the answer key revealed gaps, close them now before Lesson 3.3.2.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='part-three.html'>&larr; Previous<span>The Portfolio Architect</span></a><a href='3-3-2.html' style='text-align:right'>Next &rarr;<span>The Intake — Objective, Horizon, and Risk Capacity</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.1 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.1', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

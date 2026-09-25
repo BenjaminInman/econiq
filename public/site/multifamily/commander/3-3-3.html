@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.3.3 · The Intake — Role, Geography, and Capital Structure &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.3.3</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part Three</span>
+  <p class="eyebrow">Lesson 3.3.3</p>
+  <h1>The Intake — Role, Geography, and Capital Structure</h1>
+  <p class='deck'>How You Will Build the Portfolio — and With What Tools</p>
+  <div class="leadmeta"><span><b>2,829</b> words</span><span><b>13</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><h2>Input Four — The Role</h2>
+<p class='secdeck'><em><em>Operator, allocator, or hybrid — and the honest version of the answer</em></em></p>
+<div class='epi'><p><em>The question is not which role you prefer. It is which role your available time, expertise, and infrastructure can actually sustain.</em></p></div>
+<p>The fourth input determines which levers you will hold. It sounds like a preference question. It is really a capacity question, and answering it aspirationally is one of the more expensive mistakes available in this industry.</p>
+<h3>THE THREE POSITIONS</h3>
+<p><strong>The Owner-Operator.</strong> You control the asset. You select the market, negotiate the purchase, sign the debt, hire and fire management, direct capital expenditure, and decide when to sell. Your levers are the widest available: you can change operations, restructure debt, alter the business plan, and time the exit.</p>
+<p>Those levers cost something. Operating consumes time in a way that does not scale linearly, requires local infrastructure or trusted local partners in every market you enter, and creates recourse exposure that passive investors never touch. The operator’s portfolio is constrained less by capital than by attention and by the practical limit on how many distinct markets one organization can genuinely understand.</p>
+<p><strong>The Passive Allocator.</strong> You provide capital and select the parties who execute. Your levers are narrow — what you fund and when you fund it — and once funded, you have limited influence and even more limited exit optionality.</p>
+<p>The compensating advantages are substantial and frequently undervalued. You can be in more markets than any operator, because you are not building infrastructure in any of them. You can be in more strategies simultaneously. You can go completely inactive during phases when deploying is unwise, at essentially no cost, which is a luxury an operator with staff and overhead does not have. And your downside is generally bounded at your invested capital.</p>
+<p><strong>The Hybrid.</strong> You operate in markets and strategies where you have genuine edge, and allocate passively into markets and strategies where you do not. Done deliberately, this is the strongest position available to an experienced investor, because it uses operating skill where it creates value and buys access everywhere else.</p>
+<p>Done accidentally — which is the common version — it produces an operator who is also an inattentive LP in a handful of deals a friend brought them, with no framework governing which is which.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>DIMENSION</strong></th><th><strong>OPERATOR</strong></th><th><strong>ALLOCATOR</strong></th></tr></thead><tbody><tr><td>Levers available</td><td>Operations, debt, business plan, exit timing, capital structure</td><td>Selection and pacing only</td></tr><tr><td>Market breadth</td><td>Constrained by infrastructure and attention</td><td>Effectively unconstrained</td></tr><tr><td>Time cost</td><td>High and ongoing; scales with position count</td><td>Concentrated in diligence; low afterward</td></tr><tr><td>Downside exposure</td><td>Equity plus guarantees plus reputation</td><td>Generally bounded at invested capital</td></tr><tr><td>Ability to sit out a phase</td><td>Difficult — overhead and team continue</td><td>Straightforward and nearly costless</td></tr><tr><td>Primary portfolio risk</td><td>Over-concentration and operational overextension</td><td>Sponsor correlation and vintage clustering</td></tr></tbody></table></div>
+<h3>THE HONEST VERSION OF THE QUESTION</h3>
+<p>Here is the diagnostic. Answer it before you answer the role question.</p>
+<ul class='blist'>
+<li><strong>How many hours per week, sustainably, for the next five years? Not the number in an ambitious month.</strong> The number in a bad month, when something else in your life is demanding attention. That number determines how many positions you can genuinely oversee.</li>
+<li><strong>In how many markets do you have real, current, ground-level knowledge? Not familiarity.</strong> Knowledge — of submarket boundaries, employer concentration, permit pipelines, and which management companies actually perform. For most operators the honest number is one or two.</li>
+<li><strong>Do you have infrastructure or must you build it? Every new operating market requires management relationships, contractor relationships, and someone who can walk the property on short notice.</strong> The cost of entering a market you do not have is routinely underestimated by an order of magnitude.</li>
+<li><strong></strong>What is your recourse appetite? If the answer is near zero, you have effectively answered the role question already.</li>
+</ul>
+<div class='card solo'><p class='ch'>THE SCALING TRAP</p><p>The most common failure among successful operators is entering a fifth or sixth market because the returns look better there than in the two markets they actually understand.</p><p>Sometimes the returns are better. But the operator is comparing their expert execution in known markets against theoretical execution in an unknown one — and executing at expert level in a new market takes years. Frequently the correct answer is to allocate passively into the attractive market with a local operator who has the edge you would have to spend three years building. That is not a retreat. It is portfolio design.</p></div>
+<h3>ROLE AS AN ALLOCATION VARIABLE</h3>
+<p>The insight worth carrying forward: the operator/allocator split is not a fixed identity. It is a portfolio allocation in its own right, and it should shift by phase.</p>
+<p>Operating is most valuable when there is value to create through execution and when entry basis is favorable — conditions concentrated in Recovery and early Expansion. Operating is least valuable when assets are priced for perfection and the marginal return to operational excellence is compressed to nothing, which is the late-Expansion and Oversupply condition. In those phases, passive positions in operators with genuine distress-acquisition capability, or simply holding capital, frequently outperform your own eleventh acquisition.</p>
+<div class='callout'><p><em>Deciding not to operate in a given phase is an operating decision. Most operators have never made it consciously.</em></p></div>
+<h3>WORKSHEET — INPUT FOUR</h3>
+<p><strong>A1</strong>  State your sustainable weekly hours and the number of markets in which you have genuine ground-level knowledge.</p>
+<p><strong>A2</strong>  Set a target split: what percentage of portfolio equity should be in positions you control versus positions you fund? State it as a range, not a point.</p>
+<p><strong>A3</strong>  Name the markets or strategies where you have real edge, and the ones where you would be paying tuition. Be specific about what the edge consists of.</p>
+<h2>Input Five — The Geography</h2>
+<p class='secdeck'><em><em>Concentration, distribution, and the market portfolio</em></em></p>
+<div class='callout'><p><em>You are not diversified because you own in six cities. You are diversified because those six cities do not share a fate.</em></p></div>
+<p>The fifth input is where. And the standard advice — diversify across markets — is close enough to correct that it obscures the more useful question, which is not how many markets but which relationships between markets.</p>
+<h3>TWO LEGITIMATE STRATEGIES</h3>
+<p>There are two coherent geographic approaches. Both work. What does not work is drifting between them without noticing.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>Deliberate concentration</span></div></div></div>
+<p>You operate in one or two markets and you know them better than nearly anyone. Your edge is informational and relational: you see deals before they are marketed, you know which submarkets are actually improving versus merely being marketed as improving, and your operating costs are lower because your infrastructure is dense. The risk is obvious and total — a market-specific shock hits everything you own simultaneously. Concentration is defensible only when paired with materially lower leverage, because the leverage is what converts a market downturn into a solvency event.</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>Deliberate distribution</span></div></div></div>
+<p>You hold positions across markets selected specifically because their economies, demand drivers, and supply cycles differ. Your edge is structural rather than informational: no single market event compromises the portfolio. The cost is that you will never know any of these markets the way a concentrated operator knows theirs, which means you are paying for diversification with informational disadvantage — and should therefore lean toward partnering with local operators rather than executing yourself.</p>
+<h3>THE CORRELATION QUESTION</h3>
+<p>The mistake that makes geographic diversification illusory is counting cities instead of examining what drives them.</p>
+<p>Two markets six hundred miles apart can be functionally the same market if they share the same demand driver, the same in-migration source, the same dominant employer type, and — critically — the same supply cycle. Two markets can be genuinely different neighbors if one is supply-constrained and the other is not, or if one is driven by an employment base that is countercyclical to the other.</p>
+<p>The questions that actually determine correlation are these.</p>
+<ul class='blist'>
+<li><strong>What drives demand here, specifically? A market driven by government and healthcare employment behaves differently through a downturn than one driven by logistics, or technology, or energy, or tourism.</strong> Two markets with different demand drivers can occupy different phases at the same moment.</li>
+<li><strong>What is the supply response capability? How quickly can this market build in response to rent growth? Markets with abundant land, permissive entitlement, and available construction financing overbuild rapidly and enter Oversupply hard.</strong> Constrained markets have shallower supply cycles and different risk profiles entirely.</li>
+<li><strong></strong>Where does the population come from, and where does it go? Markets that draw migration from the same source markets share exposure to whatever affects that source.</li>
+<li><strong>Who owns here? Markets dominated by institutional capital behave differently in a downturn than markets dominated by local private owners.</strong> Ownership composition determines how fast distress becomes transactions — which determines whether a downturn produces opportunity or just paralysis.</li>
+</ul>
+<div class='card solo'><p class='ch'>A WORKING DEFINITION</p><p>Two markets are genuinely diversifying if you can construct a plausible scenario in which one is in Recovery while the other is in Oversupply.</p><p>If you cannot construct that scenario, they are one market with two names, and holding both provides operational complexity without risk reduction.</p></div>
+<h3>THE LOCAL PHASE MAP</h3>
+<p>The practical output of this input is a map. For each market you own in or are considering, record your read on its current cycle phase, its supply pipeline relative to historical absorption, its primary demand driver, and its correlation to the other markets on your list.</p>
+<p>This is Layer 1 of the Onion Framework applied portfolio-wide — submarket conditions examined individually rather than blended into an impression of "the market." When the map is built, the concentration you actually carry becomes visible, and it is frequently not the concentration you assumed. Operators who believed they were diversified across five markets routinely discover that four of the five occupy the same phase and share the same demand driver.</p>
+<h3>FOR THE ALLOCATOR</h3>
+<p>Geographic diversification is the easiest axis for you and the one most likely to be accidental. You did not choose your market exposure; you chose sponsors, and your market exposure is whatever they happened to be buying.</p>
+<p>Build the map anyway. List every position, note the market, and then apply the correlation questions above. The common finding: a portfolio of eight investments with five sponsors across six markets, where five of the six markets are high-growth Sun Belt metros with abundant land, permissive entitlement, and identical in-migration narratives. That is one bet, well distributed geographically and not at all diversified in substance.</p>
+<div class='callout'><p><em>Count demand drivers and supply responses, not cities.</em></p></div>
+<h3>WORKSHEET — INPUT FIVE</h3>
+<p><strong>B1</strong>  List every market where you hold a position. For each: current phase read, primary demand driver, supply response capability, and share of portfolio equity.</p>
+<p><strong>B2</strong>  For each pair of markets in your top three by exposure, answer: can I construct a scenario where these two occupy different phases? If no, they are one market.</p>
+<p><strong>B3</strong>  State your geographic strategy explicitly: deliberate concentration or deliberate distribution. Then state the leverage discipline that strategy requires.</p>
+<h2>Input Six — The Capital Structure Posture</h2>
+<p class='secdeck'><em><em>Leverage and maturity as portfolio-level decisions</em></em></p>
+<div class='callout'><p><em>Your debt schedule is a second portfolio, sitting underneath the first, with its own concentration risk. Almost nobody manages it as one.</em></p></div>
+<p>The sixth and final input is the one that converts every other input from theory into consequence. Capital structure determines whether a downturn is a difficult period or a terminal one.</p>
+<p>And it is nearly always managed deal by deal. Each loan is negotiated on its own merits, at the terms available on the day it closed, by whoever was in the market at the time. The aggregate schedule that results is not designed. It is deposited.</p>
+<h3>LEVERAGE IS AN ALLOCATION DECISION</h3>
+<p>Treat total portfolio leverage the way a wealth manager treats equity allocation: as a top-level setting that governs everything beneath it, adjusted according to conditions rather than according to what lenders will permit.</p>
+<p>That last clause carries the weight. The amount of leverage available to you is set by the market. The amount you use is set by you. In Expansion these two numbers diverge dramatically, and the gap between them is where portfolio discipline either exists or does not.</p>
+<div class='card solo'><p class='ch'>THE AVAILABILITY TRAP</p><p>Debt is cheapest, most abundant, and most permissive precisely when asset prices are highest and forward returns are lowest. It is scarcest and most expensive precisely when prices are lowest and forward returns are highest.</p><p>This is not a market failure. It is the mechanism by which cycles amplify themselves. Which means that following the availability of credit will reliably put you at maximum leverage at maximum price — the exact configuration that converts a normal cycle turn into a permanent capital loss.</p></div>
+<h3>THE MATURITY LADDER</h3>
+<p>Bond investors have managed maturity concentration for a century. Real estate investors, holding instruments with identical characteristics, generally do not.</p>
+<p>Lay out every loan in your portfolio on a timeline by maturity date. Add rate cap expirations, which function as maturities in every way that matters. Add any covenant test date that could trigger a cash sweep or a paydown demand.</p>
+<p>What most people find: clustering. Three or four maturities inside an eighteen-month window, because the acquisitions clustered and the loan terms were similar. If that window happens to land in a favorable phase, nothing comes of it. If it lands in Contraction, every position needs a lender at the moment lenders are least willing, valuations are lowest, and every other owner in the market is asking the same lenders for the same accommodation.</p>
+<div class='card solo'><p class='ch'>THE LADDER RULE</p><p>No maturity window should be able to force multiple simultaneous decisions</p><p>Spread maturities so that no twelve-month window contains more than a defined share of your total debt. When you cannot spread them at origination — because terms are what they are — spread them afterward through staggered refinancing, extension purchases, or selective early payoff.</p><p>The cost of laddering is real: you will sometimes accept slightly worse terms to avoid clustering. Price it as insurance, because that is exactly what it is.</p></div>
+<h3>FIXED, FLOATING, AND THE QUESTION UNDERNEATH</h3>
+<p>The fixed-versus-floating debate is usually conducted as a rate forecast, which is the wrong frame — because it asks you to predict something you cannot predict and makes the answer hostage to that prediction.</p>
+<p>The portfolio question is different: which structure allows this position to survive a phase it did not expect? Floating-rate debt with a purchased cap transfers rate risk for a defined period and then returns it, frequently at a renewal cost that was not underwritten. Fixed-rate debt removes rate uncertainty but usually carries prepayment friction that constrains exit timing — which is a cycle risk of a different kind, because it can prevent you from selling into strength.</p>
+<p>Neither is correct in general. What is correct is knowing which specific risk you have chosen to carry, and ensuring that the portfolio as a whole does not carry all of one kind.</p>
+<h3>THE FOUR STRUCTURAL QUESTIONS</h3>
+<p>For each position, and then for the portfolio in aggregate.</p>
+<div class='numlist'><div class='numrow'><div class='n'>1</div><div class='c'><span class='term'>What is the trigger?</span></div></div></div>
+<p>What specific event — maturity, cap expiration, covenant breach, capital call — forces a decision on this position, and on what date?</p>
+<div class='numlist'><div class='numrow'><div class='n'>2</div><div class='c'><span class='term'>What is the extension?</span></div></div></div>
+<p>If the trigger arrives at a bad moment, what buys time? Extension options, their conditions, their cost, and whether the conditions are achievable in a stressed market rather than in the base case.</p>
+<div class='numlist'><div class='numrow'><div class='n'>3</div><div class='c'><span class='term'>What is the recourse?</span></div></div></div>
+<p>What am I personally on the hook for, and under what circumstances does that exposure become live?</p>
+<div class='numlist'><div class='numrow'><div class='n'>4</div><div class='c'><span class='term'>What is the aggregate?</span></div></div></div>
+<p>When every position’s triggers are laid on one timeline, where are the pileups — and what is the total capital required if two of them arrive together?</p>
+<h3>PHASE-ADJUSTED LEVERAGE</h3>
+<p>The final principle, and the one that ties this input to everything in Lesson 3.3.5: your target portfolio leverage should move inversely to the cycle.</p>
+<p>Higher leverage is appropriate when basis is low, when the acquisition price already reflects distress, and when the probability of further downside is compressed — conditions found in Recovery. Lower leverage is appropriate when basis is high, when pricing assumes continuation of favorable conditions, and when downside is asymmetric — conditions found in late Expansion and Oversupply.</p>
+<p>This is precisely the opposite of what the credit market encourages, and precisely the opposite of what most portfolios actually do. Which is why writing the target down, in advance, in a calm moment, is not bureaucratic. It is the mechanism by which you will decline the loan that everyone else accepts.</p>
+<div class='callout'><p><em>Use the leverage the cycle justifies, not the leverage the lender offers.</em></p></div>
+<h3>WORKSHEET — INPUT SIX</h3>
+<p><strong>C1</strong>  Build your maturity ladder. Every loan, every rate cap expiration, every covenant test date on one timeline. Mark the heaviest twelve-month window.</p>
+<p><strong>C2</strong>  State your current portfolio-wide loan-to-value and your target range for the current phase. If they differ, state how you will close the gap and by when.</p>
+<p><strong>C3</strong>  For your three largest positions, answer the four structural questions: trigger, extension, recourse, aggregate.</p>
+<p><strong>C4</strong>  Total capital required if your two nearest triggers both resolve unfavorably. Compare against your liquidity capacity from Lesson 3.3.2.</p></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='B'><span class='qn'>Question 1</span><p class='qs'>Which statement best describes the lesson’s view of the operator/allocator split?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>It is a fixed identity chosen once at the start of a career.</button><button class='opt' data-k='B'><span class='k'>B</span>It is a portfolio allocation in its own right and should shift by phase—operating is most valuable in Recovery and early Expansion, and least valuable when assets are priced for perfection.</button><button class='opt' data-k='C'><span class='k'>C</span>Allocators always outperform operators.</button><button class='opt' data-k='D'><span class='k'>D</span>Operators should never invest passively.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson treats role as an allocation variable, not an identity. Deciding not to operate in a given phase is itself an operating decision—one most operators have never made consciously.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>What does the lesson call the most common failure among successful operators?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Refusing to raise outside capital.</button><button class='opt' data-k='B'><span class='k'>B</span>Hiring too many property managers.</button><button class='opt' data-k='C'><span class='k'>C</span>Operating only one asset class.</button><button class='opt' data-k='D'><span class='k'>D</span>The scaling trap—entering a fifth or sixth market because returns look better there than in the markets they actually understand, comparing expert execution in known markets against theoretical execution in an unknown one.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Sometimes the returns in a new market really are better. But executing at expert level in a new market takes years of infrastructure-building the underwriting rarely prices in. The honest version of the role question asks about sustainable hours, genuine ground-level knowledge, infrastructure, and recourse appetite.</em></p></div></div>
+<div class='q' data-a='C'><span class='qn'>Question 3</span><p class='qs'>According to the lesson’s working definition, when are two markets genuinely diversifying?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>When they are at least 500 miles apart.</button><button class='opt' data-k='B'><span class='k'>B</span>When they are in different states.</button><button class='opt' data-k='C'><span class='k'>C</span>When you can construct a plausible scenario in which one is in Recovery while the other is in Oversupply.</button><button class='opt' data-k='D'><span class='k'>D</span>When their average rents differ by more than 20%.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Two markets far apart can be functionally the same if they share the same demand driver, in-migration source, dominant employer type, and supply cycle. If you cannot construct a scenario in which the two occupy different phases, they are one market with two names. The lesson’s summary: count demand drivers and supply responses, not cities.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>What does the lesson’s Ladder Rule require?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>No maturity window should be able to force multiple simultaneous decisions—spread maturities so that no twelve-month window contains more than a defined share of total debt.</button><button class='opt' data-k='B'><span class='k'>B</span>All loans should mature in the same year so they can be refinanced together.</button><button class='opt' data-k='C'><span class='k'>C</span>Every loan should be floating rate.</button><button class='opt' data-k='D'><span class='k'>D</span>Maturities should be timed to the peak of each Expansion.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>Bond investors have managed maturity concentration for a century; real estate investors holding similar instruments generally do not. Clustering usually happens because acquisitions clustered. If that window lands in a favorable phase, nothing happens; if it lands in Contraction, several maturities may have to be resolved at once in the worst market of the cycle.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson calls the gap between the leverage available and the leverage you use “the availability trap.” In 2–3 sentences, explain the trap and the principle the lesson uses to escape it.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Debt is cheapest, most abundant, and most permissive precisely when asset prices are highest and forward returns are lowest, and it is scarcest when prices are lowest and forward returns are highest. Following availability therefore means borrowing most at the top and least at the bottom—exactly backwards. The lesson’s answer is phase-adjusted leverage: set a target portfolio leverage that moves inversely to the cycle, higher in Recovery when basis is low and lower in late Expansion and Oversupply, and write that target down in a calm moment.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>A passive allocator holds eight LP investments with five sponsors across six markets. The allocator believes the portfolio is well diversified. On review, five of the six markets share a nearly identical in-migration story, an abundant-land supply response, and similar employer bases. Four of the eight deals carry floating-rate debt whose rate caps expire within the same 14-month window. The allocator has never asked sponsors about debt structure. Using the lesson’s framework, explain (a) what the geography finding means, (b) what the capital structure finding means, (c) how the allocator should apply the correlation questions and the four structural questions, and (d) how the allocator’s approach to future commitments should change.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) Five of the six markets are functionally one market: they share a demand narrative, supply response, and employer base, so they will likely move through the cycle together. The allocator did not choose that exposure—they chose sponsors, and the market exposure is whatever the sponsors happened to be buying. (b) The four positions with rate caps expiring in the same 14-month window form a cluster on the maturity ladder. Cap expirations function as maturities in every way that matters, so several positions could force decisions at the same time, potentially in an unfavorable phase. (c) The allocator should build the local phase map for every position and apply the correlation questions—what drives demand, how quickly the market can build, where the population comes from, and who owns there. For each of the largest positions, the allocator should ask the four structural questions: what is the trigger, what is the extension and whether its conditions are achievable in a stressed market, what is the recourse, and what is the aggregate capital required if two triggers arrive together. (d) Future commitments should be evaluated against portfolio need rather than deal appeal: favoring markets with genuinely different demand drivers and supply cycles, asking every sponsor about debt structure and trigger dates, and spreading exposure so no single window of maturities or cap expirations dominates the portfolio.</em></em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 7</span><p class='qs'>According to the lesson, what question should replace the fixed-versus-floating rate forecast?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Which lender offers the lowest spread today?</button><button class='opt' data-k='B'><span class='k'>B</span>Which structure allows this position to survive a phase it did not expect—and does the portfolio as a whole carry all of one kind of risk?</button><button class='opt' data-k='C'><span class='k'>C</span>Which structure maximizes proceeds?</button><button class='opt' data-k='D'><span class='k'>D</span>Which structure the sponsor prefers.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson calls the fixed-versus-floating debate, conducted as a rate forecast, the wrong frame. Neither structure is correct in general. What is correct is knowing which specific risk each position carries and ensuring the portfolio does not carry all of one kind.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of the last three intake inputs. Proceed to Lesson 3.3.4 (The Five Axes of Balance) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review “The Honest Version of the Question,” “The Correlation Question,” and “The Maturity Ladder” in Lesson 3.3.3 before proceeding, and complete the Worksheet prompts if you have not already.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.3.3 in full. Role, geography, and capital structure determine whether a downturn is a difficult period or a terminal one.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>Count demand drivers and supply responses, not cities. If the answer key revealed gaps, close them now before Lesson 3.3.4.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='3-3-2.html'>&larr; Previous<span>The Intake — Objective, Horizon, and Risk Capacity</span></a><a href='3-3-4.html' style='text-align:right'>Next &rarr;<span>The Five Axes of Balance</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.3.3 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.3.3', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>

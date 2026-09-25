@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Commander Workbook &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+.wb{width:min(760px,92vw);margin:0 auto;padding:8px 0 40px}
+.wb h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;margin:46px 0 14px;padding-top:16px;border-top:1px solid var(--line)}
+.wb p{font-family:var(--ed);font-size:1.06rem;line-height:1.72;margin:0 0 20px}
+.wb .em{font-family:var(--ed);font-style:italic;color:var(--soft);font-size:1.06rem;margin:0 0 22px}
+.wb li{font-family:var(--ed);font-size:1.03rem;line-height:1.7;margin:0 0 12px;list-style:none;padding-left:20px;position:relative}
+.wb li:before{content:"";position:absolute;left:0;top:14px;width:8px;height:1px;background:var(--amber)}
+.partmark{background:var(--deep);color:#D9B25E;font-family:var(--mono);font-size:10px;letter-spacing:.24em;
+ text-transform:uppercase;padding:9px 16px;border-radius:3px;display:inline-block;margin:56px 0 4px}
+.ex{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;margin:34px 0 4px;background:var(--panel)}
+.ex-h{display:grid;grid-template-columns:56px 1fr;align-items:center;background:var(--well);border-bottom:1px solid var(--line)}
+.ex-h .n{font-family:var(--mono);font-size:15px;color:var(--amber);text-align:center;padding:18px 0}
+.ex-h .t{padding:16px 20px 16px 0}
+.ex-h .t b{font-family:var(--disp);font-weight:600;font-size:1.06rem;display:block}
+.ex-h .t span{font-family:var(--mono);font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);display:block;margin-top:5px}
+.box{background:var(--well);border-left:2px solid var(--olive);border-radius:0 var(--r) var(--r) 0;padding:20px 24px;margin:22px 0}
+.box em,.box{font-family:var(--ed);font-size:1rem;line-height:1.68;color:var(--ink)}
+.prompt{font-family:var(--disp);font-weight:500;font-size:.99rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.fieldwrap{position:relative;margin:0 0 8px}
+.fieldwrap textarea{width:100%;min-height:120px;background:var(--paper);border:1px solid var(--dim);
+ border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;
+ color:var(--ink);resize:vertical}
+.fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+.fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;
+ letter-spacing:.1em;color:var(--dim);pointer-events:none}
+.wbtable{width:100%;border-collapse:collapse;margin:24px 0;font-size:.93rem}
+.wbtable th{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);font-weight:500}
+.wbtable td{padding:13px 14px;border-bottom:1px solid var(--line);color:var(--soft);vertical-align:top}
+.wbbar{position:sticky;top:47px;z-index:55;background:rgba(242,240,235,.96);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--line)}
+.wbbar-in{width:min(760px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:16px;padding:11px 0;flex-wrap:wrap}
+.wbstat{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
+.wbstat b{color:var(--amber)}
+.wbacts{display:flex;gap:8px}
+.wbbtn{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;padding:8px 14px;
+ border-radius:var(--r);border:1px solid var(--dim);background:var(--paper);color:var(--soft);cursor:pointer}
+.wbbtn:hover{border-color:var(--amber);color:var(--ink)}
+.wbbtn.pri{background:var(--amber);border-color:var(--amber);color:var(--amber-txt)}
+@media print{.rbar,.wbbar,.lnav,.cpanel{display:none}.fieldwrap textarea{border:1px solid #999;min-height:0}}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+
+.wb .callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;padding:22px 26px;margin:30px 0}
+.wb .callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.wb .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+.wb .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+.wb .box p:last-child{margin-bottom:0}
+.wb table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+.wb table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.wb table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+.wb table.tbl tr:nth-child(even) td{background:var(--panel)}
+.tblwrap{overflow-x:auto}
+.wb ul.blist{margin:0 0 22px;padding:0}
+.wb h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:36px 0 12px}
+</style></head>
+<body class="no-rail">
+<header class="rbar"><div class="rbar-in">
+  <a class="rmark" href="index.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+  <span class="rmeta">Commander &middot; Capstone</span>
+  <a class="rexit" href="index.html">All lessons</a>
+</div><div class="rprog"><i id="pg"></i></div></header>
+
+<section class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+    <span class="partchip">Capstone</span>
+    <p class="eyebrow">End of course &middot; CMCS certification</p>
+    <h1>The Commander Workbook</h1>
+    <p class="deck">Synthesis, application, and the Capstone Portfolio Blueprint.</p>
+    <div class="leadmeta"><span><b>5</b> parts</span><span><b>16</b> exercises</span><span><b>83</b> responses</span><span><b>6&ndash;10</b> hrs</span></div>
+  </div>
+</section>
+
+<div class="wbbar"><div class="wbbar-in">
+  <span class="wbstat"><b id="wbDone">0</b> of 83 answered &middot; <b id="wbWords">0</b> words</span>
+  <span class="wbacts">
+    <button class="wbbtn" id="wbSave">Saved automatically</button>
+    <button class="wbbtn" id="wbExport">Export</button>
+    <button class="wbbtn pri" id="wbPrint">Print / PDF</button>
+  </span>
+</div></div>
+
+<div class="wb">
+<h2><strong>The Commander Workbook</strong></h2>
+<p class='em'><em><em>Synthesis, Execution, and the Capstone Portfolio Blueprint</em></em></p>
+<p class='em'><em><em>“Reading the cycle is intelligence. Acting on it is strategy. This Workbook is where you prove you can do both—one deal, one hold, and one portfolio at a time.”</em></em></p>
+<h2>Welcome to the Workbook</h2>
+<p>You have completed the twenty lessons of Commander Tier 3. You have applied the Rule of 6 to acquisitions—choosing partners, asset class, timing, location, thesis, and execution for the phase in front of you—and learned to rotate capital through a full cycle with 2XX2. You have applied the same six questions to the sixty months of operations that follow every acquisition. And you have learned to design the collection itself: the intake, the five axes of balance, allocation by phase, the rebalancing protocol, and the one-page blueprint.</p>
+<p>This Workbook is the culminating instrument of Commander. It does work that no individual Knowledge Check could do: it tests your ability to integrate acquisitions, operations, and portfolio architecture into a single strategy, apply that strategy to realistic multifamily scenarios, and produce a capstone execution plan that demonstrates the capability of a Certified Market Cycle Strategist.</p>
+<p>The Workbook is also the capstone artifact of the entire Econiq system. Your Cignal Dashboard from Special Ops is your reading infrastructure. The blueprint you build in Part 3 is your portfolio’s design. The completed Workbook demonstrates that you can connect the two—turning what the cycle is telling you into coordinated decisions about what to buy, how to operate, and how to position the whole portfolio.</p>
+<h2>How to Engage With the Workbook</h2>
+<p>The Workbook requires 6–10 hours of focused work, ideally completed across three or four sessions rather than in a single sitting. Engagement principles that will produce the strongest outcomes:</p>
+<ul class='blist'>
+<li><strong></strong>Complete sections in order. The Workbook builds from acquisition synthesis through operational application and portfolio architecture to the capstone scenario. Earlier sections develop the judgment that later sections require.</li>
+<li><strong></strong>Write substantively, not minimally. The answer spaces are sized for genuine strategic engagement. Brief one-line responses produce thin completions that do not reflect execution capability. Operators who treat the Workbook seriously produce documents they return to at every annual review.</li>
+<li><strong></strong>Reference back to lesson materials. The Workbook tests integration, not memorization. If you are uncertain about a phase posture, a rebalancing lever, or a capacity constraint, return to the relevant lesson rather than guessing.</li>
+<li><strong></strong>Use your own portfolio. Parts 1 through 3 work directly on your own holdings, pipeline, and capital. Keep your Cignal Dashboard, your debt schedule, and a list of every position beside you. If you do not yet own real estate, use the portfolio you intend to build.</li>
+<li><strong></strong>Use the Cignal System tools. Several exercises ask you to work in Market Maps, Portfolio Tracker, Budget Builder, and the Portfolio Architect. The tools apply live market signals to your assets; the Workbook is where you record what they show and decide what to do about it.</li>
+<li><strong></strong>Engage with the capstone scenario seriously. Part 4—the Capstone Scenario—produces the most substantial deliverable in the Workbook. Plan to spend 2–3 hours on this section alone.</li>
+</ul>
+<p>The Workbook does not have a passing score in the conventional sense. It produces a deliverable that demonstrates your strategic capability. Operators who engage seriously produce strong deliverables. The Workbook reflects what you put into it.</p>
+<div class='callout'><p><em>This is the proof artifact. The depth of your engagement determines what it proves.</em></p></div>
+<h2>Workbook Structure at a Glance</h2>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Part</strong></th><th><strong>Title</strong></th><th><strong>Exercises</strong></th><th><strong>Est. Time</strong></th></tr></thead><tbody><tr><td>Part 1</td><td>Full Cycle Acquisitions</td><td>1–4</td><td>60–90 min</td></tr><tr><td>Part 2</td><td>30x Operations</td><td>5–8</td><td>60–90 min</td></tr><tr><td>Part 3</td><td>The Portfolio Architect</td><td>9–12</td><td>90–120 min</td></tr><tr><td>Part 4</td><td>The Capstone Scenario</td><td>Sections 1–8</td><td>120–180 min</td></tr><tr><td>Part 5</td><td>Personal Reflection</td><td>13–16</td><td>30–45 min</td></tr></tbody></table></div>
+<div class='partmark'>PART 1 OF 5</div>
+<h2><strong>Full Cycle Acquisitions</strong></h2>
+<p class='em'><em><em>Integrating Concepts From Lessons 3.1.1 Through 3.1.7</em></em></p>
+<p>Part 1 verifies your ability to apply the Rule of 6 to acquisitions as a single, connected discipline—and to extend it across a full cycle with 2XX2. The exercises require you to answer all six questions together, calibrated to the phase, rather than recalling any single lesson in isolation.</p>
+<div class='ex'><div class='ex-h'><div class='n'>1</div><div class='t'><b>The Rule of 6 Applied to an Acquisition</b><span>Lessons 3.1.1–3.1.6 • WHO • WHAT • WHEN • WHERE • WHY • HOW</span></div></div></div>
+<p>Choose an acquisition you have completed, or one you are actively pursuing. Reconstruct it through all six questions of the Rule of 6, each answered for the phase the market occupied at the time of the decision.</p>
+<p class='prompt'><strong>The phase at entry</strong> — What phase did the local market occupy when the decision was made, and which leading indicators—not trailing ones—support that reading?</p>
+<div class='fieldwrap'><textarea id='f1' data-f='f1' placeholder='Your answer…'></textarea><span class='wc' id='wc-f1'>0 words</span></div>
+<p class='prompt'><strong>WHO, WHAT, and WHEN</strong> — Were the equity, lender, and operating partners right for that phase? Was the asset class the best risk-adjusted choice for that phase? Did the signal evidence justify acting when you acted?</p>
+<div class='fieldwrap'><textarea id='f2' data-f='f2' placeholder='Your answer…'></textarea><span class='wc' id='wc-f2'>0 words</span></div>
+<p class='prompt'><strong>WHERE, WHY, and HOW</strong> — Was the location in the path of progress for that phase? Was the thesis defined before the deal, or retrofitted to it? Was the execution—underwriting, leverage, debt structure—calibrated to the phase?</p>
+<div class='fieldwrap'><textarea id='f3' data-f='f3' placeholder='Your answer…'></textarea><span class='wc' id='wc-f3'>0 words</span></div>
+<p class='prompt'><strong>The question you skipped</strong> — Which of the six questions did you answer least rigorously, and what did that cost—or what could it have cost—once the cycle moved?</p>
+<div class='fieldwrap'><textarea id='f4' data-f='f4' placeholder='Your answer…'></textarea><span class='wc' id='wc-f4'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>2</div><div class='t'><b>Matching the Playbook to the Phase</b><span>Lessons 3.1.1–3.1.6 • Phase-specific acquisition discipline</span></div></div></div>
+<p>Each vignette below describes an acquisition decision made without cycle-first discipline. For each, identify the phase, the Rule of 6 question that was answered for the wrong phase, and the disciplined alternative.</p>
+<div class='box'><p><em>(a) In early Recovery, an investor who has always bought 1980s Class C product declines a discounted 2014-vintage Class A community because “that isn’t who we are,” even though institutional buyers are sidelined and financing is thin.</em></p></div>
+<p class='prompt'><strong>Phase, Rule of 6 question, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f5' data-f='f5' placeholder='Your answer…'></textarea><span class='wc' id='wc-f5'>0 words</span></div>
+<div class='box'><p><em>(b) In late Expansion, a sponsor closes a heavy value-add deal on a three-year floating-rate bridge loan, underwriting the same renovation premiums the last deal achieved, while permits from eighteen months earlier are about to deliver nearby.</em></p></div>
+<p class='prompt'><strong>Phase, Rule of 6 question, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f6' data-f='f6' placeholder='Your answer…'></textarea><span class='wc' id='wc-f6'>0 words</span></div>
+<div class='box'><p><em>(c) In Oversupply, an investor buys the cheapest asset available in a corridor where retail is retreating, population has been flat for five years, and new investment is reactive rather than intentional.</em></p></div>
+<p class='prompt'><strong>Phase, Rule of 6 question, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f7' data-f='f7' placeholder='Your answer…'></textarea><span class='wc' id='wc-f7'>0 words</span></div>
+<div class='box'><p><em>(d) In Oversupply, an investor funds an acquisition with preferred equity from a group whose documents give it control rights if distributions fall below target.</em></p></div>
+<p class='prompt'><strong>Phase, Rule of 6 question, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f8' data-f='f8' placeholder='Your answer…'></textarea><span class='wc' id='wc-f8'>0 words</span></div>
+<div class='box'><p><em>(e) In Contraction, an investor refuses to consider any purchase until trailing rent growth turns positive, while well-located assets with durable fundamentals trade at deep discounts from sellers who have no choice.</em></p></div>
+<p class='prompt'><strong>Phase, Rule of 6 question, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f9' data-f='f9' placeholder='Your answer…'></textarea><span class='wc' id='wc-f9'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>3</div><div class='t'><b>Leading Versus Trailing in Acquisition Underwriting</b><span>Lesson 3.1.6 • Signals and indicators • Knowing when not to buy</span></div></div></div>
+<p>Read the underwriting summary below. Then complete the three audits that follow.</p>
+<div class='box'><p><em>“Trailing three-year rent growth in the submarket has averaged 5.2%, occupancy is 95.6%, and the last four trades in the corridor closed at record pricing. We underwrite 5% annual rent growth, an exit cap equal to today’s going-in cap, and 75% loan-to-cost bridge financing with two one-year extensions. The pipeline shows 2,100 units under construction, but strong in-migration will absorb them.”</em></p></div>
+<p class='prompt'><strong>Trailing indicator audit</strong> — Identify every trailing indicator the summary relies on and explain why building the business plan on them is dangerous in the phase they likely describe.</p>
+<div class='fieldwrap'><textarea id='f10' data-f='f10' placeholder='Your answer…'></textarea><span class='wc' id='wc-f10'>0 words</span></div>
+<p class='prompt'><strong>Leading indicators to add</strong> — Name the leading indicators you would require before approving this deal, and what each would need to show for the underwriting to be defensible.</p>
+<div class='fieldwrap'><textarea id='f11' data-f='f11' placeholder='Your answer…'></textarea><span class='wc' id='wc-f11'>0 words</span></div>
+<p class='prompt'><strong>The disciplined version</strong> — Rewrite the underwriting assumptions and capital structure as a cycle-aware acquirer would—or explain why the right answer is to walk away.</p>
+<div class='fieldwrap'><textarea id='f12' data-f='f12' placeholder='Your answer…'></textarea><span class='wc' id='wc-f12'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>4</div><div class='t'><b>Designing Your 2XX2 Rotation</b><span>Lesson 3.1.7 • The three paths • The Market Opportunity Scanner</span></div></div></div>
+<p>Apply 2XX2 to your own capital. If you do not yet hold a position that has completed a first move, design the rotation for the next acquisition you intend to make.</p>
+<p class='prompt'><strong>The first move</strong> — Identify the position that is, or will become, your first move. When does its 2x arrive, and what signals will tell you the exit window is open rather than closing?</p>
+<div class='fieldwrap'><textarea id='f13' data-f='f13' placeholder='Your answer…'></textarea><span class='wc' id='wc-f13'>0 words</span></div>
+<p class='prompt'><strong>Your path</strong> — Which of the three paths fits your objective, equity partners, balance sheet, and market access? Explain why the other two fit less well.</p>
+<div class='fieldwrap'><textarea id='f14' data-f='f14' placeholder='Your answer…'></textarea><span class='wc' id='wc-f14'>0 words</span></div>
+<p class='prompt'><strong>Your scanner short list</strong> — Using the Market Opportunity Scanner and Market Maps, name at least two candidate destinations. For each, state its phase read and the verified contributing factors that support it.</p>
+<div class='fieldwrap'><textarea id='f15' data-f='f15' placeholder='Your answer…'></textarea><span class='wc' id='wc-f15'>0 words</span></div>
+<p class='prompt'><strong>Failure points</strong> — Which failure points threaten your rotation—holding for the last dollar, idle capital, equity alignment, debt, or costs and taxes—and how will you plan around each? Note any tax questions to take to a qualified advisor before the sale.</p>
+<div class='fieldwrap'><textarea id='f16' data-f='f16' placeholder='Your answer…'></textarea><span class='wc' id='wc-f16'>0 words</span></div>
+<div class='partmark'>PART 2 OF 5</div>
+<h2><strong>30x Operations</strong></h2>
+<p class='em'><em><em>Integrating Concepts From Lessons 3.2.1 Through 3.2.6</em></em></p>
+<p>Part 2 applies the Rule of 6 to the sixty months that follow every acquisition. The exercises test whether you can keep your team, your operating posture, and your business plan aligned with the phase as it changes—before the income statement forces the change.</p>
+<div class='ex'><div class='ex-h'><div class='n'>5</div><div class='t'><b>Your Operating Team by Phase</b><span>Lesson 3.2.1 • Equity • Lenders • Property management • Asset management</span></div></div></div>
+<p>Evaluate the team behind your current holdings against the phase your markets occupy today.</p>
+<p class='prompt'><strong>Equity and lenders</strong> — How will your equity partners and lenders behave if the cycle turns against you in the next twelve months? Which relationship is least aligned with the current phase?</p>
+<div class='fieldwrap'><textarea id='f17' data-f='f17' placeholder='Your answer…'></textarea><span class='wc' id='wc-f17'>0 words</span></div>
+<p class='prompt'><strong>Property management</strong> — Is your property management company operating for the phase you are in—or for the one you just left? Give specific evidence from leasing, pricing, screening, and expense decisions.</p>
+<div class='fieldwrap'><textarea id='f18' data-f='f18' placeholder='Your answer…'></textarea><span class='wc' id='wc-f18'>0 words</span></div>
+<p class='prompt'><strong>Asset management as the control layer</strong> — Where must asset management step in because property management is not reading the cycle? What accountability measures will you set?</p>
+<div class='fieldwrap'><textarea id='f19' data-f='f19' placeholder='Your answer…'></textarea><span class='wc' id='wc-f19'>0 words</span></div>
+<p class='prompt'><strong>Portfolio Tracker check</strong> — Load your assets into Portfolio Tracker. For each one, where does it lead or trail its submarket on rent, occupancy, and concessions—and which gap should your property manager be accountable for closing?</p>
+<div class='fieldwrap'><textarea id='f20' data-f='f20' placeholder='Your answer…'></textarea><span class='wc' id='wc-f20'>0 words</span></div>
+<p class='prompt'><strong>Retain, retrain, or replace</strong> — For each partner, state the decision and the phase-specific condition that would change it.</p>
+<div class='fieldwrap'><textarea id='f21' data-f='f21' placeholder='Your answer…'></textarea><span class='wc' id='wc-f21'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>6</div><div class='t'><b>Operating Posture Diagnosis</b><span>Lessons 3.2.2–3.2.3 • Asset class behavior • Phase playbooks</span></div></div></div>
+<p>Each vignette below describes an operating decision made without cycle-first discipline. For each, identify the phase, the operating mistake, and the disciplined alternative.</p>
+<div class='box'><p><em>(a) Three new Class A lease-ups nearby are offering eight weeks free. The property manager of a well-located Class B community proposes matching the concession on every new lease and cutting renewal rents across the board to hold 95% occupancy.</em></p></div>
+<p class='prompt'><strong>Phase, operating mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f22' data-f='f22' placeholder='Your answer…'></textarea><span class='wc' id='wc-f22'>0 words</span></div>
+<div class='box'><p><em>(b) Absorption has improved for four consecutive quarters, concessions have disappeared from the competitive set, and financing is abundant. The asset manager continues to hold renewal increases flat and defers the renovation program “until the data is clearer.”</em></p></div>
+<p class='prompt'><strong>Phase, operating mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f23' data-f='f23' placeholder='Your answer…'></textarea><span class='wc' id='wc-f23'>0 words</span></div>
+<div class='box'><p><em>(c) Occupancy has stabilized for one quarter after a downturn. The asset manager pushes 7% renewal increases and launches a full-scope renovation program on a twelve-month timeline to catch up to the business plan.</em></p></div>
+<p class='prompt'><strong>Phase, operating mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f24' data-f='f24' placeholder='Your answer…'></textarea><span class='wc' id='wc-f24'>0 words</span></div>
+<div class='box'><p><em>(d) A Class C community is seeing delinquency rise as local employers cut shifts. Collection procedures vary by leasing agent, and the asset manager has not spoken with the lender in two quarters.</em></p></div>
+<p class='prompt'><strong>Phase, operating mistake, and disciplined alternative</strong></p>
+<div class='fieldwrap'><textarea id='f25' data-f='f25' placeholder='Your answer…'></textarea><span class='wc' id='wc-f25'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>7</div><div class='t'><b>Location and the Hold Plan</b><span>Lesson 3.2.4 • Path of progress • Location as survivability</span></div></div></div>
+<p>Evaluate the location of every asset you operate, or intend to operate, against the direction of demand and capital.</p>
+<p class='prompt'><strong>Direction of demand</strong> — For each asset, is capital and demand moving toward its submarket or away from it? Run Market Lookup on its ZIP code in Market Maps and name the specific evidence—employment and industry growth, migration, supply, infrastructure, and new investment.</p>
+<div class='fieldwrap'><textarea id='f26' data-f='f26' placeholder='Your answer…'></textarea><span class='wc' id='wc-f26'>0 words</span></div>
+<p class='prompt'><strong>Performance against the submarket</strong> — In Portfolio Tracker, how does each asset compare with its submarket today? Is the location helping the asset, or is the asset fighting its location?</p>
+<div class='fieldwrap'><textarea id='f27' data-f='f27' placeholder='Your answer…'></textarea><span class='wc' id='wc-f27'>0 words</span></div>
+<p class='prompt'><strong>Survivability in Oversupply</strong> — Which assets have a natural competitive moat against new supply, and which rely on price competitiveness? How would each defend rent integrity if new supply arrived next year?</p>
+<div class='fieldwrap'><textarea id='f28' data-f='f28' placeholder='Your answer…'></textarea><span class='wc' id='wc-f28'>0 words</span></div>
+<p class='prompt'><strong>The hold decision</strong> — Is there an asset whose location is a structural risk the cycle will amplify? What does that imply for your hold or disposition plan?</p>
+<div class='fieldwrap'><textarea id='f29' data-f='f29' placeholder='Your answer…'></textarea><span class='wc' id='wc-f29'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>8</div><div class='t'><b>The Operating Why and the Transition Plan</b><span>Lessons 3.2.5–3.2.6 • Business plan logic • Leading indicators • Transitions</span></div></div></div>
+<p>Choose one asset and write the operating logic that governs it, then prepare for the next phase transition before it arrives.</p>
+<p class='prompt'><strong>The business plan’s why</strong> — State how identified risk is converted into projected return on this asset, and which market conditions must be present for that conversion to succeed.</p>
+<div class='fieldwrap'><textarea id='f30' data-f='f30' placeholder='Your answer…'></textarea><span class='wc' id='wc-f30'>0 words</span></div>
+<p class='prompt'><strong>Leading indicators you will act on</strong> — Which leading indicators will tell you the next transition is forming, and what threshold will trigger a change in operating posture?</p>
+<div class='fieldwrap'><textarea id='f31' data-f='f31' placeholder='Your answer…'></textarea><span class='wc' id='wc-f31'>0 words</span></div>
+<p class='prompt'><strong>The transition playbook</strong> — Write the specific operating changes you will make at that transition—pricing, concessions, renovations, staffing, expenses, and debt.</p>
+<div class='fieldwrap'><textarea id='f32' data-f='f32' placeholder='Your answer…'></textarea><span class='wc' id='wc-f32'>0 words</span></div>
+<p class='prompt'><strong>The cycle-adjusted budget</strong> — Run Budget Builder on this asset using its trailing twelve months. Where does the cycle-adjusted budget differ most from the budget you are operating under today, and what does that difference say about the phase ahead?</p>
+<div class='fieldwrap'><textarea id='f33' data-f='f33' placeholder='Your answer…'></textarea><span class='wc' id='wc-f33'>0 words</span></div>
+<p class='prompt'><strong>Investor communication</strong> — In 4–6 sentences, draft how you will explain the shift to your investors as a forward-looking decision rather than a reaction to poor results.</p>
+<div class='fieldwrap'><textarea id='f34' data-f='f34' placeholder='Your answer…'></textarea><span class='wc' id='wc-f34'>0 words</span></div>
+<div class='partmark'>PART 3 OF 5</div>
+<h2><strong>The Portfolio Architect</strong></h2>
+<p class='em'><em><em>Integrating Concepts From Lessons 3.3.1 Through 3.3.7</em></em></p>
+<p>Part 3 applies the Portfolio Architect to your own capital. You will complete the intake, map your current state across the five axes, set the allocation for the current phase, and assemble your one-page blueprint. If you completed the lesson worksheets, bring them forward and refine them here.</p>
+<div class='ex'><div class='ex-h'><div class='n'>9</div><div class='t'><b>Your Intake</b><span>Lessons 3.3.2–3.3.3 • The six inputs</span></div></div></div>
+<p>Complete the six inputs as they apply to your portfolio today. Where your answers have changed since you completed the lesson worksheets, note what changed and why.</p>
+<p class='prompt'><strong>Objective and horizon</strong> — State the objective in one sentence with weights for Income, Growth, Preservation, and Legacy, and separate any conflicting objectives into sleeves. State your horizon and write the three clocks for each position.</p>
+<div class='fieldwrap'><textarea id='f35' data-f='f35' placeholder='Your answer…'></textarea><span class='wc' id='wc-f35'>0 words</span></div>
+<p class='prompt'><strong>Risk capacity</strong> — Write your four capacity numbers and run the Capacity Test. What breaks first, and at what point? State your three capacity constraints.</p>
+<div class='fieldwrap'><textarea id='f36' data-f='f36' placeholder='Your answer…'></textarea><span class='wc' id='wc-f36'>0 words</span></div>
+<p class='prompt'><strong>Role and geography</strong> — State your sustainable hours, your markets of genuine knowledge, and your target operator/allocator split. Apply the correlation questions to your markets—which are genuinely diversifying and which are one market with two names?</p>
+<div class='fieldwrap'><textarea id='f37' data-f='f37' placeholder='Your answer…'></textarea><span class='wc' id='wc-f37'>0 words</span></div>
+<p class='prompt'><strong>Capital structure posture</strong> — Build your maturity ladder, mark the heaviest twelve-month window, and state your current and target portfolio leverage for this phase.</p>
+<div class='fieldwrap'><textarea id='f38' data-f='f38' placeholder='Your answer…'></textarea><span class='wc' id='wc-f38'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>10</div><div class='t'><b>Your Five-Axis Current-State Map</b><span>Lesson 3.3.4 • Phase • Market • Strategy • Vintage • Partner</span></div></div></div>
+<p>Measure your portfolio as it exists today. Weight every distribution by equity invested.</p>
+<p class='prompt'><strong>Phase and vintage</strong> — Write your entry-phase and dependency-phase distributions and your heaviest eighteen-month deployment window. What share of equity is phase-dependent, and how much ballast do you hold?</p>
+<div class='fieldwrap'><textarea id='f39' data-f='f39' placeholder='Your answer…'></textarea><span class='wc' id='wc-f39'>0 words</span></div>
+<p class='prompt'><strong>Market and strategy</strong> — Write your market shares against your ceiling and classify every position by its actual strategy—using structure and cash flow, not marketing language.</p>
+<div class='fieldwrap'><textarea id='f40' data-f='f40' placeholder='Your answer…'></textarea><span class='wc' id='wc-f40'>0 words</span></div>
+<p class='prompt'><strong>Partner</strong> — List every counterparty and the share of equity each touches. For your three largest, write what they did in the last downturn.</p>
+<div class='fieldwrap'><textarea id='f41' data-f='f41' placeholder='Your answer…'></textarea><span class='wc' id='wc-f41'>0 words</span></div>
+<p class='prompt'><strong>The dominant finding</strong> — Which single finding most changes how you see your portfolio? Is it a pile, a portfolio, or somewhere in between?</p>
+<div class='fieldwrap'><textarea id='f42' data-f='f42' placeholder='Your answer…'></textarea><span class='wc' id='wc-f42'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>11</div><div class='t'><b>Allocation for the Current Phase</b><span>Lesson 3.3.5 • The Cheetah, Bull, Gorilla, and Bear allocations</span></div></div></div>
+<p>Identify the phase your portfolio primarily occupies today and set its allocation lever by lever.</p>
+<p class='prompt'><strong>The allocation</strong> — Which allocation applies—Cheetah, Bull, Gorilla, or Bear? State your posture for deployment pace, leverage, strategy mix, debt structure, dispositions, and reserves.</p>
+<div class='fieldwrap'><textarea id='f43' data-f='f43' placeholder='Your answer…'></textarea><span class='wc' id='wc-f43'>0 words</span></div>
+<p class='prompt'><strong>The behavioral state</strong> — Which behavioral state dominates this phase, and where is it most likely to distort your own decisions? What rule will you follow to resist it?</p>
+<div class='fieldwrap'><textarea id='f44' data-f='f44' placeholder='Your answer…'></textarea><span class='wc' id='wc-f44'>0 words</span></div>
+<p class='prompt'><strong>Capital posture in the Architect</strong> — Set the Portfolio Architect to your current phase and phase position and record its capital posture—target loan-to-value, dry powder, and deployment pace. Then model the next phase. What must change between the two, and when will you begin?</p>
+<div class='fieldwrap'><textarea id='f45' data-f='f45' placeholder='Your answer…'></textarea><span class='wc' id='wc-f45'>0 words</span></div>
+<p class='prompt'><strong>The capital that must exist next phase</strong> — What capital, reserves, or relationships must you preserve now so that the next phase’s allocation is possible?</p>
+<div class='fieldwrap'><textarea id='f46' data-f='f46' placeholder='Your answer…'></textarea><span class='wc' id='wc-f46'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>12</div><div class='t'><b>Your Rebalancing Protocol and One-Page Blueprint</b><span>Lessons 3.3.6–3.3.7 • Levers • Triggers • Stress tests • The blueprint</span></div></div></div>
+<p>Assemble everything into one page and test it.</p>
+<p class='prompt'><strong>Target versus actual</strong> — Run the Portfolio Architect with your real parameters and use Re-structure an Existing Book on your tracked holdings. Where is your book over- or under-weight against the target, and does that agree with what your five-axis map shows?</p>
+<div class='fieldwrap'><textarea id='f47' data-f='f47' placeholder='Your answer…'></textarea><span class='wc' id='wc-f47'>0 words</span></div>
+<p class='prompt'><strong>Gaps and levers</strong> — List the gaps between your current state and your targets. Separate structural imbalance from solvency risk, and assign each gap a lever and a timeframe. Solvency risks get a date and an owner.</p>
+<div class='fieldwrap'><textarea id='f48' data-f='f48' placeholder='Your answer…'></textarea><span class='wc' id='wc-f48'>0 words</span></div>
+<p class='prompt'><strong>Stress tests</strong> — Run the four stress tests—phase shift, maturity pileup, counterparty failure, and liquidity need. Where does your portfolio fail, and will you accept, reduce, or prepare for each result?</p>
+<div class='fieldwrap'><textarea id='f49' data-f='f49' placeholder='Your answer…'></textarea><span class='wc' id='wc-f49'>0 words</span></div>
+<p class='prompt'><strong>Triggers and review</strong> — Write your four rebalancing trigger definitions and your annual review date.</p>
+<div class='fieldwrap'><textarea id='f50' data-f='f50' placeholder='Your answer…'></textarea><span class='wc' id='wc-f50'>0 words</span></div>
+<p class='prompt'><strong>Your one-page blueprint</strong> — Write the blueprint you could state out loud in ninety seconds: objective, horizon, reserve floor, your ceilings, the largest current gap and the lever that closes it, and the review date. Download the Portfolio Architect report and file it with this Workbook.</p>
+<div class='fieldwrap'><textarea id='f51' data-f='f51' placeholder='Your answer…'></textarea><span class='wc' id='wc-f51'>0 words</span></div>
+<div class='partmark'>PART 4 OF 5</div>
+<h2><strong>The Capstone Scenario</strong></h2>
+<p class='em'><em><em>Develop a Complete Cycle-Aware Execution Strategy</em></em></p>
+<p>Part 4 is the culminating exercise of the Commander Workbook. You will develop a complete execution strategy for a detailed operator scenario—reading the cycle in three markets, applying the Rule of 6 to a live acquisition, setting the operating plan for each market, deciding on a 2XX2 rotation, completing the portfolio intake and five-axis map, setting allocation and capital structure, sequencing the rebalancing protocol over 24 months, and producing a one-page blueprint.</p>
+<p>This exercise produces the most substantial deliverable in the Workbook. Plan to spend 2–3 hours on this section. Engage with the seriousness you would bring to an actual investment committee decision affecting your portfolio.</p>
+<div class='callout'><p><em>This is where Commander comes together. The strategy you develop here is the most concrete demonstration of execution mastery you can produce.</em></p></div>
+<h2>The Operator Profile</h2>
+<p>Read the full operator profile, portfolio, and market conditions before beginning any of the eight sections. The scenario is designed to require every Part of Commander—it cannot be resolved correctly from acquisitions, operations, or portfolio architecture alone.</p>
+<p class='prompt'><strong>Background</strong></p>
+<div class='box'><p><em>You are the principal of a multifamily firm that owns roughly 2,400 units across eight properties in three metros. Your equity comes from two sources: a family office that co-invests on every deal and wants durable income and preservation of capital, and a group of syndication investors who expect quarterly distributions and were told to expect exits in five to seven years. You have approximately $8 million of uncommitted capital, of which $3 million is your stated minimum reserve. One regional bank holds five of your eight loans. One property management company operates every asset. Your personal guarantees total $14 million across the portfolio.</em></p></div>
+<p class='prompt'><strong>The Portfolio</strong></p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Property</strong></th><th><strong>Metro</strong></th><th><strong>Class / Strategy</strong></th><th><strong>Acquired In</strong></th><th><strong>Debt / Next Trigger</strong></th></tr></thead><tbody><tr><td>A-1 (340 units)</td><td>Metro A</td><td>Class B value-add</td><td>Early Expansion</td><td>Fixed agency, 2031</td></tr><tr><td>A-2 (310 units)</td><td>Metro A</td><td>Class B value-add</td><td>Mid Expansion</td><td>Floating bridge, matures in 11 months</td></tr><tr><td>A-3 (280 units)</td><td>Metro A</td><td>Class A, stabilized</td><td>Late Expansion</td><td>Floating, rate cap expires in 7 months</td></tr><tr><td>A-4 (260 units)</td><td>Metro A</td><td>Class C, heavy value-add</td><td>Late Expansion</td><td>Floating bridge, matures in 16 months</td></tr><tr><td>B-1 (360 units)</td><td>Metro B</td><td>Class B, stabilized</td><td>Recovery</td><td>Fixed agency, 2033</td></tr><tr><td>B-2 (300 units)</td><td>Metro B</td><td>Class B value-add</td><td>Early Expansion</td><td>Fixed bank loan, 2029</td></tr><tr><td>C-1 (290 units)</td><td>Metro C</td><td>Class C, stabilized</td><td>Mid Expansion</td><td>Floating, matures in 20 months</td></tr><tr><td>C-2 (260 units)</td><td>Metro C</td><td>Class B, stabilized</td><td>Oversupply</td><td>Fixed bank loan, 2028</td></tr></tbody></table></div>
+<p class='prompt'><strong>Current Conditions — Metro A (54% of portfolio equity)</strong></p>
+<div class='box'><p><em>Multifamily permits spiked 18–24 months ago and roughly 6,500 units are scheduled to deliver over the next 18 months. Lease-ups are offering six to eight weeks free, and competing properties describe the concessions as seasonal. Rent growth has slowed for three consecutive quarters, though trailing occupancy across your four properties is still 94%. Job growth has moderated, and the metro’s demand is driven primarily by in-migration and logistics employment. A broker has an institutional buyer willing to purchase A-1 and A-2 together at a price that would roughly double the equity invested in A-1 and return about 1.6x on A-2. Your property manager proposes matching lease-up concessions on every new lease across all four Metro A assets.</em></p></div>
+<p class='prompt'><strong>Current Conditions — Metro B (23% of portfolio equity)</strong></p>
+<div class='box'><p><em>Metro B is in mid Expansion with diversified healthcare, university, and government employment. Land is scarce, entitlement is slow, and the construction pipeline is well below historical absorption. Rent growth is steady rather than spectacular, and concessions are rare. Your two Metro B assets are performing at plan.</em></p></div>
+<p class='prompt'><strong>Current Conditions — Metro C (23% of portfolio equity)</strong></p>
+<div class='box'><p><em>Metro C went through a hard Contraction and is showing early Recovery signals: occupancy has stabilized for three quarters, concessions at competing properties are shrinking, deliveries are minimal, and a manufacturing employer has announced a large plant expansion with a committed road and utility package. Several census tracts near the plant show Opportunity Zone eligibility on Market Maps. Sellers are motivated, and institutional buyers remain sidelined. A seller has accepted your letter of intent on a 2014-vintage, 240-unit Class A community near the plant at a meaningful discount to replacement cost. Your older Class C asset in Metro C, C-1, sits in a corridor that has lost population for six years.</em></p></div>
+<p class='prompt'><strong>Strategic Question</strong></p>
+<div class='box'><p><em>Your investment committee meets in 30 days. It must decide whether to accept the offer on A-1 and A-2; how to handle the rate cap on A-3 and the maturities on A-2, A-4, and C-1; whether to close on the Metro C acquisition and how to finance it; how to respond to the property manager’s concession proposal; and how to answer the syndication investors, who want distributions maintained at current levels, and the family office, which is asking whether the portfolio is too concentrated in Metro A.</em></p></div>
+<h2>Section 1 — Reading the Cycle by Market</h2>
+<p><em>Lessons 3.1.3 • 3.1.6 • 3.2.3 • Read each market on its own terms, then read them together</em></p>
+<p class='prompt'><strong>Phase call by market</strong> — What phase does each metro occupy? Name the leading indicators that support each call and the trailing indicators that could mislead an undisciplined reader.</p>
+<div class='fieldwrap'><textarea id='f52' data-f='f52' placeholder='Your answer…'></textarea><span class='wc' id='wc-f52'>0 words</span></div>
+<p class='prompt'><strong>Behavioral state</strong> — Which behavioral state is visible in Metro A, and where is it showing up in the scenario—including in your own team?</p>
+<div class='fieldwrap'><textarea id='f53' data-f='f53' placeholder='Your answer…'></textarea><span class='wc' id='wc-f53'>0 words</span></div>
+<p class='prompt'><strong>Phase divergence</strong> — Does this portfolio have genuine phase divergence across its markets? What does the divergence make possible that a single-market portfolio could not do?</p>
+<div class='fieldwrap'><textarea id='f54' data-f='f54' placeholder='Your answer…'></textarea><span class='wc' id='wc-f54'>0 words</span></div>
+<h2>Section 2 — The Rule of 6 for the Metro C Acquisition</h2>
+<p><em>Lessons 3.1.1–3.1.6 • WHO • WHAT • WHEN • WHERE • WHY • HOW</em></p>
+<p class='prompt'><strong>WHO and WHAT</strong> — Which equity and lending partners fit this Recovery acquisition, and which of your current partners do not? Why is buying up in class the right—or wrong—choice here?</p>
+<div class='fieldwrap'><textarea id='f55' data-f='f55' placeholder='Your answer…'></textarea><span class='wc' id='wc-f55'>0 words</span></div>
+<p class='prompt'><strong>WHEN and WHERE</strong> — Do the signals justify acting now rather than waiting for confirmation? Is the property in the path of progress, and what would you verify on Market Maps at the ZIP and census tract level—including what Opportunity Zone eligibility does and does not mean?</p>
+<div class='fieldwrap'><textarea id='f56' data-f='f56' placeholder='Your answer…'></textarea><span class='wc' id='wc-f56'>0 words</span></div>
+<p class='prompt'><strong>WHY and HOW</strong> — State the thesis in two sentences. Specify the underwriting assumptions, leverage, and debt structure appropriate to this phase.</p>
+<div class='fieldwrap'><textarea id='f57' data-f='f57' placeholder='Your answer…'></textarea><span class='wc' id='wc-f57'>0 words</span></div>
+<h2>Section 3 — The 30x Operating Plan by Market</h2>
+<p><em>Lessons 3.2.1–3.2.6 • Operating posture • Asset management as the control layer</em></p>
+<p class='prompt'><strong>Metro A</strong> — Respond to the property manager’s concession proposal. Set the Metro A operating posture on pricing, concessions, retention, screening, and expenses, asset by asset.</p>
+<div class='fieldwrap'><textarea id='f58' data-f='f58' placeholder='Your answer…'></textarea><span class='wc' id='wc-f58'>0 words</span></div>
+<p class='prompt'><strong>Metros B and C</strong> — Set the operating posture for Metro B and for Metro C, including how C-1’s location should shape its plan.</p>
+<div class='fieldwrap'><textarea id='f59' data-f='f59' placeholder='Your answer…'></textarea><span class='wc' id='wc-f59'>0 words</span></div>
+<p class='prompt'><strong>The budget</strong> — For one Metro A asset, explain how a cycle-adjusted budget from Budget Builder should differ from a last-year-plus-three-percent budget—rent, concessions, retention, payroll, insurance, and NOI—and how you would present the difference to the syndication investors.</p>
+<div class='fieldwrap'><textarea id='f60' data-f='f60' placeholder='Your answer…'></textarea><span class='wc' id='wc-f60'>0 words</span></div>
+<p class='prompt'><strong>The team</strong> — Is the single property management company the right operator for all three phases at once? What will asset management do—including how Portfolio Tracker will support it—and what would trigger retraining or replacement?</p>
+<div class='fieldwrap'><textarea id='f61' data-f='f61' placeholder='Your answer…'></textarea><span class='wc' id='wc-f61'>0 words</span></div>
+<h2>Section 4 — The 2XX2 Rotation Decision</h2>
+<p><em>Lesson 3.1.7 • First move • Three paths • Exit and entry as one decision</em></p>
+<p class='prompt'><strong>The offer on A-1 and A-2</strong> — Should you accept? Treat A-1 and A-2 separately: which has completed its first move, and what does selling each into late Expansion or early Oversupply accomplish?</p>
+<div class='fieldwrap'><textarea id='f62' data-f='f62' placeholder='Your answer…'></textarea><span class='wc' id='wc-f62'>0 words</span></div>
+<p class='prompt'><strong>Path selection</strong> — If you sell, which path does the capital follow—and how does the Metro C acquisition fit? Explain why the exit and the next entry must be decided together here.</p>
+<div class='fieldwrap'><textarea id='f63' data-f='f63' placeholder='Your answer…'></textarea><span class='wc' id='wc-f63'>0 words</span></div>
+<p class='prompt'><strong>Costs, taxes, and investors</strong> — What cost and tax questions—including whether a 1031 exchange is appropriate—must be resolved with qualified advisors before any sale? How will each equity group react, and how will you align them?</p>
+<div class='fieldwrap'><textarea id='f64' data-f='f64' placeholder='Your answer…'></textarea><span class='wc' id='wc-f64'>0 words</span></div>
+<h2>Section 5 — The Portfolio Intake and Five-Axis Map</h2>
+<p><em>Lessons 3.3.1–3.3.4 • Objective conflict • Capacity • The five axes</em></p>
+<p class='prompt'><strong>Objective conflict</strong> — The family office and the syndication investors want different things. Should the portfolio be run in sleeves? Define them.</p>
+<div class='fieldwrap'><textarea id='f65' data-f='f65' placeholder='Your answer…'></textarea><span class='wc' id='wc-f65'>0 words</span></div>
+<p class='prompt'><strong>Capacity Test</strong> — Run the Capacity Test on this portfolio. With $14 million of guarantees, three near-term triggers, and a $3 million reserve floor, what breaks first?</p>
+<div class='fieldwrap'><textarea id='f66' data-f='f66' placeholder='Your answer…'></textarea><span class='wc' id='wc-f66'>0 words</span></div>
+<p class='prompt'><strong>Five-axis findings</strong> — Map the portfolio across phase, market, strategy, vintage, and partner. Name the two most dangerous concentrations.</p>
+<div class='fieldwrap'><textarea id='f67' data-f='f67' placeholder='Your answer…'></textarea><span class='wc' id='wc-f67'>0 words</span></div>
+<h2>Section 6 — Allocation and Capital Structure</h2>
+<p><em>Lessons 3.3.3 • 3.3.5 • Phase allocation • The maturity ladder • The Oversupply Question</em></p>
+<p class='prompt'><strong>Allocation by market</strong> — Which allocation—Cheetah, Bull, or Gorilla—applies in each metro? State the posture for deployment, leverage, debt structure, dispositions, and reserves in each.</p>
+<div class='fieldwrap'><textarea id='f68' data-f='f68' placeholder='Your answer…'></textarea><span class='wc' id='wc-f68'>0 words</span></div>
+<p class='prompt'><strong>The Oversupply Question</strong> — For A-2, A-3, A-4, and C-1, answer the four structural questions—trigger, extension, recourse, aggregate—and decide what must be done now while lenders are still transacting.</p>
+<div class='fieldwrap'><textarea id='f69' data-f='f69' placeholder='Your answer…'></textarea><span class='wc' id='wc-f69'>0 words</span></div>
+<p class='prompt'><strong>Lender concentration and reserves</strong> — How will you reduce dependence on the regional bank? Can the Metro C acquisition be financed without breaching your reserve floor?</p>
+<div class='fieldwrap'><textarea id='f70' data-f='f70' placeholder='Your answer…'></textarea><span class='wc' id='wc-f70'>0 words</span></div>
+<p class='prompt'><strong>Testing it in the Architect</strong> — How would you use the Portfolio Architect—its capital posture for each metro’s phase and Re-structure an Existing Book on the current holdings—to test this allocation before the committee meets?</p>
+<div class='fieldwrap'><textarea id='f71' data-f='f71' placeholder='Your answer…'></textarea><span class='wc' id='wc-f71'>0 words</span></div>
+<h2>Section 7 — The Rebalancing Protocol and 24-Month Sequence</h2>
+<p><em>Lesson 3.3.6 • Levers • Structural imbalance versus solvency risk</em></p>
+<p class='prompt'><strong>Structural versus solvency</strong> — Separate every issue in the scenario into structural imbalance and solvency risk. Assign each a lever, a date, and an owner.</p>
+<div class='fieldwrap'><textarea id='f72' data-f='f72' placeholder='Your answer…'></textarea><span class='wc' id='wc-f72'>0 words</span></div>
+<p class='prompt'><strong>Months 1–6</strong> — List the decisions, sales, refinancings, acquisitions, operating changes, and investor communications in the order you will execute them.</p>
+<div class='fieldwrap'><textarea id='f73' data-f='f73' placeholder='Your answer…'></textarea><span class='wc' id='wc-f73'>0 words</span></div>
+<p class='prompt'><strong>Months 7–24</strong> — How does the plan evolve as Metro A absorbs new supply and Metro C moves further into Recovery? Name the signals that would cause you to accelerate, pause, or reverse each part of the plan.</p>
+<div class='fieldwrap'><textarea id='f74' data-f='f74' placeholder='Your answer…'></textarea><span class='wc' id='wc-f74'>0 words</span></div>
+<h2>Section 8 — The Blueprint and Strategy Summary</h2>
+<p><em>Lesson 3.3.7 • The one-page blueprint • Your capstone execution strategy</em></p>
+<p class='prompt'><strong>The one-page blueprint</strong> — Write this operator’s blueprint: objective and sleeves, horizon, reserve floor, the five ceilings, the largest current gap and the lever that closes it, and the review date.</p>
+<div class='fieldwrap'><textarea id='f75' data-f='f75' placeholder='Your answer…'></textarea><span class='wc' id='wc-f75'>0 words</span></div>
+<p class='prompt'><strong>Strategy summary</strong> — Synthesize your complete strategy in approximately 300–500 words. It should read as a coherent recommendation to the investment committee: what to sell, buy, refinance, and change, in what order, and why the cycle justifies each decision.</p>
+<div class='fieldwrap'><textarea id='f76' data-f='f76' placeholder='Your answer…'></textarea><span class='wc' id='wc-f76'>0 words</span></div>
+<p class='prompt'><strong>Communication</strong> — In 4–6 sentences, draft your answer to the syndication investors on distributions and to the family office on concentration.</p>
+<div class='fieldwrap'><textarea id='f77' data-f='f77' placeholder='Your answer…'></textarea><span class='wc' id='wc-f77'>0 words</span></div>
+<div class='partmark'>PART 5 OF 5</div>
+<h2><strong>Personal Reflection</strong></h2>
+<p class='em'><em><em>Connecting the Workbook to Your Own Practice</em></em></p>
+<p>Part 5 connects the Workbook’s strategic work back to your own multifamily practice. These reflection prompts are open-ended—there are no “correct” answers. The work is to articulate what you have learned, what has changed in how you will act on the cycle, and what you will commit to as a cycle-first strategist.</p>
+<p>These reflections, combined with your Cignal Dashboard from Special Ops and the blueprint you built in Part 3, become the operational document set you will return to at every annual review.</p>
+<div class='ex'><div class='ex-h'><div class='n'>13</div><div class='t'><b>What Has Changed in How You Execute</b><span>200–400 words • Your complete perspective shift</span></div></div></div>
+<p class='prompt'>Describe how completing Commander has changed how you acquire, operate, and build a portfolio. What decisions would you make differently today? Which of the six questions did you used to skip? What does your portfolio look like when you see it as an architecture rather than a list of deals?</p>
+<div class='fieldwrap'><textarea id='f78' data-f='f78' placeholder='Your answer…'></textarea><span class='wc' id='wc-f78'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>14</div><div class='t'><b>Your Greatest Execution Gap</b><span>Your single most consequential strategic error</span></div></div></div>
+<p class='prompt'>Reflect on your prior practice. Identify the single greatest execution gap Commander has revealed—the partner, phase, structure, or concentration that most exposed you—and describe specifically how you will close it.</p>
+<div class='fieldwrap'><textarea id='f79' data-f='f79' placeholder='Your answer…'></textarea><span class='wc' id='wc-f79'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>15</div><div class='t'><b>Your Execution Commitments</b><span>Three operational commitments that will change how you actually behave</span></div></div></div>
+<p>Articulate three specific commitments you are making as a result of completing Commander. These should be operational—decisions and disciplines you will observably practice, not general intentions.</p>
+<p class='prompt'><strong>Commitment 1:</strong></p>
+<div class='fieldwrap'><textarea id='f80' data-f='f80' placeholder='Your answer…'></textarea><span class='wc' id='wc-f80'>0 words</span></div>
+<p class='prompt'><strong>Commitment 2:</strong></p>
+<div class='fieldwrap'><textarea id='f81' data-f='f81' placeholder='Your answer…'></textarea><span class='wc' id='wc-f81'>0 words</span></div>
+<p class='prompt'><strong>Commitment 3:</strong></p>
+<div class='fieldwrap'><textarea id='f82' data-f='f82' placeholder='Your answer…'></textarea><span class='wc' id='wc-f82'>0 words</span></div>
+<div class='ex'><div class='ex-h'><div class='n'>16</div><div class='t'><b>Where Commander Has Taken You</b><span>A final reflection on capability earned</span></div></div></div>
+<p class='prompt'>In a final reflection, describe where Commander has taken you. What can you now do that operators without the full Econiq system cannot? How will you know, one cycle from now, that this capability has been put to work?</p>
+<div class='fieldwrap'><textarea id='f83' data-f='f83' placeholder='Your answer…'></textarea><span class='wc' id='wc-f83'>0 words</span></div>
+<h2>Workbook Completion</h2>
+<p>You have completed the Commander Workbook. Combined with your Cignal Dashboard from Special Ops and the blueprint you built in Part 3, you now hold the three artifacts that define a cycle-first strategist—the infrastructure that reads the cycle, the design your portfolio is measured against, and the demonstration that you can connect the two through acquisitions, operations, and portfolio decisions.</p>
+<p>These artifacts are operational documents, not certificates. Their value is not in completion alone—their value is in what they will guide at the annual reviews, investment committee meetings, lender conversations, and phase transitions ahead.</p>
+<div class='callout'><p><em>The work you have done across Commander is genuine. The framework is real, the blueprint is written, and the discipline is yours. The first cycle will feel like work. Every cycle after it will feel like edge.</em></p></div>
+<h2>CMCS Certification</h2>
+<p>Your completion of Commander—including the twenty lessons, twenty Knowledge Checks, and this Workbook—qualifies you for the Certified Market Cycle Strategist (CMCS) certification. CMCS certification recognizes your demonstrated capability in execution and mastery across the full cycle: the ability to apply the Rule of 6 to acquisitions and operations, to rotate capital through the phases with discipline, and to design and maintain a portfolio that no single phase can compromise.</p>
+<p>CMCS is the flagship credential of the Econiq system and completes the progression that began with Econiq Cycle Fundamentals in Recon and continued with the Econiq Certified Cycle Analyst designation in Special Ops.</p>
+<div class='tblwrap'><table class='tbl'><thead><tr><th><strong>Credential</strong></th><th><strong>Training Completed</strong></th><th><strong>Recognition</strong></th></tr></thead><tbody><tr><td>ECF — Econiq Cycle Fundamentals</td><td>Recon Tier 1: 6 modules, 6 KCs, Bridge Document, Workbook</td><td>Cycle-aware operator at foundational level</td></tr><tr><td>ECCA — Econiq Certified Cycle Analyst</td><td>Special Ops Tier 2: Onion Framework, Analytical Rigor, Cignal Dashboard, Cignal Threshold, Workbook</td><td>Signal mastery and operational cycle discipline</td></tr><tr><td>CMCS — Certified Market Cycle Strategist</td><td>Commander Tier 3: Full Cycle Acquisitions, 30x Operations, The Portfolio Architect, Workbook</td><td>Execution and mastery across the full cycle</td></tr></tbody></table></div>
+<h2>What Comes Next</h2>
+<p>Recon taught you to understand the cycle. Special Ops taught you to read it. Commander taught you to act on it—in what you buy, how you operate what you own, and how you design the portfolio that holds it all together.</p>
+<p>What comes next is practice. Revisit your blueprint at every annual review and at every confirmed phase transition. Keep your Cignal Dashboard current, run your stress tests on a cadence, and use the Market Opportunity Scanner before every exit rather than after. The discipline compounds only when it is maintained, and the tools on the Cignal System exist to make that maintenance practical.</p>
+<p>Whatever phase the market enters next, you now have a framework for every decision it will ask of you. The cycle will test every assumption you hold. The difference is that you will know, in advance, how you intend to answer.</p>
+<div class='callout'><p><em>Welcome to the end of Commander. You have done the work. The cycle is yours to act on.</em></p></div></div>
+
+<nav class="lnav">
+  <a href="3-3-7.html">&larr; Previous<span>Building Your Blueprint</span></a>
+  <a href="index.html" style="text-align:right">Finish &rarr;<span>All lessons</span></a>
+</nav>
+
+<footer class="lfoot"><div class="lfoot-in">
+  <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+  <span>The Econiq Method &middot; Commander Capstone Workbook &middot; v1.0</span>
+</div></footer>
+
+<script>
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){var h=document.documentElement,m=h.scrollHeight-h.clientHeight;
+ pg.style.width=(m>0?h.scrollTop/m*100:0)+'%';},{passive:true});
+
+var KEY='econiq-commander-workbook', N=83;
+function load(){ try{return JSON.parse(localStorage.getItem(KEY)||'{}');}catch(e){return {};} }
+function save(d){ try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){} }
+var data=load();
+var areas=[].slice.call(document.querySelectorAll('textarea[data-f]'));
+function words(s){ s=(s||'').trim(); return s?s.split(/\s+/).length:0; }
+function stats(){
+  var done=0,w=0;
+  areas.forEach(function(a){ var v=a.value.trim(); if(v){done++;} w+=words(v); });
+  document.getElementById('wbDone').textContent=done;
+  document.getElementById('wbWords').textContent=w.toLocaleString();
+}
+areas.forEach(function(a){
+  var id=a.dataset.f;
+  if(data[id]) a.value=data[id];
+  var wc=document.getElementById('wc-'+id);
+  function upd(){ wc.textContent=words(a.value)+' words'; }
+  upd();
+  a.addEventListener('input',function(){
+    data[id]=a.value; save(data); upd(); stats();
+    var b=document.getElementById('wbSave'); b.textContent='Saved'; clearTimeout(b._t);
+    b._t=setTimeout(function(){b.textContent='Saved automatically';},1200);
+  });
+  a.addEventListener('input',function(){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; });
+  if(a.value){ a.style.height='auto'; a.style.height=Math.max(120,a.scrollHeight)+'px'; }
+});
+stats();
+
+document.getElementById('wbPrint').onclick=function(){ window.print(); };
+document.getElementById('wbExport').onclick=function(){
+  var out='THE COMMANDER CAPSTONE WORKBOOK\nThe Econiq Method\n\n';
+  document.querySelectorAll('.wb > *').forEach(function(el){
+    if(el.classList.contains('partmark')) out+='\n\n=== '+el.textContent+' ===\n';
+    else if(el.tagName==='H2') out+='\n## '+el.textContent+'\n';
+    else if(el.classList.contains('ex')) out+='\n--- '+el.textContent.trim().replace(/\s+/g,' ')+'\n';
+    else if(el.classList.contains('prompt')) out+='\n'+el.textContent.trim()+'\n';
+    else if(el.classList.contains('fieldwrap')){
+      var t=el.querySelector('textarea'); out+=(t.value.trim()||'[not answered]')+'\n';
+    }
+  });
+  var blob=new Blob([out],{type:'text/plain'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='commander-capstone-workbook.txt'; a.click();
+};
+</script>
+</body></html>

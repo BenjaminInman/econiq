@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3.1.1 · The WHO — Choosing the Right Partners &middot; Special Ops</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+ --paper:#F7F6F3;--panel:#F2F0EB;--well:#EAE8E1;
+ --ink:#162C21;--soft:#4B6357;--faint:#6E664F;
+ --gold:#8F6F26;--amber:#B8791C;--amber-txt:#FFF9EE;
+ --olive:#867C65;--dim:#B9B2A0;--line:rgba(22,44,33,.14);
+ --deep:#0B130A;--r:4px;
+ --disp:'Space Grotesk',system-ui,sans-serif;--ed:Georgia,'Times New Roman',serif;
+ --body:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+ font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--gold)}
+:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* top bar */
+.rbar{position:sticky;top:0;z-index:60;background:rgba(247,246,243,.94);backdrop-filter:blur(10px);
+ border-bottom:1px solid var(--line)}
+.rbar-in{width:min(1080px,92vw);margin:0 auto;display:flex;align-items:center;justify-content:space-between;
+ gap:20px;padding:11px 0}
+.rmark img{width:104px;height:auto;display:block;filter:brightness(0) saturate(100%) invert(13%) sepia(18%) saturate(1200%) hue-rotate(101deg)}
+.rmeta{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint)}
+.rexit{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.rexit:hover{color:var(--ink)}
+.rprog{height:2px;background:var(--well)}
+.rprog i{display:block;height:100%;background:var(--amber);width:0;transition:width .15s linear}
+
+
+/* lesson hero — inverted forest band */
+.hero{background:var(--deep);position:relative;overflow:hidden;
+ border-bottom:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 -3px 0 -2px rgba(217,178,94,.28)}
+.hero:before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+ background:radial-gradient(120% 90% at 78% 8%, rgba(184,121,28,.20), transparent 60%)}
+.hero .bgtex{position:absolute;inset:0;pointer-events:none;opacity:.13;
+ background-image:linear-gradient(90deg,rgba(11,19,10,.96) 0%,rgba(11,19,10,.78) 38%,rgba(11,19,10,.46) 100%),
+   url('../../assets/econiq-hero-texture.jpg');
+ background-size:cover;background-position:center 62%}
+.hero .wave{position:absolute;right:-2%;bottom:-18%;width:min(560px,58%);opacity:.26;pointer-events:none;z-index:1}
+.lead{position:relative;z-index:2}
+.hero .wave path{fill:none;stroke:#D9B25E;stroke-width:2}
+.lead{width:min(1080px,92vw);margin:0 auto;padding:56px 0 44px;position:relative;z-index:1}
+.lead .eyebrow{color:#D9B25E}
+.lead h1{color:#F2F3EF}
+.lead .deck{color:#A9BBAC}
+.leadmeta{border-top:1px solid rgba(255,255,255,.14)}
+.leadmeta span{color:#8FA394}
+.leadmeta span b{color:#D9B25E;font-weight:500}
+.partchip{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;
+ color:#12301F;background:#D9B25E;border-radius:3px;padding:4px 9px;margin-bottom:16px}
+
+
+/* floating course panel */
+.cpanel{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:65;width:236px;
+ background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+ box-shadow:0 14px 34px rgba(22,44,33,.14);overflow:hidden}
+.cp-head{padding:15px 17px 13px;border-bottom:1px solid var(--line);background:var(--paper)}
+.cp-lbl{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:8px}
+.cp-count{font-family:var(--mono);font-size:11px;color:var(--soft)}
+.cp-count b{color:var(--ink)}
+.cp-bar{height:3px;background:var(--well);border-radius:2px;margin-top:9px;overflow:hidden}
+.cp-bar i{display:block;height:100%;background:var(--amber);width:0;transition:width .35s ease}
+.cp-secs{max-height:min(46vh,420px);overflow-y:auto;padding:8px 0}
+.cp-secs a{display:block;font-size:.8rem;line-height:1.4;color:var(--soft);text-decoration:none;
+ padding:7px 17px 7px 15px;border-left:2px solid transparent;transition:all .15s}
+.cp-secs a:hover{color:var(--ink);background:var(--well)}
+.cp-secs a.here{border-left-color:var(--amber);color:var(--ink);background:var(--well);font-weight:500}
+.cp-foot{border-top:1px solid var(--line);padding:11px 17px;background:var(--paper);display:flex;justify-content:space-between;gap:8px}
+.cp-foot a{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.cp-foot a:hover{color:var(--ink)}
+.cp-done{font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#2E7D50}
+.cp-toggle{display:none}
+@media(max-width:1320px){.cpanel{display:none}}
+
+/* article */
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:0 0 14px}
+.lead h1{font-family:var(--disp);font-weight:600;letter-spacing:-.02em;line-height:1.1;
+ font-size:clamp(2rem,4vw,3rem);margin:0 0 14px}
+.deck{font-family:var(--ed);font-style:italic;font-size:1.16rem;color:var(--soft);max-width:56ch;margin:0}
+.leadmeta{display:flex;gap:22px;flex-wrap:wrap;margin-top:26px;padding-top:20px}
+.leadmeta span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint)}
+
+article{width:min(680px,92vw);margin:0 auto;padding:34px 0 60px}
+article p{font-family:var(--ed);font-size:1.09rem;line-height:1.75;margin:0 0 22px;color:var(--ink)}
+article p strong{font-weight:700}
+article h2{font-family:var(--disp);font-weight:600;font-size:1.5rem;letter-spacing:-.01em;
+ margin:52px 0 16px;padding-top:14px;border-top:1px solid var(--line)}
+article h3{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);margin:36px 0 12px}
+.epi{border-left:2px solid var(--amber);padding:2px 0 2px 24px;margin:0 0 30px}
+.epi p{font-family:var(--ed);font-style:italic;font-size:1.2rem;color:var(--soft);margin:0}
+.epi cite{display:block;font-family:var(--mono);font-style:normal;font-size:10px;letter-spacing:.16em;
+ text-transform:uppercase;color:var(--faint);margin-top:10px}
+.callout{background:var(--panel);border-left:2px solid var(--amber);border-radius:0 var(--r) var(--r) 0;
+ padding:22px 26px;margin:30px 0}
+.callout p{font-family:var(--ed);font-style:italic;font-size:1.04rem;margin:0;color:var(--ink)}
+.numlist{margin:30px 0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.numrow{display:grid;grid-template-columns:54px 1fr;background:var(--well);border-bottom:1px solid var(--line)}
+.numrow:last-child{border-bottom:0}
+.numrow .n{font-family:var(--mono);font-size:13px;color:var(--amber);padding:20px 0 20px 22px}
+.numrow .c{padding:20px 24px 20px 0}
+.numrow .term{font-family:var(--disp);font-weight:600;font-size:1.02rem;display:block;margin-bottom:6px}
+.numrow p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0;color:var(--soft)}
+
+/* knowledge check */
+.kc{background:var(--panel);border-top:1px solid var(--line);padding:60px 0 70px;margin-top:20px}
+.kc-in{width:min(680px,92vw);margin:0 auto}
+.kc h2{font-family:var(--disp);font-size:1.6rem;margin:0 0 8px;border:0;padding:0}
+.kc .kcsub{color:var(--soft);font-size:.98rem;margin:0 0 30px}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:var(--r);padding:24px 26px;margin-bottom:14px}
+.q .qn{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:10px}
+.q .qs{font-family:var(--disp);font-weight:500;font-size:1.04rem;line-height:1.45;margin:0 0 16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{text-align:left;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 16px;font-family:var(--body);font-size:.95rem;color:var(--ink);cursor:pointer;line-height:1.5;transition:all .15s}
+.opt:hover{border-color:var(--gold)}
+.opt .k{font-family:var(--mono);font-size:11px;color:var(--faint);margin-right:10px}
+.opt.sel{border-color:var(--amber);background:rgba(184,121,28,.09)}
+.opt.right{border-color:#2E7D50;background:rgba(46,125,80,.11)}
+.opt.wrong{border-color:#A6462F;background:rgba(166,70,47,.09)}
+.opt[disabled]{cursor:default}
+.expl{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--line)}
+.expl.on{display:block}
+.expl .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:7px}
+.expl p{font-family:var(--ed);font-size:.98rem;margin:0;color:var(--soft)}
+.q textarea{width:100%;min-height:110px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);
+ padding:13px 15px;font-family:var(--body);font-size:.95rem;color:var(--ink);resize:vertical}
+.q textarea:focus{outline:none;border-color:var(--amber)}
+.reveal{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);
+ background:none;border:0;padding:12px 0 0;cursor:pointer}
+.kcscore{background:var(--deep);color:#EDEFEA;border-radius:var(--r);padding:26px 28px;margin-top:20px;display:none}
+.kcscore.on{display:block}
+.kcscore b{font-family:var(--mono);font-size:2rem;color:#D9B25E;display:block}
+.kcscore p{margin:8px 0 0;color:#9DAE9F;font-size:.95rem}
+
+/* footer nav */
+.navband{background:var(--deep);border-top:1px solid rgba(217,178,94,.55);
+ box-shadow:inset 0 3px 0 -2px rgba(217,178,94,.28);position:relative;overflow:hidden}
+.navband:before{content:"";position:absolute;inset:0;pointer-events:none;
+ background:radial-gradient(110% 130% at 22% 100%, rgba(184,121,28,.13), transparent 62%)}
+.lnav{width:min(680px,92vw);margin:0 auto;padding:44px 0 52px;display:flex;justify-content:space-between;
+ gap:16px;position:relative;z-index:1}
+.lnav a{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;
+ text-decoration:none;color:#8FA394;border:1px solid rgba(255,255,255,.16);border-radius:var(--r);
+ padding:16px 22px;background:rgba(255,255,255,.04);transition:all .18s;max-width:46%}
+.lnav a:hover{border-color:#D9B25E;color:#D9B25E;background:rgba(217,178,94,.09)}
+.lnav a span{display:block;font-family:var(--body);font-size:.98rem;text-transform:none;letter-spacing:0;
+ color:#F2F3EF;margin-top:6px}
+.lnav a:hover span{color:#fff}
+.lnav .sp{flex:1}
+@media(max-width:640px){article p{font-size:1.04rem}}
+.rubric{margin-top:18px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--paper)}
+.rlbl{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;
+ color:var(--gold);padding:16px 22px 10px}
+.rrow{display:grid;grid-template-columns:104px 1fr;gap:14px;padding:13px 22px;border-top:1px solid var(--line);opacity:.55;transition:opacity .2s,background .2s}
+.rrow.hit{opacity:1;background:var(--well)}
+.rb{font-family:var(--mono);font-size:10.5px;letter-spacing:.08em;color:var(--amber);white-space:nowrap}
+.rrow p{font-family:var(--body);font-size:.9rem;line-height:1.6;margin:0;color:var(--soft)}
+@media(max-width:600px){.rrow{grid-template-columns:1fr;gap:5px}}
+.lfoot{border-top:1px solid var(--line);background:var(--panel)}
+.lfoot-in{width:min(680px,92vw);margin:0 auto;padding:26px 0;display:flex;justify-content:space-between;
+ gap:16px;flex-wrap:wrap}
+.lfoot span{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+
+/* --- special ops additions --- */
+article ul.blist{margin:0 0 26px;padding:0 0 0 22px}
+article ul.blist li{font-family:var(--ed);font-size:1.05rem;line-height:1.7;margin:0 0 10px;color:var(--ink)}
+article ul.blist li::marker{color:var(--amber)}
+article table.tbl{width:100%;border-collapse:collapse;margin:26px 0 30px;font-family:var(--body);font-size:.93rem;line-height:1.55}
+article table.tbl th{background:var(--deep);color:#EDEFEA;text-align:left;padding:11px 14px;font-weight:500;font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+article table.tbl td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;color:var(--ink);background:var(--paper)}
+article table.tbl tr:nth-child(even) td{background:var(--panel)}
+article table.tbl td:first-child{font-weight:600;font-family:var(--disp)}
+.tblwrap{overflow-x:auto}
+article .cards{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:26px 0 30px}
+article .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px}
+article .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+article .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+article .card p em{font-style:italic;color:var(--faint)}
+article .card p:last-child{margin-bottom:0}
+@media(max-width:640px){article .cards{grid-template-columns:1fr}}
+article .box{border:1px solid var(--line);border-radius:var(--r);padding:18px 22px;margin:22px 0;background:var(--paper)}
+article .box p{font-family:var(--body);font-size:.95rem;line-height:1.65;margin:0 0 10px;color:var(--soft)}
+article .box p:last-child{margin-bottom:0}
+article figure{margin:30px 0}
+article figure img{max-width:100%;height:auto;display:block;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+article .fieldwrap{position:relative;margin:0 0 22px}
+article .fieldwrap textarea{width:100%;min-height:130px;background:var(--paper);border:1px solid var(--dim);border-radius:var(--r);padding:14px 16px;font-family:var(--body);font-size:.96rem;line-height:1.65;color:var(--ink);resize:vertical}
+article .fieldwrap textarea:focus{outline:none;border-color:var(--amber);background:#fff}
+article .fieldwrap .wc{position:absolute;right:10px;bottom:8px;font-family:var(--mono);font-size:9px;letter-spacing:.1em;color:var(--dim);pointer-events:none}
+article p.prompt{font-family:var(--disp);font-weight:500;font-size:1rem;line-height:1.45;margin:26px 0 9px;color:var(--ink)}
+.kc .q .sample{display:none}
+.kc .q .sample.on{display:block}
+.idx-note{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);margin-top:4px}
+.lrow .lt small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:4px;font-weight:400}
+article p.seckick{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin:52px 0 0;padding-top:16px;border-top:1px solid var(--line)}
+article p.seckick + h2{margin-top:8px;padding-top:0;border-top:0}
+article p.secdeck{font-family:var(--ed);font-style:italic;font-size:1.02rem;color:var(--faint);margin:-14px 0 22px}
+article .card.solo{margin:26px 0 30px}
+.wb .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;margin:22px 0}
+.wb .card .ch{font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.wb .card p{font-family:var(--body);font-size:.93rem;line-height:1.62;margin:0 0 8px;color:var(--soft)}
+h2.ixh{display:flex;align-items:baseline;gap:14px}
+h2.ixh small{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);font-weight:400}
+</style></head>
+<body class="no-rail">
+<header class="rbar">
+  <div class="rbar-in">
+    <a class="rmark" href="../../courses.html"><img src="../../assets/econiq-wordmark-a8963983.png" alt="ECONIQ"></a>
+    <span class="rmeta">Commander &middot; Lesson 3.1.1</span>
+    <a class="rexit" href="index.html">All lessons</a>
+  </div>
+  <div class="rprog"><i id="pg"></i></div>
+</header>
+
+<div class="hero">
+  <div class="bgtex" aria-hidden="true"></div>
+  <svg class="wave" viewBox="0 0 600 200" aria-hidden="true"><path d="M0,160 C60,155 92,142 128,124 C204,86 258,32 330,24 C398,17 448,6 496,18 C544,31 578,86 600,116"/></svg>
+  <div class="lead">
+  <span class="partchip">Part One</span>
+  <p class="eyebrow">Lesson 3.1.1</p>
+  <h1>The WHO — Choosing the Right Partners</h1>
+  <p class='deck'>For Each Phase of the Real Estate Market Cycle</p>
+  <div class="leadmeta"><span><b>2,450</b> words</span><span><b>11</b> min read</span><span><b>7</b> questions</span></div>
+  </div>
+</div>
+
+<article><p>One of the most persistent myths in real estate investing is that the “right” partner is someone you find once and build with forever. That belief is comforting. It feels stable. It feels loyal. And in a business defined by uncertainty, comfort can be seductive. But markets do not reward comfort.</p>
+<p>Partnerships, like strategies, must be cycle-aware. A partner who creates extraordinary results in one phase may unintentionally introduce risk in another. This does not make them incompetent. <strong>It makes them misaligned.</strong></p>
+<p>This lesson explores why the most successful real estate investors do not ask, “Is this a good partner?” They ask, “Is this the right partner for where we are in the cycle right now?”</p>
+<h2>The Hidden Cost of Static Partnerships in a Dynamic Market</h2>
+<p>Markets change faster than relationships do. When investors enter partnerships, they often do so during periods of optimism—usually in expansion or late-expansion phases when capital is abundant, deal flow is strong, and risk feels distant. During these phases, differences in philosophy are masked by rising rents, easy refinancing, and forgiving capital markets.</p>
+<p>But cycles expose truth. As conditions shift, differences emerge around risk tolerance, leverage preferences, growth versus preservation priorities, and time horizon expectations.</p>
+<div class='epi'><p><em>The most dangerous partnerships are not built on bad intentions—they are built on outdated assumptions.</em></p></div>
+<h2>Why No Partner Is Perfect for All Four Phases</h2>
+<p>Each phase of the real estate market cycle rewards a different type of thinking. Expecting one partner to dominate across all phases is like expecting a sprinter to also win a marathon, a weightlifting competition, and a gymnastics meet.</p>
+<ul class='blist'>
+<li><strong></strong>The Recovery phase rewards patience and contrarian conviction</li>
+<li><strong></strong>The Expansion phase rewards execution speed and operational scale</li>
+<li><strong></strong>The Oversupply phase rewards restraint and risk management</li>
+<li><strong></strong>The Contraction phase rewards discipline, liquidity, and experience</li>
+</ul>
+<p>The problem arises when investors confuse past performance with future relevance. Cycle-first investors recognize this tension early, while ego-driven investors discover it too late.</p>
+<h3>RECOVERY PHASE: THE PARTNER WHO BUILDS WHEN OTHERS HESITATE</h3>
+<p>Recovery is the most psychologically difficult phase of the cycle. Headlines are still negative, capital is scarce, and confidence is fragile. Yet this is where the foundation for the next cycle’s wealth is laid.</p>
+<p>The right partner in the recovery phase is not driven by excitement—<strong>they are driven by conviction.</strong> They are comfortable operating when transaction volume is low and uncertainty is high. They focus on buying right, structuring conservatively, and setting assets up for long-term success rather than short-term validation.</p>
+<p>They tend to ask different questions than the crowd: What downside risks are still being ignored? How long can this asset survive without growth? What assumptions must prove wrong for this deal to fail?</p>
+<div class='callout'><p><em>The greatest danger in recovery is partnering with someone who needs immediate momentum. Recovery requires belief in the cycle itself—not belief in headlines.</em></p></div>
+<h3>EXPANSION PHASE: THE PARTNER WHO KNOWS HOW TO PRESS THE ADVANTAGE</h3>
+<p>Expansion is where execution matters most. Fundamentals improve, demand accelerates, and opportunities multiply. This phase rewards investors who know how to scale without losing discipline.</p>
+<p>The ideal expansion partner understands how to harness momentum without assuming it will last forever. They are operationally sharp, systems-oriented, and decisive. <strong>The best expansion partners are aggressive operators with a clear exit plan.</strong></p>
+<h3>OVERSUPPLY PHASE: THE PARTNER WHO KNOWS WHEN TO STOP</h3>
+<p>Oversupply is the most dangerous phase of the cycle precisely because it feels safe. Rents are still high, occupancy oftentimes remains strong, capital markets remain active, and optimism has become consensus. Yet beneath the surface, risk is quietly accumulating.</p>
+<p>The right partner in oversupply is willing to challenge momentum. They focus on stress-testing assumptions, protecting equity, and preparing portfolios for an inevitable shift in conditions.</p>
+<div class='callout'><p><em>Few partners are built for this phase—and fewer investors recognize its arrival in time.</em></p></div>
+<h3>CONTRACTION PHASE: THE PARTNER WHO PRESERVES BEFORE THEY GROW</h3>
+<p>This phase is not about maximizing returns—it is about survival, liquidity, and decision quality under pressure. The right contraction partner is calm, experienced, and pragmatic. They understand lender psychology, cash-flow management, and asset stabilization.</p>
+<p>The wrong partner during the contraction phase is often the one who only knows how to thrive during the expansion phase. <strong>The Contraction phase does not create problems—it reveals the weakest links in the chain.</strong></p>
+<h2>Why Cycle Transitions Break Partnerships</h2>
+<p>Most partnerships do not fail at the top or bottom of the cycle. They fail during the transition periods between the two. Transitions require strategy changes, strategy changes require agreement, and agreement requires shared understanding of the cycle.</p>
+<p>Cycle-first investors anticipate transitions compared to cycle-blind investors who argue through them. This is why alignment on how to think, not just what to do, is the most critical factor in partnership longevity.</p>
+<h2>Timing Partner Decisions With Your Cignal Dashboard</h2>
+<p>Partner misalignment rarely announces itself. It surfaces at transitions, and the signals that a transition is forming appear on your Cignal Dashboard long before a partner’s behavior changes. Reading those signals early is what lets you adjust the team before the cycle forces the conversation.</p>
+<p>Each layer of the Onion Framework speaks to a different partner. Layer 3 macroeconomic signals—rates, credit spreads, and the employment trajectory—tell you how equity is likely to behave, because capital becomes impatient or scarce as those conditions shift. Layer 2 industry signals—lending standards, transaction volume, and the construction pipeline—tell you how lenders are about to change posture. Layer 1 submarket signals—concessions at competing properties, days on market, and absorption—tell you whether your operating partners are about to face conditions they have never managed.</p>
+<p>Apply the Cignal Threshold the way you learned in Special Ops. Replacing an equity partner, changing lenders, or switching management companies are strategic decisions and require the higher threshold. Preparing for them is not: once the minimum number of independent confirming signals appears, open the conversations, identify alternatives, and review the terms that govern control and extensions. A team change made at the prepare threshold is a plan. The same change made after trailing data confirms the transition is a scramble.</p>
+<div class='callout'><p><em>The dashboard will not tell you who to partner with. It will tell you when the partners you have are about to be tested.</em></p></div>
+<h2>The Non-Negotiable: A Cycle-First Mindset</h2>
+<p>More important than capital, experience, or personality is whether a partner operates with a <strong>cycle-first mindset.</strong></p>
+<ul class='blist'>
+<li><strong></strong>A cycle-first partner adjusts strategy before headlines change</li>
+<li><strong></strong>Understands that different phases require different rules</li>
+<li><strong></strong>Is willing to abandon what worked when conditions change</li>
+<li><strong></strong>Separates ego from execution</li>
+</ul>
+<div class='callout'><p><em>Those who master cycles build portfolios. Those who master partnerships across cycles build durability. Those who master both build legacies.</em></p></div>
+<p class='seckick'>CAPITAL MARKETS</p>
+<h2>Selecting the Right Equity Partner</h2>
+<p class='secdeck'><em><em>For Each Phase of the Real Estate Market Cycle</em></em></p>
+<p>In real estate, equity is often treated like fuel—as though money is money, and more of it simply means more deals. That assumption is not just incomplete; it is dangerous.</p>
+<p>All money is not created equal. Every dollar of equity comes with embedded expectations, incentives, timelines, and tolerances for risk. <strong>Equity is never truly passive.</strong> It applies pressure to decisions, shapes strategy, and influences behavior—especially when the market shifts.</p>
+<p>Sophisticated real estate investors do not ask, “Can this equity close the deal?” They ask, “How will this equity behave when the cycle turns?”</p>
+<h3>WHY EQUITY STRUCTURE MATTERS MORE THAN DEAL STRUCTURE</h3>
+<p>Deals fail far more often due to capital misalignment than asset quality. An asset can be well-located, well-built, and well-operated—and still underperform or fail if the equity behind it demands outcomes that the market phase cannot reasonably deliver.</p>
+<div class='callout'><p><em>Equity that is impatient in a patient market creates friction. Equity that is aggressive in a defensive phase creates fragility. Equity that is blind to cycles creates forced decisions at the worst possible moments.</em></p></div>
+<h3>RECOVERY PHASE: PATIENT, CONVICTION-DRIVEN EQUITY</h3>
+<p>Recovery-aligned equity tends to have longer time horizons, accept lower early cash flow, prioritize basis over velocity, and embrace contrarian opportunities. This type of equity is often sourced from high-net-worth individuals with long-term outlooks, family offices with multigenerational capital, and patient private investors focused on asymmetric upside.</p>
+<p>The wrong equity in recovery is capital that requires immediate validation—quarterly performance, early distributions, or rapid appreciation. Recovery is a slow build.</p>
+<h3>EXPANSION PHASE: GROWTH-ORIENTED, SCALABLE EQUITY</h3>
+<p>The right equity partner during the expansion phase understands how to scale while maintaining discipline. This equity often comes from syndication investors, private equity platforms, and institutional capital with growth mandates.</p>
+<p>Misalignment occurs when expansion capital assumes permanence. Equity that extrapolates current conditions indefinitely often pushes overleveraged structures and aggressive underwriting.</p>
+<h3>OVERSUPPLY PHASE: CAPITAL FOCUSED ON RISK CONTAINMENT</h3>
+<p>The right equity partner in this phase prioritizes capital preservation over capital deployment. <strong>Not deploying capital can sometimes be the most profitable decision.</strong></p>
+<p>The wrong equity in oversupply is growth-obsessed capital that feels pressure to deploy regardless of market conditions. I would recommend staying away from certain equity like this, in particular preferred equity groups, as the wrong equity partner with a hidden bear-market agenda can force you into a position where you are forced to give up control, and potentially the asset completely.</p>
+<h3>CONTRACTION PHASE: DEFENSIVE, LIQUIDITY-FOCUSED EQUITY</h3>
+<p>The right equity partner in the contraction phase understands that preservation precedes profit. Equity that often works well in this phase includes experienced family offices, distressed-focused funds, and investors who have lived through prior downturns.</p>
+<p>The most dangerous equity in contraction is capital that cannot endure illiquidity. Forced redemptions, capital flight, or panic-driven decisions can permanently impair assets.</p>
+<p class='seckick'>CAPITAL MARKETS</p>
+<h2>Selecting the Right Lending Partner</h2>
+<p class='secdeck'><em><em>For Each Phase of the Real Estate Market Cycle</em></em></p>
+<p>In real estate, debt is often treated as a commodity. But debt is not neutral. It is a binding agreement between your business plan and the future state of the market.</p>
+<p>The most experienced real estate investors do not ask, “Who will give me the best rate today?” They ask, <strong>“How will this lender behave if the cycle turns?”</strong></p>
+<h3>WHY DEBT STRUCTURE OFTEN DETERMINES SURVIVAL</h3>
+<p>Real estate deals rarely fail because the building stops working. They fail because the debt stops working. When markets contract, debt becomes rigid while assets remain adaptive.</p>
+<div class='callout'><p><em>Contractions do not kill good assets. Inflexible debt does!</em></p></div>
+<h3>RECOVERY PHASE: FLEXIBLE, FORGIVING, CONSERVATIVE DEBT</h3>
+<p>The right lending partner in recovery understands that this phase is about building a foundation. Recovery-aligned lenders include local and regional banks with relationship-driven underwriting, portfolio lenders willing to hold loans through stabilization, and conservative agency or bridge structures with ample reserves.</p>
+<h3>EXPANSION PHASE: SCALABLE, EFFICIENT, GROWTH-ORIENTED DEBT</h3>
+<p>The right lending partner in expansion understands growth—but does not confuse momentum with permanence. Expansion-aligned lenders support portfolio growth, offer competitive pricing and leverage, understand value-add execution, and provide refinance flexibility.</p>
+<h3>OVERSUPPLY PHASE: DEBT DESIGNED FOR DEFENSE</h3>
+<p>The right lending partner in the oversupply phase prioritizes capital preservation and flexibility, not maximum leverage. Debt strategies that often make the most sense include fixed-rate financing with conservative proceeds, longer-term agency debt with extension options, and refinancing into stable structures even if proceeds are lower.</p>
+<p>The most dangerous debt in oversupply is short-term, high-leverage financing that assumes smooth exits. <strong>This phase does not punish immediately—but when it does, it punishes leverage first.</strong></p>
+<h3>CONTRACTION PHASE: COOPERATIVE, LIQUIDITY-PRESERVING DEBT</h3>
+<p>The right lending partner during the contraction phase understands that working with borrowers is better than working against them. Contraction-aligned lenders communicate clearly during stress, offer extensions or modifications when appropriate, and understand that survival creates long-term value.</p>
+<p class='seckick'>OPERATIONS</p>
+<h2>Selecting the Right Property Management Company</h2>
+<p class='secdeck'><em><em>For Each Phase of the Real Estate Market Cycle</em></em></p>
+<p>Property management is often misunderstood as a static function. In reality, property management is not a fixed skill—it is a dynamic discipline that must evolve with market conditions.</p>
+<p>The most sophisticated investors do not ask, “Is this a good property manager?” They ask, <strong>“Is this the right property management company for where we are in the market cycle?”</strong></p>
+<h3>WHY PROPERTY MANAGEMENT BECOMES THE DECIDING FACTOR</h3>
+<p>Deals are underwritten on spreadsheets—but they are lived out on-site. During improving and stable periods, many operational mistakes are masked by favorable market conditions. But cycles remove that protection.</p>
+<h3>RECOVERY PHASE: THE OPERATOR WHO REBUILDS THE FOUNDATION</h3>
+<p>Recovery-aligned property management focuses on resident quality over occupancy at all costs, tightens screening standards, repairs deferred maintenance strategically, and builds processes and controls from the ground up.</p>
+<h3>EXPANSION PHASE: THE OPERATOR WHO KNOWS HOW TO SCALE</h3>
+<p>The right expansion-phase management company optimizes revenue through disciplined rent growth, executes renovations efficiently, maintains service levels while scaling, and uses data to guide pricing and renewal strategy. Expansion is not the time to experiment—it is the time to execute.</p>
+<h3>OVERSUPPLY PHASE: THE OPERATOR WHO KNOWS WHEN TO DEFEND</h3>
+<p>Oversupply-aligned operators defend rent integrity, use targeted concessions strategically, tighten expense control, and adjust marketing strategies without panicking. They focus on retention, resident experience, and operational efficiency rather than headline occupancy.</p>
+<h3>CONTRACTION PHASE: THE OPERATOR WHO PROTECTS CASH FLOW</h3>
+<p>Contraction-aligned management companies aggressively manage collections and delinquencies, communicate clearly with ownership, preserve cash flow wherever possible, and maintain resident relationships under stress.</p>
+<div class='callout'><p><em>The single most important trait in a property management company is not size, brand, or pricing—it is cycle awareness.</em></p></div>
+<p class='seckick'>OPERATIONS</p>
+<h2>Using Asset Management as the Cycle Control Layer</h2>
+<p>If property management is the engine, <strong>asset management is the navigation system.</strong> And when management cannot read the terrain ahead, navigation becomes the difference between staying on course and driving straight into trouble.</p>
+<h3>ASSET MANAGEMENT IS NOT REDUNDANT — IT IS PROTECTIVE</h3>
+<p>Property management focuses on leasing, maintenance, staffing, and day-to-day operations. Asset management focuses on strategy alignment, performance interpretation, risk anticipation, and accountability.</p>
+<h3>RECOVERY PHASE: THE ASSET MANAGER AS ARCHITECT AND AUDITOR</h3>
+<p>Effective asset managers define conservative leasing and screening standards, set realistic stabilization timelines, monitor expense creep aggressively, and ensure deferred maintenance is addressed strategically. Recovery is not about optics—it is about foundation.</p>
+<h3>EXPANSION PHASE: THE ASSET MANAGER AS GOVERNOR OF MOMENTUM</h3>
+<p>The asset manager’s role in expansion is to govern momentum, not suppress it. Cycle-aware asset managers push property management to capture upside deliberately, validate rent increases against competitive supply trends, and keep renovation pacing aligned with future demand.</p>
+<h3>OVERSUPPLY PHASE: THE ASSET MANAGER AS RISK INTERCEPTOR</h3>
+<p>The cycle-aware asset manager must intercept reactive decisions before they become policy. Asset managers reframe success metrics away from raw occupancy, enforce rent-integrity strategies, tighten expense controls aggressively, and challenge any decision that trades long-term stability for short-term optics.</p>
+<h3>CONTRACTION PHASE: THE ASSET MANAGER AS STABILIZER AND ENFORCER</h3>
+<p>The asset manager becomes the stabilizing force for ownership. Effective asset managers enforce strict cash-flow monitoring, standardize collection and delinquency protocols, maintain consistent communication with ownership, and hold property management accountable to execution standards.</p>
+<div class='callout'><p><em>The most important trait in an asset management firm is not reporting sophistication or software—it is cycle literacy. When property management cannot think in cycles, asset management must.</em></p></div></article>
+<section class='kc' id='check'><div class='kc-in'><h2>Knowledge Check</h2><p class='kcsub'>7 questions. Every answer explained &mdash; read them even where you were right.</p>
+<div class='q' data-a='C'><span class='qn'>Question 1</span><p class='qs'>According to the lesson, what is the most common reason partnerships become dangerous?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Personality conflicts that surface once the pressure of a downturn arrives.</button><button class='opt' data-k='B'><span class='k'>B</span>Bad intentions that were concealed during due diligence.</button><button class='opt' data-k='C'><span class='k'>C</span>Outdated assumptions—the partnership was formed for one phase of the cycle and never re-evaluated as the cycle moved.</button><button class='opt' data-k='D'><span class='k'>D</span>Insufficient capital committed at closing.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson is explicit that the most dangerous partnerships are not built on bad intentions—they are built on outdated assumptions. Partnerships are usually formed in Expansion or late Expansion, when rising rents, easy refinancing, and forgiving capital markets mask differences in risk tolerance, leverage preferences, and time horizon. As the cycle shifts, those differences surface. A partner who was right for one phase is not incompetent in the next; they are misaligned.</em></p></div></div>
+<div class='q' data-a='D'><span class='qn'>Question 2</span><p class='qs'>Which pairing of phase and partner trait matches what the lesson says each phase rewards?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Recovery — execution speed and operational scale.</button><button class='opt' data-k='B'><span class='k'>B</span>Expansion — restraint and risk management.</button><button class='opt' data-k='C'><span class='k'>C</span>Oversupply — patience and contrarian conviction.</button><button class='opt' data-k='D'><span class='k'>D</span>Contraction — discipline, liquidity, and experience.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson maps each phase to a different kind of thinking: Recovery rewards patience and contrarian conviction, Expansion rewards execution speed and operational scale, Oversupply rewards restraint and risk management, and Contraction rewards discipline, liquidity, and experience. Options A, B, and C each attach a real trait to the wrong phase—which is exactly the mistake of confusing past performance with future relevance.</em></p></div></div>
+<div class='q' data-a='B'><span class='qn'>Question 3</span><p class='qs'>The lesson singles out one type of equity to be especially cautious of in the Oversupply phase. Which is it?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Patient family office capital with a multigenerational horizon.</button><button class='opt' data-k='B'><span class='k'>B</span>Growth-obsessed capital that feels pressure to deploy regardless of conditions—particularly preferred equity with a hidden bear-market agenda that can force you to give up control, or the asset entirely.</button><button class='opt' data-k='C'><span class='k'>C</span>Distressed-focused funds that have lived through prior downturns.</button><button class='opt' data-k='D'><span class='k'>D</span>High-net-worth investors who accept lower early cash flow in exchange for a strong basis.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>In Oversupply, the right equity partner prioritizes capital preservation over capital deployment—not deploying capital can be the most profitable decision available. The lesson warns specifically against growth-obsessed capital and, in particular, preferred equity groups whose bear-market agenda can force a sponsor into giving up control or the asset. Options A, C, and D describe equity the lesson treats as well-suited to Recovery or Contraction.</em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 4</span><p class='qs'>“Contractions do not kill good assets. Inflexible debt does.” Which debt structure does the lesson identify as the most dangerous during Oversupply?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>Short-term, high-leverage financing that assumes a smooth exit.</button><button class='opt' data-k='B'><span class='k'>B</span>Fixed-rate financing with conservative proceeds.</button><button class='opt' data-k='C'><span class='k'>C</span>Longer-term agency debt with extension options.</button><button class='opt' data-k='D'><span class='k'>D</span>Refinancing into a stable structure, even at lower proceeds.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson states that Oversupply does not punish immediately—but when it does, it punishes leverage first. Short-term, high-leverage debt assumes the market will cooperate at maturity, which is precisely the assumption this phase undermines. Options B, C, and D are the defensive structures the lesson recommends for Oversupply: fixed rates, conservative proceeds, longer terms, extension options, and refinancing into stability before the window narrows.</em></p></div></div>
+<div class='q'><span class='qn'>Question 5 &middot; Short answer</span><p class='qs'>The lesson states that most partnerships do not fail at the top or bottom of the cycle—they fail during the transitions between phases. In 2–3 sentences, explain why transitions break partnerships and what the lesson identifies as the most critical factor in partnership longevity.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>Transitions break partnerships because they require strategy changes, strategy changes require agreement, and agreement requires a shared understanding of the cycle. Partners who looked aligned in Expansion discover, as conditions shift, that they differ on risk tolerance, leverage, growth versus preservation, and time horizon—and a cycle-blind partner argues through the transition instead of anticipating it. That is why the lesson treats alignment on how to think—a shared cycle-first mindset—as more important than alignment on what to do, and more important than capital, experience, or personality.</em></em></p></div></div>
+<div class='q'><span class='qn'>Question 6 &middot; Scenario</span><p class='qs'>An investor closed a value-add acquisition in late Expansion. The equity came from a syndication group expecting quarterly distributions and a three-year exit. The debt is a floating-rate bridge loan at high leverage, maturing in 36 months. The property manager is known for aggressive rent pushes and occupancy-first leasing. Eighteen months later, several new communities are delivering in the submarket, lease-ups are offering concessions, rent growth has slowed sharply, and trailing occupancy still looks acceptable. Using the lesson’s framework, identify (a) which phase the market has entered and why the team assembled at acquisition is now misaligned, (b) the specific risk each partner—equity, debt, and property management—now presents, (c) what the right partner in each of those roles looks like for this phase, and (d) the role the asset manager should play.</p><textarea placeholder='Write your answer…'></textarea><button class='reveal'>Show a strong response &rarr;</button><div class='expl'><span class='lbl'>Sample strong response</span><p><em><em>(a) The market has entered Oversupply: new deliveries, spreading concessions, and slowing rent growth while trailing occupancy still looks fine—the phase that is most dangerous precisely because it feels safe. The team was assembled for Expansion and carries Expansion’s assumption of permanence. (b) The equity expects distributions and a timed exit the phase cannot reliably deliver, which creates pressure for forced decisions. The debt is the short-term, high-leverage structure the lesson calls most dangerous in this phase; with a maturity in 18 months, the business plan now depends on a refinance or sale into a softening market. The property manager’s instinct will be to chase occupancy—broad rent cuts, heavy concessions, looser screening—locking in lower revenue and a weaker resident base. (c) The right equity partner in Oversupply prioritizes preservation over distributions and supports deleveraging and liquidity. The right lending posture is to refinance early into fixed-rate, longer-term debt with extension options, even at lower proceeds, before the window narrows. The right operator defends rent integrity, uses targeted rather than broad concessions, tightens expense control, and focuses on retention and resident experience rather than headline occupancy. (d) The asset manager becomes the risk interceptor: reframing success metrics away from raw occupancy, enforcing rent-integrity strategy, tightening expenses, and challenging any decision that trades long-term stability for short-term optics—stepping in because the property manager is not reading the cycle.</em></em></p></div></div>
+<div class='q' data-a='A'><span class='qn'>Question 7</span><p class='qs'>According to the lesson, what is the non-negotiable trait to look for in any partner—more important than capital, experience, or personality?</p><div class='opts'><button class='opt' data-k='A'><span class='k'>A</span>A cycle-first mindset: adjusting strategy before headlines change, accepting that different phases require different rules, being willing to abandon what worked, and separating ego from execution.</button><button class='opt' data-k='B'><span class='k'>B</span>The largest available capital base, so the partnership can survive any phase.</button><button class='opt' data-k='C'><span class='k'>C</span>The longest local track record, since past performance in a market predicts future relevance.</button><button class='opt' data-k='D'><span class='k'>D</span>Shared personality and communication style, since conflict is the primary cause of partnership failure.</button></div><div class='expl'><span class='lbl'>Why</span><p><em>The lesson names a cycle-first mindset as the non-negotiable—more important than capital, experience, or personality. Option C is the exact error the lesson warns against: confusing past performance with future relevance. Option D contradicts the lesson’s point that partnerships fail from outdated assumptions far more than from personality. Capital (Option B) matters, but capital that cannot think in cycles behaves badly when the cycle turns.</em></p></div></div>
+<div class='kcscore' id='score'></div>
+<div class='rubric' id='rubric'><span class='rlbl'>Score guidance</span><div class='rrow' data-band='5–7 correct'><span class='rb'>5–7 correct</span><p>Strong command of cycle-aware partner selection. Proceed to Lesson 3.1.2 (The WHAT: Matching Asset Class to Market Cycle) with confidence. Revisit any questions you missed before moving on.</p></div><div class='rrow' data-band='3–4 correct'><span class='rb'>3–4 correct</span><p>Review the phase-by-phase sections for equity, lending, property management, and asset management in Lesson 3.1.1 before proceeding. Focus especially on what each phase rewards in a partner and why the wrong equity or debt in Oversupply and Contraction is so costly.</p></div><div class='rrow' data-band='1–2 correct'><span class='rb'>1–2 correct</span><p>Return to Lesson 3.1.1 in full. The WHO comes first in the Rule of 6 because every other decision—what you buy, when, where, why, and how—is only as strong as the team that executes it. Matching each partner to the phase is the discipline the rest of Part One builds on.</p></div></div>
+<div class='callout' style='margin-top:26px'><p><em>The right partner is not a permanent answer—it is a phase-specific one. If the answer key revealed gaps, closing them now is the highest-leverage investment you can make before Lesson 3.1.2.</em></p></div>
+</div></section>
+
+<aside class="cpanel" id="cpanel">
+  <div class="cp-head">
+    <span class="cp-lbl">Course progress</span>
+    <span class="cp-count"><b id="cpDone">0</b> of 20 lessons</span>
+    <div class="cp-bar"><i id="cpBar"></i></div>
+  </div>
+  <nav class="cp-secs" id="cpSecs"></nav>
+  <div class="cp-foot">
+    <a href="index.html">All lessons</a>
+    <span id="cpState"></span>
+  </div>
+</aside>
+
+<div class="navband"><nav class="lnav"><a href='part-one.html'>&larr; Previous<span>Full Cycle Acquisitions</span></a><a href='3-1-2.html' style='text-align:right'>Next &rarr;<span>The WHAT — Matching Asset Class to Market Cycle</span></a></nav></div>
+
+<footer class="lfoot">
+  <div class="lfoot-in">
+    <span>&copy; 2026 Benjamin Inman. All rights reserved.</span>
+    <span>The Econiq Method &middot; Commander &middot; 3.1.1 &middot; v1.0</span>
+  </div>
+</footer>
+
+<script>
+// reading progress
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){
+  var h=document.documentElement, max=h.scrollHeight-h.clientHeight;
+  pg.style.width=(max>0?(h.scrollTop||document.body.scrollTop)/max*100:0)+'%';
+},{passive:true});
+
+// ---- course panel: section nav + progress ----
+(function(){
+  var CODE='3.1.1', KEY='econiq-commander-progress';
+  var secs=[].slice.call(document.querySelectorAll('article h2'));
+  var nav=document.getElementById('cpSecs');
+  secs.forEach(function(h,i){
+    if(!h.id) h.id='s'+i;
+    var a=document.createElement('a');
+    a.href='#'+h.id; a.textContent=h.textContent; a.dataset.for=h.id;
+    nav.appendChild(a);
+  });
+  function mark(){
+    var y=scrollY+140, cur=null;
+    secs.forEach(function(h){ if(h.offsetTop<=y) cur=h.id; });
+    nav.querySelectorAll('a').forEach(function(a){ a.classList.toggle('here', a.dataset.for===cur); });
+  }
+  addEventListener('scroll', mark, {passive:true}); mark();
+  function read(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+  function paint(){
+    var d=read();
+    document.getElementById('cpDone').textContent=d.length;
+    document.getElementById('cpBar').style.width=(d.length/20*100)+'%';
+    document.getElementById('cpState').innerHTML = d.indexOf(CODE)>-1 ? '<span class="cp-done">&#10003; Complete</span>' : '';
+  }
+  window.__econiqComplete=function(){
+    var d=read(); if(d.indexOf(CODE)<0){ d.push(CODE); try{ localStorage.setItem(KEY, JSON.stringify(d)); }catch(e){} }
+    paint();
+  };
+  paint();
+})();
+
+// knowledge check
+var answered=0, correct=0;
+var mcqs=[].slice.call(document.querySelectorAll('.q[data-a]'));
+mcqs.forEach(function(q){
+  var key=q.getAttribute('data-a');
+  q.querySelectorAll('.opt').forEach(function(b){
+    b.addEventListener('click', function(){
+      if(q.dataset.done) return;
+      q.dataset.done='1'; answered++;
+      var k=b.getAttribute('data-k');
+      if(k===key){ b.classList.add('right'); correct++; }
+      else{ b.classList.add('wrong');
+        q.querySelectorAll('.opt').forEach(function(o){ if(o.getAttribute('data-k')===key) o.classList.add('right'); }); }
+      q.querySelectorAll('.opt').forEach(function(o){ o.disabled=true; });
+      q.querySelector('.expl').classList.add('on');
+      if(answered===mcqs.length){
+        var s=document.getElementById('score');
+        s.innerHTML='<b>'+correct+' / '+mcqs.length+'</b><p>'+
+          (correct===mcqs.length?'Clean sweep. Work through the written questions below, then continue.':
+           correct>=mcqs.length-1?'Strong. Read the explanation on the one you missed before moving on.':
+           'Worth re-reading this lesson before you continue &mdash; the explanations above show where the gap is.')+'</p>';
+        s.classList.add('on');
+        if(window.__econiqComplete) window.__econiqComplete();
+        document.querySelectorAll('.rrow').forEach(function(rw){
+          var b=rw.getAttribute('data-band').match(/(\d+)\s*[–-]?\s*(\d+)?/);
+          if(!b) return; var lo=+b[1], hi=b[2]?+b[2]:lo;
+          if(correct>=lo && correct<=hi) rw.classList.add('hit');
+        });
+      }
+    });
+  });
+});
+document.querySelectorAll('.reveal').forEach(function(b){
+  b.addEventListener('click', function(){ b.nextElementSibling.classList.add('on'); b.style.display='none'; });
+});
+</script>
+</body></html>
